@@ -1,0 +1,31 @@
+{"type":"submissions",
+	"additionalProperites":false,
+	"properties": {
+		"_id": {
+	  		"type"		: "string",
+	  		"minLength"	: 25,
+	  		"maxLength"	: 25
+		},
+		"id_Student": {
+	  		"type"		: "string",
+	  		"minLength"	: 25,
+	  		"maxLength"	: 25
+	  	},
+		"id_Assignment": {
+	  		"type"		: "string",
+	  		"minLength"	: 25,
+	  		"maxLength"	: 25
+	  	},
+		"date": {
+			"type" 	: "string",
+			"format" : "date-time"
+		},
+		"pointsEarned": {
+			"type" : "string"
+		},
+		"description": {
+			"type":"string",
+			"maxLength" : 100
+		}
+	}
+}

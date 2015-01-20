@@ -1,0 +1,93 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/webapp',
+5 verbose install   [ 'express', 'mongodb', 'socket.io', 'JSV', 'wget' ] ]
+6 info preinstall AGS@0.0.3
+7 warn package.json JSV@4.0.2 'repositories' (plural) Not supported. Please pick one as the 'repository' field
+8 warn package.json mongo@0.1.0 No repository field.
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping JSV@4.0.x /webapp
+11 verbose cache add [ 'wget@1.15.x', null ]
+12 verbose cache add name=undefined spec="wget@1.15.x" args=["wget@1.15.x",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'wget@1.15.x',
+13 verbose parsed url   path: 'wget@1.15.x',
+13 verbose parsed url   href: 'wget@1.15.x' }
+14 verbose cache add name="wget" spec="1.15.x" args=["wget","1.15.x"]
+15 verbose parsed url { protocol: null,
+15 verbose parsed url   slashes: null,
+15 verbose parsed url   auth: null,
+15 verbose parsed url   host: null,
+15 verbose parsed url   port: null,
+15 verbose parsed url   hostname: null,
+15 verbose parsed url   hash: null,
+15 verbose parsed url   search: null,
+15 verbose parsed url   query: null,
+15 verbose parsed url   pathname: '1.15.x',
+15 verbose parsed url   path: '1.15.x',
+15 verbose parsed url   href: '1.15.x' }
+16 verbose addNamed [ 'wget', '1.15.x' ]
+17 verbose addNamed [ null, '>=1.15.0-0 <1.16.0-0' ]
+18 silly lockFile a60a25d4-wget-1-15-x wget@1.15.x
+19 verbose lock wget@1.15.x /Users/Matt/.npm/a60a25d4-wget-1-15-x.lock
+20 verbose already installed skipping express@3.2.x /webapp
+21 silly addNameRange { name: 'wget', range: '>=1.15.0-0 <1.16.0-0', hasData: false }
+22 verbose already installed skipping mongodb@1.3.x /webapp
+23 verbose already installed skipping socket.io@0.9.x /webapp
+24 verbose request where is /wget
+25 verbose request registry https://registry.npmjs.org/
+26 verbose request id 68049c3eb5106995
+27 verbose url raw /wget
+28 verbose url resolving [ 'https://registry.npmjs.org/', './wget' ]
+29 verbose url resolved https://registry.npmjs.org/wget
+30 verbose request where is https://registry.npmjs.org/wget
+31 info trying registry request attempt 1 at 17:07:41
+32 verbose etag "4MX9TJ1NQSV4BO1KNCBM9GY78"
+33 http GET https://registry.npmjs.org/wget
+34 http 304 https://registry.npmjs.org/wget
+35 silly registry.get cb [ 304,
+35 silly registry.get   { date: 'Sun, 18 Jan 2015 22:07:41 GMT',
+35 silly registry.get     server: 'Apache',
+35 silly registry.get     via: '1.1 varnish',
+35 silly registry.get     'last-modified': 'Sun, 18 Jan 2015 22:07:41 GMT',
+35 silly registry.get     'cache-control': 'max-age=60',
+35 silly registry.get     etag: '"4MX9TJ1NQSV4BO1KNCBM9GY78"',
+35 silly registry.get     age: '0',
+35 silly registry.get     'x-served-by': 'cache-atl6233-ATL',
+35 silly registry.get     'x-cache': 'HIT',
+35 silly registry.get     'x-cache-hits': '1',
+35 silly registry.get     'x-timer': 'S1421618861.364825,VS0,VE314',
+35 silly registry.get     vary: 'Accept',
+35 silly registry.get     'content-length': '0',
+35 silly registry.get     'keep-alive': 'timeout=10, max=50',
+35 silly registry.get     connection: 'Keep-Alive' } ]
+36 verbose etag https://registry.npmjs.org/wget from cache
+37 silly addNameRange number 2 { name: 'wget', range: '>=1.15.0-0 <1.16.0-0', hasData: true }
+38 silly addNameRange versions [ 'wget', [ '0.0.0', '0.0.1' ] ]
+39 silly lockFile a60a25d4-wget-1-15-x wget@1.15.x
+40 silly lockFile a60a25d4-wget-1-15-x wget@1.15.x
+41 error notarget No compatible version found: wget@'>=1.15.0-0 <1.16.0-0'
+41 error notarget Valid install targets:
+41 error notarget ["0.0.0","0.0.1"]
+41 error notarget
+41 error notarget This is most likely not a problem with npm itself.
+41 error notarget In most cases you or one of your dependencies are requesting
+41 error notarget a package version that doesn't exist.
+42 error System Darwin 14.0.0
+43 error command "node" "/usr/local/bin/npm" "install"
+44 error cwd /webapp
+45 error node -v v0.10.33
+46 error npm -v 1.4.28
+47 error code ETARGET
+48 verbose exit [ 1, true ]

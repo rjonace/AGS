@@ -1,0 +1,30 @@
+{"type":"assignments",
+	"additionalProperites":false,
+	"properties": {
+		"_id": {
+	  		"type"		: "string",
+	  		"minLength"	: 25,
+	  		"maxLength"	: 25
+		},
+		"name": {
+			"type":"string",
+			"maxLength" : 20
+		},
+		"description": {
+			"type":"string",
+			"maxLength" : 100
+		},
+		"language": {
+			"type":"string"
+		},
+		"dateDue": {
+			"type" 	: "string",
+			"format" : "date-time"
+		},
+		"id_Course": {
+	  		"type"		: "string",
+	  		"minLength"	: 25,
+	  		"maxLength"	: 25
+	  	}
+	}
+}
