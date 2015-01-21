@@ -20,8 +20,10 @@ var
   addCourseToUser,
   addAssignmentToUser,
   addSubmissionToUser,
+  addStudentToUser,
   addUserToCourse,
   addAssignmentToCourse,
+  createCourseAsInstructor,
 
   mongodb     = require( 'mongodb' ),
   fsHandle    = require( 'fs'      ),
@@ -89,11 +91,9 @@ getObjectIdByMap = function (objType, find_map, callback) {
   dbHandle.collection(
     objType,
     function ( outer_error, collection ) {
-      collection.find( find_map, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            callback( map_list[0]._id );
-          }
-      );
+      collection.findOne( find_map, function (err, obj) {
+        callback( obj._id.toString());
+      });
     }
   );
 };
@@ -155,6 +155,23 @@ addUserToCourse = function ( user_find_map, course_find_map) {
 };
 
 addAssignmentToCourse = function ( ass_find_map, course_find_map ) {
+};
+
+// does not check for duplicates
+createCourseAsInstructor = function ( course_map, instructor_find_map, callback) {
+  
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( instructor_find_map, function(err, user){ 
+
+    if(!err) {
+      course_map.id_Instructor = user._id.toString();
+
+      constructObj('courses', course_map, function (result_map) {
+        console.log(course_map.title + " course created by " + user.name );
+      });
+    }
+  });
 };
 
 // ----------------- END UTILITY METHODS ------------------
@@ -308,7 +325,8 @@ module.exports = {
 	read: 	readObj,
 	update: 	updateObj,
   connect: connectObj, 
-	destroy: destroyObj 
+	destroy: destroyObj,
+  createCourse: createCourseAsInstructor
 };
 // ----------------- END PUBLIC METHODS -------------------
 
@@ -317,10 +335,28 @@ dbHandle.open( function() {
 	console.log( '** Connected to MongoDB **');
 	clearIsOnline();
 
-  addUserToCourse({username:"rjonace"},{number:"COP1234"});
-  addCourseToUser({number:"COP1234"},{username:"rjonace"});
+  //addUserToCourse({username:"rjonace"},{number:"COP1234"});
+  //addCourseToUser({number:"COP1234"},{username:"rjonace"});
 
-  readObj('users',{"username":"user1"}, {_id:true}, console.log);
+  //readObj('users',{"username":"user1"}, {_id:true}, console.log);
+
+  /*
+  getObjectIdByMap('users', {username:"proff"}, function (instructor) {
+    var tempCourse = {
+      title: "Another CS Course",
+      number: "COP4321-001",
+      id_Instructor: instructor,
+      id_Students: [],
+      id_Assignments:[]
+    };
+    createCourseAsInstructor(
+      tempCourse,
+      {username:"proff"},
+      console.log
+    );
+
+  });
+  */
 
 
 });

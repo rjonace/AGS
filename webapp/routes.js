@@ -24,7 +24,7 @@ configRoutes = function ( app, server ) {
     response.redirect( '/spa.html' );
   });
 
-  app.post( '/formData/', function (request, response) {
+  app.post( '/signup/', function (request, response) {
 
       var body = request.body
       var tempUser = {
@@ -41,9 +41,15 @@ configRoutes = function ( app, server ) {
           id_Submissions: []
       };
 
-      console.log(tempUser);
-      response.send(tempUser);
-      //console.log(response);
+      crud.construct(
+        'users',
+        tempUser,
+        function ( result_map ) { 
+          console.log( result_map); 
+          response.redirect('/json/users/list');
+        }
+      );
+
   });
 
   app.all( '/json/:obj_type/*?', function ( request, response, next ) {
@@ -85,19 +91,6 @@ configRoutes = function ( app, server ) {
     );
   });
 
-  app.post( '/json/:obj_type/connect/:id/:conn_type/:conn_id', function (request, response ){
-    //
-    // fix to match the connect method made in crud.js
-    //
-    //
-    crud.connect(
-      request.params.obj_type,
-      {_id: makeMongoId( request.params.id ) },
-      request.body,
-      function (result_map ) { response.send( result_map ); }
-    );
-  });
-
   app.get( '/json/:obj_type/delete/:id', function ( request, response ) {
     crud.destroy(
       request.params.obj_type,
@@ -105,94 +98,7 @@ configRoutes = function ( app, server ) {
       function ( result_map ) { response.send( result_map ); }
     );
   });
-/*
-*
-* Old functions
-*
-  app.post( '/:obj_type/create', function ( request, response ) {
-    dbHandle.collection(
-      request.params.obj_type,
-      function ( outer_error, collection ) {
-        var
-          options_map = { safe: true },
-          obj_map     = request.body;
 
-        console.log(request.body);
-
-        collection.insert(
-          obj_map,
-          options_map,
-          function ( inner_error, result_map ) {
-            response.send( result_map );
-          }
-        );
-      }
-    );
-  });
-
-
-  app.get( '/:obj_type/read/:id', function ( request, response ) {
-    var find_map = { _id: makeMongoId( request.params.id ) };
-    dbHandle.collection(
-      request.params.obj_type,
-      function ( outer_error, collection ) {
-        collection.findOne(
-          find_map,
-          function ( inner_error, result_map ) {
-            response.send( result_map );
-          }
-        );
-      }
-    );
-  });
-
-
-  app.post( '/:obj_type/update/:id', function ( request, response ) {
-    var
-      find_map = { _id: makeMongoId( request.params.id ) },
-      obj_map  = request.body;
-
-    dbHandle.collection(
-      request.params.obj_type,
-      function ( outer_error, collection ) {
-        var
-          sort_order = [],
-          options_map = {
-            'new' : true, upsert: false, safe: true
-          };
-
-        collection.findAndModify(
-          find_map,
-          sort_order,
-          obj_map,
-          options_map,
-          function ( inner_error, updated_map ) {
-            response.send( updated_map );
-          }
-        );
-      }
-    );
-  });
-
-  app.get( '/:obj_type/delete/:id', function ( request, response ) {
-    var find_map = { _id: makeMongoId( request.params.id ) };
-
-    dbHandle.collection(
-      request.params.obj_type,
-      function ( outer_error, collection ) {
-        var options_map = { safe: true, single: true };
-
-        collection.remove(
-          find_map,
-          options_map,
-          function ( inner_error, delete_count ) {
-            response.send({ delete_count: delete_count });
-          }
-        );
-      }
-    );
-  });
-*/
 };
 
 module.exports = { configRoutes : configRoutes };

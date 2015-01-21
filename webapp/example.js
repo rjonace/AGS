@@ -9,12 +9,12 @@ var sys = require('sys'),
 /*wget( 
 	getCreateLink( 'localhost', '3000', 'users'),
 	simpleMakeUser("proff","Dr Instructor","passw")
-)*/
+)
 
 wget( 
 	getCreateLink( 'localhost', '3000', 'courses'),
 	simpleMakeCourse("Computer Stuff 2","COP1234","54bd706e80220d8f76d40b34")
-)
+)*/
 
 
 /* @function
@@ -25,16 +25,6 @@ wget(
 */
 function getCreateLink( host, port, obj_type) {
 	return linkString = "http://" + host + ":" + port + "/" + obj_type + "/create \\";
-}
-
-
-function getUpdateLink( host, port, obj_type) {
-
-}
-
-function getConnectLink( host, port, obj_type, conn_type, id_obj, id_conn) {
-	//    /:obj_type/connect/:id/:conn_type/:conn_id
-		return linkString = "http://" + host + ":" + port + "/" + obj_type + "/connect/" + id_obj + "/" + conn_type + "/" + id_conn + "\\";
 }
 
 /* @function
@@ -97,24 +87,17 @@ function simpleMakeCourse( title, number, instructor ) {
 	return JSON.stringify(tempCourse);
 }
 
+function simplerMakeCourse( title, number ) {
+	var tempCourse = {
+		title: title,
+		number: number,
+		id_Instructor: "",
+		id_Students: [],
+		id_Assignments:[]
+	};
 
-
-
-/* @function
-* @param {String} host
-* @param {String} port
-* @param {String} obj_type 
-* @param {String} obj_id
-* @returns {String} wget command to be entered in command line
-
-function createObject( host, port, obj_type, obj_id) {
-	var linkString = "http://" + host + ":" + port + "/" + obj_type + "/create \\",
-		optionsString = "--header='content-type: application/json' \\"
-		dataString = "--post-data='" + simpleMakeUser("mattr","Matt Rouse","passwerd") + "' -O -"
-	return "wget " + linkString + optionsString + dataString;
+	return JSON.stringify(tempCourse);
 }
-*/
-
 
 /*
 
