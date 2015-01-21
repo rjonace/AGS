@@ -16,13 +16,12 @@ var
   loadSchema,   checkSchema,  clearIsOnline,
   checkType,    constructObj, readObj,
   updateObj,    connectObj,  destroyObj,
-  getUserByUsername,
-  getCourseByTitle,
   getObjectIdByMap,
-  makeObjectConnection,
   addCourseToUser,
+  addAssignmentToUser,
+  addSubmissionToUser,
   addUserToCourse,
-  addIdToListWithMap,
+  addAssignmentToCourse,
 
   mongodb     = require( 'mongodb' ),
   fsHandle    = require( 'fs'      ),
@@ -86,32 +85,6 @@ clearIsOnline = function () {
   );
 };
 
-getUserByUsername = function (username, callback) {
-  dbHandle.collection(
-    'users',
-    function ( outer_error, collection ) {
-      collection.find( { "username": username }, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            callback( map_list[0]._id );
-          }
-      );
-    }
-  );
-};
-
-getCourseByTitle = function (title, callback) {
-  dbHandle.collection(
-    'courses',
-    function ( outer_error, collection ) {
-      collection.find( { "title": title }, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            callback( map_list[0]._id );
-          }
-      );
-    }
-  );
-};
-
 getObjectIdByMap = function (objType, find_map, callback) {
   dbHandle.collection(
     objType,
@@ -123,120 +96,66 @@ getObjectIdByMap = function (objType, find_map, callback) {
       );
     }
   );
-}
+};
 
-addCourseToUser = function (courseNumber, username, callback) {
+addCourseToUser = function (course_find_map, user_find_map) {
 
-  dbHandle.collection(
-    'courses',
-    function ( outer_error, collection ) {
-      collection.find( { "number":courseNumber }, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            var id_Course = map_list[0]._id;
-              dbHandle.collection(
-                'users',
-                function ( outer_error, collection ) {
-                  collection.update( 
-                    { "username": username}, 
-                    { $addToSet: {id_Courses: id_Course } },
-                    { safe : true, multi : false, upsert : false },
-                      function ( inner_error, update_count ) {
-                        callback({ update_count : update_count });
-                      }
-                  );
-                });
-          }
-      );
-    }
-  );
+  var courseCol = dbHandle.collection('courses');
 
-}
+  courseCol.findOne( course_find_map, function(err, course){ 
 
-addIdToListWithMap = function (id_Object, id_Type, objType, find_map) {
-  checkType(id_Type);
-  console.log("id to add " + id_Object.toString());
-  //updateObj(objType, find_map, { $addToSet: { id_Users: id_Object} })
-}
+    if(!err) {
 
-/*
-* @function
-* @param firstObjType type of object to be added to second object list
-* @param firstObjFindMap the map to find first object
-* @param secondObjType type object with a list of first object type
-* @param secondObjFindMap the map to find second object
-* @param listName name of list in second object usually id_<firstObjType>s
-* @param callback callback method 
-*/
-makeObjectConnection = function ( firstObjType, firstObjFindMap, secondObjType, secondObjFindMap, callback) {
-  
-  var setToAdd = {},
-      id_FirstObject;
+      var userCol = dbHandle.collection('users');
 
-  function setId (id) {
-    id_FirstObject = id;
-    //console.log(id);
-  }
+      userCol.update(
+          user_find_map,
+          { $addToSet: {id_Courses: course._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              console.log({ update_count : update_count });
+            }    
+        );
+      }
+  });
+};
 
-  getObjectIdByMap(secondObjType, secondObjFindMap, setId);
-  
-  if (firstObjType == 'users') {
-    setToAdd = { id_Users: id_FirstObject}
-  } else if (firstObjType == 'courses') {
-    setToAdd = { id_Courses: id_FirstObject}
-  }
+addAssignmentToUser = function ( ass_find_map, user_find_map) {
 
-  //console.log(setToAdd);
+};
 
-  dbHandle.collection(
-    firstObjType,
-    function ( outer_error, collection ) {
-      collection.find( firstObjFindMap, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            var temp_id = map_list[0]._id;
-              dbHandle.collection(
-                secondObjType,
-                function ( outer_error, collection ) {
-                  collection.update( 
-                    secondObjFindMap, 
-                    { $addToSet: setToAdd },
-                    { safe : true, multi : false, upsert : false },
-                      function ( inner_error, update_count ) {
-                        callback({ update_count : update_count });
-                      }
-                  );
-                });
-          }
-      );
-    }
-  );
-}
+addStudentToUser = function (stud_find_map, user_find_map){
 
-addUserToCourse = function ( username, courseNumber, callback) {
+};
 
-  dbHandle.collection(
-    'users',
-    function ( outer_error, collection ) {
-      collection.find( { "username": username }, {"_id": true} ).toArray( 
-          function ( inner_error, map_list ) {
-            var id_User = map_list[0]._id;
-              dbHandle.collection(
-                'courses',
-                function ( outer_error, collection ) {
-                  collection.update( 
-                    { "number": courseNumber}, 
-                    { $addToSet: {id_Users: id_User } },
-                    { safe : true, multi : false, upsert : false },
-                      function ( inner_error, update_count ) {
-                        callback({ update_count : update_count });
-                      }
-                  );
-                });
-          }
-      );
-    }
-  );
-}
+addSubmissionToUser = function(sub_find_map, user_find_map){
 
+};
+
+addUserToCourse = function ( user_find_map, course_find_map) {
+
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( user_find_map, function(err, user){ 
+
+    if(!err) {
+
+      var courseCol = dbHandle.collection('courses');
+
+      courseCol.update(
+          course_find_map,
+          { $addToSet: {id_Students: user._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              console.log({ update_count : update_count });
+            }    
+        );
+      }
+  });
+};
+
+addAssignmentToCourse = function ( ass_find_map, course_find_map ) {
+};
 
 // ----------------- END UTILITY METHODS ------------------
 
@@ -357,52 +276,6 @@ updateObj = function ( obj_type, find_map, set_map, callback ) {
 };
 
 /*
-* Connects Objects
-* @function
-* @param obj_type adds the id of conn_obj_type to an object of this type
-* @param find_map map of the object to find
-* @param conn_type object type to connect
-* @param conn_find_map object find map to connect
-* @param callback callback method
-*/
-connectObj = function (obj_type, find_map, conn_type, conn_find_map, callback) {
-    var type_check_map = checkType( obj_type ),
-        conn_type_check_map = checkType( conn_type );
-      if ( type_check_map ) {
-        callback( type_check_map );
-        return;
-      }
-      if ( conn_type_check_map ) {
-        callback( conn_type_check_map );
-        return;
-      }
-
-      checkSchema(
-      obj_type, set_map,
-      function ( error_list ) {
-        if ( error_list.length === 0 ) {
-          dbHandle.collection(
-            obj_type,
-            function ( outer_error, collection ) {
-              collection.find( conn_find_map, { _id: id_User } ).toArray(
-                function ( inner_error, map_list ) {
-                  console.log( map_list );
-                }
-              );
-            }
-          );
-        }
-        else {
-          callback({
-            error_msg  : 'Input document not valid',
-            error_list : error_list
-          });
-        }
-      }
-    );
-}
-
-/*
 * Destroys Object
 * @function
 */
@@ -443,35 +316,11 @@ module.exports = {
 dbHandle.open( function() {
 	console.log( '** Connected to MongoDB **');
 	clearIsOnline();
-  //getUserByUsername('rjonace', function(map_list) { console.log(map_list);});
 
-  console.log(
-  "hello " + readObj('courses', {"number":"COP1234"},{"_id":true},function (map_list){ console.log( map_list) })
-  );
-  //addCourseToUser('COP1234', 'rjonace', console.log);
-  //addUserToCourse('rjonace', 'COP1234', console.log);
+  addUserToCourse({username:"rjonace"},{number:"COP1234"});
+  addCourseToUser({number:"COP1234"},{username:"rjonace"});
 
-  readObj(
-    'users',
-    {"username":"mattr"},
-    {"_id":true},
-    function (map_list) {
-          addIdToListWithMap( 
-          map_list, 
-          'users',
-          'courses',
-          {"number":"COP1234"});
-    }
-  );
-
-  makeObjectConnection( 
-      'users',
-      {"username":"user1"}, 
-      'courses',
-      {"title":"Computer Stuff 2"},
-      function (){}
-    );
-
+  readObj('users',{"username":"user1"}, {_id:true}, console.log);
 
 
 });
@@ -481,9 +330,9 @@ dbHandle.open( function() {
 	var schema_name, schema_path;
 	for (schema_name in objTypeMap ) {
 		if ( objTypeMap.hasOwnProperty( schema_name ) ) {
-			schema_path = __dirname + '/' + schema_name + '.json';
+			schema_path = __dirname + '/json_schemas/' + schema_name + '.json';
 			loadSchema( schema_name, schema_path );
 		}
 	}
 }());
-// -------------- END MODULE INITIALIZATION ---------------
+// -------------- END MODULE INITIALIZATION ---------------}
