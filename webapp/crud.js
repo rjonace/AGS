@@ -17,22 +17,12 @@ var
   loadSchema,   checkSchema,  clearIsOnline,
   checkType,    constructObj, readObj,
   updateObj,    connectObj,  destroyObj,
-  getObjectIdByMap,
-  addCourseToUser,
-  addAssignmentToUser,
-  addSubmissionToUser,
-  addStudentToUser,
-  addUserToCourse,
-  addAssignmentToCourse,
-  removeCourseFromUser,
-  removeAssignmentFromUser,
-  removeSubmissionFromUser,
-  removeStudentFromUser,
-  removeUserFromCourse,
-  removeAssignmentFromCourse,
-  createCourseAsInstructor,
-  createAssignmentForCourse,
-  createSubmissionByStudent,
+  checkObj,     getObjectIdByMap,
+  addCourseToUser,  addAssignmentToUser,  addSubmissionToUser,  addStudentToUser,
+  addUserToCourse,  addAssignmentToCourse,
+  removeCourseFromUser, removeAssignmentFromUser, removeSubmissionFromUser, removeStudentFromUser,
+  removeUserFromCourse, removeAssignmentFromCourse,
+  createCourseAsInstructor, createAssignmentForCourse,  createSubmissionByStudent,
 
   mongodb     = require( 'mongodb' ),
   fsHandle    = require( 'fs'      ),
@@ -120,6 +110,33 @@ getObjectIdByMap = function (objType, find_map, callback) {
   );
 };
 
+checkObj = function ( obj_type, obj_find_map, callback ) {
+
+
+  function dataMethod (obj) {
+    if (obj.length == 0) {
+      console.log('not found' + obj)
+    }
+    else {
+      console.log('found' + JSON.stringify(obj))
+    }
+  };
+
+
+
+  if ( ! objTypeMap[ obj_type ] ) {
+    return ({ error_msg : 'Object type "' + obj_type
+      + '" is not supported.'
+    });
+  } else {
+
+
+
+    readObj( obj_type, obj_find_map, {_id:true}, dataMethod);
+
+  }
+  return null;
+};
 
 /**
 * Inserts course id into appropriate array of user object
@@ -445,6 +462,11 @@ dbHandle.open( function() {
   });
   */
 
+  
+    checkObj('users', {username:"proff"})
+    checkObj('users', {username:"profff"})
+
+    
 
 });
 
