@@ -95,47 +95,41 @@ clearIsOnline = function () {
 /**
 * Gets ID of object that matches map passed in
 * @function
-* @param { String } objType Type of object to find
+* @param {String} objType Type of object to find
 * @param {Object} find_map Map of object to find
-* @param {function} callback function to be called with object id as an argument
+* @param {function} callback function to be called with first matching object id as an argument
 */
 getObjectIdByMap = function (objType, find_map, callback) {
   dbHandle.collection(
     objType,
     function ( outer_error, collection ) {
       collection.findOne( find_map, function (err, obj) {
-        callback( obj._id.toString());
+        if (obj!=null) {
+          callback( obj._id.toString());
+        } else {
+          callback( {error_msg: "Data object does not exist."})
+        }
+
       });
     }
   );
 };
 
-checkObj = function ( obj_type, obj_find_map, callback ) {
-
-
-  function dataMethod (obj) {
-    if (obj.length == 0) {
-      console.log('not found' + obj)
+/**
+* Checks if Objects matching find map exist
+* @function
+* @param {String} objType Type of object to find
+* @param {Object} find_map Map of object to find
+* @param {function} callback function to be called with an array of object id that match map as an argument
+*/
+checkObj = function ( obj_type, obj_find_map, callback) {
+  readObj( obj_type, obj_find_map, {_id:true}, function(obj_list) {
+    if(obj_list.length > 0) {
+      callback(obj_list);
+    } else {
+      callback({error_msg: "Data object does not exist."})
     }
-    else {
-      console.log('found' + JSON.stringify(obj))
-    }
-  };
-
-
-
-  if ( ! objTypeMap[ obj_type ] ) {
-    return ({ error_msg : 'Object type "' + obj_type
-      + '" is not supported.'
-    });
-  } else {
-
-
-
-    readObj( obj_type, obj_find_map, {_id:true}, dataMethod);
-
-  }
-  return null;
+  });
 };
 
 /**
@@ -143,26 +137,30 @@ checkObj = function ( obj_type, obj_find_map, callback ) {
 * @function
 * @param {Object} course_find_map Map to find course being added
 * @param {Object} user_find_map Map to find user gaining the course
+* @param {Function} callback use console log to see errors or update count
 */
-addCourseToUser = function (course_find_map, user_find_map) {
+addCourseToUser = function (course_find_map, user_find_map, callback) {
 
   var courseCol = dbHandle.collection('courses');
 
   courseCol.findOne( course_find_map, function(err, course){ 
-
-    if(!err) {
-
+    if(course != null) {
       var userCol = dbHandle.collection('users');
-
       userCol.update(
           user_find_map,
           { $addToSet: {id_Courses: course._id.toString()}},
           { safe : true, multi : true, upsert : false },
             function ( inner_error, update_count ) {
-              console.log({ update_count : update_count });
-            }    
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({user_error: inner_error});
+              }
+            }
         );
-      }
+    } else {
+      callback({course_error: err});
+    }
   });
 };
 
@@ -196,25 +194,28 @@ addSubmissionToUser = function(sub_find_map, user_find_map){
 
 };
 
-addUserToCourse = function ( user_find_map, course_find_map) {
+addUserToCourse = function ( user_find_map, course_find_map, callback) {
 
   var userCol = dbHandle.collection('users');
 
   userCol.findOne( user_find_map, function(err, user){ 
-
-    if(!err) {
-
+    if(user!=null) {
       var courseCol = dbHandle.collection('courses');
-
       courseCol.update(
           course_find_map,
           { $addToSet: {id_Students: user._id.toString()}},
           { safe : true, multi : true, upsert : false },
             function ( inner_error, update_count ) {
-              console.log({ update_count : update_count });
-            }    
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({course_error: inner_error});
+              }
+            }
         );
-      }
+    } else {
+      callback({user_error: err});
+    }
   });
 };
 
@@ -258,13 +259,28 @@ createCourseAsInstructor = function ( course_map, instructor_find_map, callback)
   var userCol = dbHandle.collection('users');
 
   userCol.findOne( instructor_find_map, function(err, user){ 
-
-    if(!err) {
+    if(user != null) {
       course_map.id_Instructor = user._id.toString();
 
-      constructObj('courses', course_map, function (result_map) {
-        console.log(course_map.title + " course created by " + user.name );
-      });
+      var courseCol = dbHandle.collection('courses');
+
+      courseCol.findOne( { $or: [
+        {title:course_map.title},
+        {number:course_map.number}] },
+        function( course_err, course) {
+          if(course != null) {
+            callback({error_msg: 'Course already exists.'});
+          } else {
+            constructObj('courses', course_map, function (result_map) {
+              callback(course_map.title + " course created by " + user.name);
+            });
+
+          }
+        }
+      )
+
+    } else {
+      callback({user_error: err});
     }
   });
 };
@@ -439,16 +455,19 @@ dbHandle.open( function() {
 	console.log( '** Connected to MongoDB **');
 	clearIsOnline();
 
-  //addUserToCourse({username:"rjonace"},{number:"COP1234"});
-  //addCourseToUser({number:"COP1234"},{username:"rjonace"});
+  // Connecting object example
+  //addUserToCourse({username:"username3"},{number:"COP1234"}, console.log);
+  //addCourseToUser({number:"COP1234"},{username:"username3"}, console.log);
 
+  //Read Object example
   //readObj('users',{"username":"user1"}, {_id:true}, console.log);
 
+  // Creating dependent object example
   /*
   getObjectIdByMap('users', {username:"proff"}, function (instructor) {
     var tempCourse = {
-      title: "Another CS Course",
-      number: "COP4321-001",
+      title: "CS Course II",
+      number: "COP1235",
       id_Instructor: instructor,
       id_Students: [],
       id_Assignments:[]
@@ -458,13 +477,13 @@ dbHandle.open( function() {
       {username:"proff"},
       console.log
     );
-
   });
   */
 
-  
-    checkObj('users', {username:"proff"})
-    checkObj('users', {username:"profff"})
+  //Check if data objects exist methods
+  //checkObj('users', {username:"proff"}, console.log)
+  //checkObj('users', {username:"profff"}, console.log)
+  //checkObj('users', {is_online:false}, console.log);
 
     
 
