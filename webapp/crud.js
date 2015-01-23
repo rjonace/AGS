@@ -10,6 +10,7 @@
   white  : true
 */
 /*global */
+/* My comment - Rodney */
 
 // ------------ BEGIN MODULE SCOPE VARIABLES --------------
 'use strict';
