@@ -2,7 +2,7 @@
 * @fileOverview crud.js - module to provide CRUD db capabilities
 */
 
-//Matt added this
+//Matt added thi
 
 
 /*jslint         node    : true, continue : true,
@@ -65,7 +65,7 @@ loadSchema = function ( schema_name, schema_path ) {
 };
 
 function howGitHub(){
-  return dafuq;
+  return dafu;
 }
 
 /**
