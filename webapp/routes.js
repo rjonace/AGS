@@ -24,7 +24,7 @@ configRoutes = function ( app, server ) {
     response.redirect( '/spa.html' );
   });
 
-  app.post( '/signup/', function (request, response) {
+  app.post( '/user/create', function (request, response) {
 
       var body = request.body
       var tempUser = {
@@ -47,6 +47,33 @@ configRoutes = function ( app, server ) {
         function ( result_map ) { 
           console.log( result_map); 
           response.redirect('/json/users/list');
+        }
+      );
+
+  });
+
+  app.post( '/assignment/create', function (request, response) {
+
+
+      var body = request.body;
+          console.log(body.assignmentFilesField);
+
+      var tempAssignment = {
+          name: body.assignmentNameField,
+          description: body.assignmentDescriptionField,
+          language: body.assignmentLanguageField,
+          dateDue: body.assignmentDateField,
+          files: body.assignmentFilesField,
+          vta: body.assignmentGraderField,
+          id_Course: "54c1895dd12da9248b81ad31"
+      };
+
+      crud.construct(
+        'assignments',
+        tempAssignment,
+        function ( result_map ) { 
+          console.log( result_map); 
+          response.redirect('/json/assignments/list');
         }
       );
 

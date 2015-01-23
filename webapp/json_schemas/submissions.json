@@ -3,18 +3,18 @@
 	"properties": {
 		"_id": {
 	  		"type"		: "string",
-	  		"minLength"	: 25,
-	  		"maxLength"	: 25
+	  		"minLength"	: 24,
+	  		"maxLength"	: 24
 		},
 		"id_Student": {
 	  		"type"		: "string",
-	  		"minLength"	: 25,
-	  		"maxLength"	: 25
+	  		"minLength"	: 24,
+	  		"maxLength"	: 24
 	  	},
 		"id_Assignment": {
 	  		"type"		: "string",
-	  		"minLength"	: 25,
-	  		"maxLength"	: 25
+	  		"minLength"	: 24,
+	  		"maxLength"	: 24
 	  	},
 		"date": {
 			"type" 	: "string",

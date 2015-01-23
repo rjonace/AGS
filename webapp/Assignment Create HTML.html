@@ -9,7 +9,7 @@
 
 	<body>
 		<div id="createAssignmentForm">
-			<form action= "localhost:3000/assignment/create" method="post" >
+			<form action= "http://localhost:3000/assignment/create" method="post" >
 				<fieldset>
 					<label for="assignmentNameField">Assignment Name:</label>
 					<input type="text" id="assignmentNameField" name="assignmentNameField" placeholder="Senior Design II" />
@@ -24,6 +24,10 @@
 					<input type="radio" id="assignmentLanguageFieldJava" name="assignmentLanguageField" value="Java"/> Java<br>
 					<input type="radio" id="assignmentLanguageFieldPython" name="assignmentLanguageField" value="Python"/> Python<br>
 					
+					<label for="assignmentDateField">Assignment Date:</label>
+					<input type="text" id="assignmentDateField" name="assignmentDateField" />
+					<br>
+
 					<label for="assignmentFilesField">Assignment Files:</label>
 					<input type="file" id="assignmentFilesField" name="assignmentFilesField" />
 					<br>
