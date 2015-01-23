@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Lorum ipsum</title>
+		<!script src="><!/script>
+		<!link rel="stylesheet" href="relative file path">
+	</head>
+
+	<body>
+		<div id="createAssignmentForm">
+			<form action= "localhost:3000/assignment/create" method="post" >
+				<fieldset>
+					<label for="assignmentNameField">Assignment Name:</label>
+					<input type="text" id="assignmentNameField" name="assignmentNameField" placeholder="Senior Design II" />
+					<br>
+					
+					<label for="assignmentDescriptionField">Assignment Description:</label>
+					<input type="text" id="assignmentDescriptionField" name="assignmentDescriptionField" placeholder="Assignment Description Here" />
+					<br>
+					
+					<label for="assignmentLanguageField">Language:</label><br>
+					<input type="radio" id="assignmentLanguageFieldC" name="assignmentLanguageField" value="C"/> C<br>
+					<input type="radio" id="assignmentLanguageFieldJava" name="assignmentLanguageField" value="Java"/> Java<br>
+					<input type="radio" id="assignmentLanguageFieldPython" name="assignmentLanguageField" value="Python"/> Python<br>
+					
+					<label for="assignmentFilesField">Assignment Files:</label>
+					<input type="file" id="assignmentFilesField" name="assignmentFilesField" />
+					<br>
+					
+					<label for="assignmentGraderField">Virtual TA:</label>
+					<input type="file" id="assignmentGraderField" name="assignmentGraderField" />
+					<br>
+					
+					<input type="submit" onClick=""  value="Create Assignment" />
+				</fieldset>
+			</form>
+		</div>
+		
+	</body>
+</html> 
