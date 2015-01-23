@@ -65,7 +65,12 @@ loadSchema = function ( schema_name, schema_path ) {
 };
 
 function howGitHub(){
+<<<<<<< HEAD
   return dafu;
+=======
+  var what = {};
+  return dafuq;
+>>>>>>> FETCH_HEAD
 }
 
 /**
