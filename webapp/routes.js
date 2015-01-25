@@ -41,6 +41,15 @@ configRoutes = function ( app, server ) {
           id_Submissions: []
       };
 
+      crud.createUser(
+        tempUser,
+        function (result_map) {
+          console.log( result_map); 
+          response.redirect('/json/users/list');
+        }
+      );
+
+      /*
       crud.construct(
         'users',
         tempUser,
@@ -48,7 +57,7 @@ configRoutes = function ( app, server ) {
           console.log( result_map); 
           response.redirect('/json/users/list');
         }
-      );
+      );*/
 
   });
 

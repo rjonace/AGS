@@ -23,6 +23,7 @@ var
   removeCourseFromUser, removeAssignmentFromUser, removeSubmissionFromUser, removeStudentFromUser,
   removeUserFromCourse, removeAssignmentFromCourse,
   createCourseAsInstructor, createAssignmentForCourse,  createSubmissionByStudent,
+  createUserWithCheck,
 
   mongodb     = require( 'mongodb' ),
   fsHandle    = require( 'fs'      ),
@@ -285,6 +286,22 @@ createCourseAsInstructor = function ( course_map, instructor_find_map, callback)
   });
 };
 
+createUserWithCheck = function ( user_map, callback) {
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne({username:user_map.username}, function(err, user){
+    if(user != null) {
+      // user already exists and username found in database
+      callback({error_msg: 'User with that user name already exists.'});
+    } else {
+      // user does not already exist
+      constructObj('users', user_map, function (result_map) {
+        callback(user_map.username + " created.");
+      });
+    }
+  });
+};
+
 createAssignmentForCourse = function ( ass_map, course_find_map, callback) {
 
 };
@@ -446,7 +463,8 @@ module.exports = {
 	update: 	updateObj,
   connect: connectObj, 
 	destroy: destroyObj,
-  createCourse: createCourseAsInstructor
+  createCourse: createCourseAsInstructor,
+  createUser: createUserWithCheck
 };
 // ----------------- END PUBLIC METHODS -------------------
 
