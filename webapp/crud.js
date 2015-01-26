@@ -357,23 +357,23 @@ removeCourseFromUser = function (course_find_map, user_find_map, callback) {
 };
 
 removeAssignmentFromUser = function ( ass_find_map, user_find_map) {
-
+  //...
 };
 
 removeSubmissionFromUser = function(sub_find_map, user_find_map) {
-
+  //...
 };
 
 removeStudentFromUser = function (stud_find_map, user_find_map) {
-
+  //...
 };
 
 removeUserFromCourse = function ( user_find_map, course_find_map) {
-
+  //...
 };
 
 removeAssignmentFromCourse = function ( ass_find_map, course_find_map ) {
-
+  //...
 };
 
 /**
@@ -437,11 +437,11 @@ createUserWithCheck = function ( user_map, callback) {
 };
 
 createAssignmentForCourse = function ( ass_map, course_find_map, callback) {
-
+  //...
 };
 
 createSubmissionByStudent = function ( sub_map, ass_find_map, stud_find_map) {
-
+  //...
 };
 
 // ----------------- END UTILITY METHODS ------------------
