@@ -117,23 +117,6 @@ getObjectIdByMap = function (objType, find_map, callback) {
 };
 
 /**
-* Checks if Objects matching find map exist
-* @function
-* @param {String} objType Type of object to find
-* @param {Object} find_map Map of object to find
-* @param {function} callback function to be called with an array of object id that match map as an argument
-*/
-checkObj = function ( obj_type, obj_find_map, callback) {
-  readObj( obj_type, obj_find_map, {_id:true}, function(obj_list) {
-    if(obj_list.length > 0) {
-      callback(obj_list);
-    } else {
-      callback({error_msg: "Data object does not exist."})
-    }
-  });
-};
-
-/**
 * Inserts course id into appropriate array of user object
 * @function
 * @param {Object} course_find_map Map to find course being added
@@ -356,58 +339,126 @@ removeCourseFromUser = function (course_find_map, user_find_map, callback) {
   });
 };
 
-removeAssignmentFromUser = function ( ass_find_map, user_find_map) {
-  //...
-};
+/**
+* Removes assignment id from appropriate array of user object
+* @function
+* @param {Object} ass_find_map Map to find assignment being removed
+* @param {Object} user_find_map Map to find user losing the assignment
+* @param {Function} callback use console log to see errors or update count
+*/
+removeAssignmentFromUser = function ( ass_find_map, user_find_map, callback) {
+  var assignmentCol = dbHandle.collection('assignments');
 
-removeSubmissionFromUser = function(sub_find_map, user_find_map) {
-  //...
-};
-
-removeStudentFromUser = function (stud_find_map, user_find_map) {
-  //...
-};
-
-removeUserFromCourse = function ( user_find_map, course_find_map) {
-  //...
-};
-
-removeAssignmentFromCourse = function ( ass_find_map, course_find_map ) {
-  //...
+  assignmentCol.findOne( ass_find_map, function(err, assignment){ 
+    if(assignment != null) {
+      var userCol = dbHandle.collection('users');
+      userCol.update(
+          user_find_map,
+          { $pull: {id_Assignments: assignment._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({user_error: inner_error});
+              }
+            }
+        );
+    } else {
+      callback({assignment_error: err});
+    }
+  });
 };
 
 /**
-* Creates a course object in the database given an instructor user
+* Removes submission id from appropriate array of user object
 * @function
-* @param {Object} course_map Map of course object to add to database
-* @param {Object} instructor_find_map Map to find instructor creating the course  
-* @param {Object} callback callback function  
+* @param {Object} sub_find_map Map to find submission being removed
+* @param {Object} user_find_map Map to find user losing the submission
+* @param {Function} callback use console log to see errors or update count
 */
-createCourseAsInstructor = function ( course_map, instructor_find_map, callback) {
-// does check for duplicates  
+removeSubmissionFromUser = function(sub_find_map, user_find_map, callback) {
+  var submissionCol = dbHandle.collection('submissions');
+
+  submissionCol.findOne( sub_find_map, function(err, submission){ 
+    if(submission != null) {
+      var userCol = dbHandle.collection('users');
+      userCol.update(
+          user_find_map,
+          { $pull: {id_Submissions: submission._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({user_error: inner_error});
+              }
+            }
+        );
+    } else {
+      callback({submission_error: err});
+    }
+  });
+};
+
+/**
+* Removes student user id from appropriate array of instructor user object
+* @function
+* @param {Object} stud_find_map Map to find student being removed
+* @param {Object} user_find_map Map to find instructor user losing the student
+* @param {Function} callback use console log to see errors or update count
+*/
+removeStudentFromUser = function (stud_find_map, user_find_map, callback) {
   var userCol = dbHandle.collection('users');
 
-  userCol.findOne( instructor_find_map, function(err, user){ 
-    if(user != null) {
-      course_map.id_Instructor = user._id.toString();
+  userCol.findOne( stud_find_map, function(err, student){ 
+    if(student != null) {
+      if(!student.isStudent){
+        callback({student_error: err, error_msg: "User is not a Student."})
+      }
+      userCol.update(
+          user_find_map,
+          { $pull: {id_Students: student._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({user_error: inner_error});
+              }
+            }
+        );
+    } else {
+      callback({student_error: err});
+    }
+  });
+};
 
+/**
+* Removes user id from appropriate array of course object
+* @function
+* @param {Object} user_find_map Map to find user being removed
+* @param {Object} course_find_map Map to find course losing the user
+* @param {Function} callback use console log to see errors or update count
+*/
+removeUserFromCourse = function ( user_find_map, course_find_map, callback) {
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( user_find_map, function(err, user){ 
+    if(user!=null) {
       var courseCol = dbHandle.collection('courses');
-
-      courseCol.findOne( { $or: [
-        {title:course_map.title},
-        {number:course_map.number}] },
-        function( course_err, course) {
-          if(course != null) {
-            callback({error_msg: 'Course already exists.'});
-          } else {
-            constructObj('courses', course_map, function (result_map) {
-              callback(course_map.title + " course created by " + user.name);
-            });
-
-          }
-        }
-      )
-
+      courseCol.update(
+          course_find_map,
+          { $pull: {id_Students: user._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({course_error: inner_error});
+              }
+            }
+        );
     } else {
       callback({user_error: err});
     }
@@ -415,35 +466,35 @@ createCourseAsInstructor = function ( course_map, instructor_find_map, callback)
 };
 
 /**
-* Creates a user object and checks if it already exists in database
+* Removes assignment id from appropriate array of course object
 * @function
-* @param {Object} user_map Map of user object to add to database 
-* @param {Object} callback callback function  
+* @param {Object} ass_find_map Map to find assignment being removed
+* @param {Object} course_find_map Map to find course losing the assignment
+* @param {Function} callback use console log to see errors or update count
 */
-createUserWithCheck = function ( user_map, callback) {
-  var userCol = dbHandle.collection('users');
+removeAssignmentFromCourse = function ( ass_find_map, course_find_map ) {
+  var assignmentCol = dbHandle.collection('assignments');
 
-  userCol.findOne({username:user_map.username}, function(err, user){
-    if(user != null) {
-      // user already exists and username found in database
-      callback({error_msg: 'User with that user name already exists.'});
+  assignmentCol.findOne( ass_find_map, function(err, assignment){ 
+    if(assignment != null) {
+      var courseCol = dbHandle.collection('courses');
+      courseCol.update(
+          course_find_map,
+          { $pull: {id_Assignments: assignment._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              if(update_count>0) {
+                callback({ update_count : update_count });
+              } else {
+                callback({course_error: inner_error});
+              }
+            }
+        );
     } else {
-      // user does not already exist
-      constructObj('users', user_map, function (result_map) {
-        callback(user_map.username + " created.");
-      });
+      callback({assignment_error: err});
     }
   });
 };
-
-createAssignmentForCourse = function ( ass_map, course_find_map, callback) {
-  //...
-};
-
-createSubmissionByStudent = function ( sub_map, ass_find_map, stud_find_map) {
-  //...
-};
-
 // ----------------- END UTILITY METHODS ------------------
 
 // ---------------- BEGIN PUBLIC METHODS ------------------
@@ -460,6 +511,23 @@ checkType = function ( obj_type ) {
     });
   }
   return null;
+};
+
+/**
+* Checks if Objects matching find map exist
+* @function
+* @param {String} objType Type of object to find
+* @param {Object} find_map Map of object to find
+* @param {function} callback function to be called with an array of object id that match map as an argument
+*/
+checkObj = function ( obj_type, obj_find_map, callback) {
+  readObj( obj_type, obj_find_map, {_id:true}, function(obj_list) {
+    if(obj_list.length > 0) {
+      callback(obj_list);
+    } else {
+      callback({error_msg: "Data object does not exist."})
+    }
+  });
 };
 
 /**
@@ -588,6 +656,107 @@ destroyObj = function ( obj_type, find_map, callback ) {
   );
 };
 
+/**
+* Creates a course object in the database given an instructor user
+* @function
+* @param {Object} course_map Map of course object to add to database
+* @param {Object} instructor_find_map Map to find instructor creating the course  
+* @param {Object} callback callback function  
+*/
+createCourseAsInstructor = function ( course_map, instructor_find_map, callback) {
+// does check for duplicates  
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( instructor_find_map, function(err, user){ 
+    if(user != null) {
+      course_map.id_Instructor = user._id.toString();
+
+      var courseCol = dbHandle.collection('courses');
+
+      courseCol.findOne( { $or: [
+        {title:course_map.title, number:course_map.number, semester:course_map.semester, year:course_map.year},
+        {title:course_map.title, semester:course_map.semester, year:course_map.year},
+        {number:course_map.number, semester:course_map.semester, year:course_map.year}] },
+        function( course_err, course) {
+          if(course != null) {
+            callback({error_msg: 'Course already exists.'});
+          } else {
+            constructObj('courses', course_map, function (result_map) {
+              callback(course_map.title + " course created by " + user.name);
+            });
+
+          }
+        }
+      )
+
+    } else {
+      callback({user_error: err});
+    }
+  });
+};
+
+/**
+* Creates a user object and checks if it already exists in database
+* @function
+* @param {Object} user_map Map of user object to add to database 
+* @param {Object} callback callback function  
+*/
+createUserWithCheck = function ( user_map, callback) {
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne({username:user_map.username}, function(err, user){
+    if(user != null) {
+      // user already exists and username found in database
+      callback({error_msg: 'User with that user name already exists.'});
+    } else {
+      // user does not already exist
+      constructObj('users', user_map, function (result_map) {
+        callback(user_map.username + " created.");
+      });
+    }
+  });
+};
+
+/**
+* Creates an assignment for a course that exists in the database
+* @function
+* @param {Object} ass_map Map of assignment object to add to database 
+* @param {Object} course_find_map Map of course object the assignment belongs to
+* @param {Object} callback callback function  
+*/
+createAssignmentForCourse = function ( ass_map, course_find_map, callback) {
+  var courseCol = dbHandle.collection('courses');
+
+  courseCol.findOne( course_find_map, function(err, course){ 
+    if(course != null) {
+      ass_map.id_Course = course._id.toString();
+
+      var assignmentCol = dbHandle.collection('assignments');
+
+      assignmentCol.findOne( { $and: [
+        {name:ass_map.name},
+        {id_Course:ass_map.id_Course}] },
+        function( assignment_err, assignment) {
+          if(assignment != null) {
+            callback({error_msg: assignment.name + ' already exists in ' + course.title + '.'});
+          } else {
+            constructObj('assignments', ass_map, function (result_map) {
+              callback(ass_map.name + " assignment created for " + course.title);
+            });
+
+          }
+        }
+      )
+
+    } else {
+      callback({course_error: err});
+    }
+  });
+};
+
+createSubmissionByStudent = function ( sub_map, ass_find_map, stud_find_map) {
+  //...
+};
 
 module.exports = {
 	makeMongoId	: mongodb.ObjectID,
@@ -598,7 +767,8 @@ module.exports = {
   connect: connectObj, 
 	destroy: destroyObj,
   createCourse: createCourseAsInstructor,
-  createUser: createUserWithCheck
+  createUser: createUserWithCheck,
+  createAssignment: createAssignmentForCourse
 };
 // ----------------- END PUBLIC METHODS -------------------
 
@@ -620,6 +790,8 @@ dbHandle.open( function() {
     var tempCourse = {
       title: "CS Course II",
       number: "COP1235",
+      semester: "Spring",
+      year: "2015"
       id_Instructor: instructor,
       id_Students: [],
       id_Assignments:[]

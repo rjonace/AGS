@@ -12,6 +12,12 @@
 		"number": {
 			"type":"string"
 		},
+		"semester": {
+			"type":"string"
+		},
+		"year": {
+			"type":"string"
+		},
 		"id_Instructor": {
 	  		"type"		: "string",
 	  		"minLength"	: 24,

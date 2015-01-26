@@ -65,7 +65,6 @@ configRoutes = function ( app, server ) {
 
 
       var body = request.body;
-          console.log(body.assignmentFilesField);
 
       var tempAssignment = {
           name: body.assignmentNameField,
@@ -74,9 +73,19 @@ configRoutes = function ( app, server ) {
           dateDue: body.assignmentDateField,
           files: body.assignmentFilesField,
           vta: body.assignmentGraderField,
-          id_Course: "54c1895dd12da9248b81ad31"
+          id_Course: ""
       };
 
+      crud.createAssignment(
+        tempAssignment,
+        {number:"COP1234"},
+        function ( result_map ) { 
+          console.log( result_map); 
+          response.redirect('/json/assignments/list');
+        }
+      );
+
+      /*
       crud.construct(
         'assignments',
         tempAssignment,
@@ -84,7 +93,7 @@ configRoutes = function ( app, server ) {
           console.log( result_map); 
           response.redirect('/json/assignments/list');
         }
-      );
+      );*/
 
   });
 
