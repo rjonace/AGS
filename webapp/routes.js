@@ -73,7 +73,8 @@ configRoutes = function ( app, server ) {
           dateDue: body.assignmentDateField,
           files: body.assignmentFilesField,
           vta: body.assignmentGraderField,
-          id_Course: ""
+          id_Course: "",
+          id_Submissions: []
       };
 
       crud.createAssignment(
