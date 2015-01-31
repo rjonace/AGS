@@ -773,7 +773,7 @@ module.exports = {
 // ----------------- END PUBLIC METHODS -------------------
 
 // ------------- BEGIN MODULE INITIALIZATION --------------
-dbHandle.open( function() {
+dbHandle.open ( function() {
 	console.log( '** Connected to MongoDB **');
 	clearIsOnline();
 
