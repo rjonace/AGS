@@ -12,6 +12,7 @@
 }
 
 #login-dropdown-list{
+	position: relative;
 	width: 95%;
 	height: 95%;
 }
