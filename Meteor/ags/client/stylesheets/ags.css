@@ -8,11 +8,8 @@
 }
 
 #login-dropdown-list{
-	position: relative;
-	width: 80%;
-	height: 80%;
-	left:25%;
-	top:25%;
+	width: 95%;
+	height: 95%;
 }
 
 .ags-head, .ags-head-logo, .ags-head-acct,
