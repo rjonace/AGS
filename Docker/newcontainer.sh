@@ -15,11 +15,9 @@ docker exec $(cat cidfile) ./shared/a.out
 
 echo "Writing Differences"
 rm diff
-#docker diff $(cat cidfile) > diff
-
-#echo "Formating Differences"
 docker diff $(cat cidfile) | sed -e '/^C/d' -e 's:^A ::g' >> diff
 
+echo "Moving Differences"
 for var in $(cat diff) 
 do
 	echo $var
