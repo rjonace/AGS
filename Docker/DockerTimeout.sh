@@ -1,5 +1,5 @@
 #!/bin/bash
-echo $1 $2 $3
+
 to=$1
 
 cont=$(docker run -d "$@")

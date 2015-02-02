@@ -804,6 +804,7 @@ dbHandle.open ( function() {
   });
   */
 
+
   //Check if data objects exist methods
   //checkObj('users', {username:"proff"}, console.log)
   //checkObj('users', {username:"profff"}, console.log)

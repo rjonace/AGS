@@ -8,7 +8,7 @@ echo "Starting container"
 docker start $(cat cidfile)
 
 echo "Compiling Source Files"
-docker exec $(cat cidfile) gcc -o /shared/a.out /shared/program.c
+docker exec -i -t -v $(cat cidfile) gcc -o /shared/a.out /shared/program.c
 
 echo "Running binary file"
 docker exec $(cat cidfile) ./shared/a.out
