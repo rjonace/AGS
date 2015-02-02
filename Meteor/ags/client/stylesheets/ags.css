@@ -8,6 +8,9 @@
 }
 #login-buttons{
 	width:95%;
+	position: relative;
+	right:5%;
+	top:5%;
 }
 
 #login-dropdown-list{
