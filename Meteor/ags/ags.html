@@ -1,14 +1,14 @@
 <head>
-  <title>ags</title>
+	<title>Auto-Grading System</title>
+	<link rel="stylesheet" href="css/ags.css" type="text/css"/>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+	{{#if currentUser}}
+		{{> agsHead}}
+		{{> agsMain}}
+		{{> agsFoot}}
+	{{else}}
+		{{> agsLogin}}
+	{{/if}}
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>

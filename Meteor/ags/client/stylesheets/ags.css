@@ -1,0 +1,97 @@
+.ags-login {
+	background-color: grey;
+	position: fixed;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+}
+.ags-head, .ags-head-logo, .ags-head-acct,
+.ags-main, .ags-main-nav, .ags-main-content, 
+.ags-main-content-info, .ags-main-content-view,
+.ags-foot {
+	position : absolute;
+}
+.ags-head-acct,
+.ags-head-search, .ags-main, .ags-main-nav,
+.ags-main-content, .ags-foot,
+.ags-main-content-info, .ags-main-content-view{
+	padding: 10px;
+	font-family: Arial;
+}
+.ags-head {
+	top: 0;
+	left : 0;
+	right: 0;
+	height : 40px;
+}
+.ags-head-logo {
+	top: 4px;
+	left : 4px;
+	height : 32px;
+	width: 32px;
+	background : orange;
+}
+.ags-head-acct {
+	top: 4px;
+	right: 0px;
+	width: 260px;
+	height : 32px;
+	background : lightblue;
+}
+.ags-main {
+	top: 40px;
+	left : 0;
+	bottom : 40px;
+	right: 0;
+}
+.ags-main-content,
+.ags-main-nav {
+	top: 0;
+	bottom : 0;
+}
+.ags-main-nav {
+	width: 250px;
+	background : #eee;
+}
+	.ags-x-closed .ags-main-nav {
+		width: 0;
+	}
+.ags-main-content {
+	left: 250px;
+	right : 0;
+	background : #ddd;
+}
+	.ags-x-closed .ags-main-content {
+		left : 0;
+	}
+.ags-foot {
+	bottom : 0;
+	left : 0;
+	right: 0;
+	height : 40px;
+}
+
+.ags-main-content-info {
+	top : 50px;
+	left: 75px;
+	width : 1000px;
+	height: 100px;
+	background: #fff;
+	border-radius : 3px;
+}
+.ags-main-content-view {
+	top : 200px;
+	left: 75px;
+	width : 1000px;
+	height: 450px;
+	background: #fff;
+	border-radius : 3px;
+}
+.ags-nav-entry, {
+	padding: 10px;
+	font-family: Arial;
+}
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+}
