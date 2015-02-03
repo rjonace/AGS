@@ -1,2 +1,6 @@
-echo $1
-echo $@
+set -e
+
+
+to=$1
+shift
+echo "$@"

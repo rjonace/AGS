@@ -107,13 +107,20 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
-    
+    var st = 'sh '+this.path+'DockerTimeout.sh ' + this.timeout_value + 's -e \'NODE_PATH=/usr/local/lib/node_modules\' -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
+
     //log the statement in console
     console.log(st);
 
     //execute the Docker, This is done ASYNCHRONOUSLY
-    exec(st);
+    exec(st,function (error, stdout, stderr) {
+                                console.log('stdout: ' + stdout);
+                                console.log('stderr: ' + stderr);
+                                if (error !== null) {
+                                    console.log('exec error: ' + error);
+                                }
+                            });
+    //exec(st);
     console.log("------------------------------")
     //Check For File named "completed" after every 1 second
     var intid = setInterval(function() 

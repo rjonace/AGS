@@ -1,6 +1,7 @@
 #!/bin/bash
 
 to=$1
+shift
 
 cont=$(docker run -d "$@")
 code=$(timeout "$to" docker wait "$cont" || true)
