@@ -4,4 +4,3 @@ Template.loginButtons.rendered = function(){
 	    $('.login-close-text').hide();
 	}
 };
-
