@@ -1,11 +1,17 @@
 Meteor.publish('coursesList', function (){
-	var currentUserId = this.UserId;
-	var courseIdList = AGSUsers.findOne({_id:currentUserId},{_id:false,id_Courses:true}).id_Courses[0];
-	console.log(courseIdList);
+	if (!this.userId){
+		this.ready();
+		return;
+	}
+
+	var courseIdList = AGSUsers.findOne({_id:this.userId}).id_Courses;
 	return AGSCourses.find({_id : { $in: courseIdList}});
 });
 
-Meteor.publish('usersList', function(){ 
-	return Meteor.users.find({_id:currentUserId}, 
-							{fields :{'id_Courses': 1}})
+Meteor.publish('currentUserInfo', function(){
+	if (!this.userId){
+		this.ready();
+		return;
+	}
+	return AGSUsers.find({_id: this.userId}); 
 });

@@ -1,2 +1,2 @@
 Meteor.subscribe('coursesList');
-Meteor.subscribe('usersList');
+Meteor.subscribe('currentUserInfo');
