@@ -51,11 +51,12 @@ DockerSandbox.prototype.prepare = function(success)
     exec("mkdir "+ this.path+this.folder + " && cp "+this.path+"/Payload/* "+this.path+this.folder+"&& chmod -R 777 "+ this.path+this.folder
         ,function(error, stdout, stderr)
         {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
+            //console.log('stdout: ' + stdout);
+            //console.log('stderr: ' + stderr);
             if (error !== null) {
                 console.log('exec error: ' + error);
             }
+            console.log("Temporary directory created and payload copied")
             
             fs.writeFile(sandbox.path + sandbox.folder+"/" + sandbox.file_name, sandbox.code,function(err) 
             {
@@ -68,8 +69,8 @@ DockerSandbox.prototype.prepare = function(success)
                     console.log(sandbox.langName+" file was saved!");
                     exec("chmod 777 \'"+sandbox.path+sandbox.folder+"/"+sandbox.file_name+"\'"
                             ,function (error, stdout, stderr) {
-                                console.log('stdout: ' + stdout);
-                                console.log('stderr: ' + stderr);
+                                //console.log('stdout: ' + stdout);
+                                //console.log('stderr: ' + stderr);
                                 if (error !== null) {
                                     console.log('exec error: ' + error);
                                 }
@@ -121,19 +122,10 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = 'sh '+this.path+'DockerTimeout.sh ' + this.timeout_value + 's -itv "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
+    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's -it -v ' + this.path + this.folder + ':/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
 
     //log the statement in console
     console.log(st);
-
-    exec('id',function (error, stdout, stderr) {
-                                console.log('stdout: ' + stdout);
-                                console.log('stderr: ' + stderr);
-                                if (error !== null) {
-                                    console.log('exec error: ' + error);
-                                }
-                                console.log("------------------------------")
-                            });
 
     //execute the Docker, This is done ASYNCHRONOUSLY
     exec(st,function (error, stdout, stderr) {
@@ -150,7 +142,7 @@ DockerSandbox.prototype.execute = function(success)
     var intid = setInterval(function() 
         {
             //Displaying the checking message after 1 second interval, testing purposes only
-            //console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
+            console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
 
             myC = myC + 1;
             

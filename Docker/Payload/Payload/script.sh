@@ -38,22 +38,22 @@ addtionalArg=$4
 #	
 ########################################################################
 
-exec  1> /usercode/logfile.txt
-exec  2> /usercode/errors
+exec  1> $"/usercode/logfile.txt"
+exec  2> $"/usercode/errors"
 #3>&1 4>&2 >
 
 START=$(date +%s.%2N)
 
 #Branch 1
-if [ $output = "" ]; then
-    $compiler /usercode/$file -< /usercode/inputFile #| tee /usercode/output.txt
+if [ "$output" = "" ]; then
+    $compiler /usercode/$file -< $"/usercode/inputFile" #| tee /usercode/output.txt
 #Branch 2
 else
 	#In case of compile errors, redirect them to a file
         $compiler /usercode/$file $addtionalArg #&> /usercode/errors.txt
 	#Branch 2a
 	if [ $? -eq 0 ];	then
-		$output -< /usercode/inputFile #| tee /usercode/output.txt    
+		$output -< $"/usercode/inputFile" #| tee /usercode/output.txt    
 	#Branch 2b
 	else
 	    echo "Compilation Failed"

@@ -10,13 +10,8 @@ function random(size) {
 };
 
 var language = 'C';
-var code = "#include <stdio.h>\
-\
-int main() {\
- printf(\"Hello\n\");\
- return 0;\
-}"
-var stdin = "hello"
+var code = "#include <stdio.h>\nint main() {\nprintf(\"Hello\n\");\nreturn 0;\n}"
+var stdin = ""
 
 var folder= 'temp/' + random(10); //folder in which the temporary folder will be saved
 var path=__dirname+"/"; //current working path
@@ -29,7 +24,7 @@ var sandboxType = new sandBox(timeout_value
 	,path
 	,folder
 	,vm_name
-	,"\'gcc -o /usercode/a.out\' "
+	,"\'gcc -o /usercode/a.out\'"
 	,"file.c"
 	,code
 	,"/usercode/a.out"

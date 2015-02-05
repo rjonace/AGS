@@ -1,31 +1,25 @@
-echo "Removing container ID file"
+echo "Removing Container ID File"
 rm cidfile
+
+echo "Copying StudentFiles Contents"
+cp ~/docker/StudentFiles/* ~/docker/shared
+
 echo "Creating container"
-docker run -v ~/sharedfiles:/shared ags-vm sleep 5
+docker run -v ~/docker/shared:/shared ags-vm sleep 5
 docker ps -lq >> cidfile
 
 echo "Starting container"
 docker start $(cat cidfile)
 
 echo "Compiling Source Files"
-docker exec -i -t -v $(cat cidfile) gcc -o /shared/a.out /shared/program.c
+docker exec -i -t $(cat cidfile) gcc -o /shared/a.out /shared/test.c
 
 echo "Running binary file"
-docker exec $(cat cidfile) ./shared/a.out
+docker exec $(cat cidfile) ./shared/a.out >> StudentFiles/output
 
 echo "Writing Differences"
 rm diff
 docker diff $(cat cidfile) | sed -e '/^C/d' -e 's:^A ::g' >> diff
-
-echo "Moving Differences"
-for var in $(cat diff) 
-do
-	echo $var
-	if [ $var != /shared ]
-	then
-		docker exec $(cat cidfile) mv $var /shared
-	fi;
-done;
 
 
 
