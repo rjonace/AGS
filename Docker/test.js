@@ -21,7 +21,7 @@ var stdin = "hello"
 var folder= 'temp/' + random(10); //folder in which the temporary folder will be saved
 var path=__dirname+"/"; //current working path
 console.log(path);
-var vm_name='ags_vm'; //name of virtual machine that we want to execute
+var vm_name="ags-vm"; //name of virtual machine that we want to execute
 var timeout_value=20;//Timeout Value, In Seconds
 
 //details of this are present in DockerSandbox.js

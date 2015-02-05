@@ -48,8 +48,15 @@ DockerSandbox.prototype.prepare = function(success)
     var fs = require('fs');
     var sandbox = this;
 
-    exec("mkdir "+ this.path+this.folder + " && cp "+this.path+"/Payload/* "+this.path+this.folder+"&& chmod 777 "+ this.path+this.folder,function(st)
+    exec("mkdir "+ this.path+this.folder + " && cp "+this.path+"/Payload/* "+this.path+this.folder+"&& chmod -R 777 "+ this.path+this.folder
+        ,function(error, stdout, stderr)
         {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+                console.log('exec error: ' + error);
+            }
+            
             fs.writeFile(sandbox.path + sandbox.folder+"/" + sandbox.file_name, sandbox.code,function(err) 
             {
                 if (err) 
@@ -59,7 +66,14 @@ DockerSandbox.prototype.prepare = function(success)
                 else
                 {
                     console.log(sandbox.langName+" file was saved!");
-                    exec("chmod 777 \'"+sandbox.path+sandbox.folder+"/"+sandbox.file_name+"\'")
+                    exec("chmod 777 \'"+sandbox.path+sandbox.folder+"/"+sandbox.file_name+"\'"
+                            ,function (error, stdout, stderr) {
+                                console.log('stdout: ' + stdout);
+                                console.log('stderr: ' + stderr);
+                                if (error !== null) {
+                                    console.log('exec error: ' + error);
+                                }
+                            });
 
                     fs.writeFile(sandbox.path + sandbox.folder+"/inputFile", sandbox.stdin_data,function(err) 
                     {
@@ -107,10 +121,19 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = 'sh '+this.path+'DockerTimeout.sh ' + this.timeout_value + 's -e \'NODE_PATH=/usr/local/lib/node_modules\' -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
+    var st = 'sh '+this.path+'DockerTimeout.sh ' + this.timeout_value + 's -itv "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
 
     //log the statement in console
     console.log(st);
+
+    exec('id',function (error, stdout, stderr) {
+                                console.log('stdout: ' + stdout);
+                                console.log('stderr: ' + stderr);
+                                if (error !== null) {
+                                    console.log('exec error: ' + error);
+                                }
+                                console.log("------------------------------")
+                            });
 
     //execute the Docker, This is done ASYNCHRONOUSLY
     exec(st,function (error, stdout, stderr) {
@@ -119,6 +142,7 @@ DockerSandbox.prototype.execute = function(success)
                                 if (error !== null) {
                                     console.log('exec error: ' + error);
                                 }
+                                console.log("------------------------------")
                             });
     //exec(st);
     console.log("------------------------------")
@@ -152,12 +176,12 @@ DockerSandbox.prototype.execute = function(success)
                     console.log("Main File")
                     console.log(data)
 
-            var lines = data.toString().split('*-COMPILEBOX::ENDOFOUTPUT-*')
-            data=lines[0]
-            var time=lines[1]
+                    var lines = data.toString().split('*-COMPILEBOX::ENDOFOUTPUT-*')
+                    data=lines[0]
+                    var time=lines[1]
 
-            console.log("Time: ")
-            console.log(time)
+                    console.log("Time: ")
+                    console.log(time)
 
 
                     success(data,time,data2)
@@ -178,12 +202,12 @@ DockerSandbox.prototype.execute = function(success)
                     {
                         if(!data2) data2=""
 
-                var lines = data.toString().split('*---*')
-                data=lines[0]
-                var time=lines[1]
+                        var lines = data.toString().split('*---*')
+                        data=lines[0]
+                        var time=lines[1]
 
-                console.log("Time: ")
-                console.log(time)
+                        console.log("Time: ")
+                        console.log(time)
 
                         success(data,data2)
                     });

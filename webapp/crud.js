@@ -785,13 +785,13 @@ dbHandle.open ( function() {
   //readObj('users',{"username":"user1"}, {_id:true}, console.log);
 
   // Creating dependent object example
-  /*
+  
   getObjectIdByMap('users', {username:"proff"}, function (instructor) {
     var tempCourse = {
       title: "CS Course II",
       number: "COP1235",
       semester: "Spring",
-      year: "2015"
+      year: "2015",
       id_Instructor: instructor,
       id_Students: [],
       id_Assignments:[]
@@ -802,7 +802,7 @@ dbHandle.open ( function() {
       console.log
     );
   });
-  */
+
 
 
   //Check if data objects exist methods

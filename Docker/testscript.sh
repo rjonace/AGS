@@ -1,6 +1,8 @@
-set -e
 
 
 to=$1
 shift
-echo "$@"
+echo hello $@
+echo $to
+echo $2
+echo $3
