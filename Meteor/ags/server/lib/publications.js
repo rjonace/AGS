@@ -13,5 +13,5 @@ Meteor.publish('currentUserInfo', function(){
 		this.ready();
 		return;
 	}
-	return AGSUsers.find({_id: this.userId}); 
+	return AGSUsers.find({_id: this.userId}, {field:{'firstname'} }); 
 });

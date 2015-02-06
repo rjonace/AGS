@@ -1,0 +1,21 @@
+<template name="mainContent">
+			<div class="ags-main-content-info">
+			<h2>Your courses</h2>
+				<ul>
+					{{#each userCourseList}}
+						<li class>{{number}}: {{name}}</li>
+					{{/each}}
+				</ul>
+			</div>
+
+			<div class="ags-main-content-view">
+				<ul>
+					<li><a href="COP3502_New.html">Create Assignment</a></li>
+					<li><a href="COP3502_1.html">Assignment 1</a><br></li>
+					<li><a href="COP3502_2.html">Assignment 2</a><br></li>
+					<li><a href="COP3502_3.html">Assignment 3</a><br></li>
+					<li><a href="COP3502_4.html">Assignment 4</a><br></li>
+				</ul>
+			</div>
+
+</template>
