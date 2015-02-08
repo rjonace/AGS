@@ -35,7 +35,7 @@
 	top: 0;
 	left : 0;
 	right: 0;
-	height : 40px;
+	height : 50px;
 }
 
 .ags-head-logo {
@@ -43,7 +43,7 @@
 	left : 4px;
 	height : 32px;
 	width: 32px;
-	background : orange;
+	background : white;
 }
 
 .ags-head-acct {
@@ -51,7 +51,7 @@
 	right: 0px;
 	width: 260px;
 	height : 32px;
-	background : lightblue;
+	background : gold;
 }
 
 .ags-main {
@@ -68,7 +68,7 @@
 }
 
 .ags-main-nav {
-	width: 250px;
+	width: 20%;
 	background : #eee;
 }
 
@@ -77,7 +77,7 @@
 }
 
 .ags-main-content {
-	left: 250px;
+	left: 20%;
 	right : 0;
 	background : #ddd;
 }
@@ -96,7 +96,7 @@
 .ags-main-content-info {
 	top : 50px;
 	left: 75px;
-	width : 1000px;
+	width : 90%;
 	height: 100px;
 	background: #fff;
 	border-radius : 3px;
@@ -105,7 +105,7 @@
 .ags-main-content-view {
 	top : 200px;
 	left: 75px;
-	width : 1000px;
+	width : 90%;
 	height: 450px;
 	background: #fff;
 	border-radius : 3px;

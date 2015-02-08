@@ -15,7 +15,7 @@ echo "Compiling Source Files"
 docker exec -i -t $(cat cidfile) gcc -o /shared/a.out /shared/test.c
 
 echo "Running binary file"
-docker exec $(cat cidfile) ./shared/a.out >> StudentFiles/output
+docker exec $(cat cidfile) ./shared/a.out >> output
 
 echo "Writing Differences"
 rm diff
