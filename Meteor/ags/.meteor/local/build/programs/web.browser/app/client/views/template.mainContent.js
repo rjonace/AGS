@@ -58,7 +58,17 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
     }), "\n\n			", Blaze.If(function() {
       return Spacebars.call(view.lookup("isCourseDash"));
     }, function() {
-      return "\n				\n			\n\n			";
+      return [ "\n				", HTML.H2("Course assignments"), "\n				", HTML.UL("\n					", Blaze.Each(function() {
+        return Spacebars.call(view.lookup("courseAssignmentList"));
+      }, function() {
+        return [ "\n						", HTML.LI({
+          "class": "courseAssignment"
+        }, HTML.A(Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("name"));
+        }), ": ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("dateDue"));
+        }))), "\n					" ];
+      }), "\n				"), "\n				", Spacebars.include(view.lookupTemplate("addAssignmentForm")), "\n				\n\n			" ];
     }), "\n		" ];
   }), "\n\n\n	") ];
 }));

@@ -37,8 +37,14 @@
 			{{/if}}
 
 			{{#if isCourseDash}}
+				<h2>Course assignments</h2>
+				<ul>
+					{{#each courseAssignmentList}}
+						<li class="courseAssignment"><a>{{name}}: {{dateDue}}</a></li>
+					{{/each}}
+				</ul>
+				{{> addAssignmentForm}}
 				
-			
 
 			{{/if}}
 		{{/if}}

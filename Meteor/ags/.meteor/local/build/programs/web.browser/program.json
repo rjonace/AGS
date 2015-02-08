@@ -420,6 +420,17 @@
       "hash": "1ac0cc1f87f6e64d6cfbf5cab2e606405bb49183"
     },
     {
+      "path": "packages/autopublish.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/autopublish.js?c3059a78bb200b171099fc4fa1a9345101790ddb",
+      "sourceMap": "packages/autopublish.js.map",
+      "sourceMapUrl": "/packages/c3059a78bb200b171099fc4fa1a9345101790ddb.map",
+      "size": 1293,
+      "hash": "c3059a78bb200b171099fc4fa1a9345101790ddb"
+    },
+    {
       "path": "packages/webapp.js",
       "where": "client",
       "type": "js",
@@ -493,6 +504,15 @@
       "hash": "9427e6a3fbe0b8c89c0f947d3f8fda55e6e910d4"
     },
     {
+      "path": "app/client/views/template.createAssignment.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/views/template.createAssignment.js?b9b8fabb98d71fa4d1cd33493d9e7f8d7a7b7286",
+      "size": 2118,
+      "hash": "b9b8fabb98d71fa4d1cd33493d9e7f8d7a7b7286"
+    },
+    {
       "path": "app/client/views/template.createUser.js",
       "where": "client",
       "type": "js",
@@ -533,9 +553,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.mainContent.js?a92874e180b068b33e0ba48928e3c3ea550779f9",
-      "size": 2685,
-      "hash": "a92874e180b068b33e0ba48928e3c3ea550779f9"
+      "url": "/client/views/template.mainContent.js?5ed1e1586f1f1c07fb2c29e12847389ad1325292",
+      "size": 3267,
+      "hash": "5ed1e1586f1f1c07fb2c29e12847389ad1325292"
     },
     {
       "path": "app/template.ags.js",
@@ -614,9 +634,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?0b85ce3d5160cf70bc9e1a5d8a8b1ecd26c8bf31",
-      "size": 1269,
-      "hash": "0b85ce3d5160cf70bc9e1a5d8a8b1ecd26c8bf31"
+      "url": "/client/controllers/mainContentInfo.js?85a153df05519c6a7714258b809f6ebe7cf38c9f",
+      "size": 3009,
+      "hash": "85a153df05519c6a7714258b809f6ebe7cf38c9f"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",

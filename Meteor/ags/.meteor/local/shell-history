@@ -51,3 +51,6 @@ ls
 help
 .help
 exit
+Session.get('currentCourse')
+Session.kets
+Session.keys
