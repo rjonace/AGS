@@ -1,4 +1,12 @@
 Meteor.methods({
+	'createUserData': function(id, first, last, id_Courses){
+		AGSUsers.insert({
+			_id: id,
+			first: first,
+			last: last,
+			id_Courses: id_Courses
+		});
+	},
 	'insertCourseData': function(title, number, semester, year) {
 		var currentUserId = Meteor.userId();
 		AGSCourses.insert({

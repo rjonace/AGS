@@ -44,3 +44,4 @@ Meteor.users.find().fetch()[0].services.password.bcrypt
 Meteor.user.find().fetch().services.password.bcrypt
 Meteor.user().find().fetch().services.password.bcrypt
 Meteor.users.find().fetch()[0].services.password.bcrypt
+selectedCourseList

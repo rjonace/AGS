@@ -2,33 +2,33 @@
 		<div id="signUpForm">
 			<form method="post" >
 				<fieldset>
-					<label for="userNameField">Username:</label>
-					<input type="text" id="userNameField" name="userNameField" placeholder="example1234" />
-					<br>
 					
 					<label for="firstNameField">First Name:</label>
-					<input type="text" id="firstNameField" name="firstNameField" placeholder="First Name Here" />
-					<br>
+					<input type="text" id="firstNameField" name="firstNameField" />
+					
 					
 					<label for="lastNameField">Last Name:</label>
-					<input type="text" id="lastNameField" name="lastNameField" placeholder="Last Name Here" />
+					<input type="text" id="lastNameField" name="lastNameField"  />
 					<br>
-					
-					<label for="emailField">Email:</label>
-					<input type="text" id="emailField" name="emailField" placeholder="example@domain.com" />
+
+					<label for="majorField">Major:</label>
+					<input type="text" id="majorField" name="majorField"/>
 					<br>
-					
-					<label for="passwordField">Password:</label>
-					<input type="password" id="passwordField" name="passwordField" placeholder="password1234" />
 					<br>
-					
-					<label for="passwordConfirmField">Confirm Password:</label>
-					<input type="password" id="passwordConfirmField" name="passwordConfirmField" placeholder="password1234" />
+					<label for="userCourse">Select Courses:</label>
 					<br>
-				
+
+					{{#each courseList}}
+							<input type="checkbox" id="userCourse" name="userCourse" value="{{_id}}"/>{{number}}: {{name}}<br>
+					{{/each}}
+
+					<br/>
+
 					<input type="submit" onClick="" value="Sign Up" />
 					<label id="errorMsg" name="errorMsg"></label>
 				</fieldset>
+
+
 			</form>
 		</div>
 </template>

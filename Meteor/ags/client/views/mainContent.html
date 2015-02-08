@@ -1,26 +1,47 @@
 <template name="mainContent">
-			<div class="ags-main-content-info">
-				{{#if unfinishedAccount}}
-					<h2>Finish Creating Your Account</h2>
-				{{else}}
-					
-				{{/if}}
-			</div>
-			<div class="ags-main-content-view">
-			{{#if unfinishedAccount}}
-					{{> AGSCreateUser}}
-			{{else}}
+	<div class="ags-main-content-info">
+		{{#if unfinishedAccount}}
+			<h2>Finish Creating Your Account</h2>
+		{{else}}
+			{{#if isUserDash}}
+				
+				{{#with userInfo}}
+					Welcome {{firstname}}!
+				{{/with}}
+
+			{{/if}}
+
+			{{#if isCourseDash}}
+
+			
+
+			{{/if}}
+		{{/if}}
+	</div>
+	<div class="ags-main-content-view">
+		{{#if unfinishedAccount}}
+				{{> AGSCreateUser}}
+		{{else}}
+
+			{{#if isUserDash}}
 				<h2>Your courses</h2>
 				<ul>
 					{{#each userCourseList}}
-						<li class>{{number}}: {{name}}</li>
+						<li class="userCourse"><a>{{number}}: {{name}}</a></li>
 					{{/each}}
 				</ul>
 			
-				{{> addCourseForm}}
+				
 			{{/if}}
 
+			{{#if isCourseDash}}
+				{{> addCourseForm}}
+			
 
-			</div>
+			{{/if}}
+		{{/if}}
+
+
+	</div>
 
 </template>

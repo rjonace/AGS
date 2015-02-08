@@ -1,5 +1,9 @@
 Meteor.users.deny({update: function () { return true; }});
 
+Meteor.publish('availableCourses', function(){
+	return AGSCourses.find();
+});
+
 Meteor.publish('coursesList', function (){
 	if (!this.userId){
 		this.ready();

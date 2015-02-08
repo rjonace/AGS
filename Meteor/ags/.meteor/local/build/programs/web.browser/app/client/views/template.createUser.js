@@ -2,7 +2,26 @@
 Template.__checkName("AGSCreateUser");
 Template["AGSCreateUser"] = new Template("Template.AGSCreateUser", (function() {
   var view = this;
-  return HTML.Raw('<div id="signUpForm">\n			<form method="post">\n				<fieldset>\n					<label for="userNameField">Username:</label>\n					<input type="text" id="userNameField" name="userNameField" placeholder="example1234">\n					<br>\n					\n					<label for="firstNameField">First Name:</label>\n					<input type="text" id="firstNameField" name="firstNameField" placeholder="First Name Here">\n					<br>\n					\n					<label for="lastNameField">Last Name:</label>\n					<input type="text" id="lastNameField" name="lastNameField" placeholder="Last Name Here">\n					<br>\n					\n					<label for="emailField">Email:</label>\n					<input type="text" id="emailField" name="emailField" placeholder="example@domain.com">\n					<br>\n					\n					<label for="passwordField">Password:</label>\n					<input type="password" id="passwordField" name="passwordField" placeholder="password1234">\n					<br>\n					\n					<label for="passwordConfirmField">Confirm Password:</label>\n					<input type="password" id="passwordConfirmField" name="passwordConfirmField" placeholder="password1234">\n					<br>\n				\n					<input type="submit" onclick="" value="Sign Up">\n					<label id="errorMsg" name="errorMsg"></label>\n				</fieldset>\n			</form>\n		</div>');
+  return HTML.DIV({
+    id: "signUpForm"
+  }, "\n			", HTML.FORM({
+    method: "post"
+  }, "\n				", HTML.FIELDSET("\n					\n					", HTML.Raw('<label for="firstNameField">First Name:</label>'), "\n					", HTML.Raw('<input type="text" id="firstNameField" name="firstNameField">'), "\n					\n					\n					", HTML.Raw('<label for="lastNameField">Last Name:</label>'), "\n					", HTML.Raw('<input type="text" id="lastNameField" name="lastNameField">'), "\n					", HTML.Raw("<br>"), "\n\n					", HTML.Raw('<label for="majorField">Major:</label>'), "\n					", HTML.Raw('<input type="text" id="majorField" name="majorField">'), "\n					", HTML.Raw("<br>"), "\n					", HTML.Raw("<br>"), "\n					", HTML.Raw('<label for="userCourse">Select Courses:</label>'), "\n					", HTML.Raw("<br>"), "\n\n					", Blaze.Each(function() {
+    return Spacebars.call(view.lookup("courseList"));
+  }, function() {
+    return [ "\n							", HTML.INPUT({
+      type: "checkbox",
+      id: "userCourse",
+      name: "userCourse",
+      value: function() {
+        return Spacebars.mustache(view.lookup("_id"));
+      }
+    }), Blaze.View(function() {
+      return Spacebars.mustache(view.lookup("number"));
+    }), ": ", Blaze.View(function() {
+      return Spacebars.mustache(view.lookup("name"));
+    }), HTML.BR(), "\n					" ];
+  }), "\n\n					", HTML.Raw("<br>"), "\n\n					", HTML.Raw('<input type="submit" onclick="" value="Sign Up">'), "\n					", HTML.Raw('<label id="errorMsg" name="errorMsg"></label>'), "\n				"), "\n\n\n			"), "\n		");
 }));
 
 })();
