@@ -276,6 +276,9 @@
       "path": "app/lib/init.js"
     },
     {
+      "path": "app/server/methods.js"
+    },
+    {
       "sourceMap": "packages/service-configuration.js.map",
       "sourceMapRoot": "packages",
       "path": "packages/service-configuration.js"

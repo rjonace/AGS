@@ -484,6 +484,15 @@
       "hash": "624b54846399e6e8ca0954ad8f283df192b7c1d1"
     },
     {
+      "path": "app/client/views/template.addCourseForm.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/views/template.addCourseForm.js?bec8e3e9f1fedb5bb110994f0e71a6f2a65037fd",
+      "size": 2240,
+      "hash": "bec8e3e9f1fedb5bb110994f0e71a6f2a65037fd"
+    },
+    {
       "path": "app/client/views/template.createUser.js",
       "where": "client",
       "type": "js",
@@ -506,9 +515,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.head.js?9c551989fe5b29a72ac993d9abab330ef246d4e9",
-      "size": 492,
-      "hash": "9c551989fe5b29a72ac993d9abab330ef246d4e9"
+      "url": "/client/views/template.head.js?86ca13edfe0d1bc89b6775e130ca1f51b3c6f993",
+      "size": 493,
+      "hash": "86ca13edfe0d1bc89b6775e130ca1f51b3c6f993"
     },
     {
       "path": "app/client/views/template.login.js",
@@ -524,9 +533,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.mainContent.js?4dd6c2b4b4024dbc9a0bd73f5990baadb6fca0d7",
-      "size": 1074,
-      "hash": "4dd6c2b4b4024dbc9a0bd73f5990baadb6fca0d7"
+      "url": "/client/views/template.mainContent.js?38941bb7fcd9d8b03e4353de0cf376bdc43ef02b",
+      "size": 1327,
+      "hash": "38941bb7fcd9d8b03e4353de0cf376bdc43ef02b"
     },
     {
       "path": "app/template.ags.js",
@@ -605,20 +614,20 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?35a31479e5a04f7d861366446b03884eb9e50221",
-      "size": 148,
-      "hash": "35a31479e5a04f7d861366446b03884eb9e50221"
+      "url": "/client/controllers/mainContentInfo.js?f6908fc5a28aaeb623487ccf30834d3ad5aa07d5",
+      "size": 643,
+      "hash": "f6908fc5a28aaeb623487ccf30834d3ad5aa07d5"
     },
     {
-      "path": "3e841935c3f37d79225358bb3a614c2f9fea0f14.css",
+      "path": "002c52515f4311b5e13fc9d1bdde025cc7086720.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/3e841935c3f37d79225358bb3a614c2f9fea0f14.css",
-      "sourceMap": "3e841935c3f37d79225358bb3a614c2f9fea0f14.css.map",
-      "sourceMapUrl": "/3e841935c3f37d79225358bb3a614c2f9fea0f14.map",
-      "size": 10281,
-      "hash": "3e841935c3f37d79225358bb3a614c2f9fea0f14"
+      "url": "/002c52515f4311b5e13fc9d1bdde025cc7086720.css",
+      "sourceMap": "002c52515f4311b5e13fc9d1bdde025cc7086720.css.map",
+      "sourceMapUrl": "/002c52515f4311b5e13fc9d1bdde025cc7086720.map",
+      "size": 10265,
+      "hash": "002c52515f4311b5e13fc9d1bdde025cc7086720"
     },
     {
       "path": "app/images/headlogo.png",
@@ -628,6 +637,15 @@
       "url": "/images/headlogo.png",
       "size": 16812,
       "hash": "1da880d19c214ae457ce871ad7a598737a65253b"
+    },
+    {
+      "path": "app/images/headlogo2.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/headlogo2.png",
+      "size": 23371,
+      "hash": "25f39761f53d47382b457fd784e8210808392f23"
     },
     {
       "path": "head.html",

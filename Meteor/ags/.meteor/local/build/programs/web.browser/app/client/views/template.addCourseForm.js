@@ -26,21 +26,21 @@ Template["addCourseForm"] = new Template("Template.addCourseForm", (function() {
     }), "\n						"), "\n					"), "	\n					", HTML.TR("\n						", HTML.TD({
       align: "right"
     }, "\n							", HTML.LABEL({
-      "for": "courseSemsterField"
+      "for": "courseSemesterField"
     }, "Semester:"), "\n						"), "\n						", HTML.TD("\n							", HTML.INPUT({
       type: "radio",
-      id: "courseSemsterFieldFall",
-      name: "courseSemsterField",
+      id: "courseSemesterFieldFall",
+      name: "courseSemesterField",
       value: "Fall"
     }), "Fall", HTML.BR(), "\n							", HTML.INPUT({
       type: "radio",
-      id: "courseSemsterFieldSpring",
-      name: "courseSemsterField",
+      id: "courseSemesterFieldSpring",
+      name: "courseSemesterField",
       value: "Spring"
     }), "Spring", HTML.BR(), "\n							", HTML.INPUT({
       type: "radio",
-      id: "courseSemsterFieldSummer",
-      name: "courseSemsterField",
+      id: "courseSemesterFieldSummer",
+      name: "courseSemesterField",
       value: "Summer"
     }), "Summer", HTML.BR(), "\n						"), "\n						", HTML.TD({
       align: "right"

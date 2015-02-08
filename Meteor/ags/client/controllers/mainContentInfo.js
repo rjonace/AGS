@@ -1,7 +1,10 @@
 Template.mainContent.helpers({
 	'userCourseList': function(){
 		return AGSCourses.find({}, {sort: {number: 1, name: 1} });
-	}	
+	},
+	'unfinishedAccount': function(){
+		return (AGSUsers.find().count() == 0);
+	}
 });
 
 Template.mainContent.events({
