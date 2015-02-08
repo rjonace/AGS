@@ -10,7 +10,9 @@ Meteor.publish('coursesList', function (){
 		return;
 	}
 
-	var courseIdList = AGSUsers.findOne({_id:this.userId}).id_Courses;
+	var userObj = AGSUsers.findOne({_id:this.userId});
+	var courseIdList = (userObj) ? userObj.id_Courses : [];
+
 	return AGSCourses.find({_id : { $in: courseIdList}});
 });
 

@@ -12,10 +12,10 @@ Template["addCourseForm"] = new Template("Template.addCourseForm", (function() {
     }, "\n						Create Course\n					"), "\n					", HTML.TR("\n						", HTML.TD({
       align: "right"
     }, "	\n							", HTML.LABEL({
-      "for": "courseTitleField"
-    }, "Title:"), "\n						"), "	\n						", HTML.TD("	\n							", HTML.INPUT({
+      "for": "courseNameField"
+    }, "Name:"), "\n						"), "	\n						", HTML.TD("	\n							", HTML.INPUT({
       type: "text",
-      name: "courseTitleField"
+      name: "courseNameField"
     }), "\n						"), "\n						", HTML.TD({
       align: "right"
     }, "	\n							", HTML.LABEL({

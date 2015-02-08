@@ -488,18 +488,18 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.addCourseForm.js?bec8e3e9f1fedb5bb110994f0e71a6f2a65037fd",
-      "size": 2240,
-      "hash": "bec8e3e9f1fedb5bb110994f0e71a6f2a65037fd"
+      "url": "/client/views/template.addCourseForm.js?42eb02a9674b6c689d0eed87f106f6e0a532e288",
+      "size": 2237,
+      "hash": "42eb02a9674b6c689d0eed87f106f6e0a532e288"
     },
     {
       "path": "app/client/views/template.createUser.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.createUser.js?7533e15f0fbac49fc0b0b6513a41151b33475dac",
-      "size": 1682,
-      "hash": "7533e15f0fbac49fc0b0b6513a41151b33475dac"
+      "url": "/client/views/template.createUser.js?66c7932e878b580fabd815536db9707020726793",
+      "size": 1983,
+      "hash": "66c7932e878b580fabd815536db9707020726793"
     },
     {
       "path": "app/client/views/template.foot.js",
@@ -596,9 +596,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/createUser.js?6f2aabdaad44d84b65f108c9e0d0ad4d6ff478a4",
-      "size": 482,
-      "hash": "6f2aabdaad44d84b65f108c9e0d0ad4d6ff478a4"
+      "url": "/client/controllers/createUser.js?c0aece0c761527d72d22aca7fdb956952032a5c8",
+      "size": 823,
+      "hash": "c0aece0c761527d72d22aca7fdb956952032a5c8"
     },
     {
       "path": "app/client/controllers/login.js",
@@ -619,15 +619,15 @@
       "hash": "fa45ccba85a6a5117c4da6433bab21f09c2ac400"
     },
     {
-      "path": "002c52515f4311b5e13fc9d1bdde025cc7086720.css",
+      "path": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/002c52515f4311b5e13fc9d1bdde025cc7086720.css",
-      "sourceMap": "002c52515f4311b5e13fc9d1bdde025cc7086720.css.map",
-      "sourceMapUrl": "/002c52515f4311b5e13fc9d1bdde025cc7086720.map",
-      "size": 10265,
-      "hash": "002c52515f4311b5e13fc9d1bdde025cc7086720"
+      "url": "/dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css",
+      "sourceMap": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css.map",
+      "sourceMapUrl": "/dfda95e030af253ea3ed6dc749f3e9b1c4eae141.map",
+      "size": 10263,
+      "hash": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141"
     },
     {
       "path": "app/images/headlogo.png",

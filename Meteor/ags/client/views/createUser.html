@@ -18,9 +18,16 @@
 					<label for="userCourse">Select Courses:</label>
 					<br>
 
-					{{#each courseList}}
-							<input type="checkbox" id="userCourse" name="userCourse" value="{{_id}}"/>{{number}}: {{name}}<br>
+					<table>
+					{{#each addIndex courseList}}
+						<tr>
+							<td>{{index}}</td>
+							<td><input type="checkbox" name="userCourse" value="{{value._id}}"/></td>
+							<td>{{value.number}}: {{value.name}}</td>
+							<br>
+						</tr>
 					{{/each}}
+					</table>
 
 					<br/>
 
