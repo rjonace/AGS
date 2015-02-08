@@ -619,15 +619,15 @@
       "hash": "fa45ccba85a6a5117c4da6433bab21f09c2ac400"
     },
     {
-      "path": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css",
+      "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css",
-      "sourceMap": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141.css.map",
-      "sourceMapUrl": "/dfda95e030af253ea3ed6dc749f3e9b1c4eae141.map",
-      "size": 10263,
-      "hash": "dfda95e030af253ea3ed6dc749f3e9b1c4eae141"
+      "url": "/5333cd974da126e07dd803c87fb5f57a1d219c1b.css",
+      "sourceMap": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css.map",
+      "sourceMapUrl": "/5333cd974da126e07dd803c87fb5f57a1d219c1b.map",
+      "size": 10314,
+      "hash": "5333cd974da126e07dd803c87fb5f57a1d219c1b"
     },
     {
       "path": "app/images/headlogo.png",
