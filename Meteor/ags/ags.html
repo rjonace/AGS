@@ -3,6 +3,10 @@
 </head>
 
 <body>
+	{{> ags}}
+</body>
+
+<template name="ags">
 	{{#if currentUser}}
 		{{> agsHead}}
 		{{> agsMain}}
@@ -10,4 +14,4 @@
 	{{else}}
 		{{> loginButtons}}
 	{{/if}}
-</body>
+</template>

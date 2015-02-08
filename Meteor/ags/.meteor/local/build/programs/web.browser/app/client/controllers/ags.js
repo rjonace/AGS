@@ -1,0 +1,4 @@
+(function(){Template.ags.helpers({
+})
+
+})();
