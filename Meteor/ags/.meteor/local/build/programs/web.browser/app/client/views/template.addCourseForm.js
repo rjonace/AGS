@@ -5,7 +5,10 @@ Template["addCourseForm"] = new Template("Template.addCourseForm", (function() {
   return Blaze.If(function() {
     return Spacebars.call(view.lookup("currentUser"));
   }, function() {
-    return [ "\n		", HTML.FORM("\n			", HTML.H2("Create Course"), "\n			", HTML.TABLE({
+    return [ "\n		", HTML.FORM({
+      name: "createCourse",
+      id: "createCourse"
+    }, "\n			", HTML.H2("Create Course"), "\n			", HTML.TABLE({
       border: "0"
     }, "\n				", HTML.TBODY("\n					", HTML.TH({
       colspan: "4"

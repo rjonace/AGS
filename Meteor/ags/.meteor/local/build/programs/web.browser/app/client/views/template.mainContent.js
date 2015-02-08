@@ -15,14 +15,24 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
       return [ "\n				\n				", Spacebars.With(function() {
         return Spacebars.call(view.lookup("userInfo"));
       }, function() {
-        return [ "\n					Welcome ", Blaze.View(function() {
+        return [ "\n					User: ", Blaze.View(function() {
           return Spacebars.mustache(view.lookup("firstname"));
-        }), "!\n				" ];
+        }), " ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("lastname"));
+        }), "\n				" ];
       }), "\n\n			" ];
     }), "\n\n			", Blaze.If(function() {
       return Spacebars.call(view.lookup("isCourseDash"));
     }, function() {
-      return "\n\n			\n\n			";
+      return [ "\n\n				", Spacebars.With(function() {
+        return Spacebars.call(view.lookup("courseInfo"));
+      }, function() {
+        return [ "\n					Course: ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("name"));
+        }), " ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("number"));
+        }), "\n				" ];
+      }), "\n\n			" ];
     }), "\n		" ];
   }), "\n	"), "\n	", HTML.DIV({
     "class": "ags-main-content-view"
@@ -44,11 +54,11 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
         }), ": ", Blaze.View(function() {
           return Spacebars.mustache(view.lookup("name"));
         }))), "\n					" ];
-      }), "\n				"), "\n			\n				\n			" ];
+      }), "\n				"), "\n				", Spacebars.include(view.lookupTemplate("addCourseForm")), "\n				\n			" ];
     }), "\n\n			", Blaze.If(function() {
       return Spacebars.call(view.lookup("isCourseDash"));
     }, function() {
-      return [ "\n				", Spacebars.include(view.lookupTemplate("addCourseForm")), "\n			\n\n			" ];
+      return "\n				\n			\n\n			";
     }), "\n		" ];
   }), "\n\n\n	") ];
 }));

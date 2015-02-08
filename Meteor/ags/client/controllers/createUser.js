@@ -14,7 +14,7 @@ Template.AGSCreateUser.helpers({
 });
 
 Template.AGSCreateUser.events({
-	'submit': function(event, template){
+	'submit #createUser': function(event, template){
 		var userId = Meteor.userId();
 		var firstName = event.target.firstNameField.value;
 		var lastName = event.target.lastNameField.value;
