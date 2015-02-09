@@ -35,15 +35,34 @@
 		);
 	},
 	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points, vta, solution, input){
+		
+		var fileReader = new FileReader();
+		fileReader.readAsText(vta);
+		while(fileReader.readyState != fileReader.DONE);
+		var vtaObj = {name: vta.name, contents:fileReader.result};
+
+		fileReader.readAsText(solution);
+		while(fileReader.readyState != fileReader.DONE);
+		var solutionObj = {name: solution.name, contents:fileReader.result};
+
+		var inputObjList = [];
+		for(var i=0; i < input.length; i++) {
+			var curInput = input.files[i];
+			fileReader.readAsText(curInput);
+			while(fileReader.readyState != fileReader.DONE);
+			inputObjList.push({name: curInput.name, contents:fileReader.result});
+		}
+
+
 		AGSAssignments.insert({
 			name: name,
 			description: description,
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			points: points,
-			vta: vta,
-			solution: solution,
-			input: input,
+			vta: vtaObj,
+			solution: solutionObj,
+			input: inputObjList,
 			id_Course: id_Course
 		}, function(err, id) {
 			console.log(err);

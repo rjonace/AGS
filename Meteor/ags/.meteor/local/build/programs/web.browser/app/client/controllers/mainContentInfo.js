@@ -4,17 +4,19 @@
 		return AGSCourses.find(({_id : { $in: courseIdList}}), {sort: {number: 1, name: 1} });
 	},
 	'userInfo': function(){
-		return AGSUsers.findOne();
+		return AGSUsers.findOne({_id:Meteor.userId()});
 	},
 	'courseInfo': function(){
 		return Session.get('currentCourse');
 	},
 	'unfinishedAccount': function(){
-		return (AGSUsers.find().count() == 0);
+		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
 	},
 	'courseAssignmentList' : function() {
 		var courseId = Session.get('currentCourse')._id;
 		var assIdList = AGSCourses.findOne({_id:courseId}).id_Assignments;
+		if (assIdList==null)
+			return [];
 		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {dateDue: 1, name: 1} });
 	},
 	'currentDashboard': function(){
@@ -52,28 +54,30 @@ Template.mainContent.events({
 		var fileReader = new FileReader();
 
 		var vta = event.target.assignmentVTAField.files[0];
-		fileReader.readAsText(vta);
+		//fileReader.readAsText(vta);
 	//	while(fileReader.readyState != fileReader.DONE);
-		alert("Done reading VTA File");
-		var vtaObj = {name: vta.name, contents:fileReader.result};
+		//alert("Done reading VTA File");
+		//var vtaObj = {name: vta.name, contents:fileReader.result};
 
 		var solution = event.target.assignmentSolutionField.files[0];
 		/*fileReader.readAsText(solution);
 	//	while(fileReader.readyState != fileReader.DONE);
 		alert("Done reading Solution File");
 		var solutionObj = {name: solution.name, contents:fileReader.result};*/
+		//var solutionObj = event.target.assignmentSolutionField.files[0];
 
-		var inputObjList = [];
-		/*for(var i=0; i < event.target.assignmentInputField.files.length; i++) {
-			var input = event.target.assignmentInputField.files[i];
-			fileReader.readAsText(input);
+		var inputList = event.target.assignmentInputField.files;
+		//var inputObjList = [];
+		//for(var i=0; i < event.target.assignmentInputField.files.length; i++) {
+			//var input = event.target.assignmentInputField.files[i];
+			//fileReader.readAsText(input);
 	//		while(fileReader.readyState != fileReader.DONE);
-			inputObjList.push({name: input.name, contents:fileReader.result});
-		}*/
-		alert("Done reading Input File(s)");
+			//inputObjList.push({name: input.name, contents:fileReader.result});
+		//}
+		//alert("Done reading Input File(s)");
 
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, dateAvailable, dateDue, points, vtaObj, solutionObj, inputObjList);
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, dateAvailable, dateDue, points, vta, solution, inputList);
 	},
 })
 

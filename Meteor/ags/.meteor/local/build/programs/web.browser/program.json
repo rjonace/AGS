@@ -508,9 +508,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.createAssignment.js?b9b8fabb98d71fa4d1cd33493d9e7f8d7a7b7286",
-      "size": 2118,
-      "hash": "b9b8fabb98d71fa4d1cd33493d9e7f8d7a7b7286"
+      "url": "/client/views/template.createAssignment.js?3217a9ba6e85e1af5f99134d9b1287fec8a8775b",
+      "size": 2248,
+      "hash": "3217a9ba6e85e1af5f99134d9b1287fec8a8775b"
     },
     {
       "path": "app/client/views/template.createUser.js",
@@ -634,9 +634,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?85a153df05519c6a7714258b809f6ebe7cf38c9f",
-      "size": 3009,
-      "hash": "85a153df05519c6a7714258b809f6ebe7cf38c9f"
+      "url": "/client/controllers/mainContentInfo.js?67b636ec3676fcb4b1e8ad7f40b80eb29a9aa2fe",
+      "size": 3223,
+      "hash": "67b636ec3676fcb4b1e8ad7f40b80eb29a9aa2fe"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",
