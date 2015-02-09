@@ -569,9 +569,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/lib/subscriptions.js?c33086e405580ea5b9d5c25175f6eca70a4a3ef6",
-      "size": 193,
-      "hash": "c33086e405580ea5b9d5c25175f6eca70a4a3ef6"
+      "url": "/client/lib/subscriptions.js?0cbd38c911e8986b8163772c2ccaf6ee38137e23",
+      "size": 228,
+      "hash": "0cbd38c911e8986b8163772c2ccaf6ee38137e23"
     },
     {
       "path": "app/lib/collections.js",
@@ -623,9 +623,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049",
-      "size": 3340,
-      "hash": "8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049"
+      "url": "/client/controllers/mainContentInfo.js?be417bfa326a9d34ab9f52a132a20da93edd70e8",
+      "size": 1846,
+      "hash": "be417bfa326a9d34ab9f52a132a20da93edd70e8"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",
