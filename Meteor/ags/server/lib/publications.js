@@ -4,6 +4,10 @@ Meteor.publish('availableCourses', function(){
 	return AGSCourses.find();
 });
 
+Meteor.publish('allAssignments', function(){
+	return AGSAssignments.find();
+}
+
 Meteor.publish('coursesList', function (){
 	if (!this.userId){
 		this.ready();
