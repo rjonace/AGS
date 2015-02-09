@@ -5,6 +5,8 @@ Meteor.methods({
 			firstname: first,
 			lastname: last,
 			id_Courses: id_Courses
+		}, function(err, id){
+			console.log(err);
 		});
 	},
 	'insertCourseData': function(name, number, semester, year) {
@@ -17,6 +19,11 @@ Meteor.methods({
 			id_Instructor: currentUserId,
 			id_Students: [],
 			id_Assignments: []
+		}, function(err,id){
+			AGSUsers.update(
+				{_id:currentUserId},
+				{ $addToSet: { id_Courses: id}}
+			);
 		});
 	},
 	'removeCourseData': function(selectedCourse){
@@ -36,22 +43,22 @@ Meteor.methods({
 	},
 	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points, vta, solution, input){
 		
-		var fileReader = new FileReader();
-		fileReader.readAsText(vta);
-		while(fileReader.readyState != fileReader.DONE);
-		var vtaObj = {name: vta.name, contents:fileReader.result};
+		// var fileReader = new FileReader();
+		// fileReader.readAsText(vta);
+		// while(fileReader.readyState != fileReader.DONE);
+		// var vtaObj = {name: vta.name, contents:fileReader.result};
 
-		fileReader.readAsText(solution);
-		while(fileReader.readyState != fileReader.DONE);
-		var solutionObj = {name: solution.name, contents:fileReader.result};
+		// fileReader.readAsText(solution);
+		// while(fileReader.readyState != fileReader.DONE);
+		// var solutionObj = {name: solution.name, contents:fileReader.result};
 
-		var inputObjList = [];
-		for(var i=0; i < input.length; i++) {
-			var curInput = input.files[i];
-			fileReader.readAsText(curInput);
-			while(fileReader.readyState != fileReader.DONE);
-			inputObjList.push({name: curInput.name, contents:fileReader.result});
-		}
+		// var inputObjList = [];
+		// for(var i=0; i < input.length; i++) {
+		// 	var curInput = input.files[i];
+		// 	fileReader.readAsText(curInput);
+		// 	while(fileReader.readyState != fileReader.DONE);
+		// 	inputObjList.push({name: curInput.name, contents:fileReader.result});
+		// }
 
 
 		AGSAssignments.insert({
@@ -60,9 +67,9 @@ Meteor.methods({
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			points: points,
-			vta: vtaObj,
-			solution: solutionObj,
-			input: inputObjList,
+			vta: vta,
+			solution: solution,
+			input: input,
 			id_Course: id_Course
 		}, function(err, id) {
 			console.log(err);

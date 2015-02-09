@@ -23,7 +23,7 @@ Template["AGSCreateUser"] = new Template("Template.AGSCreateUser", (function() {
     }), ": ", Blaze.View(function() {
       return Spacebars.mustache(Spacebars.dot(view.lookup("value"), "name"));
     })), "\n							", HTML.BR(), "\n						"), "\n					" ];
-  }), "\n					"), "\n\n					", HTML.Raw("<br>"), "\n\n					", HTML.Raw('<input type="submit" onclick="submitUser" value="Sign Up">'), "\n					", HTML.Raw('<label id="errorMsg" name="errorMsg"></label>'), "\n				"), "\n\n\n			"), "\n		");
+  }), "\n					"), "\n\n					", HTML.Raw("<br>"), "\n\n					", HTML.Raw('<input type="submit" value="Sign Up">'), "\n					", HTML.Raw('<label id="errorMsg" name="errorMsg"></label>'), "\n				"), "\n\n\n			"), "\n		");
 }));
 
 })();

@@ -420,17 +420,6 @@
       "hash": "1ac0cc1f87f6e64d6cfbf5cab2e606405bb49183"
     },
     {
-      "path": "packages/autopublish.js",
-      "where": "client",
-      "type": "js",
-      "cacheable": true,
-      "url": "/packages/autopublish.js?c3059a78bb200b171099fc4fa1a9345101790ddb",
-      "sourceMap": "packages/autopublish.js.map",
-      "sourceMapUrl": "/packages/c3059a78bb200b171099fc4fa1a9345101790ddb.map",
-      "size": 1293,
-      "hash": "c3059a78bb200b171099fc4fa1a9345101790ddb"
-    },
-    {
       "path": "packages/webapp.js",
       "where": "client",
       "type": "js",
@@ -517,9 +506,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.createUser.js?6a1f6aee491c6acfb907b1c6698cdfe19ad3a2b4",
-      "size": 2015,
-      "hash": "6a1f6aee491c6acfb907b1c6698cdfe19ad3a2b4"
+      "url": "/client/views/template.createUser.js?744536ad69d5894cd06626e23738e7131f5a0b0f",
+      "size": 1994,
+      "hash": "744536ad69d5894cd06626e23738e7131f5a0b0f"
     },
     {
       "path": "app/client/views/template.foot.js",
@@ -580,9 +569,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/lib/subscriptions.js?cc6f3cbdb880a7e5967bf8cc0b90e8ff07e14766",
-      "size": 157,
-      "hash": "cc6f3cbdb880a7e5967bf8cc0b90e8ff07e14766"
+      "url": "/client/lib/subscriptions.js?c33086e405580ea5b9d5c25175f6eca70a4a3ef6",
+      "size": 193,
+      "hash": "c33086e405580ea5b9d5c25175f6eca70a4a3ef6"
     },
     {
       "path": "app/lib/collections.js",
@@ -616,9 +605,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/createUser.js?cf48bd8a74d83f41fc9fd07865c2d3c1c623eaae",
-      "size": 835,
-      "hash": "cf48bd8a74d83f41fc9fd07865c2d3c1c623eaae"
+      "url": "/client/controllers/createUser.js?09a98537eba7bd8f2341b62f8ff2067b75dddb04",
+      "size": 849,
+      "hash": "09a98537eba7bd8f2341b62f8ff2067b75dddb04"
     },
     {
       "path": "app/client/controllers/login.js",
@@ -634,9 +623,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?67b636ec3676fcb4b1e8ad7f40b80eb29a9aa2fe",
-      "size": 3223,
-      "hash": "67b636ec3676fcb4b1e8ad7f40b80eb29a9aa2fe"
+      "url": "/client/controllers/mainContentInfo.js?8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049",
+      "size": 3340,
+      "hash": "8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",

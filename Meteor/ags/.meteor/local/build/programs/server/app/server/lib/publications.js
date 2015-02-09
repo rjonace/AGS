@@ -33,4 +33,8 @@ Meteor.publish("userData", function () {
   }
 });
 
+Meteor.publish('allAssignments', function(){
+	return AGSAssignments.find();
+});
+
 })();
