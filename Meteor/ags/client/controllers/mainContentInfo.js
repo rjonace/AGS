@@ -114,32 +114,5 @@ Template.mainContent.events({
 				}
 			}
 		);
-
-
-
-
-/*
-		for(var i=0; i < inputFileList.length; i++) {
-			inputReaderList.push(new FileReader());
-			var input = inputFileList[i];
-			inputReader.readAsText(input);
-
-			inputObjList.push({name: input.name, contents:inputReader.result});
-		}*/
-
-/*		inputFileList.map(function(item, index, array){
-			var inputReader = new FileReader();
-			inputReader.onload = function(){
-				inputObjList.push({name: item.name, contents:inputReader.result});
-			}
-			inputReader.readAsText(item);
-		})*/
-
-
-
-
-	
-
-
 	},
 })

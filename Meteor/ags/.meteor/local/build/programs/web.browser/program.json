@@ -632,9 +632,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?40088078b1dbf7c14c00acf83c78de67bea3e4e7",
-      "size": 4432,
-      "hash": "40088078b1dbf7c14c00acf83c78de67bea3e4e7"
+      "url": "/client/controllers/mainContentInfo.js?b7bd4c44c92c75897ec0bd0a0fbfd811e404c951",
+      "size": 3937,
+      "hash": "b7bd4c44c92c75897ec0bd0a0fbfd811e404c951"
     },
     {
       "path": "app/client/controllers/nav.js",
