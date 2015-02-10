@@ -42,26 +42,8 @@ Meteor.methods({
 		);
 	},
 	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points){
-		
-		// var fileReader = new FileReader();
-		// fileReader.readAsText(vta);
-		// while(fileReader.readyState != fileReader.DONE);
-		// var vtaObj = {name: vta.name, contents:fileReader.result};
 
-		// fileReader.readAsText(solution);
-		// while(fileReader.readyState != fileReader.DONE);
-		// var solutionObj = {name: solution.name, contents:fileReader.result};
-
-		// var inputObjList = [];
-		// for(var i=0; i < input.length; i++) {
-		// 	var curInput = input.files[i];
-		// 	fileReader.readAsText(curInput);
-		// 	while(fileReader.readyState != fileReader.DONE);
-		// 	inputObjList.push({name: curInput.name, contents:fileReader.result});
-		// }
-
-
-		AGSAssignments.insert({
+		return AGSAssignments.insert({
 			name: name,
 			description: description,
 			dateAvailable: dateAvailable,
@@ -77,9 +59,21 @@ Meteor.methods({
 		});
 	},
 	'insertAssignmentVTA': function(id_Assignment, filename, contents){
-		AGSAssignments.update(id_Assignment, {$set {vta: {name: filename, contents: contents}} });
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$set: { vta: { name: filename, contents: contents} } }
+		);
 	},	
 	'insertAssignmentSolution': function(id_Assignment, filename, contents){
-		AGSAssignments.update(id_Assignment, {$set {solution: {name: filename, contents: contents}} });
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$set: {solution: {name: filename, contents: contents} } }
+		);
+	},
+	'insertAssignmentInput': function(id_Assignment, filename, contents){
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$addToSet: { inputs: { name: filename, contents: contents } } }
+		);
 	}
-})
+});
