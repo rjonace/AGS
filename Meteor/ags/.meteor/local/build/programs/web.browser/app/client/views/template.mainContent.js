@@ -108,7 +108,10 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
             return Spacebars.mustache(view.lookup("contents"));
           })), "\n						", HTML.BR(), "\n					" ];
         }), "\n\n				" ];
-      }), "\n			" ];
+      }), "\n\n				", HTML.BUTTON({
+        type: "button",
+        id: "write"
+      }, "Write"), "\n			" ];
     }), "\n		" ];
   }), "\n\n\n	") ];
 }));

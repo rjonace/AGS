@@ -53,6 +53,9 @@ Template.mainContent.events({
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash")
 	},
+	'click #write': function(){
+		Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS');
+	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
 		var name = event.target.assignmentNameField.value;

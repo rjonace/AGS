@@ -542,9 +542,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.mainContent.js?2f3e36c8a3b0d0eedb39bdc90630a6048a79dc55",
-      "size": 5540,
-      "hash": "2f3e36c8a3b0d0eedb39bdc90630a6048a79dc55"
+      "url": "/client/views/template.mainContent.js?b4cb5ef85a3f5986f98819b74ed2d20e8f32a1ff",
+      "size": 5629,
+      "hash": "b4cb5ef85a3f5986f98819b74ed2d20e8f32a1ff"
     },
     {
       "path": "app/client/views/template.nav.js",
@@ -632,9 +632,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?9d9bbda1ed92313d898c42437d628b6ae76a3056",
-      "size": 4328,
-      "hash": "9d9bbda1ed92313d898c42437d628b6ae76a3056"
+      "url": "/client/controllers/mainContentInfo.js?40088078b1dbf7c14c00acf83c78de67bea3e4e7",
+      "size": 4432,
+      "hash": "40088078b1dbf7c14c00acf83c78de67bea3e4e7"
     },
     {
       "path": "app/client/controllers/nav.js",

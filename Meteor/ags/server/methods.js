@@ -1,13 +1,30 @@
 Meteor.methods({
-	'prepareSandbox' : function(path) {
-		var fs = require('fs');
-		var exec = require('child_process').exec;
-
-		var fileObj = AGSAssignments.findOne({solution:{name:"solution_test_file.c"}}, {_id:false,solution:true}).fetch();
+	'writeFiles' : function(assignment, path) {
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
 
 		//make studentfiles directory
-		exec("mkdir " + path + "/StudentFiles");
-		fs.writeFile(path + "/StudentFiles/" + fileObj.name, fileObj.contents);
+		exec("mkdir " + path + "/InstructorFiles"
+			 ,function(error, stdout, stderr){
+			 	if (error){
+			 		console.log(error + stdout + stderr);
+
+			 	} else {
+					fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
+						console.log(err);
+					});
+					fs.writeFile(path + "/InstructorFiles/" + assignment.solution.name, assignment.solution.contents, function(err){
+						console.log(err);
+					});
+					for (var i=0; i < assignment.inputs.length; i++){
+						fs.writeFile(path + "/InstructorFiles/" + assignment.inputs[i].name, assignment.inputs[i].contents, function(err){
+							console.log(err);
+						});
+					}
+				}
+			 }
+		);
+
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
