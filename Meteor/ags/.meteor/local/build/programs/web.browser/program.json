@@ -542,9 +542,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.mainContent.js?7a84b671ce6b56a66073cafd80d5c416254d81a5",
-      "size": 4293,
-      "hash": "7a84b671ce6b56a66073cafd80d5c416254d81a5"
+      "url": "/client/views/template.mainContent.js?2f3e36c8a3b0d0eedb39bdc90630a6048a79dc55",
+      "size": 5540,
+      "hash": "2f3e36c8a3b0d0eedb39bdc90630a6048a79dc55"
     },
     {
       "path": "app/client/views/template.nav.js",

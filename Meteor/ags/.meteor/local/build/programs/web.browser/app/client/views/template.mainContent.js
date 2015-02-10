@@ -88,7 +88,27 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
     }), "\n\n			", Blaze.If(function() {
       return Spacebars.call(view.lookup("isAssignmentDash"));
     }, function() {
-      return [ "\n				", HTML.H2("Assignment submissions"), "\n				\n\n			" ];
+      return [ "\n				", HTML.H2("Assignment files"), "\n				", Spacebars.With(function() {
+        return Spacebars.call(view.lookup("assignmentInfo"));
+      }, function() {
+        return [ "\n				\n				", HTML.H3("VTA"), "\n				", Blaze.View(function() {
+          return Spacebars.mustache(Spacebars.dot(view.lookup("vta"), "name"));
+        }), HTML.BR(), "\n				", HTML.CODE(Blaze.View(function() {
+          return Spacebars.mustache(Spacebars.dot(view.lookup("vta"), "contents"));
+        })), "\n				\n				", HTML.H3("Solution"), "\n				", Blaze.View(function() {
+          return Spacebars.mustache(Spacebars.dot(view.lookup("solution"), "name"));
+        }), HTML.BR(), "\n				", HTML.CODE(Blaze.View(function() {
+          return Spacebars.mustache(Spacebars.dot(view.lookup("solution"), "contents"));
+        })), "\n				\n				", HTML.H3("Inputs"), "\n					", Blaze.Each(function() {
+          return Spacebars.call(view.lookup("inputs"));
+        }, function() {
+          return [ "\n						", Blaze.View(function() {
+            return Spacebars.mustache(view.lookup("name"));
+          }), HTML.BR(), "\n						", HTML.CODE(Blaze.View(function() {
+            return Spacebars.mustache(view.lookup("contents"));
+          })), "\n						", HTML.BR(), "\n					" ];
+        }), "\n\n				" ];
+      }), "\n			" ];
     }), "\n		" ];
   }), "\n\n\n	") ];
 }));

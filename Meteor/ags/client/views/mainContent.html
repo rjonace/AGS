@@ -60,9 +60,25 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
-				<h2>Assignment submissions</h2>
+				<h2>Assignment files</h2>
+				{{#with assignmentInfo}}
 				
+				<h3>VTA</h3>
+				{{vta.name}}<br>
+				<code>{{vta.contents}}</code>
+				
+				<h3>Solution</h3>
+				{{solution.name}}<br>
+				<code>{{solution.contents}}</code>
+				
+				<h3>Inputs</h3>
+					{{#each inputs}}
+						{{name}}<br>
+						<code>{{contents}}</code>
+						<br>
+					{{/each}}
 
+				{{/with}}
 			{{/if}}
 		{{/if}}
 
