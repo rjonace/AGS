@@ -1,4 +1,14 @@
 (function(){Meteor.methods({
+	'prepareSandbox' : function(path) {
+		var fs = require('fs');
+		var exec = require('child_process').exec;
+
+		var fileObj = AGSAssignments.findOne({solution:{name:"solution_test_file.c"}}, {_id:false,solution:true}).fetch();
+
+		//make studentfiles directory
+		exec("mkdir " + path + "/StudentFiles");
+		fs.writeFile(path + "/StudentFiles/" + fileObj.name, fileObj.contents);
+	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
 			_id: id,

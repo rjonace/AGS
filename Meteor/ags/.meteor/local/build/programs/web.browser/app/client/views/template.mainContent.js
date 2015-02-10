@@ -33,7 +33,23 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
           return Spacebars.mustache(view.lookup("number"));
         }), "\n				" ];
       }), "\n\n			" ];
-    }), "\n		" ];
+    }), "\n\n			", Blaze.If(function() {
+      return Spacebars.call(view.lookup("isAssignmentDash"));
+    }, function() {
+      return [ "\n\n				", Spacebars.With(function() {
+        return Spacebars.call(view.lookup("assignmentInfo"));
+      }, function() {
+        return [ "\n					Assignment: ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("name"));
+        }), HTML.BR(), "\n					", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("description"));
+        }), " ", HTML.BR(), "\n					Date Available: ", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("dateAvailable"));
+        }), HTML.BR(), " Date Due:", Blaze.View(function() {
+          return Spacebars.mustache(view.lookup("dateDue"));
+        }), "\n				" ];
+      }), "\n\n			" ];
+    }), "\n\n		" ];
   }), "\n	"), "\n	", HTML.DIV({
     "class": "ags-main-content-view"
   }, "\n		", Blaze.If(function() {
@@ -69,6 +85,10 @@ Template["mainContent"] = new Template("Template.mainContent", (function() {
           return Spacebars.mustache(view.lookup("dateDue"));
         }))), "\n					" ];
       }), "\n				"), "\n				", Spacebars.include(view.lookupTemplate("addAssignmentForm")), "\n				\n\n			" ];
+    }), "\n\n			", Blaze.If(function() {
+      return Spacebars.call(view.lookup("isAssignmentDash"));
+    }, function() {
+      return [ "\n				", HTML.H2("Assignment submissions"), "\n				\n\n			" ];
     }), "\n		" ];
   }), "\n\n\n	") ];
 }));

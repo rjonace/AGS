@@ -1,1 +1,25 @@
- 
+<template name="mainNav">
+	<div class="ags-nav-entry">
+		{{#with userInfo}}
+			<a id="navUser">{{firstname}}</a><br>
+		{{/with}}
+
+		{{#with courseInfo}}
+			<a id="navCourse">{{number}}</a><br>
+		{{/with}}
+
+		{{#with assignmentInfo}}
+			<a id="navAss">{{name}}</a><br>
+		{{/with}}
+
+		<p><b>Current Courses:</b></p>
+		
+		<a href="COP3502.html">Computer Science I</a><br>
+		<a href="COP3330.html">Object-Oriented Programming</a><br>
+		<a href="COT4500.html">Numerical Calculus</a>
+		
+		<p><b>Past Courses:</b></p>
+		<a href="COP3223.html">Introduction to<br>Programming with C</a><br>
+		<a href="COP2500">Concepts of Computer Science</a>
+	</div>
+</template>

@@ -542,9 +542,18 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.mainContent.js?5ed1e1586f1f1c07fb2c29e12847389ad1325292",
-      "size": 3267,
-      "hash": "5ed1e1586f1f1c07fb2c29e12847389ad1325292"
+      "url": "/client/views/template.mainContent.js?7a84b671ce6b56a66073cafd80d5c416254d81a5",
+      "size": 4293,
+      "hash": "7a84b671ce6b56a66073cafd80d5c416254d81a5"
+    },
+    {
+      "path": "app/client/views/template.nav.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/views/template.nav.js?f3554020542fa17e5d0dcc0aa7aee7e339947f8e",
+      "size": 1437,
+      "hash": "f3554020542fa17e5d0dcc0aa7aee7e339947f8e"
     },
     {
       "path": "app/template.ags.js",
@@ -560,9 +569,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/views/template.main.js?b60840a039e8e6427b31c1a143dc0b6d55652919",
-      "size": 808,
-      "hash": "b60840a039e8e6427b31c1a143dc0b6d55652919"
+      "url": "/client/views/template.main.js?e5bb825d1434752c50db9280a3473183521dc0ef",
+      "size": 454,
+      "hash": "e5bb825d1434752c50db9280a3473183521dc0ef"
     },
     {
       "path": "app/client/lib/subscriptions.js",
@@ -623,9 +632,18 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?6beaa07a873df5b428c8ee6c9cfc02686b952385",
-      "size": 4218,
-      "hash": "6beaa07a873df5b428c8ee6c9cfc02686b952385"
+      "url": "/client/controllers/mainContentInfo.js?9d9bbda1ed92313d898c42437d628b6ae76a3056",
+      "size": 4328,
+      "hash": "9d9bbda1ed92313d898c42437d628b6ae76a3056"
+    },
+    {
+      "path": "app/client/controllers/nav.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/controllers/nav.js?dcaf83e5f708feac7e394e53654ffef27b95fd13",
+      "size": 1043,
+      "hash": "dcaf83e5f708feac7e394e53654ffef27b95fd13"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",

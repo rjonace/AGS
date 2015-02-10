@@ -18,6 +18,17 @@
 				{{/with}}
 
 			{{/if}}
+
+			{{#if isAssignmentDash}}
+
+				{{#with assignmentInfo}}
+					Assignment: {{name}}<br>
+					{{description}} <br>
+					Date Available: {{dateAvailable}}<br> Date Due:{{dateDue}}
+				{{/with}}
+
+			{{/if}}
+
 		{{/if}}
 	</div>
 	<div class="ags-main-content-view">
@@ -44,6 +55,12 @@
 					{{/each}}
 				</ul>
 				{{> addAssignmentForm}}
+				
+
+			{{/if}}
+
+			{{#if isAssignmentDash}}
+				<h2>Assignment submissions</h2>
 				
 
 			{{/if}}

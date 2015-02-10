@@ -9,6 +9,9 @@ Template.mainContent.helpers({
 	'courseInfo': function(){
 		return Session.get('currentCourse');
 	},
+	'assignmentInfo': function(){
+		return Session.get('currentAssignment');
+	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
 	},
@@ -27,13 +30,15 @@ Template.mainContent.helpers({
 	},
 	'isCourseDash': function(){
 		return Session.get('currentDashboard') === "courseDash";
+	},
+	'isAssignmentDash': function(){
+		return Session.get('currentDashboard') === "assignmentDash";
 	}
 });
 
 Template.mainContent.events({
 	'submit #createCourse': function(event){
 		event.preventDefault();
-		alert("Course event")
 		var courseTitle = event.target.courseNameField.value;
 		var courseNumber = event.target.courseNumberField.value;
 		var courseSemester = event.target.courseSemesterField.value;
@@ -41,8 +46,12 @@ Template.mainContent.events({
 		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear);
 	},
 	'click .userCourse': function(){
-		Session.set('currentCourse', this)
+		Session.set('currentCourse', this);
 		Session.set('currentDashboard', "courseDash");
+	},
+	'click .courseAssignment': function(){
+		Session.set('currentAssignment', this);
+		Session.set('currentDashboard', "assignmentDash")
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
@@ -65,8 +74,7 @@ Template.mainContent.events({
 					var solution = event.target.assignmentSolutionField.files[0];
 					var inputFileList = event.target.assignmentInputField.files;
 
-					var vtaObj, solutionObj, inputObjList = [];
-					var inputListIndex = 0;
+					var vtaObj, solutionObj;
 
 					vtaReader.onloadend = function(){
 						vtaObj = {name: vta.name, contents:vtaReader.result};
@@ -78,14 +86,6 @@ Template.mainContent.events({
 						Meteor.call('insertAssignmentSolution', result, solutionObj.name, solutionObj.contents);
 					}
 
-					inputReader.onloadend = function(){
-						var inputObj = inputObjList[inputListIndex];
-						inputListIndex++;
-						inputObj.contents = inputReader.result;
-						alert(inputObjList);
-						Meteor.call('insertAssignmentInput', result, inputObj.name, inputObj.contents);
-					}
-
 					if (vta)
 						vtaReader.readAsText(vta);
 
@@ -94,9 +94,14 @@ Template.mainContent.events({
 
 					if(inputFileList.length > 0) {
 						for (var i = 0; i < inputFileList.length; i++) {
-							alert(i);
-							inputObjList.push({name: inputFileList[i].name, contents: null});
-							inputReader.readAsText(inputFileList[i]);
+							(function(file) {
+								var name = file.name;
+								var reader = new FileReader();
+								reader.onloadend = function(event) {
+									Meteor.call('insertAssignmentInput', result, name, reader.result);
+								}
+								reader.readAsText(file);
+							})(inputFileList[i]);
 						};
 					}
 
