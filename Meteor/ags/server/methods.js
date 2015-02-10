@@ -41,7 +41,7 @@ Meteor.methods({
 			{ $addToSet: { id_Courses: selectedCourse._id } }
 		);
 	},
-	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points, vta, solution, input){
+	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points){
 		
 		// var fileReader = new FileReader();
 		// fileReader.readAsText(vta);
@@ -67,9 +67,6 @@ Meteor.methods({
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			points: points,
-			vta: vta,
-			solution: solution,
-			input: input,
 			id_Course: id_Course
 		}, function(err, id) {
 			console.log(err);
@@ -78,5 +75,11 @@ Meteor.methods({
 				{ $addToSet: { id_Assignments: id}}
 			);
 		});
+	},
+	'insertAssignmentVTA': function(id_Assignment, filename, contents){
+		AGSAssignments.update(id_Assignment, {$set {vta: {name: filename, contents: contents}} });
+	},	
+	'insertAssignmentSolution': function(id_Assignment, filename, contents){
+		AGSAssignments.update(id_Assignment, {$set {solution: {name: filename, contents: contents}} });
 	}
 })

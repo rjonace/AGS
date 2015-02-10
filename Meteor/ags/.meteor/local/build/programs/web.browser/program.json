@@ -623,9 +623,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/controllers/mainContentInfo.js?8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049",
-      "size": 3340,
-      "hash": "8d01edab6e4e2471ce5577e88ffcdcb6e1ad6049"
+      "url": "/client/controllers/mainContentInfo.js?82d5eb675b55b08bd9fcbd029a4802151f847981",
+      "size": 3414,
+      "hash": "82d5eb675b55b08bd9fcbd029a4802151f847981"
     },
     {
       "path": "5333cd974da126e07dd803c87fb5f57a1d219c1b.css",

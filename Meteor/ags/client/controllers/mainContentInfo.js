@@ -81,16 +81,18 @@ Template.mainContent.events({
 
 		vtaReader.onloadend = function(){
 			vtaObj = {name: vta.name, contents:vtaReader.result};
+			alert(vtaObj.name);
+			Meteor.call('insertAssignmentVTA', vtaObj.name, vtaObj.contents);
 		}
 
 		solutionReader.onloadend = function(){
 			solutionObj = {name: solution.name, contents:solutionReader.result};
+			alert(solutionObj.contents);
 		}
-		
+
 		vtaReader.readAsText(vta);
 		solutionReader.readAsText(solution);
-
-		while(vtaReader.readyState != vtaReader.DONE);
+	
 
 		var currentCourseId = Session.get('currentCourse')._id;
 		Meteor.call('insertAssignmentData', currentCourseId, name, description, dateAvailable, dateDue, points, vtaObj, solutionObj, inputObjList);

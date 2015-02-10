@@ -6,7 +6,7 @@ Meteor.publish('availableCourses', function(){
 
 Meteor.publish('allAssignments', function(){
 	return AGSAssignments.find();
-}
+});
 
 Meteor.publish('coursesList', function (){
 	if (!this.userId){
@@ -35,8 +35,4 @@ Meteor.publish("userData", function () {
   } else {
     this.ready();
   }
-});
-
-Meteor.publish('allAssignments', function(){
-	return AGSAssignments.find();
 });
