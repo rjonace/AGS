@@ -60,6 +60,12 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
+				<h2>Assignment submissions</h2>
+				<ul>
+					{{#with assignmentSubmissions}}
+				</ul>
+				<button type="button" id="newSubmission" >New Submission</button>
+
 				<h2>Assignment files</h2>
 				{{#with assignmentInfo}}
 				
@@ -82,6 +88,8 @@
 
 				<button type="button" id="write" >Write</button>
 			{{/if}}
+
+
 		{{/if}}
 
 

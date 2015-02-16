@@ -51,7 +51,7 @@ Template.mainContent.events({
 	},
 	'click .courseAssignment': function(){
 		Session.set('currentAssignment', this);
-		Session.set('currentDashboard', "assignmentDash")
+		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #write': function(){
 		Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS');
@@ -60,12 +60,13 @@ Template.mainContent.events({
 		event.preventDefault();
 		var name = event.target.assignmentNameField.value;
 		var description = event.target.assignmentDescriptionField.value;
+		var lang = event.target.assignmentLanguageField.value;
 		var dateAvailable = event.target.assignmentDateAvailableField.value;
 		var dateDue = event.target.assignmentDateDueField.value;
 		var points = event.target.assignmentPointsField.value;
 
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, dateAvailable, dateDue, points, 
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, points, 
 			function(error, result) {
 				if(!error) {
 
@@ -115,4 +116,11 @@ Template.mainContent.events({
 			}
 		);
 	},
+	'click #newSubmission': function(){
+		Session.set('currentSubmission', 
+			Meteor.call('createNewSubmission', 
+				Meteor.userId(),
+				Session.get('currentAssignment')._id ));
+		Session.set('currentDashboard', "submissionDash");
+	}
 })

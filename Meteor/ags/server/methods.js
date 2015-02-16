@@ -68,11 +68,42 @@ Meteor.methods({
 			{ $addToSet: { id_Courses: selectedCourse._id } }
 		);
 	},
-	'insertAssignmentData': function(id_Course, name, description, dateAvailable, dateDue, points){
+	'createNewSubmission': function(id_User, id_Assignment){
+		var sub = AGSSubmissions.findOne({
+			id_Student: id_User,
+			id_Assignment: id_Assignment
+		});
+
+		if (!sub) {
+
+			return AGSSubmissions.insert({
+				id_Student: id_User,
+				id_Assignment: id_Assignment,
+				AttemptCount: 1,
+				AttemptList: [new Date()]
+			}, function(err, id) {
+				console.log(err);
+				AGSAssignments.update(
+					{_id:id_Assignment},
+					{ $addToSet: { id_Submissions: id}}
+				);
+			});
+
+		} else {
+			return AGSSubmissions.update(
+					sub,
+					{ 	$inc: { AttemptCount: 1 },
+						$addToSet: { AttemptList: new Date()}
+					}
+				);
+		}
+	},
+	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
 
 		return AGSAssignments.insert({
 			name: name,
 			description: description,
+			language: lang,
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			points: points,
