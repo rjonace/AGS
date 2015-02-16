@@ -58,7 +58,7 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #write': function(){
-		Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS');
+		Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student');
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();

@@ -4,11 +4,10 @@ Meteor.methods({
 		var exec = Npm.require('child_process').exec;
 
 		//make studentfiles directory
-		exec("mkdir " + path + "/InstructorFiles"
-			 ,function(error, stdout, stderr){
+		exec("mkdir " + path + "/InstructorFiles",
+			function(error, stdout, stderr){
 			 	if (error){
 			 		console.log(error + stdout + stderr);
-
 			 	} else {
 					fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
 						console.log(err);
