@@ -22,6 +22,10 @@ Template.mainContent.helpers({
 			return [];
 		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {dateDue: 1, name: 1} });
 	},
+	'studentSubmissionList' : function() {
+		var assignmentId = Session.get('currentAssignment')._id;
+		return AGSSubmissions.find({id_Student: Meteor.userId(), id_Assigment: assignmentId});
+	},
 	'currentDashboard': function(){
 		 return Session.get('currentDashboard');
 	},

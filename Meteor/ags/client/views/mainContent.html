@@ -62,7 +62,9 @@
 			{{#if isAssignmentDash}}
 				<h2>Assignment submissions</h2>
 				<ul>
-					{{#with assignmentSubmissions}}
+					{{#with studentSubmissionList}}
+						{{AttemptCount}}
+					{{/with}}
 				</ul>
 				<button type="button" id="newSubmission" >New Submission</button>
 
