@@ -1,0 +1,17 @@
+<template name="breadCrumb">
+		{{#with userInfo}}
+			<a id="breadUser">{{firstname}}</a> 
+		{{/with}}
+
+		{{#with courseInfo}}
+			--> <a id="breadCourse">{{number}}</a> 
+		{{/with}}
+
+		{{#with assignmentInfo}}
+			--> <a id="breadAss">{{name}}</a> 
+		{{/with}}
+
+		{{#with submissionInfo}}
+			--> <a id="breadSub">{{name}}</a> 
+		{{/with}}		
+</template>

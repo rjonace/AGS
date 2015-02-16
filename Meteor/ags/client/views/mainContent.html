@@ -4,7 +4,7 @@
 			<h2>Finish Creating Your Account</h2>
 		{{else}}
 			{{#if isUserDash}}
-				
+				<b>User Dashboard</b><br/>
 				{{#with userInfo}}
 					User: {{firstname}} {{lastname}}
 				{{/with}}
@@ -12,7 +12,7 @@
 			{{/if}}
 
 			{{#if isCourseDash}}
-
+				<b>Course Dashboard</b><br/>
 				{{#with courseInfo}}
 					Course: {{name}} {{number}}
 				{{/with}}
@@ -20,13 +20,22 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
-
+				<b>Assignment Dashboard</b><br/>
 				{{#with assignmentInfo}}
 					Assignment: {{name}}<br>
 					{{description}} <br>
 					Date Available: {{dateAvailable}}<br> Date Due:{{dateDue}}
 				{{/with}}
 
+			{{/if}}
+
+			{{#if isSubmissionDash}}
+				<b>Submission Dashboard</b><br/>
+				{{#with submissionInfo}}
+					Submission: {{name}}<br>
+					Date Created: {{dateCreated}}<br>
+					Finish adding files and submit!
+				{{/with}}
 			{{/if}}
 
 		{{/if}}
@@ -62,9 +71,11 @@
 			{{#if isAssignmentDash}}
 				<h2>Assignment submissions</h2>
 				<ul>
-					{{#with studentSubmissionList}}
-						{{AttemptCount}}
-					{{/with}}
+					{{#each assignmentSubmissionList}}
+						{{#each AttemptList}}
+						<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
+						{{/each}}
+					{{/each}}
 				</ul>
 				<button type="button" id="newSubmission" >New Submission</button>
 
@@ -92,6 +103,10 @@
 			{{/if}}
 
 
+		{{/if}}
+
+		{{#if isSubmissionDash}}
+			{{> submissionFilesForm}}
 		{{/if}}
 
 

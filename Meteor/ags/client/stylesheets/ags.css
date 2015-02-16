@@ -19,7 +19,7 @@
 .ags-head, .ags-head-logo, .ags-head-acct,
 .ags-main, .ags-main-nav, .ags-main-content, 
 .ags-main-content-info, .ags-main-content-view,
-.ags-foot {
+.ags-foot, .ags-head-breadcrumb {
 	position : absolute;
 }
 
@@ -93,6 +93,12 @@
 	right: 0;
 	background: #163763;
 	height : 10px;
+}
+
+.ags-head-breadcrumb {
+	left : 200px;
+	top: 15px;
+	font-family: Arial;
 }
 
 .ags-main-content-info {

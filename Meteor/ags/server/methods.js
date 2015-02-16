@@ -80,7 +80,7 @@ Meteor.methods({
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
 				AttemptCount: 1,
-				AttemptList: [new Date()]
+				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() }]
 			}, function(err, id) {
 				console.log(err);
 				AGSAssignments.update(
@@ -90,12 +90,16 @@ Meteor.methods({
 			});
 
 		} else {
-			return AGSSubmissions.update(
+			AGSSubmissions.update(
 					sub,
 					{ 	$inc: { AttemptCount: 1 },
-						$addToSet: { AttemptList: new Date()}
+						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date() } }
 					}
-				);
+			);
+			return AGSSubmissions.findOne({
+				id_Student: id_User,
+				id_Assignment: id_Assignment
+			});
 		}
 	},
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){

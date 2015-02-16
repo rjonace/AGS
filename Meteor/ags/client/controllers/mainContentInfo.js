@@ -12,6 +12,9 @@ Template.mainContent.helpers({
 	'assignmentInfo': function(){
 		return Session.get('currentAssignment');
 	},
+	'submissionInfo': function(){
+		return Session.get('currentSubmission');
+	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
 	},
@@ -22,9 +25,9 @@ Template.mainContent.helpers({
 			return [];
 		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {dateDue: 1, name: 1} });
 	},
-	'studentSubmissionList' : function() {
+	'assignmentSubmissionList' : function() {
 		var assignmentId = Session.get('currentAssignment')._id;
-		return AGSSubmissions.find({id_Student: Meteor.userId(), id_Assigment: assignmentId});
+		return AGSSubmissions.find({id_Assignment: assignmentId});
 	},
 	'currentDashboard': function(){
 		 return Session.get('currentDashboard');
@@ -37,6 +40,9 @@ Template.mainContent.helpers({
 	},
 	'isAssignmentDash': function(){
 		return Session.get('currentDashboard') === "assignmentDash";
+	},
+	'isSubmissionDash': function(){
+		return Session.get('currentDashboard') === "submissionDash";
 	}
 });
 
@@ -56,6 +62,10 @@ Template.mainContent.events({
 	'click .courseAssignment': function(){
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash");
+	},
+	'click .assignmentSubmission': function(){
+		Session.set('currentSubmission', this);
+		Session.set('currentDashboard', "submissionDash");
 	},
 	'click #write': function(){
 		Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student');
@@ -121,13 +131,17 @@ Template.mainContent.events({
 		);
 	},
 	'click #newSubmission': function(){
-		Session.set('currentSubmission', 
-			Meteor.call('createNewSubmission', 
-				Meteor.userId(),
-				Session.get('currentAssignment')._id ,
-				Session.get('currentCourse').id_Instructor
-			)
+
+		Meteor.call('createNewSubmission', Meteor.userId(), Session.get('currentAssignment')._id, Session.get('currentCourse').id_Instructor, 
+			function( error, result ) {
+				if(!error) {
+					var currentSubmission = result.AttemptList[result.AttemptCount-1];
+					Session.set('currentSubmission', currentSubmission);
+					Session.set('currentDashboard', "submissionDash");
+				}
+			}
 		);
-		Session.set('currentDashboard', "submissionDash");
+
+
 	}
 })
