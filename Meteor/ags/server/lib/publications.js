@@ -28,6 +28,12 @@ Meteor.publish('currentUserInfo', function(){
 	return AGSUsers.find({_id: this.userId}); 
 });
 
+Meteor.publish('submissionData', function () {
+	return AGSSubmissions.find({
+		$or: [ {id_Student: this.userId}, {id_Instructor: this.userId} ]
+	});
+});
+
 Meteor.publish("userData", function () {
   if (this.userId) {
     return Meteor.users.find({_id: this.userId},

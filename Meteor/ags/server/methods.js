@@ -68,7 +68,7 @@ Meteor.methods({
 			{ $addToSet: { id_Courses: selectedCourse._id } }
 		);
 	},
-	'createNewSubmission': function(id_User, id_Assignment){
+	'createNewSubmission': function(id_User, id_Assignment, id_Instructor){
 		var sub = AGSSubmissions.findOne({
 			id_Student: id_User,
 			id_Assignment: id_Assignment
@@ -79,6 +79,7 @@ Meteor.methods({
 			return AGSSubmissions.insert({
 				id_Student: id_User,
 				id_Assignment: id_Assignment,
+				id_Instructor: id_Instructor,
 				AttemptCount: 1,
 				AttemptList: [new Date()]
 			}, function(err, id) {

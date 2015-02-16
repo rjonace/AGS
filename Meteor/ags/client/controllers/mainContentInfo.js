@@ -124,7 +124,10 @@ Template.mainContent.events({
 		Session.set('currentSubmission', 
 			Meteor.call('createNewSubmission', 
 				Meteor.userId(),
-				Session.get('currentAssignment')._id ));
+				Session.get('currentAssignment')._id ,
+				Session.get('currentCourse').id_Instructor
+			)
+		);
 		Session.set('currentDashboard', "submissionDash");
 	}
 })
