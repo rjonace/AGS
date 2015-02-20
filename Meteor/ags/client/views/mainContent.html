@@ -46,32 +46,49 @@
 		{{else}}
 
 			{{#if isUserDash}}
-				<h2>Your courses</h2>
-				<ul>
-					{{#each userCourseList}}
-						<li class="userCourse"><a>{{number}}: {{name}}</a></li>
-					{{/each}}
-				</ul>
+				{{#with userInfo}}
+					<h3>{{firstname}}'s Courses</h3>
+
+					<ul>
+						{{#each studentCourseList}}
+							<li class="userCourse"><a>{{number}}: {{name}}</a></li>
+						{{/each}}
+					</ul>
+
+
+					<h3>{{firstname}}'s Created Courses</h3>
+
+					<ul>
+						{{#each instructorCourseList}}
+							<li class="userCourse"><a>{{number}}: {{name}}</a></li>
+						{{/each}}
+					</ul>
+
+
+				{{/with}}
 				{{> addCourseForm}}
 				
 			{{/if}}
 
 			{{#if isCourseDash}}
-				<h2>Course assignments</h2>
+				<h3>Course Assignments</h3>
 				<ul>
 					{{#each courseAssignmentList}}
 						<li class="courseAssignment"><a>{{name}}: {{dateDue}}</a></li>
 					{{/each}}
 				</ul>
-				{{> addAssignmentForm}}
-				
+				{{#if isUserCreator}}
+					{{> addAssignmentForm}}
+				{{/if}}
 
 			{{/if}}
 
 			{{#if isAssignmentDash}}
-				<h2>Assignment submissions</h2>
+				{{#with userInfo}}
+				<h3>{{firstname}}'s Submissions</h3>
+				{{/with}}
 				<ul>
-					{{#each assignmentSubmissionList}}
+					{{#each studentSubmissionList}}
 						{{#each AttemptList}}
 						<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
 						{{/each}}
@@ -79,27 +96,38 @@
 				</ul>
 				<button type="button" id="newSubmission" >New Submission</button>
 
-				<h2>Assignment files</h2>
-				{{#with assignmentInfo}}
-				
-				<h3>VTA</h3>
-				{{vta.name}}<br>
-				<code>{{vta.contents}}</code>
-				
-				<h3>Solution</h3>
-				{{solution.name}}<br>
-				<code>{{solution.contents}}</code>
-				
-				<h3>Inputs</h3>
-					{{#each inputs}}
-						{{name}}<br>
-						<code>{{contents}}</code>
-						<br>
-					{{/each}}
+				{{#if isUserCreator}}
 
-				{{/with}}
+					<h3>Student Submissions</h3>
+					<ul>
+						{{#each instructorSubmissionList}}
+							{{#each AttemptList}}
+							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
+							{{/each}}
+						{{/each}}
+					</ul>
+					<h3>Assignment Files</h3>
+					{{#with assignmentInfo}}
+					
+					<h3>VTA</h3>
+					{{vta.name}}<br>
+					<code>{{vta.contents}}</code>
+					
+					<h3>Solution</h3>
+					{{solution.name}}<br>
+					<code>{{solution.contents}}</code>
+					
+					<h3>Inputs</h3>
+						{{#each inputs}}
+							{{name}}<br>
+							<code>{{contents}}</code>
+							<br>
+						{{/each}}
 
-				<button type="button" id="write" >Write</button>
+					{{/with}}
+
+					<button type="button" id="write" >Write</button>
+				{{/if}}
 			{{/if}}
 
 

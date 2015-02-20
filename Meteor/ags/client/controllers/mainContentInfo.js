@@ -1,18 +1,31 @@
 Template.mainContent.helpers({
-	'userCourseList': function(){
+	'studentCourseList': function(){
 		var courseIdList = AGSUsers.findOne({_id:Meteor.userId()}).id_Courses;
 		return AGSCourses.find(({_id : { $in: courseIdList}}), {sort: {number: 1, name: 1} });
+	},
+	'instructorCourseList' : function(){
+		return AGSCourses.find({id_Instructor: Meteor.userId()});
+	},
+	// this function will return true if the current user has instructor priveleges
+	// for the current dashboard
+	'isUserCreator' : function() {
+		var curDash = Session.get('currentDashboard');
+		if (curDash === "courseDash" || curDash === "assignmentDash") 
+			return Session.get('currentCourse').id_Instructor == Meteor.userId();
 	},
 	'userInfo': function(){
 		return AGSUsers.findOne({_id:Meteor.userId()});
 	},
 	'courseInfo': function(){
+		// check if creator of course
 		return Session.get('currentCourse');
 	},
 	'assignmentInfo': function(){
+		// check if creator of assignment
 		return Session.get('currentAssignment');
 	},
 	'submissionInfo': function(){
+		// check if creator of submission
 		return Session.get('currentSubmission');
 	},
 	'unfinishedAccount': function(){
@@ -25,9 +38,20 @@ Template.mainContent.helpers({
 			return [];
 		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {dateDue: 1, name: 1} });
 	},
+	// returns all submissions for the current assignment
 	'assignmentSubmissionList' : function() {
 		var assignmentId = Session.get('currentAssignment')._id;
 		return AGSSubmissions.find({id_Assignment: assignmentId});
+	},
+	// returns all submissions for the current assignment that have been submitted by the current user
+	'studentSubmissionList' : function() {
+		var assignmentId = Session.get('currentAssignment')._id;
+		return AGSSubmissions.find({id_Assignment: assignmentId, id_Student: Meteor.userId()});
+	},
+	// returns all submissions for the current assignment based on instructor
+	'instructorSubmissionList' : function() {
+		var assignmentId = Session.get('currentAssignment')._id;
+		return AGSSubmissions.find({id_Assignment: assignmentId, id_Instructor: Meteor.userId()});
 	},
 	'currentDashboard': function(){
 		 return Session.get('currentDashboard');

@@ -1,50 +1,22 @@
 <template name="addCourseForm">
 	{{#if currentUser}}
 		<form name="createCourse" id="createCourse">
-			<h2>Create Course</h2>
-			<table border="0">
-				<tbody>
-					<th colspan="4">
-						Create Course
-					</th>
-					<tr>
-						<td align="right">	
-							<label for="courseNameField">Name:</label>
-						</td>	
-						<td>	
-							<input type="text" name="courseNameField">
-						</td>
-						<td align="right">	
-							<label for="courseNumberField">Number:</label>	
-						</td>
-						<td>	
-							<input type="text" name="courseNumberField">
-						</td>
-					</tr>	
-					<tr>
-						<td align="right">
-							<label for="courseSemesterField">Semester:</label>
-						</td>
-						<td>
-							<input type="radio" id="courseSemesterFieldFall" name="courseSemesterField" value="Fall"/>Fall<br/>
-							<input type="radio" id="courseSemesterFieldSpring" name="courseSemesterField" value="Spring"/>Spring<br/>
-							<input type="radio" id="courseSemesterFieldSummer" name="courseSemesterField" value="Summer"/>Summer<br/>
-						</td>
-						<td align="right">	
-							<label for="courseYearField">Year:</label>	
-						</td>
-						<td>	
-							<input type="text" name="courseYearField">
-						</td>
-					</tr>
-					<tr>
-						<td alight="right">
-							<input type="submit" value="Add Course">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			
+			<h3>Create Course</h3>
+			<label for="courseNameField">Name:</label>
+			<input type="text" name="courseNameField">
+			<br/>
+			<label for="courseNumberField">Number:</label>
+			<input type="text" name="courseNumberField">
+			<br/>
+			<label for="courseYearField">Year:</label>	
+			<input type="text" name="courseYearField">
+			<br/>
+			<label for="courseSemesterField">Semester:</label>
+			<input type="radio" id="courseSemesterFieldFall" name="courseSemesterField" value="Fall"/>Fall
+			<input type="radio" id="courseSemesterFieldSpring" name="courseSemesterField" value="Spring"/>Spring
+			<input type="radio" id="courseSemesterFieldSummer" name="courseSemesterField" value="Summer"/>Summer
+			<br/>
+			<input type="submit" value="Add Course">
 		</form>
 	{{/if}}
 </template>

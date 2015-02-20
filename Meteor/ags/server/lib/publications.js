@@ -17,7 +17,7 @@ Meteor.publish('coursesList', function (){
 	var userObj = AGSUsers.findOne({_id:this.userId});
 	var courseIdList = (userObj) ? userObj.id_Courses : [];
 
-	return AGSCourses.find({_id : { $in: courseIdList}});
+	return AGSCourses.find({$or: [{_id : { $in: courseIdList}}, {id_Instructor: this.userId}]} );
 });
 
 Meteor.publish('currentUserInfo', function(){
