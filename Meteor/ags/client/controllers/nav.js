@@ -43,6 +43,6 @@ Template.mainNav.events({
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #gradeTest': function(){
-		Meteor.call('gradeSubmission', Session.get('currentSubmission'), '/home/student/ags/Docker/CompileTestJava/');
+		Meteor.call('gradeSubmission', Session.get('currentSubmission'), '/home/student/ags/Docker/CompileTestJava');
 	}
 })
