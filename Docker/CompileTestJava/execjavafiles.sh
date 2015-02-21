@@ -32,7 +32,7 @@ rm $currentPath/cidfile
 mkdir $currentPath/$1/completed
 mv $currentPath/$1/diff $currentPath/$1/completed
 mv $currentPath/$1/shared/*.class $currentPath/$1/completed
-mv $currentPath/$1/output.txtex $currentPath/$1/completed
+mv $currentPath/$1/output.txt $currentPath/$1/completed
 mv $currentPath/$1/logs.txt $currentPath/$1/completed
 mv $currentPath/$1/completed $currentPath
 rm -R $currentPath/$1
