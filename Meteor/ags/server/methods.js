@@ -29,17 +29,17 @@ Meteor.methods({
 
 
 		var fileCheck = setInterval(function(){
-			console.log("Checking for completed in " + path + randomFolderName + " " + counter);
+			console.log("Checking for completed in " + path + '/' + randomFolderName + " " + counter);
 			counter++;
 
-			fs.readFile(path + randomFolderName + '/completed', 'utf8', function(error, data) {
+			fs.readFile(path + '/' + randomFolderName + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
 					console.log(error);
 					return;
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					fs.readFile(path + randomFolderName + '/output.txt', 'utf8', function(inner_error, inner_data) {
+					fs.readFile(path + '/' + randomFolderName + '/output.txt', 'utf8', function(inner_error, inner_data) {
 						if(!inner_error)
 							console.log(inner_data);
 					})
@@ -50,7 +50,7 @@ Meteor.methods({
 				}
 
 				// remove temp folder
-				exec("rm -r " + path + randomFolderName);
+				exec("rm -r " + path + '/' + randomFolderName);
 
 				clearInterval(fileCheck);
 			});
