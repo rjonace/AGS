@@ -10,3 +10,5 @@ done
 
 java AutoGrader
 
+#GRADING=`java AutoGrader`
+#echo $GRADING
