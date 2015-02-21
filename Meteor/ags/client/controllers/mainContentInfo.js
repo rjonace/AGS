@@ -93,7 +93,7 @@ Template.mainContent.events({
 	},
 	'click #write': function(){
 		var errString;
-		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/', errString));
+		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/'));
 		console.log(errString);
 	},
 	'submit #createAssignment': function(event){

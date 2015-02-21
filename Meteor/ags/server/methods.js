@@ -1,5 +1,4 @@
 Meteor.methods({
-<<<<<<< Updated upstream
 	'gradeSubmission' : function(submission, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -59,9 +58,6 @@ Meteor.methods({
 
 	},
 	'writeFiles' : function(assignment, path) {
-=======
-	'writeFiles' : function(assignment, path, errorString) {
->>>>>>> Stashed changes
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 //		var errorString;
@@ -89,8 +85,6 @@ Meteor.methods({
 				}
 			 }
 		);
-
-		return "FUUUUU";
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
