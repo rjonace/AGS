@@ -10,9 +10,8 @@ done
 echo "Compiled"
 for classfile in *.class; do
     classname=${classfile%.*}
-    echo $classfile
+    echo $(javap -public $classname)
     if javap -public $classname | fgrep -q 'public static void main(java.lang.String[])'; then
-        echo $classname
         java $classname
     fi
 done
