@@ -32,14 +32,14 @@ Meteor.methods({
 			console.log("Checking for completed in " + path + " " + counter);
 			counter++;
 
-			fs.readFile(path + '/completed/', 'utf8', function(error, data) {
+			fs.readFile(path + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
 					console.log(error);
 					return;
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					fs.readFile(path + '/' + randomFolderName + '/output.txt', 'utf8', function(inner_error, inner_data) {
+					fs.readFile(path + '/results/output.txt', 'utf8', function(inner_error, inner_data) {
 						if(!inner_error)
 							console.log(inner_data);
 					})
@@ -50,7 +50,8 @@ Meteor.methods({
 				}
 
 				// remove temp folder
-				exec("rm -r " + path + '/' + randomFolderName);
+				// this is done in the scripts
+				//exec("rm -r " + path + '/' + randomFolderName);
 
 				clearInterval(fileCheck);
 			});
