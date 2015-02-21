@@ -34,7 +34,7 @@ Meteor.methods({
 
 			fs.readFile(path + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
-					console.log(error);
+					//console.log(error);
 					return;
 				}
 				else if (counter < maxTime) {
