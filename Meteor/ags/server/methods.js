@@ -93,7 +93,8 @@ Meteor.methods({
 			lastname: last,
 			id_Courses: id_Courses
 		}, function(err, id){
-			console.log(err);
+			if (err)
+				console.log(err);
 		});
 	},
 	'insertCourseData': function(name, number, semester, year) {
