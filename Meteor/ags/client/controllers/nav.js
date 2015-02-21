@@ -28,6 +28,10 @@ Template.mainNav.helpers({
 
 
 Template.mainNav.events({
+	'click .userCourse': function(){
+		Session.set('currentCourse', this);
+		Session.set('currentDashboard', "courseDash");
+	},
 	'click #navUser': function(){
 		Session.set('currentCourse', null);
 		Session.set('currentAssignment', null);
