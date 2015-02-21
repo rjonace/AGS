@@ -138,6 +138,11 @@
 	color: blue;
 	text-decoration: underline;
 	list-style: none outside none;
+	padding:5px 0px;
+}
+
+.ags-nav-entry > ul > li{
+	padding-bottom: 3px;
 }
 
 a:link, a:visited, a:active {
