@@ -16,7 +16,7 @@ echo "Starting container"
 docker start $(cat $currentPath/cidfile)
 
 echo "Compiling Source Files"
-docker exec -i -a $(cat $currentPath/cidfile) sh /shared/javaCompiler.sh
+docker exec -i $(cat $currentPath/cidfile) sh /shared/javaCompiler.sh
 
 echo "Running binary file"
 docker exec $(cat $currentPath/cidfile) sh /shared/javaRunner.sh >> $currentPath/$1/output.txt
