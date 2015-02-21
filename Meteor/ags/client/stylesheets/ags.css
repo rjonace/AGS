@@ -124,7 +124,7 @@
 	border-radius : 3px;
 }
 
-.ags-main-content-view > ul{
+.ags-main-content-view  > ul{
 	color: blue;
 	text-decoration: underline;
 	list-style: none outside none;
@@ -135,6 +135,12 @@
 	font-family: Arial;
 }
 
-a:link, a:visited, a:hover, a:active {
+.ags-nav-entry  > ul{
+	color: blue;
+	text-decoration: underline;
+	list-style: none outside none;
+{
+
+a:link, a:visited, a:active {
 	text-decoration: none;
 }
