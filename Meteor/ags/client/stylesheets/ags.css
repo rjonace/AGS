@@ -127,6 +127,7 @@
 .ags-main-content-view > ul{
 	color: blue;
 	text-decoration: underline;
+	list-style: none outside none;
 }
 
 .ags-nav-entry, {
