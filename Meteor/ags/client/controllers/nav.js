@@ -5,6 +5,13 @@ Template.mainNav.helpers({
 	'courseInfo': function(){
 		return Session.get('currentCourse');
 	},
+	'studentCourseList': function(){
+		var courseIdList = AGSUsers.findOne({_id:Meteor.userId()}).id_Courses;
+		return AGSCourses.find(({_id : { $in: courseIdList}}), {sort: {number: 1, name: 1} });
+	},
+	'instructorCourseList' : function(){
+		return AGSCourses.find({id_Instructor: Meteor.userId()});
+	},
 	'assignmentInfo': function(){
 		return Session.get('currentAssignment');
 	},

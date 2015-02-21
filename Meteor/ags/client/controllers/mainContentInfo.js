@@ -92,7 +92,9 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "submissionDash");
 	},
 	'click #write': function(){
-		Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student');
+		var errString;
+		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/', errString));
+		console.log(errString);
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();

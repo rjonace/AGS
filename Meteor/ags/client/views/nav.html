@@ -1,15 +1,23 @@
 <template name="mainNav">
 	<div class="ags-nav-entry">
 		{{#with userInfo}}
-			<a id="navUser">{{firstname}}</a><br>
-		{{/with}}
+			<h3>{{firstname}}'s Courses</h3>
 
-		{{#with courseInfo}}
-			<a id="navCourse">{{number}}</a><br>
-		{{/with}}
+			<ul>
+				{{#each studentCourseList}}
+					<li class="userCourse"><a>{{number}}: {{name}}</a></li>
+				{{/each}}
+			</ul>
 
-		{{#with assignmentInfo}}
-			<a id="navAss">{{name}}</a><br>
+			{{#if instructorCourseList}}
+				<h3>{{firstname}}'s Created Courses</h3>
+
+				<ul>
+					{{#each instructorCourseList}}
+						<li class="userCourse"><a>{{number}}: {{name}}</a></li>
+					{{/each}}
+				</ul>
+			{{/if}}
 		{{/with}}
 
 		<button type="button" id="gradeTest" >Grade Test!</button>

@@ -1,4 +1,5 @@
 Meteor.methods({
+<<<<<<< Updated upstream
 	'gradeSubmission' : function(submission, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -58,30 +59,38 @@ Meteor.methods({
 
 	},
 	'writeFiles' : function(assignment, path) {
+=======
+	'writeFiles' : function(assignment, path, errorString) {
+>>>>>>> Stashed changes
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-
+//		var errorString;
 		//make studentfiles directory
 		exec("mkdir " + path + "/InstructorFiles",
 			function(error, stdout, stderr){
 			 	if (error){
+			 		errorString = error + stdout + stderr; 
 			 		console.log(error + stdout + stderr);
 			 	} else {
 					fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
 						console.log(err);
+						errorString = err;
 					});
 					fs.writeFile(path + "/InstructorFiles/" + assignment.solution.name, assignment.solution.contents, function(err){
 						console.log(err);
+						errorString += err;
 					});
 					for (var i=0; i < assignment.inputs.length; i++){
 						fs.writeFile(path + "/InstructorFiles/" + assignment.inputs[i].name, assignment.inputs[i].contents, function(err){
 							console.log(err);
+							errorString += err;
 						});
 					}
 				}
 			 }
 		);
 
+		return "FUUUUU";
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
