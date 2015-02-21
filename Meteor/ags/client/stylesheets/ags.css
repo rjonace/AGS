@@ -99,6 +99,9 @@
 	left : 200px;
 	top: 15px;
 	font-family: Arial;
+}
+
+.ags-head-breadcrumb > a{
 	color: blue;
 	text-decoration: underline;
 }
