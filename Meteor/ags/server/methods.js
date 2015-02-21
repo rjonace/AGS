@@ -1,4 +1,62 @@
 Meteor.methods({
+	'gradeSubmission' : function(submission, path) {
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		// create temporary folder
+		var randomFolderName = Math.floor(Math.random()*1000000);
+		var counter = 0;
+		var maxTime = 20;
+		// check assignment language
+
+		// may not need cd becuase passing path into exec sh
+		exec("cd " + path,
+			function(error, stdout, stderr){
+				if(!error){
+					console.log(stdout);
+					console.log(stderr);
+					exec("sh " + path + "execjavafiles.sh " + randomFolderName + " " + path,
+						function(inner_error, inner_stdout, inner_stderr){
+							console.log("error: "+inner_error);
+							console.log("stdout: "+inner_stdout);
+							console.log("stderr: "+inner_stderr);
+						}
+					);
+				} else {
+					console.log(error);
+				}
+			}
+		);
+
+
+		var fileCheck = setInterval(function(){
+			console.log("Checking for completed in " + path + randomFolderName + " " + counter);
+			counter++;
+
+			fs.readFile(path + randomFolderName + '/completed', 'utf8', function(error, data) {
+				if (error && counter < maxTime) {
+					console.log(error);
+					return;
+				}
+				else if (counter < maxTime) {
+					console.log("Completed");
+					fs.readFile(path + randomFolderName + '/output.txt', 'utf8', function(inner_error, inner_data) {
+						if(!inner_error)
+							console.log(inner_data);
+					})
+				}
+				else { 
+					// exceeded max time
+					console.log("Timed out");
+				}
+
+				// remove temp folder
+				exec("rm -r " + path + randomFolderName);
+
+				clearInterval(fileCheck);
+			});
+		}, 1000);
+
+	},
 	'writeFiles' : function(assignment, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;

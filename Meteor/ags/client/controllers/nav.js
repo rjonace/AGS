@@ -34,5 +34,8 @@ Template.mainNav.events({
 	'click #navAss': function(){
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash");
+	},
+	'click #gradeTest': function(){
+		Meteor.call('gradeSubmission', Session.get('currentSubmission'), '/AGS/Docker/CompileTestJava/');
 	}
 })
