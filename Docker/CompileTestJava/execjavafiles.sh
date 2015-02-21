@@ -29,9 +29,10 @@ docker logs $(cat $currentPath/cidfile) >> $currentPath/$1/logs.txt
 
 echo "Moving Files to Completed"
 rm $currentPath/cidfile
-mkdir $currentPath/completed
-mv $currentPath/$1/diff $currentPath/completed
-mv $currentPath/$1/shared/*.class $currentPath/completed
-mv $currentPath/$1/output.txt $currentPath/completed
-mv $currentPath/$1/logs.txt $currentPath/completed
+mkdir $currentPath/$1/completed
+mv $currentPath/$1/diff $currentPath/$1/completed
+mv $currentPath/$1/shared/*.class $currentPath/$1/completed
+mv $currentPath/$1/output.txt $currentPath/$1/completed
+mv $currentPath/$1/logs.txt $currentPath/$1/completed
+mv $currentPath/$1/completed $currentPath
 rm -R $currentPath/$1

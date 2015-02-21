@@ -29,10 +29,10 @@ Meteor.methods({
 
 
 		var fileCheck = setInterval(function(){
-			console.log("Checking for completed in " + path + '/' + randomFolderName + " " + counter);
+			console.log("Checking for completed in " + path + " " + counter);
 			counter++;
 
-			fs.readFile(path + '/' + randomFolderName + '/completed', 'utf8', function(error, data) {
+			fs.readFile(path + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
 					console.log(error);
 					return;
