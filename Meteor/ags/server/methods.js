@@ -5,7 +5,7 @@ Meteor.methods({
 		// create temporary folder
 		var randomFolderName = Math.floor(Math.random()*1000000);
 		var counter = 0;
-		var maxTime = 20;
+		var maxTime = 50;
 		// check assignment language
 
 		// may not need cd becuase passing path into exec sh
