@@ -14,7 +14,7 @@ Meteor.methods({
 				if(!error){
 					console.log(stdout);
 					console.log(stderr);
-					exec("sh " + path + "execjavafiles.sh " + randomFolderName + " " + path,
+					exec("sh " + path + "/execjavafiles.sh " + randomFolderName + " " + path,
 						function(inner_error, inner_stdout, inner_stderr){
 							console.log("error: "+inner_error);
 							console.log("stdout: "+inner_stdout);
