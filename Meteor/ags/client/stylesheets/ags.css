@@ -99,6 +99,8 @@
 	left : 200px;
 	top: 15px;
 	font-family: Arial;
+	color: blue;
+	text-decoration: underline;
 }
 
 .ags-main-content-info {
