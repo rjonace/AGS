@@ -108,10 +108,10 @@ Meteor.methods({
 			id_Students: [],
 			id_Assignments: []
 		}, function(err,id){
-			AGSUsers.update(
-				{_id:currentUserId},
-				{ $addToSet: { id_Courses: id}}
-			);
+			//AGSUsers.update(
+			//	{_id:currentUserId},
+			//	{ $addToSet: { id_Courses: id}}
+			//);
 		});
 	},
 	'removeCourseData': function(selectedCourse){
