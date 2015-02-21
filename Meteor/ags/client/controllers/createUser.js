@@ -21,7 +21,13 @@ Template.AGSCreateUser.events({
 		var lastName = event.target.lastNameField.value;
 		var availableCourseList = event.target.userCourse;
 		var selectedCourseList = [];
-
+		
+		if(!availableCourseList.length){
+			if(availableCourseList.checked){
+				selectedCourseList.push(availableCourseList.value);
+			}
+		}
+		
 		for( i=0; availableCourseList && i < availableCourseList.length; i++) {
 			if (availableCourseList[i].checked) {
 				selectedCourseList.push(availableCourseList[i].value);
