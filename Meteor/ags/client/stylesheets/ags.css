@@ -110,13 +110,13 @@
 	top : 25px;
 	left: 25px;
 	width : 100%;
-	height: 75px;
+	height: 100px;
 	background: #fff;
 	border-radius : 3px;
 }
 
 .ags-main-content-view {
-	top : 150px;
+	top : 180px;
 	left: 25px;
 	width : 100%;
 	height: 100%;
