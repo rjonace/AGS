@@ -32,13 +32,11 @@
 #Move into the directory and execute the loop
 cd /shared/
 
-echo $@
-
 for classfile in *.class; do
     classname=${classfile%.*}
-    echo $classname
+
     #Execute fgrep with -q option to not display anything on stdout when the match is found
     if javap -public $classname | fgrep -q 'public static void main(java.lang.String[])'; then
-        java $classname "$@"
+        java $classname >> output.txt
     fi
 done

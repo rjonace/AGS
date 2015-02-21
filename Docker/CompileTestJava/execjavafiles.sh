@@ -19,7 +19,7 @@ echo "Compiling Source Files"
 docker exec -i -t $(cat $currentPath/cidfile) sh /shared/javaCompiler.sh
 
 echo "Running binary file"
-docker exec $(cat $currentPath/cidfile) sh /shared/javaRunner.sh >> $currentPath/$1/output.txt
+docker exec $(cat $currentPath/cidfile) sh /shared/javaRunner.sh
 
 echo "Writing Differences"
 docker diff $(cat $currentPath/cidfile) | sed -e '/^C/d' -e 's:^A ::g' >> $currentPath/$1/diff
@@ -32,7 +32,8 @@ rm $currentPath/cidfile
 mkdir $currentPath/$1/completed
 mv $currentPath/$1/diff $currentPath/$1/completed
 mv $currentPath/$1/shared/*.class $currentPath/$1/completed
-mv $currentPath/$1/output.txt $currentPath/$1/completed
+mv $currentPath/$1/shared/output.txt $currentPath/$1/completed
+#mv $currentPath/$1/output.txt $currentPath/$1/completed
 mv $currentPath/$1/logs.txt $currentPath/$1/completed
 mv $currentPath/$1/completed $currentPath
 rm -R $currentPath/$1
