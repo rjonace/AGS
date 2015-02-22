@@ -1,12 +1,12 @@
 
-public abstract class SkeletonForStudents {
+public class SkeletonForStudents {
 	public static double tempConvert(String mode, double temp){
 		return 0;
 	}
-	private static double f2C(double temp){
+	public static double f2C(double temp){
 		return 0;
 	}
-	private static double c2F(double temp){
+	public static double c2F(double temp){
 		return 0;
 	}
 	
