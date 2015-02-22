@@ -74,11 +74,11 @@ Template.mainContent.helpers({
 	},
 	'fileNotSubmitted': function(){
 		var submission = Session.get('currentSubmission');
-		return (submission.filename === null);
+		return (submission.filename === undefined);
 	},
 	'fileNotGraded': function(){
 		var submission = Session.get('currentSubmission');
-		return (submission.feedback === null)
+		return (submission.feedback === undefined)
 	},
 	'submissionFilename': function(){
 		var submission = Session.get('currentSubmission');
