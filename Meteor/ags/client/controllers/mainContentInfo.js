@@ -83,7 +83,7 @@ Template.mainContent.helpers({
 	'submissionFilename': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.filename;
-	}
+	},
 	'submissionFeeback': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
@@ -112,53 +112,19 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "submissionDash");
 	},
 	'click #write': function(){
-		//var errString;
-		//alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/ags/gradeTest'));
-		//console.log(errString);
+		var errString;
+		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS/gradeTest'));
+		console.log(errString);
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
-		var currentUserId = Meteor.userId();
-		var currentAssignment= Session.get('currentAssignment');
-
-		var filePath = '/home/student/ags/gradeTest';
-
-		/*Meteor.call('writeSubmissionFiles', submission, filePath,			
+		Meteor.call('writeSubmissionFiles', submission, 			
 			function( error, result ) {
 				if(!error) {
-					Meteor.call('writeInstructorFiles', currentAssignment, filePath,
-						function( error1, result1 ) {
-							Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
-								function( error2, result2 ) {
-									Meteor.call('gradeSubmission', submission, filePath,
-										function( error3, result3) {
-											Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath);
-										}
-									);
-								}
-							);
-						}
-					);
-
+					Meteor.call('gradeSubmission', submission, '/AGS/gradeTest');
 				}
 			}
-		);*/		
-		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
-				function( error, result ) {
-					if(!error) {
-						alert(result);
-						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
-							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
-								Meteor.call('gradeSubmission', submission, filePath, result,
-									Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath)
-								)
-							)
-						)
-					}
-				}
 		);
-
-
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
