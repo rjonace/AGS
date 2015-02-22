@@ -58,6 +58,23 @@ Meteor.methods({
 		}, 1000);
 
 	},
+	'writeSubmissionFiles' : function(submission) {
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+
+		exec("mkdir /AGS/gradeTest/SubmissionFiles",
+			function(error, stdout, stderr){
+			 	if (error){
+			 		errorString = error + stdout + stderr; 
+			 		console.log(error + stdout + stderr);
+			 	} else {
+					fs.writeFile("/AGS/gradeTest/SubmissionFiles/" + submission.filename, submission.contents, function(err){
+						console.log(err);
+					});
+				}
+			 }
+		);
+	},
 	'writeFiles' : function(assignment, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -69,20 +86,20 @@ Meteor.methods({
 			 		errorString = error + stdout + stderr; 
 			 		console.log(error + stdout + stderr);
 			 	} else {
-					fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
+					/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
 						console.log(err);
 						errorString = err;
-					});
-					fs.writeFile(path + "/InstructorFiles/" + assignment.solution.name, assignment.solution.contents, function(err){
+					});*/
+					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
 						console.log(err);
 						errorString += err;
 					});
-					for (var i=0; i < assignment.inputs.length; i++){
-						fs.writeFile(path + "/InstructorFiles/" + assignment.inputs[i].name, assignment.inputs[i].contents, function(err){
+					/*for (var i=0; i < assignment.studentfiles.length; i++){
+						fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
 							console.log(err);
 							errorString += err;
 						});
-					}
+					}*/
 				}
 			 }
 		);

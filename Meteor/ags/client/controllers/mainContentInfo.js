@@ -97,8 +97,18 @@ Template.mainContent.events({
 	},
 	'click #write': function(){
 		var errString;
-		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/'));
+		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS/gradeTest'));
 		console.log(errString);
+	},
+	'click #gradeSubmission': function(){
+		var submission = Session.get('currentSubmission');
+		Meteor.call('writeSubmissionFiles', submission, 			
+			function( error, result ) {
+				if(!error) {
+					Meteor.call('gradeSubmission', submission, '/AGS/gradeTest');
+				}
+			}
+		);
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();

@@ -87,6 +87,7 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
+				<button type="button" id="getStudentFiles" >Get Student Files</button>
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Submissions</h3>
 				{{/with}}
@@ -139,6 +140,7 @@
 
 		{{#if isSubmissionDash}}
 			{{> submissionFilesForm}}
+			<button type="button" id="gradeSubmission" >Get Feedback</button>
 		{{/if}}
 
 
