@@ -25,11 +25,7 @@ Meteor.publish('currentUserInfo', function(){
 		this.ready();
 		return;
 	}
-
-	var userObj = AGSUsers.findOne({_id:this.userId});
-	var studentIdList = (userObj) ? userObj.id_Students : [];
-
-	return AGSUsers.find({$or: [{_id: this.userId}, {_id: {$in: studentIdList}}]}); 
+	return AGSUsers.find({_id: this.userId}); 
 });
 
 Meteor.publish('submissionData', function () {
