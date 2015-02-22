@@ -21,27 +21,7 @@ Meteor.methods({
 					}
 		);
 
-
-		var folderCheck = setInterval(function(){
-			console.log("Checking for Submission and Instructor Files in " + path + " " + counter);
-			counter++;
-
-			fs.readFile(path + '/written', 'utf8', function(error, data) {
-				if (error && counter < maxTime) {
-					//console.log(error);
-					return;
-				}
-				else if (counter < maxTime) {
-					exec("cp " + path + "/*" + " " + path + "/" + folderName);
-				}
-				else { 
-					// exceeded max time
-					console.log("Timed out");
-				}
-
-				clearInterval(folderCheck);
-			});
-		}, 1000);
+		return folderName;
 	},
 	'gradeCleanUp' : function(id_User, id_Assignment, submission, path){
 		var fs = Npm.require('fs');
@@ -80,7 +60,7 @@ Meteor.methods({
 		);
 
 	},
-	'gradeSubmission' : function(submission, path) {
+	'gradeSubmission' : function(submission, path, folderName) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
@@ -89,13 +69,15 @@ Meteor.methods({
 		var maxTime = 50;
 		// check assignment language
 
+		var newPath = path + "/" + folderName;
+
 		// may not need cd becuase passing path into exec sh
-		exec("cd " + path,
+		exec("cp " + path + "/*.* " + newPath,
 			function(error, stdout, stderr){
 				if(!error){
 					console.log(stdout);
 					console.log(stderr);
-					exec("sh " + path + "/execjavafiles.sh " + randomFolderName + " " + path,
+					exec("sh " + newPath + "/execjavafiles.sh " + randomFolderName + " " + newPath,
 						function(inner_error, inner_stdout, inner_stderr){
 							console.log("error: "+inner_error);
 							console.log("stdout: "+inner_stdout);
@@ -110,17 +92,17 @@ Meteor.methods({
 
 
 		var fileCheck = setInterval(function(){
-			console.log("Checking for completed in " + path + " " + counter);
+			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
-			fs.readFile(path + '/completed', 'utf8', function(error, data) {
+			fs.readFile(newPath + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
 					//console.log(error);
 					return;
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					fs.readFile(path + '/results/output.txt', 'utf8', function(inner_error, inner_data) {
+					fs.readFile(newPath + '/results/output.txt', 'utf8', function(inner_error, inner_data) {
 						if(!inner_error)
 							console.log(inner_data);
 					})
@@ -173,7 +155,7 @@ Meteor.methods({
 					});*/
 					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
 						if(!err){
-							exec("touch " + path + "/written");
+
 						} else {
 							console.log(err);
 						}
