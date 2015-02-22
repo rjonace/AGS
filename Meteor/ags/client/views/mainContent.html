@@ -141,19 +141,17 @@
 		{{#if isSubmissionDash}}
 			{{#if fileNotSubmitted}}
 				{{> submissionFilesForm}}
-			{{/if}}
-			{{#else}}
+			{{else}}
 				<h3>Submission</h3>
 				<label for="submissionFilenameText">Your Solution File:</label>
 				<p name="submissionFilenameText">{{submissionFilename}}</p>
 				<h3>Feedback</h3>
 				{{#if fileNotGraded}}
 					<button type="button" id="gradeSubmission" >Get Feedback</button>
-				{{/if}}
-				{{#else}}
+				{{else}}
 					{{{submissionFeedback}}}
-				{{/else}}
-			{{/else}}
+				{{/if}}
+			{{/if}}
 		{{/if}}
 
 
