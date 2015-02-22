@@ -5,36 +5,46 @@
 			<label for="assignmentNameField">Name:</label>
 			<input type="text" name="assignmentNameField">
 			<br>
+			
 			<label for="assignmentDescriptionField">Description:</label>
 			<input type="text" name="assignmentDescriptionField">
 			<br>
+			
 			<label for="assignmentLanguageField">Language:</label>
-			<input type="radio" id="assignmentLanguageFieldC" name="assignmentLanguageField" value="C"/>C
-			<input type="radio" id="assignmentLanguageFieldJava" name="assignmentLanguageField" value="Java"/>Java
-			<input type="radio" id="assignmentLanguageFieldPython" name="assignmentLanguageField" value="Python"/>Python
+				<input type="radio" id="assignmentLanguageFieldC" name="assignmentLanguageField" value="C"/>C
+				<input type="radio" id="assignmentLanguageFieldJava" name="assignmentLanguageField" value="Java"/>Java
+				<input type="radio" id="assignmentLanguageFieldPython" name="assignmentLanguageField" value="Python"/>Python
 			<br/>			
 			<label for="assignmentDateAvailableField">Date Available:</label>
 			<input type="datetime-local" name="assignmentDateAvailableField">
 			<br>
+
 			<label for="assignmentDateDueField">Date Due:</label>
 			<input type="date-local" name="assignmentDateDueField">			
 			<br>
+			
 			<label for="assignmentPointsField">Max Points:</label>
 			<input type="text" name="assignmentPointsField">
 			<br>
-			<label for="assignmentVTAField">VTA File:</label>
-			<input type="file" name="assignmentVTAField">
+			
+			<label for="assignmentAGField">Auto-Grader File:</label>
+			<input type="file" name="assignmentAGField">
 			<br>
-			<label for="assignmentSolutionField">Solution File:</label>
+
+<!--			<label for="assignmentSolutionField">Solution File:</label>
 			<input type="file" name="assignmentSolutionField">
 			<br>
-			<label for="assignmentInputField">Input File(s):</label>
-			<input type="file" name="assignmentInputField" multiple>
-			<br>
-			<input type="text" name="statusText" value="" readonly>
-			<br>
-			<input type="submit" value="Add Assignment">
+-->
 
+			<label for="assignmentStudentField">Student File(s):</label>
+			<input type="file" name="assignmentStudentField" multiple>
+			<br>
+
+	<!--		<input type="text" name="statusText" value="" readonly>
+			<br>
+	-->
+
+			<input type="submit" value="Add Assignment">
 		</form>
 	{{/if}}
 </template>

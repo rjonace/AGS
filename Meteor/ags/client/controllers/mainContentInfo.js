@@ -110,42 +110,43 @@ Template.mainContent.events({
 			function(error, result) {
 				if(!error) {
 
-					var vtaReader = new FileReader();
-					var solutionReader = new FileReader();
-					var inputReader = new FileReader();
+					var agReader = new FileReader();
+//					var solutionReader = new FileReader();
+					var studentReader = new FileReader();
 
-					var vta = event.target.assignmentVTAField.files[0];
-					var solution = event.target.assignmentSolutionField.files[0];
-					var inputFileList = event.target.assignmentInputField.files;
+					var ag = event.target.assignmentAGField.files[0];
+//					var solution = event.target.assignmentSolutionField.files[0];
+					var studentFileList = event.target.assignmentStudentField.files;
 
-					var vtaObj, solutionObj;
+					var agObj, 
+//						solutionObj;
 
-					vtaReader.onloadend = function(){
-						vtaObj = {name: vta.name, contents:vtaReader.result};
-						Meteor.call('insertAssignmentVTA', result, vtaObj.name, vtaObj.contents);
+					agReader.onloadend = function(){
+						agObj = {name: ag.name, contents:agReader.result};
+						Meteor.call('insertAssignmentAG', result, agObj.name, agObj.contents);
 					}
 
-					solutionReader.onloadend = function(){
+/*					solutionReader.onloadend = function(){
 						solutionObj = {name: solution.name, contents:solutionReader.result};
 						Meteor.call('insertAssignmentSolution', result, solutionObj.name, solutionObj.contents);
 					}
+*/
+					if (ag)
+						agReader.readAsText(ag);
 
-					if (vta)
-						vtaReader.readAsText(vta);
+//					if (solution)
+//						solutionReader.readAsText(solution);
 
-					if (solution)
-						solutionReader.readAsText(solution);
-
-					if(inputFileList.length > 0) {
-						for (var i = 0; i < inputFileList.length; i++) {
+					if(studentFileList.length > 0) {
+						for (var i = 0; i < studentFileList.length; i++) {
 							(function(file) {
 								var name = file.name;
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
-									Meteor.call('insertAssignmentInput', result, name, reader.result);
+									Meteor.call('insertAssignmentStudent', result, name, reader.result);
 								}
 								reader.readAsText(file);
-							})(inputFileList[i]);
+							})(studentFileList[i]);
 						};
 					}
 
