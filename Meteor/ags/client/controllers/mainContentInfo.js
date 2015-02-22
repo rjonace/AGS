@@ -100,10 +100,10 @@ Template.mainContent.events({
 		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/'));
 		console.log(errString);
 	},
-	'submit .submissionFilesForm': function(event){
+	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
-		var currentUser = Session.get('currentUser');
-		var currentAssignment = Session.get('currentAssignment');
+		var currentUserId = Meteor.userId();
+		var currentAssignmentId = Session.get('currentAssignment')._id;
 		var currentSubmission = Session.get('currentSubmission');
 		var currentSubmissionNumber = currentSubmission.subNumber;
 
@@ -115,7 +115,7 @@ Template.mainContent.events({
 					var name = file.name;
 					var reader = new FileReader();
 					reader.onloadend = function(event) {
-						Meteor.call('insertSubmissionSolution', currentUser, currentAssignment,
+						Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
 							 currentSubmissionNumber, name, reader.result);
 					}
 					reader.readAsText(file);
