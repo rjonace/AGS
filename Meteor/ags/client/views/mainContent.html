@@ -104,8 +104,9 @@
 					<h3>Student Submissions</h3>
 					<ul>
 						{{#each instructorSubmissionList}}
+
 							{{#each AttemptList}}
-							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
+							<li class="assignmentSubmission"><a>{{getStudentName id_Student}} {{name}}: {{dateCreated}}</a></li>
 							{{/each}}
 						{{/each}}
 					</ul>

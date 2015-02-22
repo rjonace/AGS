@@ -6,6 +6,10 @@ Template.mainContent.helpers({
 	'instructorCourseList' : function(){
 		return AGSCourses.find({id_Instructor: Meteor.userId()});
 	},
+	'getStudentName' : function(id_Student) {
+		var student = AGSUsers.find({_id: id_Student});
+		return student.firstname + " " + student.lastname;
+	},
 	// this function will return true if the current user has instructor priveleges
 	// for the current dashboard
 	'isUserCreator' : function() {

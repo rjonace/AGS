@@ -127,7 +127,11 @@ Meteor.methods({
 		);
 		AGSUsers.update( 
 			{ _id: currentUserId },
-			{ $addToSet: { id_Courses: selectedCourse._id } }
+			{ $addToSet: { id_Courses: selectedCourse._id} }
+		);
+		AGSUsers.update( 
+			{ _id: selectedCourse.id_Instructor },
+			{ $addToSet: { id_Students: currentUserId} }
 		);
 	},
 	'createNewSubmission': function(id_User, id_Assignment, id_Instructor){
