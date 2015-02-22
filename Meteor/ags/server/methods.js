@@ -20,47 +20,15 @@ Meteor.methods({
 
 		return folderName;
 	},
-	'gradeCleanUp' : function(id_User, id_Assignment, submission, path){
-		var fs = Npm.require('fs');
+	'gradeCleanUp' : function(path, folderName){
 		var exec = Npm.require('child_process').exec;
 
-		var fullSubObj = AGSSubmissions.findOne({
-			id_Student: id_User,
-			id_Assignment: id_Assignment
-		});
-
-		var folderName = fullSubObj._id + submission.subNumber;
-
-		//exec("mv " + path + "/" + folderName + "/results" + " " + path + "/" + folderName);
-		exec("cat " + path + "/" + folderName + "/results/output.txt",
-			function(error, stdout, stderr){
-			 	if (!error){
-						console.log("stdout: "+ stdout);
-						AGSSubmissions.update(
-							{
-								"id_Student": id_User,
-								"id_Assignment": id_Assignment,
-								"AttemptList.subNumber": submission.subNumber
-							}, 
-							{ 
-								$set: {
-									"AttemptList.$.feedback": stdout
-								} 
-							} 
-						);
-						exec("rm -Rf " + path + "/" + folderName);
-						exec("rm -Rf " + path + "/" + folderName + "/SubmissionFiles");
-						exec("rm -Rf " + path + "/" + folderName + "/InstructorFiles");
-				} else {
-					console.log("stdout: "+ stdout);
-					console.log("error: " + error);
-					console.log("stderr: "+ stderr);
-				}
-			 }
-		);
+		exec("rm -Rf " + path + "/" + folderName);
+		exec("rm -Rf " + path + "/" + folderName + "/SubmissionFiles");
+		exec("rm -Rf " + path + "/" + folderName + "/InstructorFiles");
 
 	},
-	'gradeSubmission' : function(submission, path, folderName) {
+	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
@@ -104,7 +72,18 @@ Meteor.methods({
 					console.log("Completed");
 					fs.readFile(newPath + '/results/output.txt', 'utf8', function(inner_error, inner_data) {
 						if(!inner_error)
-							console.log(inner_data);
+							AGSSubmissions.update(
+							{
+								"id_Student": id_User,
+								"id_Assignment": id_Assignment,
+								"AttemptList.subNumber": submission.subNumber
+							}, 
+							{ 
+								$set: {
+									"AttemptList.$.feedback": inner_data
+								} 
+							} 
+						);
 					})
 				}
 				else { 

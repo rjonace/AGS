@@ -149,8 +149,8 @@ Template.mainContent.events({
 						alert(result);
 						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
 							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
-								Meteor.call('gradeSubmission', submission, filePath, result,
-									Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath)
+								Meteor.call('gradeSubmission', submission, filePath, result, currentUserId, currentAssignment._id,
+									Meteor.call('gradeCleanUp', filePath, result)
 								)
 							)
 						)
