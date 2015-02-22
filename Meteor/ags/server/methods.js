@@ -51,6 +51,10 @@ Meteor.methods({
 						exec("rm -Rf " + path + "/" + folderName);
 						exec("rm -Rf " + path + "/" + folderName + "/SubmissionFiles");
 						exec("rm -Rf " + path + "/" + folderName + "/InstructorFiles");
+				} else {
+					console.log("stdout: "+ stdout);
+					console.log("error: " + error);
+					console.log("stderr: "+ stderr);
 				}
 			 }
 		);
