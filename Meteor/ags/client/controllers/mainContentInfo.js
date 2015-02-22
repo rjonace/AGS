@@ -107,7 +107,7 @@ Template.mainContent.events({
 
 		var filePath = '/home/student/ags/gradeTest';
 
-		Meteor.call('writeSubmissionFiles', submission, 			
+		Meteor.call('writeSubmissionFiles', submission, filePath,			
 			function( error, result ) {
 				if(!error) {
 					Meteor.call('writeInstructorFiles', currentAssignment, filePath,

@@ -3,6 +3,9 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
+		var counter = 0;
+		var maxTime = 50;
+
 		var fullSubObj = AGSSubmissions.findOne({
 			id_Student: id_User,
 			id_Assignment: id_Assignment
@@ -12,15 +15,33 @@ Meteor.methods({
 
 		exec("mkdir " + path + "/" + folderName,
 			function(error, stdout, stderr){
-			 	if (error){
 						console.log("error: "+ error);
 						console.log("stdout: "+ stdout);
 						console.log("stderr: "+ stderr);
-			 	} else {
-			 		exec("cp " + path + "/*" + " " + path + "/" + folderName);
-				}
-			 }
+					}
 		);
+
+
+		var folderCheck = setInterval(function(){
+			console.log("Checking for Submission and Instructor Files in " + path + " " + counter);
+			counter++;
+
+			fs.readFile(path + '/written', 'utf8', function(error, data) {
+				if (error && counter < maxTime) {
+					//console.log(error);
+					return;
+				}
+				else if (counter < maxTime) {
+					exec("cp " + path + "/*" + " " + path + "/" + folderName);
+				}
+				else { 
+					// exceeded max time
+					console.log("Timed out");
+				}
+
+				clearInterval(fileCheck);
+			});
+		}, 1000);
 	},
 	'gradeCleanUp' : function(id_User, id_Assignment, submission, path){
 		var fs = Npm.require('fs');
@@ -51,6 +72,9 @@ Meteor.methods({
 							} 
 						);
 						exec("rm -Rf " + path + "/" + folderName);
+						exec("rm -Rf " + path + "/SubmissionFiles");
+						exec("rm -Rf " + path + "/InstructorFiles");
+						exec("rm -Rf " + path + "/written");
 				}
 			 }
 		);
@@ -115,18 +139,19 @@ Meteor.methods({
 		}, 1000);
 
 	},
-	'writeSubmissionFiles' : function(submission) {
+	'writeSubmissionFiles' : function(submission, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
-		exec("mkdir /home/student/ags/gradeTest/SubmissionFiles",
+		exec("mkdir " + path + "/SubmissionFiles",
 			function(error, stdout, stderr){
 			 	if (error){
-			 		errorString = error + stdout + stderr; 
 			 		console.log(error + stdout + stderr);
 			 	} else {
-					fs.writeFile("/home/student/ags/gradeTest/SubmissionFiles/" + submission.filename, submission.contents, function(err){
-						console.log(err);
+					fs.writeFile(path + "/SubmissionFiles/" + submission.filename, submission.contents, function(err){
+						if(err){
+							console.log(err);
+						}
 					});
 				}
 			 }
@@ -135,12 +160,11 @@ Meteor.methods({
 	'writeInstructorFiles' : function(assignment, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-//		var errorString;
-		//make studentfiles directory
+
 		exec("mkdir " + path + "/InstructorFiles",
 			function(error, stdout, stderr){
 			 	if (error){
-			 		errorString = error + stdout + stderr; 
+
 			 		console.log(error + stdout + stderr);
 			 	} else {
 					/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
@@ -148,8 +172,11 @@ Meteor.methods({
 						errorString = err;
 					});*/
 					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
-						console.log(err);
-						errorString += err;
+						if(!err){
+							exec("touch " + path + "/written");
+						} else {
+							console.log(err);
+						}
 					});
 					/*for (var i=0; i < assignment.studentfiles.length; i++){
 						fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
