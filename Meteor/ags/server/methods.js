@@ -61,7 +61,7 @@ Meteor.methods({
 	'writeSubmissionFiles' : function(submission) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-
+		alert(submission.filename);
 		exec("mkdir /home/student/ags/gradeTest/SubmissionFiles",
 			function(error, stdout, stderr){
 			 	if (error){
