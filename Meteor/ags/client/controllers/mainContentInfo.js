@@ -102,7 +102,7 @@ Template.mainContent.events({
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
-		alert(submission.filename);
+
 		Meteor.call('writeSubmissionFiles', submission, 			
 			function( error, result ) {
 				if(!error) {
