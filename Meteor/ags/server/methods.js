@@ -39,7 +39,7 @@ Meteor.methods({
 					console.log("Timed out");
 				}
 
-				clearInterval(fileCheck);
+				clearInterval(folderCheck);
 			});
 		}, 1000);
 	},
