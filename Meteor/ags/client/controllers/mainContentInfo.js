@@ -124,6 +124,20 @@ Template.mainContent.events({
 					Meteor.call('gradeSubmission', submission, '/AGS/gradeTest');
 				}
 			}
+		);		
+		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
+				function( error, result ) {
+					if(!error) {
+						alert(result);
+						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
+							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
+								Meteor.call('gradeSubmission', submission, filePath, result, currentUserId, currentAssignment._id,
+									Meteor.call('gradeCleanUp', filePath, result)
+								)
+							)
+						)
+					}
+				}
 		);
 	},
 	'submit #submissionFilesForm': function(event){
