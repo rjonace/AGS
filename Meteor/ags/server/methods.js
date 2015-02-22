@@ -3,9 +3,6 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
-		var counter = 0;
-		var maxTime = 50;
-
 		var fullSubObj = AGSSubmissions.findOne({
 			id_Student: id_User,
 			id_Assignment: id_Assignment
@@ -52,9 +49,8 @@ Meteor.methods({
 							} 
 						);
 						exec("rm -Rf " + path + "/" + folderName);
-						exec("rm -Rf " + path + "/SubmissionFiles");
-						exec("rm -Rf " + path + "/InstructorFiles");
-						exec("rm -Rf " + path + "/written");
+						exec("rm -Rf " + path + "/" + folderName + "/SubmissionFiles");
+						exec("rm -Rf " + path + "/" + folderName + "/InstructorFiles");
 				}
 			 }
 		);
