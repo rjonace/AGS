@@ -119,7 +119,7 @@ Template.mainContent.events({
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
 		var currentUserId = Meteor.userId();
-		var currentAssignmentId = Session.get('currentAssignment');
+		var currentAssignment = Session.get('currentAssignment');
 		var filePath = '/home/student/ags/gradeTest';
 
 
