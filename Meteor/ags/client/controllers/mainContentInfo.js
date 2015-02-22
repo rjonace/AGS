@@ -131,10 +131,13 @@ Template.mainContent.events({
 				function( error, result ) {
 					if(!error) {
 						alert(result);
-						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result);
-						Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result);
-						Meteor.call('gradeSubmission', submission, filePath, result);
-						Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath);
+						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
+							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
+								Meteor.call('gradeSubmission', submission, filePath, result,
+									Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath);
+								);
+							);
+						);
 					}
 				}
 		);
