@@ -118,7 +118,7 @@ Template.mainContent.events({
 //					var solution = event.target.assignmentSolutionField.files[0];
 					var studentFileList = event.target.assignmentStudentField.files;
 
-					var agObj, 
+					var agObj
 //						solutionObj;
 
 					agReader.onloadend = function(){
