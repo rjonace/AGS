@@ -96,17 +96,34 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "submissionDash");
 	},
 	'click #write': function(){
-		var errString;
-		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/ags/gradeTest'));
-		console.log(errString);
+		//var errString;
+		//alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/ags/gradeTest'));
+		//console.log(errString);
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
+		var currentUserId = Meteor.userId();
+		var currentAssignment= Session.get('currentAssignment');
+
+		var filePath = '/home/student/ags/gradeTest';
 
 		Meteor.call('writeSubmissionFiles', submission, 			
 			function( error, result ) {
 				if(!error) {
-					Meteor.call('gradeSubmission', submission, '/home/student/ags/gradeTest');
+					Meteor.call('writeInstructorFiles', currentAssignment, filePath,
+						function( error1, result1 ) {
+							Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
+								function( error2, result2 ) {
+									Meteor.call('gradeSubmission', submission, filePath,
+										function( error3, result3) {
+											Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath);
+										}
+									);
+								}
+							);
+						}
+					);
+
 				}
 			}
 		);

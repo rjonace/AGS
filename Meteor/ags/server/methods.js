@@ -1,4 +1,61 @@
 Meteor.methods({
+	'prepareGrade' : function(id_User, id_Assignment, submission, path){
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+
+		var fullSubObj = AGSSubmissions.findOne({
+			id_Student: id_User,
+			id_Assignment: id_Assignment
+		});
+
+		var folderName = fullSubObj._id + submission.subNumber;
+
+		exec("mkdir " + path + "/" + folderName,
+			function(error, stdout, stderr){
+			 	if (error){
+						console.log("error: "+ error);
+						console.log("stdout: "+ stdout);
+						console.log("stderr: "+ stderr);
+			 	} else {
+			 		exec("cp " + path + "/*" + " " + path + "/" + folderName);
+				}
+			 }
+		);
+	},
+	'gradeCleanUp' : function(id_User, id_Assignment, submission, path){
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+
+		var fullSubObj = AGSSubmissions.findOne({
+			id_Student: id_User,
+			id_Assignment: id_Assignment
+		});
+
+		var folderName = fullSubObj._id + submission.subNumber;
+
+		//exec("mv " + path + "/" + folderName + "/results" + " " + path + "/" + folderName);
+		exec("cat " + path + "/" + folderName + "/results/output.txt",
+			function(error, stdout, stderr){
+			 	if (!error){
+						console.log("stdout: "+ stdout);
+						AGSSubmissions.update(
+							{
+								"id_Student": id_User,
+								"id_Assignment": id_Assignment,
+								"AttemptList.subNumber": submission.subNumber
+							}, 
+							{ 
+								$set: {
+									"AttemptList.$.feedback": stdout
+								} 
+							} 
+						);
+						exec("rm -Rf " + path + "/" + folderName);
+				}
+			 }
+		);
+
+	},
 	'gradeSubmission' : function(submission, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -75,7 +132,7 @@ Meteor.methods({
 			 }
 		);
 	},
-	'writeFiles' : function(assignment, path) {
+	'writeInstructorFiles' : function(assignment, path) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 //		var errorString;
