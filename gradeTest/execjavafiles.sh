@@ -7,6 +7,7 @@ mkdir $currentPath/$1
 echo "Copying StudentFiles Contents"
 mkdir $currentPath/$1/shared
 cp $currentPath/VTA.java $currentPath/$1/shared
+cp $currentPath/javaCompiler.sh $currentPath/$1/shared
 cp $currentPath/InstructorFiles/* $currentPath/$1/shared
 cp $currentPath/SubmissionFiles/* $currentPath/$1/shared
 
