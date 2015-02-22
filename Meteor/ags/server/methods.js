@@ -12,6 +12,7 @@ Meteor.methods({
 
 		exec("mkdir " + path + "/" + folderName,
 			function(error, stdout, stderr){
+						console.log("made directory " + path + "/" + folderName);
 						console.log("error: "+ error);
 						console.log("stdout: "+ stdout);
 						console.log("stderr: "+ stderr);
