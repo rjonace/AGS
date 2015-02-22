@@ -118,13 +118,11 @@ Template.mainContent.events({
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
-		Meteor.call('writeSubmissionFiles', submission, 			
-			function( error, result ) {
-				if(!error) {
-					Meteor.call('gradeSubmission', submission, '/home/student/ags/gradeTest');
-				}
-			}
-		);		
+		var currentUserId = Meteor.userId();
+		var currentAssignmentId = Session.get('currentAssignment');
+		var filePath = '/home/student/ags/gradeTest';
+
+
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 				function( error, result ) {
 					if(!error) {
