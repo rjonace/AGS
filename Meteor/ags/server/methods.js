@@ -24,9 +24,6 @@ Meteor.methods({
 		var exec = Npm.require('child_process').exec;
 
 		exec("rm -Rf " + path + "/" + folderName);
-		exec("rm -Rf " + path + "/" + folderName + "/SubmissionFiles");
-		exec("rm -Rf " + path + "/" + folderName + "/InstructorFiles");
-
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
 		var fs = Npm.require('fs');
