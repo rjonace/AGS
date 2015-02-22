@@ -112,16 +112,16 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "submissionDash");
 	},
 	'click #write': function(){
-		var errString;
-		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/AGS/gradeTest'));
-		console.log(errString);
+/*		var errString;
+		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/ags/gradeTest'));
+		console.log(errString);*/
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
 		Meteor.call('writeSubmissionFiles', submission, 			
 			function( error, result ) {
 				if(!error) {
-					Meteor.call('gradeSubmission', submission, '/AGS/gradeTest');
+					Meteor.call('gradeSubmission', submission, '/home/student/ags/gradeTest');
 				}
 			}
 		);		
