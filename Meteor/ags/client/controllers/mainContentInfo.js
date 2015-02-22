@@ -134,10 +134,10 @@ Template.mainContent.events({
 						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
 							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
 								Meteor.call('gradeSubmission', submission, filePath, result,
-									Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath);
-								);
-							);
-						);
+									Meteor.call('gradeCleanUp', currentUserId, currentAssignment._id, submission, filePath)
+								)
+							)
+						)
 					}
 				}
 		);
