@@ -71,6 +71,22 @@ Template.mainContent.helpers({
 	},
 	'isSubmissionDash': function(){
 		return Session.get('currentDashboard') === "submissionDash";
+	},
+	'fileNotSubmitted': function(){
+		var submission = Session.get('currentSubmission');
+		return (submission.filename === null);
+	},
+	'fileNotGraded': function(){
+		var submission = Session.get('currentSubmission');
+		return (submission.feedback === null)
+	},
+	'submissionFilename': function(){
+		var submission = Session.get('currentSubmission');
+		return submission.filename;
+	}
+	'submissionFeeback': function(){
+		var submission = Session.get('currentSubmission');
+		return submission.feedback;
 	}
 });
 
