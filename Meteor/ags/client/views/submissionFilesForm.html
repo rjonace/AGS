@@ -1,14 +1,15 @@
 <template name="submissionFilesForm">
 	{{#if currentUser}}
-		<form name="submissionFilesForm" id="submissionFilesForm" enctype="multipart/form-data">
+		<form name="submissionFilesForm" id="submissionFilesForm" method="post" enctype="multipart/form-data">
 			<h3>Submission</h3>
-			<label for="submissionSolutionFile">Solution File:</label>
-			<input type="file" name="submissionSolutionFile">
-			<br>
-			<label for="submissionInputField">Input File(s):</label>
-			<input type="file" name="submissionInputField" multiple>
+			<label for="submissionSolutionFile">Your Solution File:</label>
+			<input type="file" name="submissionSolutionFile" multiple>
 			<br>
 
+<!--			<label for="submissionInputField">Input File(s):</label>
+			<input type="file" name="submissionInputField" multiple>
+			<br>
+-->
 			<input type="submit" value="Add Submission Files">
 
 		</form>

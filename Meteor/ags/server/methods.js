@@ -147,7 +147,7 @@ Meteor.methods({
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
 				AttemptCount: 1,
-				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() }]
+				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
 			}, function(err, id) {
 				console.log(err);
 				AGSAssignments.update(
@@ -160,7 +160,7 @@ Meteor.methods({
 			AGSSubmissions.update(
 					sub,
 					{ 	$inc: { AttemptCount: 1 },
-						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date() } }
+						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
 					}
 			);
 			return AGSSubmissions.findOne({
@@ -168,6 +168,21 @@ Meteor.methods({
 				id_Assignment: id_Assignment
 			});
 		}
+	},
+	'insertSubmissionSolution' : function(id_Student, id_Assignment, subNumber, filename, contents){
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set: {
+					"AttemptList.$.filename": filename, 
+					"AttemptList.$.contents": contents
+				} 
+			} 
+		);
 	},
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
 
@@ -187,22 +202,23 @@ Meteor.methods({
 			);
 		});
 	},
-	'insertAssignmentVTA': function(id_Assignment, filename, contents){
+	'insertAssignmentAG': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
-			{$set: { vta: { name: filename, contents: contents} } }
+			{$set: { ag: { name: filename, contents: contents} } }
 		);
 	},	
-	'insertAssignmentSolution': function(id_Assignment, filename, contents){
+/*	'insertAssignmentSolution': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
 			{$set: {solution: {name: filename, contents: contents} } }
 		);
 	},
-	'insertAssignmentInput': function(id_Assignment, filename, contents){
+*/
+	'insertAssignmentStudent': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
-			{$addToSet: { inputs: { name: filename, contents: contents } } }
+			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
 		);
 	}
 });

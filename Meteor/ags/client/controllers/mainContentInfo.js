@@ -100,6 +100,30 @@ Template.mainContent.events({
 		alert(Meteor.call('writeFiles', Session.get('currentAssignment'), '/home/student/'));
 		console.log(errString);
 	},
+	'submit .submissionFilesForm': function(event){
+		event.preventDefault();
+		var currentUser = Session.get('currentUser');
+		var currentAssignment = Session.get('currentAssignment');
+		var currentSubmission = Session.get('currentSubmission');
+		var currentSubmissionNumber = currentSubmission.subNumber;
+
+		var reader = new FileReader();
+		var fileList = event.target.submissionSolutionFile.files;
+		if(fileList.length > 0) {
+			for (var i = 0; i < fileList.length; i++) {
+				(function(file) {
+					var name = file.name;
+					var reader = new FileReader();
+					reader.onloadend = function(event) {
+						Meteor.call('insertSubmissionSolution', currentUser, currentAssignment,
+							 currentSubmissionNumber, name, reader.result);
+					}
+					reader.readAsText(file);
+				})(fileList[i]);
+			};
+		}
+
+	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
 		var name = event.target.assignmentNameField.value;

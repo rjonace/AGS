@@ -88,12 +88,12 @@
 
 			{{#if isAssignmentDash}}
 				{{#with userInfo}}
-				<h3>{{firstname}}'s Submissions</h3>
+					<h3>{{firstname}}'s Submissions</h3>
 				{{/with}}
 				<ul>
 					{{#each studentSubmissionList}}
 						{{#each AttemptList}}
-						<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
+							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
 						{{/each}}
 					{{/each}}
 				</ul>
