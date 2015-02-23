@@ -140,12 +140,16 @@ Template.mainContent.events({
 					}
 				}
 		);*/
-
-		Meteor.apply('prepareGrade', [currentUserId, currentAssignment._id, submission, filePath]);
-		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + result] , true);
-		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + result], true);
-		Meteor.apply('gradeSubmission', [submission, filePath, result, currentUserId, currentAssignment._id] , true);
-		Meteor.apply('gradeCleanUp', [filePath, result], true);
+		var folderName = "";
+		Meteor.apply('prepareGrade', [currentUserId, currentAssignment._id, submission, filePath],true,
+			function(error,result){
+				console.log('prepared');
+				folderName = result;
+			});
+		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
+		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
+		Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
+		Meteor.apply('gradeCleanUp', [filePath, folderName], true);
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
