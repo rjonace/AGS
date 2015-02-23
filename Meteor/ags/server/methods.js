@@ -1,5 +1,7 @@
 Meteor.methods({
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
+		console.log("prep start");
+		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
@@ -10,7 +12,7 @@ Meteor.methods({
 
 		var folderName = fullSubObj._id + submission.subNumber;
 		var newPath = path + "/" + folderName;
-
+		
 		exec("mkdir " + newPath,
 			function(error, stdout, stderr){
 						console.log("made directory " + newPath);
@@ -19,9 +21,10 @@ Meteor.methods({
 						console.log("stderr: "+ stderr);
 					}
 		);
-		
+		console.log("prep exec over")
 		while(true){
 			if(fs.exists(newPath)){
+				console.log("prep end");
 				return folderName;
 			}
 		}
@@ -31,7 +34,7 @@ Meteor.methods({
 
 		exec("rm -Rf " + path + "/" + folderName);
 	},
-	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
+	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
@@ -104,11 +107,14 @@ Meteor.methods({
 
 	},
 	'writeSubmissionFiles' : function(submission, path) {
+		console.log("sub start");
+		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		var newPath = path + "/SubmissionFiles";
 		while(true){	
 			if(fs.exists(path)){
+				console.log("sub check 1");
 				exec("mkdir " + newPath,
 					function(error, stdout, stderr){
 						if (error){
@@ -116,6 +122,7 @@ Meteor.methods({
 						} else {
 							while(true){
 								if(fs.exists(newPath)){
+									console.log("sub check 2");
 									fs.writeFile(path + "/SubmissionFiles/" + submission.filename, submission.contents, function(err){
 										if(err){
 											console.log(err);
@@ -128,14 +135,18 @@ Meteor.methods({
 				);
 			}
 		}
+		console.log("sub end");
 	},
 	'writeInstructorFiles' : function(assignment, path) {
+		console.log("ins start");
+		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		var newPath = path + "/InstructorFiles";
 		
 		while(true){
 			if(fs.exists(path)){
+				console.log("ins check 1");
 				exec("mkdir " + path + "/InstructorFiles",
 					function(error, stdout, stderr){
 						if (error){
@@ -148,6 +159,7 @@ Meteor.methods({
 							});*/
 							while(true){
 								if(fs.exists(newPath)){
+									console.log("ins check 2")
 									fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
 										if(!err){
 
@@ -168,6 +180,7 @@ Meteor.methods({
 				);
 			}
 		}
+		console.log("ins end");
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({

@@ -155,7 +155,7 @@ Template.mainContent.events({
 		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
 		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 		Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
-		Meteor.apply('gradeCleanUp', [filePath, folderName], true);
+		//Meteor.apply('gradeCleanUp', [filePath, folderName], true);
 		Session.set('fileNotGraded', false);
 
 	},
