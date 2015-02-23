@@ -154,12 +154,13 @@ Template.mainContent.events({
 		Meteor.apply('prepareGrade', [currentUserId, currentAssignment._id, submission, filePath],true,
 			function(error,result){
 				folderName = result;
+				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
+				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
+				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
+				Meteor.apply('gradeCleanUp', [filePath, folderName], true);
+				Session.set('fileNotGraded', false);
 			});
-		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
-		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-		Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
-		Meteor.apply('gradeCleanUp', [filePath, folderName], true);
-		Session.set('fileNotGraded', false);
+
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
