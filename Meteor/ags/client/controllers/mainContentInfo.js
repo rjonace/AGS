@@ -169,6 +169,7 @@ Template.mainContent.events({
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
+					alert(result);
 					if (!result && counter < maxTime) {
 						return;
 					} else if (counter < maxTime) {
