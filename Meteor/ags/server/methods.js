@@ -52,7 +52,7 @@ Meteor.methods({
 			}
 		);
 
-
+		var data;
 		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
@@ -64,31 +64,29 @@ Meteor.methods({
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					var data = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
-					AGSSubmissions.update(
-					{
-						"id_Student": id_User,
-						"id_Assignment": id_Assignment,
-						"AttemptList.subNumber": submission.subNumber
-					}, 
-					{ 
-						$set: {
-							"AttemptList.$.feedback": data
-						} 
-					});
+					data = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+
 				}
 				else { 
 					// exceeded max time
 					console.log("Timed out");
 				}
 
-				// remove temp folder
-				// this is done in the scripts
-				//exec("rm -r " + path + '/' + randomFolderName);
-
 				clearInterval(fileCheck);
 			});
 		}, 1000);
+
+		AGSSubmissions.update(
+		{
+			"id_Student": id_User,
+			"id_Assignment": id_Assignment,
+			"AttemptList.subNumber": submission.subNumber
+		}, 
+		{ 
+			$set: {
+				"AttemptList.$.feedback": data
+			} 
+		});
 
 	},
 	'writeSubmissionFiles' : function(submission, path) {
