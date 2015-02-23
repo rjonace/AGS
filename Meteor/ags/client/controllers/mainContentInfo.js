@@ -108,6 +108,16 @@ Template.mainContent.events({
 	'click .assignmentSubmission': function(){
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
+		if(Session.get('currentSubmission').filename === undefined){
+			Session.set('fileNotSubmitted', true);
+		}else{
+			Session.set('fileNotSubmitted', false);
+		}
+		if(Session.get('currentSubmission').feedback === undefined){
+			Session.set('fileNotGraded', true);
+		}else{
+			Session.set('fileNotGraded', false);
+		}
 	},
 	'click #write': function(){
 /*		var errString;
@@ -150,6 +160,7 @@ Template.mainContent.events({
 		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 		Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
 		Meteor.apply('gradeCleanUp', [filePath, folderName], true);
+		Session.set('fileNotGraded', false);
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
@@ -174,7 +185,7 @@ Template.mainContent.events({
 			};
 		}
 		Session.set('file');
-
+		Session.set('fileNotSubmitted', false);
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
