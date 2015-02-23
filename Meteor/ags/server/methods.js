@@ -102,9 +102,7 @@ Meteor.methods({
 			}catch (e){
 				
 			}
-			setTimeout(function(){
-				attempt++;
-			}, (1000));
+			attempt++;
 		}
 		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		
