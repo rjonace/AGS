@@ -1,7 +1,7 @@
 Meteor.methods({
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
+		var exec = Npm.require('child_process').execSync;
 
 		var fullSubObj = AGSSubmissions.findOne({
 			id_Student: id_User,
@@ -10,7 +10,14 @@ Meteor.methods({
 
 		var folderName = fullSubObj._id + submission.subNumber;
 
-		exec("mkdir " + path + "/" + folderName);
+		exec("mkdir " + path + "/" + folderName,
+			function(error, stdout, stderr){
+						console.log("made directory " + path + "/" + folderName);
+						console.log("error: "+ error);
+						console.log("stdout: "+ stdout);
+						console.log("stderr: "+ stderr);
+					}
+		);
 
 		console.log('prepare ended');
 		return folderName;
@@ -18,7 +25,7 @@ Meteor.methods({
 	},
 	'gradeCleanUp' : function(path, folderName){
 		console.log('clean up started');
-		var exec = Npm.require('child_process').exec;
+		var exec = Npm.require('child_process').execSync;
 
 		exec("rm -Rf " + path + "/" + folderName);
 		console.log('clean up ended');
@@ -26,7 +33,7 @@ Meteor.methods({
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
 		console.log("grade submission started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
+		var exec = Npm.require('child_process').execSync;
 		// create temporary folder
 		var randomFolderName = Math.floor(Math.random()*1000000);
 		var counter = 0;
@@ -101,7 +108,7 @@ Meteor.methods({
 	'writeSubmissionFiles' : function(submission, path) {
 		console.log("wirte sub fiels started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
+		var exec = Npm.require('child_process').execSync;
 
 		exec("mkdir " + path + "/SubmissionFiles",
 			function(error, stdout, stderr){
@@ -121,7 +128,7 @@ Meteor.methods({
 	'writeInstructorFiles' : function(assignment, path) {
 		console.log("iunstrcutfasdfljkj started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
+		var exec = Npm.require('child_process').execSync;
 
 		exec("mkdir " + path + "/InstructorFiles",
 			function(error, stdout, stderr){
