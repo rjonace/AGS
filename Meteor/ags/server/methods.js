@@ -68,7 +68,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-		var fileCheck = Meteor.setInterval(function(){
+		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -82,7 +82,7 @@ Meteor.methods({
 					try{
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 						console.log(outputData);
-						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+						Meteor.bindEnvironment(AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}}));
 					}catch(e){
 						console.log(e.message);
 						console.log("didn't get it.");
@@ -93,9 +93,11 @@ Meteor.methods({
 					console.log("Timed out");
 				}
 
-				Meteor.clearInterval(fileCheck);
+				clearInterval(fileCheck);
 			});
 		}, 1000);
+		
+		var syncFileCheck = Meteor._wrapAsync(fileCheck);
 /* 		var attempt = 1;
 		while(true){
 			setTimeout(function(){
