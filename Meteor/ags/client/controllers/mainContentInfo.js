@@ -153,7 +153,6 @@ Template.mainContent.events({
 		var folderName = "";
 		Meteor.apply('prepareGrade', [currentUserId, currentAssignment._id, submission, filePath],true,
 			function(error,result){
-				alert("Prepared");
 				folderName = result;
 			});
 		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
