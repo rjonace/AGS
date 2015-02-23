@@ -10,14 +10,7 @@ Meteor.methods({
 
 		var folderName = fullSubObj._id + submission.subNumber;
 
-		exec("mkdir " + path + "/" + folderName,
-			function(error, stdout, stderr){
-						console.log("made directory " + path + "/" + folderName);
-						console.log("error: "+ error);
-						console.log("stdout: "+ stdout);
-						console.log("stderr: "+ stderr);
-					}
-		);
+		exec("mkdir " + path + "/" + folderName);
 
 		console.log('prepare ended');
 		return folderName;
