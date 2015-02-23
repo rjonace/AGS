@@ -140,6 +140,8 @@ Meteor.methods({
 		}, function(err, id){
 			if (err)
 				console.log(err);
+			else
+				console.log(id);
 		});
 	},
 	'insertCourseData': function(name, number, semester, year) {
