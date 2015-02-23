@@ -46,7 +46,6 @@ Meteor.methods({
 		// check assignment language
 
 		var newPath = path + "/" + folderName;
-		var subNumber = submission.subNumber;
 
 		// may not need cd becuase passing path into exec sh
 		exec("cp " + path + "/*.* " + newPath,
@@ -68,7 +67,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-		/*var fileCheck = setInterval(function(){
+		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -89,24 +88,13 @@ Meteor.methods({
 
 				clearInterval(fileCheck);
 			});
-		}, 1000);*/
-		var attempt = 1;
-		while(true){
-			try{
-				var comp;
-				console.log("Attempt " + attempt)
-				comp = fs.readFileSync(newPath + '/completed', 'utf8');
-				if(comp === "completed"){
-					break;
-				}
-			}catch (e){
-				
-			}
-			attempt++;
-		}
-		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
-		
-		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+		}, 1000);
+
+		//while(fs.readFileSync(newPath + '/completed', 'utf8') != "completed");
+		//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+
+
+
 	},
 	'writeSubmissionFiles' : function(submission, path) {
 		console.log("sub start");
