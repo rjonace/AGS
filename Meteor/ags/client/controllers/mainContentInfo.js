@@ -131,7 +131,7 @@ Template.mainContent.events({
 		var filePath = '/home/student/ags/gradeTest';
 		var counter = 0;
 		var maxTime = 50;
-
+		var newPath;
 /*		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 				function( error, result ) {
 					if(!error) {
@@ -155,10 +155,10 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, result) {
 				var folderName = result;
+				newPath = filePath + "/" + folderName;
 				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
 				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
-				//Meteor.apply('gradeCleanUp', [filePath, folderName, currentUserId, currentAssignment._id, submission], true);
 				Session.set('fileNotGraded', false);
 		});
 
@@ -173,7 +173,7 @@ Template.mainContent.events({
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
-						alert("Reset");
+						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 					} else {
 						alert("Timed out");
 					}
