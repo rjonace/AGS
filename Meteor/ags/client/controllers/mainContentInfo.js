@@ -173,6 +173,7 @@ Template.mainContent.events({
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
+						alert("Reset");
 					} else {
 						alert("Timed out");
 					}
