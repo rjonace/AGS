@@ -126,13 +126,18 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 				function( error, result ) {
 					if(!error) {
-						alert(result);
 						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
-							Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
-								Meteor.call('gradeSubmission', submission, filePath, result, currentUserId, currentAssignment._id,
-									Meteor.call('gradeCleanUp', filePath, result)
+							function(error1) {
+								Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
+									function(error2) {
+										Meteor.call('gradeSubmission', submission, filePath, result, currentUserId, currentAssignment._id,
+											function(error3) {
+												Meteor.call('gradeCleanUp', filePath, result);
+											}
+										)
+									}
 								)
-							)
+							}
 						)
 					}
 				}
