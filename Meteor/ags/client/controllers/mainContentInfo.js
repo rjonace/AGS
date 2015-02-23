@@ -177,8 +177,10 @@ Template.mainContent.events({
 					var name = file.name;
 					var reader = new FileReader();
 					reader.onloadend = function(event) {
-						Session.set('currentSubmission', Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
-							 currentSubmissionNumber, name, reader.result));
+						var updatedSubmission = Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
+							 currentSubmissionNumber, name, reader.result);
+						alert(updatedSubmission.filename);
+						Session.set('currentSubmission', updatedSubmission);
 					}
 					reader.readAsText(file);
 				})(fileList[i]);
