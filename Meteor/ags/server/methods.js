@@ -68,7 +68,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-		/*var fileCheck = setInterval(function(){
+		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -79,7 +79,11 @@ Meteor.methods({
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+					try{
+						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+					}catch(e){
+						
+					}
 				}
 				else { 
 					// exceeded max time
@@ -88,24 +92,24 @@ Meteor.methods({
 
 				clearInterval(fileCheck);
 			});
-		}, 1000);*/
-		var attempt = 1;
+		}, 1000);
+/* 		var attempt = 1;
 		while(true){
-			try{
-				var comp;
-				console.log("Attempt " + attempt)
-				comp = fs.readFileSync(newPath + '/completed', 'utf8');
-				if(comp === "completed"){
-					break;
-				}
-			}catch (e){
-				
-			}
 			setTimeout(function(){
+				try{
+					var comp;
+					console.log("Attempt " + attempt)
+					comp = fs.readFileSync(newPath + '/completed', 'utf8');
+					if(comp === "completed"){
+						break;
+					}
+				}catch (e){
+					
+				}
 				attempt++;
 			}, (1000));
-		}
-		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+		} */
+		//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		
 		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 	},
