@@ -13,15 +13,9 @@ Meteor.methods({
 		var folderName = fullSubObj._id + submission.subNumber;
 		var newPath = path + "/" + folderName;
 		
-		fs.mkdir(newPath);
+		fs.mkdirSync(newPath);
 		console.log("prep mkdir over");
-		
-		while(true){
-			if(fs.exists(newPath)){
-				console.log("prep end");
-				return folderName;
-			}
-		}
+		return folderName;
 	},
 	'gradeCleanUp' : function(path, folderName){
 		var exec = Npm.require('child_process').exec;
