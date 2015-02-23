@@ -10,14 +10,15 @@ Meteor.methods({
 
 		var folderName = fullSubObj._id + submission.subNumber;
 
-		exec("mkdir " + path + "/" + folderName,
+		console.log(exec("mkdir " + path + "/" + folderName));
+/*		exec("mkdir " + path + "/" + folderName,
 			function(error, stdout, stderr){
 						console.log("made directory " + path + "/" + folderName);
 						console.log("error: "+ error);
 						console.log("stdout: "+ stdout);
 						console.log("stderr: "+ stderr);
 					}
-		);
+		);*/
 
 		console.log('prepare ended');
 		return folderName;
@@ -43,7 +44,9 @@ Meteor.methods({
 		var newPath = path + "/" + folderName;
 
 		// may not need cd becuase passing path into exec sh
-		exec("cp " + path + "/*.* " + newPath,
+		exec("cp " + path + "/*.* " + newPath);
+		console.log(exec("sh " + newPath + "/execjavafiles.sh " + randomFolderName + " " + newPath));
+/*		exec("cp " + path + "/*.* " + newPath,
 			function(error, stdout, stderr){
 				if(!error){
 					console.log(stdout);
@@ -59,7 +62,7 @@ Meteor.methods({
 					console.log(error);
 				}
 			}
-		);
+		);*/
 
 
 		var fileCheck = setInterval(function(){
@@ -109,8 +112,9 @@ Meteor.methods({
 		console.log("wirte sub fiels started");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').execSync;
-
-		exec("mkdir " + path + "/SubmissionFiles",
+exec("mkdir " + path + "/SubmissionFiles");
+fs.writeFileSync(path + "/SubmissionFiles/" + submission.filename, submission.contents);
+/*		exec("mkdir " + path + "/SubmissionFiles",
 			function(error, stdout, stderr){
 			 	if (error){
 			 		console.log(error + stdout + stderr);
@@ -122,7 +126,7 @@ Meteor.methods({
 					});
 				}
 			 }
-		);
+		);*/
 		console.log("write sub files ended");
 	},
 	'writeInstructorFiles' : function(assignment, path) {
@@ -130,32 +134,34 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').execSync;
 
-		exec("mkdir " + path + "/InstructorFiles",
-			function(error, stdout, stderr){
+		exec("mkdir " + path + "/InstructorFiles");
+		fs.writeFileSync(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents);
+//		exec("mkdir " + path + "/InstructorFiles",
+/*			function(error, stdout, stderr){
 			 	if (error){
 
 			 		console.log(error + stdout + stderr);
-			 	} else {
+			 	} else {*/
 					/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
 						console.log(err);
 						errorString = err;
 					});*/
-					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
-						if(!err){
-
-						} else {
-							console.log(err);
-						}
-					});
+//					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
+//						if(!err){
+//
+//						} else {
+//							console.log(err);
+//						}
+//					});
 					/*for (var i=0; i < assignment.studentfiles.length; i++){
 						fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
 							console.log(err);
 							errorString += err;
 						});
 					}*/
-				}
-			 }
-		);
+//				}
+//			 }
+//		);
 		console.log("i files ended")
 	},
 	'createUserData': function(id, first, last, id_Courses){
