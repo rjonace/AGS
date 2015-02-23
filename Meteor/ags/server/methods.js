@@ -1,5 +1,5 @@
 Meteor.methods({
-	'prepareGrade' : function(id_User, id_Assignment, submission, path, folder){
+	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		console.log("prep start");
 		
 		var fs = Npm.require('fs');
@@ -15,8 +15,7 @@ Meteor.methods({
 		
 		fs.mkdirSync(newPath);
 		console.log("prep mkdir over");
-		folder = folderName;
-		console.log("prep pbr over");
+		return folderName;
 	},
 	'gradeCleanUp' : function(path, folderName){
 		var exec = Npm.require('child_process').exec;
