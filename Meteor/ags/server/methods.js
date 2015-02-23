@@ -52,7 +52,7 @@ Meteor.methods({
 			}
 		);
 
-		var data;
+		var outputData;
 		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
@@ -64,7 +64,7 @@ Meteor.methods({
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					data = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+					outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 
 				}
 				else { 
@@ -84,7 +84,7 @@ Meteor.methods({
 		}, 
 		{ 
 			$set: {
-				"AttemptList.$.feedback": data
+				"AttemptList.$.feedback": outputData
 			} 
 		});
 
