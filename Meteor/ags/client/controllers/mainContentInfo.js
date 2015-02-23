@@ -84,7 +84,8 @@ Template.mainContent.helpers({
 	},
 	'submissionFeeback': function(){
 		var submission = Session.get('currentSubmission');
-		return "<p> Temperature Conversion: 5/50</p>";
+		console.log(submission.feedback);
+		return "<span>hello</span>";
 	}
 });
 
