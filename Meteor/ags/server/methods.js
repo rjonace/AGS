@@ -76,6 +76,9 @@ Meteor.methods({
 			});
 		}, 1000);
 
+		while(fs.readFileSync(newPath + '/completed', 'utf8') == null);
+		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+
 		AGSSubmissions.update(
 		{
 			"id_Student": id_User,
