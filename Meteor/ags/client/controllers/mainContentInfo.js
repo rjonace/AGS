@@ -82,10 +82,9 @@ Template.mainContent.helpers({
 		var submission = Session.get('currentSubmission');
 		return submission.filename;
 	},
-	'submissionFeeback': function(){
+	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
-		alert(submission.feedback);
-		return "Hello";
+		return submisson.feedback;
 	}
 });
 
