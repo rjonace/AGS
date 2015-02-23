@@ -84,6 +84,7 @@ Meteor.methods({
 						console.log(outputData);
 						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 					}catch(e){
+						console.log(e.message);
 						console.log("didn't get it.");
 					}
 				}
