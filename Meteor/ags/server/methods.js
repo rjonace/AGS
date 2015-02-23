@@ -112,8 +112,8 @@ Meteor.methods({
 		console.log("wirte sub fiels started");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').execSync;
-exec("mkdir " + path + "/SubmissionFiles");
-fs.writeFileSync(path + "/SubmissionFiles/" + submission.filename, submission.contents);
+		exec("mkdir " + path + "/SubmissionFiles");
+		fs.writeFileSync(path + "/SubmissionFiles/" + submission.filename, submission.contents);
 /*		exec("mkdir " + path + "/SubmissionFiles",
 			function(error, stdout, stderr){
 			 	if (error){
