@@ -177,14 +177,13 @@ Template.mainContent.events({
 					var name = file.name;
 					var reader = new FileReader();
 					reader.onloadend = function(event) {
-						Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
-							 currentSubmissionNumber, name, reader.result);
+						Session.set('currentSubmission', Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
+							 currentSubmissionNumber, name, reader.result));
 					}
 					reader.readAsText(file);
 				})(fileList[i]);
 			};
 		}
-		Session.set('file');
 		Session.set('fileNotSubmitted', false);
 	},
 	'submit #createAssignment': function(event){
