@@ -100,29 +100,10 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		var newPath = path + "/SubmissionFiles";
-		while(true){	
-			if(fs.exists(path)){
-				console.log("sub check 1");
-				exec("mkdir " + newPath,
-					function(error, stdout, stderr){
-						if (error){
-							console.log(error + stdout + stderr);
-						} else {
-							while(true){
-								if(fs.exists(newPath)){
-									console.log("sub check 2");
-									fs.writeFile(path + "/SubmissionFiles/" + submission.filename, submission.contents, function(err){
-										if(err){
-											console.log(err);
-										}
-									});
-								}
-							}
-						}
-					}
-				);
-			}
-		}
+		console.log("sub check 1");
+		fs.mkdirSync(newPath);
+		console.log("sub check 2");
+		fs.writeFileSync(newPath + "/" + submission.filename, submission.contents);
 		console.log("sub end");
 	},
 	'writeInstructorFiles' : function(assignment, path) {
@@ -132,42 +113,10 @@ Meteor.methods({
 		var exec = Npm.require('child_process').exec;
 		var newPath = path + "/InstructorFiles";
 		
-		while(true){
-			if(fs.exists(path)){
-				console.log("ins check 1");
-				exec("mkdir " + path + "/InstructorFiles",
-					function(error, stdout, stderr){
-						if (error){
-
-							console.log(error + stdout + stderr);
-						} else {
-							/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
-								console.log(err);
-								errorString = err;
-							});*/
-							while(true){
-								if(fs.exists(newPath)){
-									console.log("ins check 2")
-									fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
-										if(!err){
-
-										} else {
-											console.log(err);
-										}
-									});
-							/*for (var i=0; i < assignment.studentfiles.length; i++){
-								fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
-									console.log(err);
-									errorString += err;
-								});
-							}*/
-								}
-							}
-						}
-					 }
-				);
-			}
-		}
+		console.log("ins check 1");
+		fs.mkdirSync(newPath);
+		console.log("ins check 2");
+		fs.writeFileSync(newPath + "/" + assignment.ag.name, assignment.ag.contents);
 		console.log("ins end");
 	},
 	'createUserData': function(id, first, last, id_Courses){
