@@ -83,6 +83,8 @@ Meteor.methods({
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 						console.log(outputData);
 						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+						Session.set('currentSubmission', AGSSubmissions.findOne({ id_Student: currentUserId, id_Assignment: currentAssignment._id }).AttemptList[submission.subNumber]);
+
 					}catch(e){
 						console.log(e.message);
 						console.log("didn't get it.");
