@@ -72,7 +72,7 @@ Meteor.methods({
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
-			Meteor.bindEnvironment(fs.readFile(newPath + '/completed', 'utf8', function(error, data) {
+			fs.readFile(newPath + '/completed', 'utf8', Meteor.bindEnvironment(function(error, data) {
 				if (error && counter < maxTime) {
 					//console.log(error);
 					return;
@@ -94,8 +94,8 @@ Meteor.methods({
 				}
 
 				clearInterval(fileCheck);
-			});
-		}, 1000));
+			}))
+		}, 1000);
 /* 		var attempt = 1;
 		while(true){
 			setTimeout(function(){
