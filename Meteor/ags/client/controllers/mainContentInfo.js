@@ -140,6 +140,7 @@ Template.mainContent.events({
 					}
 				}
 		);
+		Session.set('fileNotGraded', false);
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
@@ -164,7 +165,7 @@ Template.mainContent.events({
 			};
 		}
 		Session.set('file');
-
+		Session.set('fileNotSubmitted', false);
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
