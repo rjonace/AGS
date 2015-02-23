@@ -160,7 +160,7 @@ Template.mainContent.events({
 				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
 				//Meteor.apply('gradeCleanUp', [filePath, folderName, currentUserId, currentAssignment._id, submission], true);
 				Session.set('fileNotGraded', false);
-				Session.set('currentSubmission', AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[submission.subNumber]);
+				Session.set('currentSubmission', AGSSubmissions.findOne({ id_Student: currentUserId, id_Assignment: currentAssignment._id }).AttemptList[submission.subNumber]);
 		});
 	},
 	'submit #submissionFilesForm': function(event){
