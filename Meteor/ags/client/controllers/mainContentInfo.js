@@ -32,6 +32,9 @@ Template.mainContent.helpers({
 		// check if creator of submission
 		return Session.get('currentSubmission');
 	},
+	'feedbackStatus' : function(){
+		return Session.get('feedbackStatus');
+	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
 	},
@@ -163,7 +166,7 @@ Template.mainContent.events({
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){
-			console.log("Checking for feedback " + counter);
+			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
 
@@ -173,9 +176,10 @@ Template.mainContent.events({
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
+						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 					} else {
-						alert("Timed out");
+						Session.set('feedbackStatus', "Timed out");
 					}
 
 					Meteor.clearInterval(feedbackCheck);
