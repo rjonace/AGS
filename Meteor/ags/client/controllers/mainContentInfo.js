@@ -177,10 +177,8 @@ Template.mainContent.events({
 					var name = file.name;
 					var reader = new FileReader();
 					reader.onloadend = function(event) {
-						var updatedSubmission = Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
-							 currentSubmissionNumber, name, reader.result);
-						console.log(updatedSubmission);
-						Session.set('currentSubmission', updatedSubmission.AttemptList[currentSubmissionNumber]);
+						Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId, currentSubmissionNumber, name, reader.result);
+						Session.set('currentSubmission', AGSSubmissions.findOne({ id_Student: currentUserId, id_Assignment: currentAssignmentId }).AttemptList[currentSubmissionNumber]);
 					}
 					reader.readAsText(file);
 				})(fileList[i]);
