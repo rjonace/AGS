@@ -18,6 +18,7 @@ Meteor.methods({
 		return folderName;
 	},
 	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment){
+		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		AGSSubmissions.update(
