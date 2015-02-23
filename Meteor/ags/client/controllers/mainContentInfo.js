@@ -121,7 +121,7 @@ Template.mainContent.events({
 		var filePath = '/home/student/ags/gradeTest';
 
 
-		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
+/*		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 				function( error, result ) {
 					if(!error) {
 						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
@@ -139,7 +139,13 @@ Template.mainContent.events({
 						)
 					}
 				}
-		);
+		);*/
+
+		Meteor.apply('prepareGrade', [currentUserId, currentAssignment._id, submission, filePath]);
+		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + result] , true);
+		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + result], true);
+		Meteor.apply('gradeSubmission', [submission, filePath, result, currentUserId, currentAssignment._id] , true);
+		Meteor.apply('gradeCleanUp', [filePath, result], true);
 	},
 	'submit #submissionFilesForm': function(event){
 		event.preventDefault();
