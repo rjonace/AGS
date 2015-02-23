@@ -151,6 +151,7 @@ Template.mainContent.events({
 				}
 		);*/
 
+<<<<<<< HEAD
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, result) {
 				var folderName = result;
@@ -162,6 +163,16 @@ Template.mainContent.events({
 				Session.set('fileNotGraded', false);
 		});
 
+=======
+		var folderName; 
+		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath, folderName);
+		alert(folderName);
+		Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
+		Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
+		Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
+		//Meteor.apply('gradeCleanUp', [filePath, folderName], true);
+		Session.set('fileNotGraded', false);
+>>>>>>> FETCH_HEAD
 
 	},
 	'submit #submissionFilesForm': function(event){
