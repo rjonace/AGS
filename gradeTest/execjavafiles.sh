@@ -43,4 +43,4 @@ mv $currentPath/$1/* $currentPath/results
 #mv $currentPath/$1/logs.txt $currentPath/$1/results
 #mv $currentPath/$1/results $currentPath
 rm -R $currentPath/$1
-touch $currentPath/completed
+echo completed >>  $currentPath/completed
