@@ -19,14 +19,19 @@ Meteor.methods({
 					}
 		);
 
+		console.log('prepare ended');
 		return folderName;
+
 	},
 	'gradeCleanUp' : function(path, folderName){
+		console.log('clean up started');
 		var exec = Npm.require('child_process').exec;
 
 		exec("rm -Rf " + path + "/" + folderName);
+		console.log('clean up ended');
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
+		console.log("grade submission started");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
@@ -97,8 +102,11 @@ Meteor.methods({
 			});
 		}, 1000);
 
+		console.log("grade submission ended");
+
 	},
 	'writeSubmissionFiles' : function(submission, path) {
+		console.log("wirte sub fiels started");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
@@ -115,8 +123,10 @@ Meteor.methods({
 				}
 			 }
 		);
+		console.log("write sub files ended");
 	},
 	'writeInstructorFiles' : function(assignment, path) {
+		console.log("iunstrcutfasdfljkj started");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
@@ -146,6 +156,7 @@ Meteor.methods({
 				}
 			 }
 		);
+		console.log("i files ended")
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
