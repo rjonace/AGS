@@ -82,7 +82,7 @@ Meteor.methods({
 					try{
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 					}catch(e){
-						
+						console.log("didn't get it.");
 					}
 				}
 				else { 
