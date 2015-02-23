@@ -33,6 +33,7 @@ Template.AGSCreateUser.events({
 				selectedCourseList.push(availableCourseList[i].value);
 			}
 		}
+		alert(userId);
 		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
 	}
 })
