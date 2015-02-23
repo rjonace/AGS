@@ -20,6 +20,8 @@ Meteor.methods({
 	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment){
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
+
+		var newPath = path + "/" + folderName;
 		var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		AGSSubmissions.update(
 		{
@@ -32,7 +34,7 @@ Meteor.methods({
 				"AttemptList.$.feedback": outputData
 			} 
 		});
-		exec("rm -Rf " + path + "/" + folderName);
+		exec("rm -Rf " + newPath);
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
 		var fs = Npm.require('fs');
