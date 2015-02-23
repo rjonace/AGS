@@ -17,7 +17,7 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment){
+	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment, submission){
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
@@ -79,7 +79,6 @@ Meteor.methods({
 				else if (counter < maxTime) {
 					console.log("Completed");
 					outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
-
 				}
 				else { 
 					// exceeded max time
