@@ -163,7 +163,7 @@ Template.mainContent.events({
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){
-			console.log("Checking for completed in " + newPath + " " + counter);
+			console.log("Checking for feedback " + counter);
 			counter++;
 			
 
