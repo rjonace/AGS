@@ -213,7 +213,7 @@ Meteor.methods({
 				} 
 			} 
 		);
-		return AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[subNumber];
+		return AGSSubmissions.findOne({ id_Student: id_Student, id_Assignment: id_Assignment }).AttemptList[subNumber];
 	},
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
 
