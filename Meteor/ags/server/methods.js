@@ -68,7 +68,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-		var fileCheck = setInterval(function(){
+		var fileCheck = Meteor.setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -93,7 +93,7 @@ Meteor.methods({
 					console.log("Timed out");
 				}
 
-				clearInterval(fileCheck);
+				Meteor.clearInterval(fileCheck);
 			}))
 		}, 1000);
 /* 		var attempt = 1;
