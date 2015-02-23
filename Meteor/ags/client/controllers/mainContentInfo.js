@@ -85,7 +85,7 @@ Template.mainContent.helpers({
 	'submissionFeeback': function(){
 		var submission = Session.get('currentSubmission');
 		console.log(submission.feedback);
-		return "<span>hello</span>";
+		return "Hello";
 	}
 });
 
