@@ -179,8 +179,8 @@ Template.mainContent.events({
 					reader.onloadend = function(event) {
 						var updatedSubmission = Meteor.call('insertSubmissionSolution', currentUserId, currentAssignmentId,
 							 currentSubmissionNumber, name, reader.result);
-						alert(updatedSubmission.filename);
-						Session.set('currentSubmission', updatedSubmission);
+						console.log(updatedSubmission);
+						Session.set('currentSubmission', updatedSubmission.AttemptList[currentSubmissionNumber]);
 					}
 					reader.readAsText(file);
 				})(fileList[i]);
