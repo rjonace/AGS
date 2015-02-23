@@ -22,12 +22,14 @@ Template.AGSCreateUser.events({
 		var availableCourseList = event.target.userCourse;
 		var selectedCourseList = [];
 		
+		alert(userId);
+
+
 		if(!availableCourseList.length){
 			if(availableCourseList.checked){
 				selectedCourseList.push(availableCourseList.value);
 			}
 		}
-				alert(userId);
 
 		for( i=0; availableCourseList && i < availableCourseList.length; i++) {
 			if (availableCourseList[i].checked) {
