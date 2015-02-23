@@ -84,7 +84,7 @@ Template.mainContent.helpers({
 	},
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
-		return submisson.feedback;
+		return submission.feedback;
 	}
 });
 
