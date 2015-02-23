@@ -27,13 +27,13 @@ Template.AGSCreateUser.events({
 				selectedCourseList.push(availableCourseList.value);
 			}
 		}
-		
+				alert(userId);
+
 		for( i=0; availableCourseList && i < availableCourseList.length; i++) {
 			if (availableCourseList[i].checked) {
 				selectedCourseList.push(availableCourseList[i].value);
 			}
 		}
-		alert(userId);
 		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
 	}
 })
