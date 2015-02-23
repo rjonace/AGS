@@ -17,10 +17,14 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
+	'resetSubmissionSession' : function(id_User, id_Assignment, submission) {
+		return AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[submission.subNumber];
+	},
 	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment, submission){
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-
+		var counter = 0;
+		var maxTime = 50;
 		var newPath = path + "/" + folderName;
 		/*var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		AGSSubmissions.update(
@@ -34,7 +38,12 @@ Meteor.methods({
 				"AttemptList.$.feedback": outputData
 			} 
 		});*/
+		var newSub = AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[submission.subNumber];
+
+
 		exec("rm -Rf " + newPath);
+
+		return newSub;
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
 		var fs = Npm.require('fs');
@@ -83,7 +92,6 @@ Meteor.methods({
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 						console.log(outputData);
 						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
-						Session.set('currentSubmission', AGSSubmissions.findOne({ id_Student: currentUserId, id_Assignment: currentAssignment._id }).AttemptList[submission.subNumber]);
 
 					}catch(e){
 						console.log(e.message);
