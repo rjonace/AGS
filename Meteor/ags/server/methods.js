@@ -22,7 +22,7 @@ Meteor.methods({
 		var exec = Npm.require('child_process').exec;
 
 		var newPath = path + "/" + folderName;
-		var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+		/*var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 		AGSSubmissions.update(
 		{
 			"id_Student": id_User,
@@ -33,7 +33,7 @@ Meteor.methods({
 			$set: {
 				"AttemptList.$.feedback": outputData
 			} 
-		});
+		});*/
 		exec("rm -Rf " + newPath);
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
