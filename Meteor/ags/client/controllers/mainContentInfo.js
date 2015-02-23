@@ -108,6 +108,16 @@ Template.mainContent.events({
 	'click .assignmentSubmission': function(){
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
+		if(Session.get('currentSubmission').filename === undefined){
+			Session.set('fileNotSubmitted', true);
+		}else{
+			Session.set('fileNotSubmitted', false);
+		}
+		if(Session.get('currentSubmission').feedback === undefined){
+			Session.set('fileNotGraded', true);
+		}else{
+			Session.set('fileNotGraded', false);
+		}
 	},
 	'click #write': function(){
 /*		var errString;
