@@ -13,15 +13,9 @@ Meteor.methods({
 		var folderName = fullSubObj._id + submission.subNumber;
 		var newPath = path + "/" + folderName;
 		
-		exec("mkdir " + newPath,
-			function(error, stdout, stderr){
-						console.log("made directory " + newPath);
-						console.log("error: "+ error);
-						console.log("stdout: "+ stdout);
-						console.log("stderr: "+ stderr);
-					}
-		);
-		console.log("prep exec over")
+		fs.mkdir(newPath);
+		console.log("prep mkdir over");
+		
 		while(true){
 			if(fs.exists(newPath)){
 				console.log("prep end");
