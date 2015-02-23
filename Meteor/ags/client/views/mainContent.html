@@ -87,7 +87,6 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
-				<button type="button" id="getStudentFiles" >Get Student Files</button>
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Submissions</h3>
 				{{/with}}
@@ -107,7 +106,7 @@
 						{{#each instructorSubmissionList}}
 
 							{{#each AttemptList}}
-							<li class="assignmentSubmission"><a>{{getStudentName id_Student}} {{name}}: {{dateCreated}}</a></li>
+							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
 							{{/each}}
 						{{/each}}
 					</ul>
