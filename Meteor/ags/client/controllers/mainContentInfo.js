@@ -73,10 +73,10 @@ Template.mainContent.helpers({
 		return Session.get('currentDashboard') === "submissionDash";
 	},
 	'fileNotSubmitted': function(){
-		return Session.get('currentSubmission').filename === undefined);
+		return Session.get('fileNotSubmitted');
 	},
 	'fileNotGraded': function(){
-		return Session.get('currentSubmission').feedback === undefined)
+		return Session.get('fileNotGraded');
 	},
 	'submissionFilename': function(){
 		var submission = Session.get('currentSubmission');
@@ -163,6 +163,7 @@ Template.mainContent.events({
 				})(fileList[i]);
 			};
 		}
+		Session.set('file');
 
 	},
 	'submit #createAssignment': function(event){
@@ -237,7 +238,7 @@ Template.mainContent.events({
 				}
 			}
 		);
-
-
+		Session.set('fileNotSubmitted', true);
+		Session.set('fileNotGraded', true);
 	}
 })
