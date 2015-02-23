@@ -64,21 +64,18 @@ Meteor.methods({
 				}
 				else if (counter < maxTime) {
 					console.log("Completed");
-					fs.readFile(newPath + '/results/output.txt', 'utf8', function(inner_error, inner_data) {
-						if(!inner_error)
-							AGSSubmissions.update(
-							{
-								"id_Student": id_User,
-								"id_Assignment": id_Assignment,
-								"AttemptList.subNumber": submission.subNumber
-							}, 
-							{ 
-								$set: {
-									"AttemptList.$.feedback": inner_data
-								} 
-							} 
-						);
-					})
+					var data = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+					AGSSubmissions.update(
+					{
+						"id_Student": id_User,
+						"id_Assignment": id_Assignment,
+						"AttemptList.subNumber": submission.subNumber
+					}, 
+					{ 
+						$set: {
+							"AttemptList.$.feedback": data
+						} 
+					});
 				}
 				else { 
 					// exceeded max time
