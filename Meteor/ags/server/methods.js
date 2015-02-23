@@ -53,7 +53,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-		var fileCheck = setInterval(function(){
+/*		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -74,7 +74,7 @@ Meteor.methods({
 
 				clearInterval(fileCheck);
 			});
-		}, 1000);
+		}, 1000);*/
 
 		while(fs.readFileSync(newPath + '/completed', 'utf8') == null);
 		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
