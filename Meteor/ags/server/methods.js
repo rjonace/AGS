@@ -17,9 +17,20 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'gradeCleanUp' : function(path, folderName){
+	'gradeCleanUp' : function(path, folderName, id_User, id_Assignment){
 		var exec = Npm.require('child_process').exec;
-
+		var outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+		AGSSubmissions.update(
+		{
+			"id_Student": id_User,
+			"id_Assignment": id_Assignment,
+			"AttemptList.subNumber": submission.subNumber
+		}, 
+		{ 
+			$set: {
+				"AttemptList.$.feedback": outputData
+			} 
+		});
 		exec("rm -Rf " + path + "/" + folderName);
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
@@ -53,7 +64,7 @@ Meteor.methods({
 		);
 
 		var outputData;
-/*		var fileCheck = setInterval(function(){
+		var fileCheck = setInterval(function(){
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
@@ -74,22 +85,12 @@ Meteor.methods({
 
 				clearInterval(fileCheck);
 			});
-		}, 1000);*/
+		}, 1000);
 
-		while(fs.readFileSync(newPath + '/completed', 'utf8') == null);
-		outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+		//while(fs.readFileSync(newPath + '/completed', 'utf8') != "completed");
+		//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 
-		AGSSubmissions.update(
-		{
-			"id_Student": id_User,
-			"id_Assignment": id_Assignment,
-			"AttemptList.subNumber": submission.subNumber
-		}, 
-		{ 
-			$set: {
-				"AttemptList.$.feedback": outputData
-			} 
-		});
+
 
 	},
 	'writeSubmissionFiles' : function(submission, path) {
