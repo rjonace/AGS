@@ -1,7 +1,7 @@
 Meteor.methods({
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').execSync;
+		var exec = Npm.require('child_process').exec;
 
 		var fullSubObj = AGSSubmissions.findOne({
 			id_Student: id_User,
@@ -9,32 +9,31 @@ Meteor.methods({
 		});
 
 		var folderName = fullSubObj._id + submission.subNumber;
+		var newPath = path + "/" + folderName;
 
-		console.log(exec("mkdir " + path + "/" + folderName));
-/*		exec("mkdir " + path + "/" + folderName,
+		exec("mkdir " + newPath,
 			function(error, stdout, stderr){
-						console.log("made directory " + path + "/" + folderName);
+						console.log("made directory " + newPath);
 						console.log("error: "+ error);
 						console.log("stdout: "+ stdout);
 						console.log("stderr: "+ stderr);
 					}
-		);*/
-
-		console.log('prepare ended');
-		return folderName;
-
+		);
+		
+		while(true){
+			if(fs.exists(newPath)){
+				return folderName;
+			}
+		}
 	},
 	'gradeCleanUp' : function(path, folderName){
-		console.log('clean up started');
-		var exec = Npm.require('child_process').execSync;
+		var exec = Npm.require('child_process').exec;
 
 		exec("rm -Rf " + path + "/" + folderName);
-		console.log('clean up ended');
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {
-		console.log("grade submission started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').execSync;
+		var exec = Npm.require('child_process').exec;
 		// create temporary folder
 		var randomFolderName = Math.floor(Math.random()*1000000);
 		var counter = 0;
@@ -44,9 +43,7 @@ Meteor.methods({
 		var newPath = path + "/" + folderName;
 
 		// may not need cd becuase passing path into exec sh
-		exec("cp " + path + "/*.* " + newPath);
-		console.log(exec("sh " + newPath + "/execjavafiles.sh " + randomFolderName + " " + newPath));
-/*		exec("cp " + path + "/*.* " + newPath,
+		exec("cp " + path + "/*.* " + newPath,
 			function(error, stdout, stderr){
 				if(!error){
 					console.log(stdout);
@@ -62,7 +59,7 @@ Meteor.methods({
 					console.log(error);
 				}
 			}
-		);*/
+		);
 
 
 		var fileCheck = setInterval(function(){
@@ -105,64 +102,72 @@ Meteor.methods({
 			});
 		}, 1000);
 
-		console.log("grade submission ended");
-
 	},
 	'writeSubmissionFiles' : function(submission, path) {
-		console.log("wirte sub fiels started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').execSync;
-		exec("mkdir " + path + "/SubmissionFiles");
-		fs.writeFileSync(path + "/SubmissionFiles/" + submission.filename, submission.contents);
-/*		exec("mkdir " + path + "/SubmissionFiles",
-			function(error, stdout, stderr){
-			 	if (error){
-			 		console.log(error + stdout + stderr);
-			 	} else {
-					fs.writeFile(path + "/SubmissionFiles/" + submission.filename, submission.contents, function(err){
-						if(err){
-							console.log(err);
+		var exec = Npm.require('child_process').exec;
+		var newPath = path + "/SubmissionFiles";
+		while(true){	
+			if(fs.exists(path)){
+				exec("mkdir " + newPath,
+					function(error, stdout, stderr){
+						if (error){
+							console.log(error + stdout + stderr);
+						} else {
+							while(true){
+								if(fs.exists(newPath)){
+									fs.writeFile(path + "/SubmissionFiles/" + submission.filename, submission.contents, function(err){
+										if(err){
+											console.log(err);
+										}
+									});
+								}
+							}
 						}
-					});
-				}
-			 }
-		);*/
-		console.log("write sub files ended");
+					}
+				);
+			}
+		}
 	},
 	'writeInstructorFiles' : function(assignment, path) {
-		console.log("iunstrcutfasdfljkj started");
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').execSync;
+		var exec = Npm.require('child_process').exec;
+		var newPath = path + "/InstructorFiles";
+		
+		while(true){
+			if(fs.exists(path)){
+				exec("mkdir " + path + "/InstructorFiles",
+					function(error, stdout, stderr){
+						if (error){
 
-		exec("mkdir " + path + "/InstructorFiles");
-		fs.writeFileSync(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents);
-//		exec("mkdir " + path + "/InstructorFiles",
-/*			function(error, stdout, stderr){
-			 	if (error){
+							console.log(error + stdout + stderr);
+						} else {
+							/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
+								console.log(err);
+								errorString = err;
+							});*/
+							while(true){
+								if(fs.exists(newPath)){
+									fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
+										if(!err){
 
-			 		console.log(error + stdout + stderr);
-			 	} else {*/
-					/*fs.writeFile(path + "/InstructorFiles/" + assignment.vta.name, assignment.vta.contents, function(err){
-						console.log(err);
-						errorString = err;
-					});*/
-//					fs.writeFile(path + "/InstructorFiles/" + assignment.ag.name, assignment.ag.contents, function(err){
-//						if(!err){
-//
-//						} else {
-//							console.log(err);
-//						}
-//					});
-					/*for (var i=0; i < assignment.studentfiles.length; i++){
-						fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
-							console.log(err);
-							errorString += err;
-						});
-					}*/
-//				}
-//			 }
-//		);
-		console.log("i files ended")
+										} else {
+											console.log(err);
+										}
+									});
+							/*for (var i=0; i < assignment.studentfiles.length; i++){
+								fs.writeFile(path + "/InstructorFiles/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents, function(err){
+									console.log(err);
+									errorString += err;
+								});
+							}*/
+								}
+							}
+						}
+					 }
+				);
+			}
+		}
 	},
 	'createUserData': function(id, first, last, id_Courses){
 		AGSUsers.insert({
