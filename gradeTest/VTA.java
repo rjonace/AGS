@@ -41,13 +41,13 @@ final class VTA {
 		int aLength = array.length;
 		
 		temp += "<table>\n";
-		temp += "\t<th>\n";
+		temp += "\t<tr>\n";
 		temp += "\t\t";
 		for(int i = 0; i < aLength; i++){
-			temp += "<td>" + (i+1) + "</td> ";
+			temp += "<th>" + (i+1) + "</th> ";
 		}
 		temp += "\n"; 
-		temp += "\t</th>\n\n";
+		temp += "\t</tr>\n\n";
 		
 		temp += "\t<tr>\n";
 		temp += "\t\t";
@@ -72,13 +72,13 @@ final class VTA {
 		
 		temp += "<table>\n";
 		
-		temp += "\t<th>\n";
+		temp += "\t<tr>\n";
 		
-		temp += "\t\t" + "<td>" + "Test Case #" + "</td> " + 
-				"<td>" + "Professor Output" + "</td> " +
-				"<td>" + "Student Output" + "</td>\n"; 
+		temp += "\t\t" + "<th>" + "Test Case #" + "</th> " + 
+				"<th>" + "Professor Output" + "</th> " +
+				"<th>" + "Student Output" + "</th>\n"; 
 		
-		temp += "\t</th>\n\n";
+		temp += "\t</tr>\n\n";
 		
 		for(int i = 0; i < pLength; i++){
 			
@@ -111,13 +111,13 @@ final class VTA {
 		
 		temp += "<table>\n";
 		
-		temp += "\t<th>\n";
+		temp += "\t<tr>\n";
 		
-		temp += "\t\t" + "<td>" + "Test Case #" + "</td> " + 
-				"<td>" + "Professor Output" + "</td> " +
-				"<td>" + "Student Output" + "</td>\n"; 
+		temp += "\t\t" + "<th>" + "Test Case #" + "</th> " + 
+				"<th>" + "Professor Output" + "</th> " +
+				"<th>" + "Student Output" + "</th>\n"; 
 		
-		temp += "\t</th>\n\n";
+		temp += "\t</tr>\n\n";
 		
 		for(int i = 0; i < pLength; i++){
 			
@@ -150,13 +150,13 @@ final class VTA {
 		
 		temp += "<table>\n";
 		
-		temp += "\t<th>\n";
+		temp += "\t<tr>\n";
 		
-		temp += "\t\t" + "<td>" + "Test Case #" + "</td> " + 
-				"<td>" + "Professor Output" + "</td> " +
-				"<td>" + "Student Output" + "</td>\n"; 
+		temp += "\t\t" + "<th>" + "Test Case #" + "</th> " + 
+				"<th>" + "Professor Output" + "</th> " +
+				"<th>" + "Student Output" + "</th>\n"; 
 		
-		temp += "\t</th>\n\n";
+		temp += "\t</tr>\n\n";
 		
 		for(int i = 0; i < pLength; i++){
 			
