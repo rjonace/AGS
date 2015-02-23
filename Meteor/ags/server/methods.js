@@ -72,7 +72,7 @@ Meteor.methods({
 			console.log("Checking for completed in " + newPath + " " + counter);
 			counter++;
 
-			fs.readFile(newPath + '/completed', 'utf8', function(error, data) {
+			Meteor.bindEnvironment(fs.readFile(newPath + '/completed', 'utf8', function(error, data) {
 				if (error && counter < maxTime) {
 					//console.log(error);
 					return;
@@ -82,7 +82,7 @@ Meteor.methods({
 					try{
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 						console.log(outputData);
-						Meteor.bindEnvironment(AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}}));
+						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 					}catch(e){
 						console.log(e.message);
 						console.log("didn't get it.");
@@ -95,9 +95,7 @@ Meteor.methods({
 
 				clearInterval(fileCheck);
 			});
-		}, 1000);
-		
-		var syncFileCheck = Meteor._wrapAsync(fileCheck);
+		}, 1000));
 /* 		var attempt = 1;
 		while(true){
 			setTimeout(function(){
