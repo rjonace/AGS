@@ -4,36 +4,54 @@
 			<h2>Finish Creating Your Account</h2>
 		{{else}}
 			{{#if isUserDash}}
-				<b>User Dashboard</b><br/>
 				{{#with userInfo}}
-					User: {{firstname}} {{lastname}}
+					<div class="ui dividing header">
+					  <i class="user icon"></i>
+					  <div class="content">
+					    User Dashboard
+					    <div class="sub header">{{firstname}} {{lastname}}</div>
+					  </div>
+					</div>	
 				{{/with}}
-
 			{{/if}}
 
 			{{#if isCourseDash}}
-				<b>Course Dashboard</b><br/>
 				{{#with courseInfo}}
-					Course: {{name}} {{number}}
+					<div class="ui dividing header">
+					  <i class="student icon"></i>
+					  <div class="content">
+					    Course Dashboard
+					    <div class="sub header">{{number}}: {{name}}</div>
+					  </div>
+					</div>	
 				{{/with}}
-
 			{{/if}}
 
 			{{#if isAssignmentDash}}
-				<b>Assignment Dashboard</b><br/>
 				{{#with assignmentInfo}}
-					Assignment: {{name}}<br>
-					{{description}} <br>
+					<div class="ui dividing header">
+						<i class="book icon"></i>
+						<div class="content">
+							Assignment Dashboard
+						    <div class="sub header">{{name}}: {{description}}
+							</div>
+				  		</div>
+					</div>
 					Date Available: {{dateAvailable}}<br> Date Due:{{dateDue}}
 				{{/with}}
 
 			{{/if}}
 
 			{{#if isSubmissionDash}}
-				<b>Submission Dashboard</b><br/>
 				{{#with submissionInfo}}
-					Submission: {{name}}<br>
-					Date Created: {{dateCreated}}<br>
+					<div class="ui dividing header">
+						<i class="file text icon"></i>
+						<div class="content">
+							Submission Dashboard
+						    <div class="sub header">{{name}}: {{dateCreated}}
+							</div>
+				  		</div>
+					</div>
 					Finish adding files and submit!
 				{{/with}}
 			{{/if}}
@@ -46,23 +64,55 @@
 		{{else}}
 
 			{{#if isUserDash}}
+
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Courses</h3>
-
-					<ul>
+					<div class="ui cards">
+						{{#each studentCourseList}}
+						<div class="card" id="userCourse">
+						    <div class="content">
+						      <div class="header">{{number}}</div>
+						      <div class="description">
+						        {{name}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="sign in icon"></i>
+						      Open Course
+						    </div>
+						  </div>
+						  {{/each}}
+					 </div>
+<!-- 					<ul>
 						{{#each studentCourseList}}
 							<li class="userCourse"><a>{{number}}: {{name}}</a></li>
 						{{/each}}
-					</ul>
+					</ul> -->
 
 
 					<h3>{{firstname}}'s Created Courses</h3>
 
-					<ul>
+<!-- 					<ul>
 						{{#each instructorCourseList}}
 							<li class="userCourse"><a>{{number}}: {{name}}</a></li>
 						{{/each}}
-					</ul>
+					</ul> -->
+					<div class="ui cards">
+						{{#each instructorCourseList}}
+						<div class="card" id="userCourse">
+						    <div class="content">
+						      <div class="header">{{number}}</div>
+						      <div class="description">
+						        {{name}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="edit icon"></i>
+						      Edit Course
+						    </div>
+						  </div>
+						  {{/each}}
+					 </div>
 
 
 				{{/with}}
@@ -75,11 +125,28 @@
 
 			{{#if isCourseDash}}
 				<h3>Course Assignments</h3>
-				<ul>
+<!-- 				<ul>
 					{{#each courseAssignmentList}}
 						<li class="courseAssignment"><a>{{name}}: {{dateDue}}</a></li>
 					{{/each}}
-				</ul>
+				</ul> -->
+				<div class="ui cards">
+						{{#each courseAssignmentList}}
+						<div class="card" id="courseAssignment">
+						    <div class="content">
+						      <div class="header">{{name}}</div>
+						      <div class="description">
+						        {{description}}<br/>
+						        Due: {{dateDue}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="file text outline icon"></i>
+						      View Submissions
+						    </div>
+						  </div>
+						  {{/each}}
+					 </div>
 				{{#if isUserCreator}}
 					{{> addAssignmentForm}}
 				{{/if}}
@@ -90,13 +157,32 @@
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Submissions</h3>
 				{{/with}}
-				<ul>
+<!-- 				<ul>
 					{{#each studentSubmissionList}}
 						{{#each AttemptList}}
 							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
 						{{/each}}
 					{{/each}}
-				</ul>
+				</ul> -->
+				<div class="ui cards">
+					{{#each studentSubmissionList}}
+						{{#each AttemptList}}	
+						<div class="card" id="assignmentSubmission">
+						    <div class="content">
+						      <div class="header">{{name}}</div>
+						      <div class="description">
+						        {{description}}<br/>
+						        Created: {{dateCreated}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="file text outline icon"></i>
+						      Edit Submission
+						    </div>
+						  </div>
+						  {{/each}}
+					 {{/each}}
+				 </div>
 				<button type="button" id="newSubmission" >New Submission</button>
 
 				{{#if isUserCreator}}

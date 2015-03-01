@@ -2,6 +2,53 @@
 	{{#if currentUser}}
 		<form name="createCourse" id="createCourse">
 			<h3>Create Course</h3>
+			<div class="ui form segment">
+				<div class="main course required fields">
+					<div class="field">
+					  <label>Name</label>
+					  <input placeholder="Computer Science 1" type="text">
+					</div>
+					<div class="field">
+					  <label>Number</label>
+					  <input placeholder="COP3502C" type="text">
+					</div>
+					<div class="field">
+					  <label>Year</label>
+					  <input placeholder="2015" type="text">
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="grouped inline fields">
+					<label>Semester</label>
+						<div class="field">
+						  <div class="ui radio checkbox">
+						    <input type="radio" name="fruit">
+						    <label>Fall</label>
+						  </div>
+						</div>
+						<div class="field">
+						  <div class="ui radio checkbox">
+						    <input type="radio" name="fruit">
+						    <label>Spring</label>
+						  </div>
+						</div>
+						<div class="field">
+						  <div class="ui radio checkbox">
+						    <input type="radio" name="fruit">
+						    <label>Summer</label>
+						  </div>
+						</div>
+					</div>
+					<div class="field">
+						<label>Description</label>
+						<textarea></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="ui submit button">Submit</div>
+
+		<div>
+
 			<label for="courseNameField">Name:</label>
 			<input type="text" name="courseNameField">
 			<br/>
@@ -17,6 +64,7 @@
 			<input type="radio" id="courseSemesterFieldSummer" name="courseSemesterField" value="Summer"/>Summer
 			<br/>
 			<input type="submit" value="Add Course">
+		</div>
 		</form>
 	{{/if}}
 </template>

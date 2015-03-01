@@ -100,15 +100,15 @@ Template.mainContent.events({
 		var courseYear = event.target.courseYearField.value;
 		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear);
 	},
-	'click .userCourse': function(){
+	'click #userCourse': function(){
 		Session.set('currentCourse', this);
 		Session.set('currentDashboard', "courseDash");
 	},
-	'click .courseAssignment': function(){
+	'click #courseAssignment': function(){
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash");
 	},
-	'click .assignmentSubmission': function(){
+	'click #assignmentSubmission': function(){
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
 		if(Session.get('currentSubmission').filename === undefined){
