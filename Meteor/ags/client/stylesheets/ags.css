@@ -19,13 +19,13 @@
 .ags-head, .ags-head-logo, .ags-head-acct,
 .ags-main, .ags-main-nav, .ags-main-content, 
 .ags-main-content-info, .ags-main-content-view,
-.ags-foot, .ags-head-breadcrumb {
+.ags-head-breadcrumb {
 	position : absolute;
 }
 
 .ags-head-acct,
 .ags-head-search, .ags-main, .ags-main-nav,
-.ags-main-content, .ags-foot,
+.ags-main-content,
 .ags-main-content-info, .ags-main-content-view{
 	padding: 10px;
 	font-family: Arial;
@@ -85,14 +85,6 @@
 
 .ags-x-closed .ags-main-content {
 		left : 0;
-}
-
-.ags-foot {
-	bottom : -100%;
-	left : 0;
-	right: 0;
-	background: #163763;
-	height : 10px;
 }
 
 .ags-head-breadcrumb {
