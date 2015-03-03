@@ -1,7 +1,13 @@
 <template name="mainContent">
 	<div class="ags-main-content-info">
 		{{#if unfinishedAccount}}
-			<h2>Finish Creating Your Account</h2>
+			<div class="ui dividing header">
+			  <i class="user icon"></i>
+			  <div class="content">
+			    Finish Creating Your Account
+			  </div>
+			</div>
+			<p>Enter your first and last name. <br>Sign up for a course by entering the course key provided by the instructor.</p>
 		{{else}}
 			{{#if isUserDash}}
 				{{#with userInfo}}
@@ -9,16 +15,17 @@
 					  <i class="user icon"></i>
 					  <div class="content">
 					    User Dashboard
-					    <div class="sub header">{{firstname}} {{lastname}}</div>
+					    <div class="sub header">{{firstname}} {{lastname}}
+					    </div>
 					  </div>
-					</div>	
+					</div>
 				{{/with}}
 			{{/if}}
 
 			{{#if isCourseDash}}
 				{{#with courseInfo}}
 					<div class="ui dividing header">
-					  <i class="student icon"></i>
+					  <i class="users icon"></i>
 					  <div class="content">
 					    Course Dashboard
 					    <div class="sub header">{{number}}: {{name}}</div>
@@ -55,6 +62,23 @@
 					Finish adding files and submit!
 				{{/with}}
 			{{/if}}
+			
+			{{#if isUserCreator}}
+			<div class="popup tips">
+				<div class="ui icon button">
+					<i class="edit icon"></i>
+				</div>
+				<div class="ui small popup">
+					Edit
+				</div>
+				<div class="ui icon button">
+					<i class="delete icon"></i>
+				</div>
+				<div class="ui small popup">
+					Remove
+				</div>
+			</div>
+			{{/if}}
 
 		{{/if}}
 	</div>
@@ -77,8 +101,8 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="sign in icon"></i>
-						      Open Course
+						      <i class="book icon"></i>
+						      View Assignments
 						    </div>
 						  </div>
 						  {{/each}}
@@ -107,8 +131,8 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="edit icon"></i>
-						      Edit Course
+						      <i class="book icon"></i>
+						      View Assignments
 						    </div>
 						  </div>
 						  {{/each}}

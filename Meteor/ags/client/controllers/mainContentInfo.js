@@ -1,3 +1,7 @@
+Template.mainContent.rendered = function(){
+	this.$('.popup.tips .ui.button').popup();
+};
+
 Template.mainContent.helpers({
 	'studentCourseList': function(){
 		var courseIdList = AGSUsers.findOne({_id:Meteor.userId()}).id_Courses;
@@ -16,6 +20,13 @@ Template.mainContent.helpers({
 		var curDash = Session.get('currentDashboard');
 		if (curDash === "courseDash" || curDash === "assignmentDash") 
 			return Session.get('currentCourse').id_Instructor == Meteor.userId();
+
+		if (curDash === "submissionDash")
+			return true; // we have to change this later
+		
+		if (curDash == "userDash")
+			return true; // we have to change this later
+
 	},
 	'userInfo': function(){
 		return AGSUsers.findOne({_id:Meteor.userId()});
