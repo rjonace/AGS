@@ -5,7 +5,7 @@
 // };
 
 Template.agsLogin.rendered = function () {
- 
+ 	$('.ui.error.message').hide();
 }
 
 if (Meteor.isClient) {
@@ -21,13 +21,13 @@ if (Meteor.isClient) {
   			if( pass != "") {
 				Meteor.loginWithPassword(email,pass,function(error){
 					if(error)
-						alert(error);
+						$('.ui.error.message').text(error).show();
 				});
   			} else {
-  				alert("No password entered.");
+  				$('.ui.error.message').text("No password entered.").show();
   			} 
   		} else {
-  				alert("No email entered.");
+  				$('.ui.error.message').text("No email entered.").show();
   		}
   	},
   	'click .ui.button.create.account' : function(e){
@@ -38,15 +38,15 @@ if (Meteor.isClient) {
   			if( pass != "") {
 				  Accounts.createUser({email: email, password: pass},function(error){
 					if(error)
-						alert(error);
+						$('.ui.error.message').text(error).show();
 				});
   			} else {
-  				alert("No password entered.");
+  				$('.ui.error.message').text("No password entered.").show();
   			} 
   		} else {
-  				alert("No email entered.");
+  				$('.ui.error.message').text("No email entered.").show();
   		}
-  		console.log('createaccount');
+
   	}
   });
 

@@ -1,7 +1,6 @@
 <template name="addCourseForm">
 	{{#if currentUser}}
 		<form name="createCourse" id="createCourse">
-			<h3>Create Course</h3>
 			<div class="ui form segment">
 				<div class="main course required fields">
 					<div class="field">
@@ -22,19 +21,19 @@
 					<label>Semester</label>
 						<div class="field">
 						  <div class="ui radio checkbox">
-						    <input type="radio" name="fruit">
+						    <input type="radio" name="Fall">
 						    <label>Fall</label>
 						  </div>
 						</div>
 						<div class="field">
 						  <div class="ui radio checkbox">
-						    <input type="radio" name="fruit">
+						    <input type="radio" name="Spring">
 						    <label>Spring</label>
 						  </div>
 						</div>
 						<div class="field">
 						  <div class="ui radio checkbox">
-						    <input type="radio" name="fruit">
+						    <input type="radio" name="Summer">
 						    <label>Summer</label>
 						  </div>
 						</div>
@@ -45,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui submit button">Submit</div>
+			<input type="submit" class="ui submit button" value="Create">
 
 		<div>
 

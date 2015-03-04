@@ -64,7 +64,7 @@
 			{{/if}}
 			
 			{{#if isUserCreator}}
-			<div class="popup tips">
+			<div class="dashboard popup tips">
 				<div class="ui icon button">
 					<i class="edit icon"></i>
 				</div>
@@ -140,8 +140,16 @@
 
 
 				{{/with}}
-
-				{{> addCourseForm}}
+				<div class="ui hidden divider"></div>
+				<div class="ui styled fluid accordion">
+					<div class="active title">
+						<i class="add icon"></i>
+							Create Course
+					</div>
+					<div class="active content">
+						{{> addCourseForm}}
+					</div>
+				</div>
 
 			
 				

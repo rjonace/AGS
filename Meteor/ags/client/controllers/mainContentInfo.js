@@ -1,5 +1,6 @@
 Template.mainContent.rendered = function(){
-	this.$('.popup.tips .ui.button').popup();
+	$('.dashboard.popup.tips .ui.button').popup();
+	$('.ui.styled.fluid.accordion').accordion();
 };
 
 Template.mainContent.helpers({
@@ -299,5 +300,8 @@ Template.mainContent.events({
 		);
 		Session.set('fileNotSubmitted', true);
 		Session.set('fileNotGraded', true);
+	},
+	'click .active.title' :function(){
+		$('.ui.styled.fluid.accordion').accordion('toggle',0);
 	}
 })

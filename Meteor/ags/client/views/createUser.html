@@ -4,11 +4,11 @@
 				<div class="ui form segment">
 					<div class="field">
 						<label>First Name</label>
-						<input type="text" placeholder="John">
+						<input id="firstNameField" type="text" placeholder="John">
 					</div>
 					<div class="field">
 						<label>Last Name</label>
-						<input type="text" placeholder="Smith">
+						<input id="lastNameField"  type="text" placeholder="Smith">
 					</div>
 					<div class="field">
 						<label>Course Key</label>
@@ -17,9 +17,12 @@
 						  <div class="ui teal enroll button">Verify</div>
 						</div>
 					</div>
-					<div class="ui sign up button">Sign Up</div>
+					  <div class="ui error message">
+					    <div class="header">Error</div>
+					  </div>
+					<input type="submit" id="userSignUpButton" class="ui submit button" value="Sign Up">
 				</div>
-				<fieldset>
+<!-- 				<fieldset>
 					
 					<label for="firstNameField">First Name:</label>
 					<input type="text" id="firstNameField" name="firstNameField" />
@@ -51,7 +54,7 @@
 
 					<input type="submit" value="Sign Up" />
 					<label id="errorMsg" name="errorMsg"></label>
-				</fieldset>
+				</fieldset> -->
 
 
 			</form>

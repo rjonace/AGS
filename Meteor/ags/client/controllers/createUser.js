@@ -21,6 +21,11 @@ Template.AGSCreateUser.events({
 		var lastName = event.target.lastNameField.value;
 		var availableCourseList = event.target.userCourse;
 		var selectedCourseList = [];
+
+		if (firstName === "" || lastName === "") {
+			$('.ui.error.message').text('Enter first and last name').show();
+			return false;
+		} 
 		
 		if(availableCourseList) {
 			if(!availableCourseList.length){

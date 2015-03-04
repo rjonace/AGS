@@ -1,5 +1,5 @@
 Template.agsHead.rendered = function() {
-	this.$('.account.popup.tips .ui.button').popup();
+	$('.account.popup.tips .ui.button').popup();
 }
 
 Template.agsHead.helpers({
