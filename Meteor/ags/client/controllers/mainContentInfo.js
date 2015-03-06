@@ -1,6 +1,8 @@
 Template.mainContent.rendered = function(){
-	$('.dashboard.popup.tips .ui.button').popup();
-	$('.ui.styled.fluid.accordion').accordion();
+	//$('.dashboard.popup.tips .ui.button').popup();
+
+
+
 };
 
 Template.mainContent.helpers({
@@ -147,26 +149,7 @@ Template.mainContent.events({
 		var counter = 0;
 		var maxTime = 50;
 		var newPath;
-/*		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
-				function( error, result ) {
-					if(!error) {
-						Meteor.call('writeSubmissionFiles', submission, filePath + "/" + result,
-							function(error1) {
-								Meteor.call('writeInstructorFiles', currentAssignment, filePath + "/" + result,
-									function(error2) {
-										Meteor.call('gradeSubmission', submission, filePath, result, currentUserId, currentAssignment._id,
-											function(error3) {
-												Meteor.call('gradeCleanUp', filePath, result);
-											}
-										)
-									}
-								)
-							}
-						)
-					}
-				}
-		);*/
-
+		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, result) {
 				var folderName = result;
@@ -303,5 +286,15 @@ Template.mainContent.events({
 	},
 	'click .active.title' :function(){
 		$('.ui.styled.fluid.accordion').accordion('toggle',0);
+	},
+	'mouseenter .ui.icon.edit.button' : function(){
+		$('.dashboard.popup.tips .ui.icon.edit.button').popup('show');
+	},
+	'mouseenter .ui.icon.delete.button' : function(){
+		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
+	},
+	'click .ui.teal.enroll.button' : function(){
+		$('.ui.message.enroll').text('You put in a course code').show();
 	}
+
 })

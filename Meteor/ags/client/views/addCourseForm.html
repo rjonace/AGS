@@ -1,52 +1,42 @@
 <template name="addCourseForm">
 	{{#if currentUser}}
 		<form name="createCourse" id="createCourse">
-			<div class="ui form segment">
-				<div class="main course required fields">
+			<div class="ui form">
+				<div class="two required fields">
 					<div class="field">
 					  <label>Name</label>
-					  <input placeholder="Computer Science 1" type="text">
+					  <input id="courseNameField" placeholder="Computer Science 1" type="text">
 					</div>
 					<div class="field">
 					  <label>Number</label>
-					  <input placeholder="COP3502C" type="text">
+					  <input id="courseNumberField" placeholder="COP3502C" type="text">
 					</div>
+				</div>
+				<div class="two required fields">
 					<div class="field">
 					  <label>Year</label>
-					  <input placeholder="2015" type="text">
-					</div>
-				</div>
-				<div class="two fields">
-					<div class="grouped inline fields">
-					<label>Semester</label>
-						<div class="field">
-						  <div class="ui radio checkbox">
-						    <input type="radio" name="Fall">
-						    <label>Fall</label>
-						  </div>
-						</div>
-						<div class="field">
-						  <div class="ui radio checkbox">
-						    <input type="radio" name="Spring">
-						    <label>Spring</label>
-						  </div>
-						</div>
-						<div class="field">
-						  <div class="ui radio checkbox">
-						    <input type="radio" name="Summer">
-						    <label>Summer</label>
-						  </div>
-						</div>
+					  <input id="courseYearField" placeholder="2015" type="text">
 					</div>
 					<div class="field">
-						<label>Description</label>
-						<textarea></textarea>
+						<label>Semester</label>
+						<select id="courseSemesterField" class="ui dropdown">
+							<option value="">Semester</option>
+							 <option value="Fall">Fall</option>
+    						 <option value="Spring">Spring</option>
+    						 <option value="Summer">Summer</option>
+						</select>
+						<script type="text/javascript">$('select.dropdown').dropdown();</script>
 					</div>
 				</div>
+				<div id="courseDescriptionField" class="field">
+					<label>Description</label>
+					<textarea></textarea>
+				</div>
 			</div>
+			<div class="ui hidden divider"></div>
 			<input type="submit" class="ui submit button" value="Create">
 
-		<div>
+<!-- 		<div>
 
 			<label for="courseNameField">Name:</label>
 			<input type="text" name="courseNameField">
@@ -63,7 +53,7 @@
 			<input type="radio" id="courseSemesterFieldSummer" name="courseSemesterField" value="Summer"/>Summer
 			<br/>
 			<input type="submit" value="Add Course">
-		</div>
+		</div> -->
 		</form>
 	{{/if}}
 </template>

@@ -65,13 +65,13 @@
 			
 			{{#if isUserCreator}}
 			<div class="dashboard popup tips">
-				<div class="ui icon button">
+				<div class="ui icon edit button">
 					<i class="edit icon"></i>
 				</div>
 				<div class="ui small popup">
 					Edit
 				</div>
-				<div class="ui icon button">
+				<div class="ui icon delete button">
 					<i class="delete icon"></i>
 				</div>
 				<div class="ui small popup">
@@ -112,7 +112,17 @@
 							<li class="userCourse"><a>{{number}}: {{name}}</a></li>
 						{{/each}}
 					</ul> -->
-
+					<div class="ui form segment">
+					<div class="field">
+						<label>Course Key</label>
+						<div class="ui action input">
+						  <input type="text" placeholder="#kdff234jkdfsd">
+						  <div class="ui teal enroll button">Enroll</div>
+						</div>
+					</div>
+					<div class="ui message enroll"></div>
+					<script>$('.ui.message.enroll').hide();</script>
+				</div>
 
 					<h3>{{firstname}}'s Created Courses</h3>
 
@@ -140,6 +150,8 @@
 
 
 				{{/with}}
+
+
 				<div class="ui hidden divider"></div>
 				<div class="ui styled fluid accordion">
 					<div class="active title">
@@ -150,6 +162,7 @@
 						{{> addCourseForm}}
 					</div>
 				</div>
+				<script>$('.ui.styled.fluid.accordion').accordion('close',0);</script>
 
 			
 				
@@ -271,7 +284,6 @@
 				{{/if}}
 			{{/if}}
 		{{/if}}
-
 
 	</div>
 
