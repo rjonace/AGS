@@ -228,20 +228,32 @@
 						  {{/each}}
 					 {{/each}}
 				 </div>
-				<button type="button" id="newSubmission" >New Submission</button>
+				 <div class="ui hidden divider"></div>
+				<div class="ui button" id="newSubmission" >New Submission</div>
 
 				{{#if isUserCreator}}
 
-					<h3>Student Submissions</h3>
-					<ul>
+				<h3>Student Submissions</h3>
+					<div class="ui cards">
 						{{#each instructorSubmissionList}}
-
-							{{#each AttemptList}}
-							<li class="assignmentSubmission"><a>{{name}}: {{dateCreated}}</a></li>
-							{{/each}}
+						{{#each AttemptList}}	
+						<div class="card" id="assignmentSubmission">
+						    <div class="content">
+						      <div class="header">{{name}}</div>
+						      <div class="description">
+						        {{description}}<br/>
+						        Created: {{dateCreated}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="file text outline icon"></i>
+						      View Submission
+						    </div>
+						  </div>
+						  {{/each}}
 						{{/each}}
-					</ul>
-					<h3>Assignment Files</h3>
+					</div>
+<!-- 					<h3>Assignment Files</h3>
 					{{#with assignmentInfo}}
 					
 					<h3>VTA</h3>
@@ -259,9 +271,9 @@
 							<br>
 						{{/each}}
 
-					{{/with}}
+					{{/with}} -->
 
-					<button type="button" id="write" >Write</button>
+<!-- 					<button type="button" id="write" >Write</button> -->
 				{{/if}}
 			{{/if}}
 
