@@ -24,10 +24,6 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
-		var errorData = fs.readFileSync(path + '/results/errors.txt', 'utf8');
-		console.log(errorData);
-		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":errorData}});
-
 		if (path)
 			exec("rm -Rf " + path);
 
@@ -86,7 +82,15 @@ Meteor.methods({
 
 					}catch(e){
 						console.log(e.message);
-						console.log("didn't get it.");
+						console.log("didn't get output.");
+					}
+					try{
+						outputData = fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+						console.log(outputData);
+						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+					}catch(e){
+						console.log(e.message);
+						console.log("didn't get errors.");
 					}
 				}
 				else { 
