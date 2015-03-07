@@ -24,6 +24,10 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
+		var errorData = fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+		console.log(errorData);
+		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.error":errorData}});
+
 		exec("rm -Rf " + path);
 
 	},
@@ -75,13 +79,8 @@ Meteor.methods({
 					console.log("Completed");
 					try{
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
-						errorData = fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
 						console.log(outputData);
-						if (errorData != "")
-							AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.error":errorData}});
-
-						if (outputData != "")
-							AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 
 					}catch(e){
 						console.log(e.message);
