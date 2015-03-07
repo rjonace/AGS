@@ -99,6 +99,10 @@ Template.mainContent.helpers({
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
+	},
+	'submissionErrors': function(){
+		var submission = Session.get('currentSubmission');
+		return submission.errors;
 	}
 });
 
