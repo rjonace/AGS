@@ -24,7 +24,7 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
-		var errorData = fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+		var errorData = fs.readFileSync(path + '/results/errors.txt', 'utf8');
 		console.log(errorData);
 		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.error":errorData}});
 
