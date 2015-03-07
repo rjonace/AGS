@@ -332,10 +332,10 @@ Template.mainContent.events({
 			});
 	},
 	'click #createCourseTitle' : function(){
-		$('.ui.styled.fluid.accordion').accordion('toggle',0);
+		$('#courseAccordion').accordion('toggle',0);
 	},
 	'click #createAssignmentTitle' : function(){
-		$('.ui.styled.fluid.accordion').accordion('toggle',1);
+		$('#assignmentAccordion').accordion('toggle',0);
 	},
 	'mouseenter .ui.icon.edit.button' : function(){
 		$('.dashboard.popup.tips .ui.icon.edit.button').popup('show');
