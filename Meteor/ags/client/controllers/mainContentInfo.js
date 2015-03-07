@@ -1,6 +1,6 @@
 Template.mainContent.rendered = function(){
 	//$('.dashboard.popup.tips .ui.button').popup();
-
+	$('.ui.styled.fluid.accordion').accordion();
 
 
 };
@@ -331,8 +331,11 @@ Template.mainContent.events({
 					$('.ui.message.enroll').text('Invalid Course key').show();
 			});
 	},
-	'click .active.title' : function(){
+	'click #createCourseTitle' : function(){
 		$('.ui.styled.fluid.accordion').accordion('toggle',0);
+	},
+	'click #createAssignmentTitle' : function(){
+		$('.ui.styled.fluid.accordion').accordion('toggle',1);
 	},
 	'mouseenter .ui.icon.edit.button' : function(){
 		$('.dashboard.popup.tips .ui.icon.edit.button').popup('show');
@@ -341,10 +344,10 @@ Template.mainContent.events({
 		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
 	},
 	'click .ui.icon.edit.button' : function(){
-		$('.fullscreen.modal').modal('show');
+		$('.ui.fullscreen.modal').modal('show');
 	},
 	'click .ui.icon.delete.button' : function(){
-		$('.small.modal').modal('show');
+		$('.ui.small.modal').modal('show');
 	}
 
 })
