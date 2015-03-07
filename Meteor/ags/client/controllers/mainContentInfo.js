@@ -99,10 +99,6 @@ Template.mainContent.helpers({
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
-	},
-	'submissionErrors': function(){
-		var submission = Session.get('currentSubmission');
-		return submission.errors;
 	}
 });
 
@@ -196,7 +192,7 @@ Template.mainContent.events({
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
-					if (!result.feedback || !result.error && counter < maxTime) {
+					if (!result.feedback && counter < maxTime) {
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);

@@ -26,9 +26,10 @@ Meteor.methods({
 
 		var errorData = fs.readFileSync(path + '/results/errors.txt', 'utf8');
 		console.log(errorData);
-		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.error":errorData}});
+		AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":errorData}});
 
-		exec("rm -Rf " + path);
+		if (path)
+			exec("rm -Rf " + path);
 
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
@@ -56,7 +57,8 @@ Meteor.methods({
 								stdout: inner_stdout,
 								stderr:inner_stderr
 							}
-							fs.writeFileSync(newPath + '/results/errors.txt', execData.error + '\n' + execData.stdout + '\n' + execData.stderr);
+							fs.writeFileSync(newPath + '/results/errors.txt',
+							 '<h3>Errors</h3><br><p>'+ execData.error + '<br>' + execData.stdout + '<br>' + execData.stderr + '</p>');
 						}
 					);
 				} else {
