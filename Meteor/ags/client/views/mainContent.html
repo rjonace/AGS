@@ -1,4 +1,60 @@
 <template name="mainContent">
+	<div class="ui fullscreen modal">
+		<i class="close icon"></i>
+		<div class="header">
+      		Edit Settings
+		</div>
+		<div class="content">
+			{{#if isUserDash}}
+				{{> AGSCreateUser}}
+			{{/if}}
+			{{#if isCourseDash}}
+				{{> addCourseForm}}
+			{{/if}}
+			{{#if isAssignmentDash}}
+				{{> addAssignmentForm}}
+			{{/if}}
+		</div>
+		<div class="actions">
+		      <div class="ui button">Cancel</div>
+		      <div class="ui green button">Update</div>
+    	</div>
+	</div>
+	<script>$('.fullscreen.modal').modal();</script>
+	<div class="ui small modal">
+		<i class="close icon"></i>
+
+			{{#if isUserDash}}
+				{{> AGSCreateUser}}
+				<div class="header">
+      				Delete User
+				</div>
+				<div class="content">
+					Are you sure you want to delete your AGS account?
+				</div>
+			{{/if}}
+			{{#if isCourseDash}}
+				<div class="header">
+      				Delete Course
+				</div>
+				<div class="content">
+					Are you sure you want to delete this Course?
+				</div>
+			{{/if}}
+			{{#if isAssignmentDash}}
+				<div class="header">
+      				Delete Assignment
+				</div>
+				<div class="content">
+					Are you sure you want to delete this Assignment?
+				</div>
+			{{/if}}
+		<div class="actions">
+		      <div class="ui red button">No</div>
+		      <div class="ui green button">Yes</div>
+    	</div>
+	</div>
+	<script>$('.small.modal').modal();</script>
 	<div class="ags-main-content-info">
 		{{#if unfinishedAccount}}
 			<div class="ui dividing header">
@@ -20,17 +76,49 @@
 					  </div>
 					</div>
 				{{/with}}
+				<div class="dashboard popup tips">
+					<div class="ui icon edit button">
+						<i class="edit icon"></i>
+					</div>
+					<div class="ui small popup">
+						Edit Account
+					</div>
+				</div>	
 			{{/if}}
 
 			{{#if isCourseDash}}
 				{{#with courseInfo}}
+					{{#if isUserCreator}}
+					<div class="ui dividing header">
+					  <i class="users icon"></i>
+					  <div class="content">
+					    Course Dashboard
+					    <div class="sub header">{{number}}: {{name}} <br>Key: {{key}}</div>
+					  </div>
+					</div>
+					<div class="dashboard popup tips">
+						<div class="ui icon edit button">
+							<i class="edit icon"></i>
+						</div>
+						<div class="ui small popup">
+							Edit Course
+						</div>
+						<div class="ui icon delete button">
+							<i class="delete icon"></i>
+						</div>
+						<div class="ui small popup">
+							Remove Course
+						</div>
+					</div>	
+					{{else}}
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
 					    Course Dashboard
 					    <div class="sub header">{{number}}: {{name}}</div>
 					  </div>
-					</div>	
+					</div>
+					{{/if}}
 				{{/with}}
 			{{/if}}
 
@@ -46,6 +134,22 @@
 					</div>
 					Date Available: {{dateAvailable}}<br> Date Due:{{dateDue}}
 				{{/with}}
+				{{#if isUserCreator}}
+				<div class="dashboard popup tips">
+					<div class="ui icon edit button">
+						<i class="edit icon"></i>
+					</div>
+					<div class="ui small popup">
+						Edit Assignment
+					</div>
+					<div class="ui icon delete button">
+						<i class="delete icon"></i>
+					</div>
+					<div class="ui small popup">
+						Remove Assignment
+					</div>
+				</div>
+				{{/if}}
 
 			{{/if}}
 
@@ -62,29 +166,17 @@
 					Finish adding files and submit!
 				{{/with}}
 			{{/if}}
-			
-			{{#if isUserCreator}}
-			<div class="dashboard popup tips">
-				<div class="ui icon edit button">
-					<i class="edit icon"></i>
-				</div>
-				<div class="ui small popup">
-					Edit
-				</div>
-				<div class="ui icon delete button">
-					<i class="delete icon"></i>
-				</div>
-				<div class="ui small popup">
-					Remove
-				</div>
-			</div>
-			{{/if}}
 
 		{{/if}}
 	</div>
 	<div class="ags-main-content-view">
 		{{#if unfinishedAccount}}
+			<div id="signUpForm">
+				<form method="post" id="createUser" class="createUser">
 				{{> AGSCreateUser}}
+				<input type="submit" id="userSignUpButton" class="ui submit button" value="Sign Up">
+				</form>
+			</div>
 		{{else}}
 
 			{{#if isUserDash}}
@@ -116,7 +208,7 @@
 					<div class="field">
 						<label>Course Key</label>
 						<div class="ui action input">
-						  <input type="text" placeholder="#kdff234jkdfsd">
+						  <input id="courseKeyField" type="text" placeholder="1234567890aBcdEFg">
 						  <div class="ui teal enroll button">Enroll</div>
 						</div>
 					</div>
@@ -159,7 +251,11 @@
 							Create Course
 					</div>
 					<div class="active content">
-						{{> addCourseForm}}
+						<form name="createCourse" id="createCourse">
+							{{> addCourseForm}}
+							<div class="ui hidden divider"></div>
+							<input type="submit" class="ui submit button" value="Create">
+						</form>
 					</div>
 				</div>
 				<script>$('.ui.styled.fluid.accordion').accordion('close',0);</script>
@@ -193,7 +289,22 @@
 						  {{/each}}
 					 </div>
 				{{#if isUserCreator}}
-					{{> addAssignmentForm}}
+
+				<div class="ui hidden divider"></div>	
+				<div class="ui styled fluid accordion">
+					<div class="active title">
+						<i class="add icon"></i>
+							Create Assignment
+					</div>
+					<div class="active content">
+						<form name="createAssignment" id="createAssignment" enctype="multipart/form-data">
+							{{> addAssignmentForm}}
+							<div class="ui hidden divider"></div>
+							<input type="submit" class="ui submit assignment button" value="Add Assignment">
+						</form>
+					</div>
+				</div>
+				<script>$('.ui.styled.fluid.accordion').accordion('close',0);</script>
 				{{/if}}
 
 			{{/if}}
@@ -298,5 +409,4 @@
 		{{/if}}
 
 	</div>
-
 </template>

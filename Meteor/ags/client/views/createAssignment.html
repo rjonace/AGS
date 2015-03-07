@@ -1,7 +1,6 @@
 <template name="addAssignmentForm">
 	{{#if currentUser}}
-		<form name="createAssignment" id="createAssignment" enctype="multipart/form-data">
-			<h3>Create Assignment</h3>
+
 			<div class="ui form">
 				<div class="two fields">
 					<div class="field">
@@ -57,51 +56,6 @@
 				</div>
 
 			</div>
-			<div class="ui hidden divider"></div>
-			<input type="submit" class="ui submit assignment button" value="Add Assignment">
-<!-- 
-			<label for="assignmentNameField">Name:</label>
-			<input type="text" name="assignmentNameField">
-			<br>
-			
-			<label for="assignmentDescriptionField">Description:</label>
-			<input type="text" name="assignmentDescriptionField">
-			<br>
-			
-			<label for="assignmentLanguageField">Language:</label>
-				<input type="radio" id="assignmentLanguageFieldC" name="assignmentLanguageField" value="C"/>C
-				<input type="radio" id="assignmentLanguageFieldJava" name="assignmentLanguageField" value="Java"/>Java
-				<input type="radio" id="assignmentLanguageFieldPython" name="assignmentLanguageField" value="Python"/>Python
-			<br/>			
-			<label for="assignmentDateAvailableField">Date Available:</label>
-			<input type="datetime-local" name="assignmentDateAvailableField">
-			<br>
 
-			<label for="assignmentDateDueField">Date Due:</label>
-			<input type="date-local" name="assignmentDateDueField">			
-			<br>
-			
-			<label for="assignmentPointsField">Max Points:</label>
-			<input type="text" name="assignmentPointsField">
-			<br>
-			
-			<label for="assignmentAGField">Auto-Grader File:</label>
-			<input type="file" name="assignmentAGField">
-			<br>
-
-			<input type="file" name="assignmentSolutionField">
-			<br>
-
-
-			<label for="assignmentStudentField">Student File(s):</label>
-			<input type="file" name="assignmentStudentField" multiple>
-			<br>
-
-	<input type="text" name="statusText" value="" readonly>
-			<br>
-	
-
-			<input type="submit" value="Add Assignment"> -->
-		</form>
 	{{/if}}
 </template>

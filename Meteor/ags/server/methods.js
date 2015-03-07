@@ -146,11 +146,13 @@ Meteor.methods({
 	},
 	'insertCourseData': function(name, number, semester, year) {
 		var currentUserId = Meteor.userId();
+		var courseKey = AGSCourses._makeNewID();
 		AGSCourses.insert({
 			name: name,
 			number: number,
 			semester: semester,
 			year: year,
+			key: courseKey,
 			id_Instructor: currentUserId,
 			id_Students: [],
 			id_Assignments: []
@@ -164,6 +166,9 @@ Meteor.methods({
 	'removeCourseData': function(selectedCourse){
 		AGSCourses.remove(selectedCourse);
 		// remove all references to the course?
+	},
+	'checkCourseKey' : function(courseKey) {
+		return AGSCourses.findOne({key:courseKey});
 	},
 	'enrollInCourse': function(selectedCourse){
 		var currentUserId = Meteor.userId();

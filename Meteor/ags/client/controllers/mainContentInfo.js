@@ -114,6 +114,34 @@ Template.mainContent.events({
 		var courseYear = event.target.courseYearField.value;
 		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear);
 	},
+	'submit .createUser': function(event){
+
+		var userId = Meteor.userId();
+		var firstName = event.target.firstNameField.value;
+		var lastName = event.target.lastNameField.value;
+		var availableCourseList = event.target.userCourse;
+		var selectedCourseList = [];
+
+		if (firstName === "" || lastName === "") {
+			$('.ui.error.message').text('Enter first and last name').show();
+			return false;
+		} 
+		
+		if(availableCourseList) {
+			if(!availableCourseList.length){
+				if(availableCourseList.checked){
+					selectedCourseList.push(availableCourseList.value);
+				}
+			}
+
+			for( i=0; availableCourseList && i < availableCourseList.length; i++) {
+				if (availableCourseList[i].checked) {
+					selectedCourseList.push(availableCourseList[i].value);
+				}
+			}
+		}
+		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
+	},
 	'click #userCourse': function(){
 		Session.set('currentCourse', this);
 		Session.set('currentDashboard', "courseDash");
@@ -284,7 +312,26 @@ Template.mainContent.events({
 		Session.set('fileNotSubmitted', true);
 		Session.set('fileNotGraded', true);
 	},
-	'click .active.title' :function(){
+	'click .ui.teal.enroll.button' : function(event) {
+		var keyEntered = $('#courseKeyField').val();
+		if (keyEntered === "") {
+			$('.ui.message.enroll').text('Please enter a valid Course key').show();
+			return;
+		}
+
+		Meteor.call('checkCourseKey', keyEntered, 
+			function(error, result) {
+				if(!error && result) {
+					$('.ui.message.enroll').text("You have enrolled in " + result.name).show();
+					Meteor.call('enrollInCourse',result);
+				}
+				else if (error)
+					$('.ui.message.enroll').text(error).show();
+				else
+					$('.ui.message.enroll').text('Invalid Course key').show();
+			});
+	},
+	'click .active.title' : function(){
 		$('.ui.styled.fluid.accordion').accordion('toggle',0);
 	},
 	'mouseenter .ui.icon.edit.button' : function(){
@@ -293,8 +340,11 @@ Template.mainContent.events({
 	'mouseenter .ui.icon.delete.button' : function(){
 		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
 	},
-	'click .ui.teal.enroll.button' : function(){
-		$('.ui.message.enroll').text('You put in a course code').show();
+	'click .ui.icon.edit.button' : function(){
+		$('.fullscreen.modal').modal('show');
+	},
+	'click .ui.icon.delete.button' : function(){
+		$('.small.modal').modal('show');
 	}
 
 })

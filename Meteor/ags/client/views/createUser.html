@@ -1,62 +1,15 @@
 <template name="AGSCreateUser">
-		<div id="signUpForm">
-			<form method="post" id="createUser" class="createUser">
-				<div class="ui form segment">
-					<div class="field">
-						<label>First Name</label>
-						<input id="firstNameField" type="text" placeholder="John">
-					</div>
-					<div class="field">
-						<label>Last Name</label>
-						<input id="lastNameField"  type="text" placeholder="Smith">
-					</div>
-					<div class="field">
-						<label>Course Key</label>
-						<div class="ui action input">
-						  <input type="text" placeholder="#kdff234jkdfsd">
-						  <div class="ui teal enroll button">Verify</div>
-						</div>
-					</div>
-					  <div class="ui error message">
-					    <div class="header">Error</div>
-					  </div>
-					<input type="submit" id="userSignUpButton" class="ui submit button" value="Sign Up">
-				</div>
-<!-- 				<fieldset>
-					
-					<label for="firstNameField">First Name:</label>
-					<input type="text" id="firstNameField" name="firstNameField" />
-					
-					
-					<label for="lastNameField">Last Name:</label>
-					<input type="text" id="lastNameField" name="lastNameField"  />
-					<br>
-
-					<label for="majorField">Major:</label>
-					<input type="text" id="majorField" name="majorField"/>
-					<br>
-					<br>
-					<label for="userCourse">Select Courses:</label>
-					<br>
-
-					<table>
-					{{#each addIndex courseList}}
-						<tr>
-							<td>{{index}}</td>
-							<td><input type="checkbox" name="userCourse" value="{{value._id}}"/></td>
-							<td>{{value.number}}: {{value.name}}</td>
-							<br>
-						</tr>
-					{{/each}}
-					</table>
-
-					<br/>
-
-					<input type="submit" value="Sign Up" />
-					<label id="errorMsg" name="errorMsg"></label>
-				</fieldset> -->
-
-
-			</form>
+	<div class="ui form segment">
+		<div class="field">
+			<label>First Name</label>
+			<input id="firstNameField" type="text" placeholder="John">
 		</div>
+		<div class="field">
+			<label>Last Name</label>
+			<input id="lastNameField"  type="text" placeholder="Smith">
+		</div>
+		  <div class="ui error message">
+		    <div class="header">Error</div>
+		  </div>
+	</div>
 </template>

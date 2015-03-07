@@ -1,6 +1,5 @@
 <template name="addCourseForm">
 	{{#if currentUser}}
-		<form name="createCourse" id="createCourse">
 			<div class="ui form">
 				<div class="two required fields">
 					<div class="field">
@@ -33,27 +32,5 @@
 					<textarea></textarea>
 				</div>
 			</div>
-			<div class="ui hidden divider"></div>
-			<input type="submit" class="ui submit button" value="Create">
-
-<!-- 		<div>
-
-			<label for="courseNameField">Name:</label>
-			<input type="text" name="courseNameField">
-			<br/>
-			<label for="courseNumberField">Number:</label>
-			<input type="text" name="courseNumberField">
-			<br/>
-			<label for="courseYearField">Year:</label>	
-			<input type="text" name="courseYearField">
-			<br/>
-			<label for="courseSemesterField">Semester:</label>
-			<input type="radio" id="courseSemesterFieldFall" name="courseSemesterField" value="Fall"/>Fall
-			<input type="radio" id="courseSemesterFieldSpring" name="courseSemesterField" value="Spring"/>Spring
-			<input type="radio" id="courseSemesterFieldSummer" name="courseSemesterField" value="Summer"/>Summer
-			<br/>
-			<input type="submit" value="Add Course">
-		</div> -->
-		</form>
 	{{/if}}
 </template>
