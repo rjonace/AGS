@@ -47,9 +47,12 @@ Meteor.methods({
 					console.log(stderr);
 					exec("sh " + newPath + "/execjavafiles.sh " + randomFolderName + " " + newPath,
 						function(inner_error, inner_stdout, inner_stderr){
-							console.log("error: "+inner_error);
-							console.log("stdout: "+inner_stdout);
-							console.log("stderr: "+inner_stderr);
+							var execData = {
+								error: inner_error,
+								stdout: inner_stdout,
+								stderr:inner_stderr
+							}
+							fs.writeFileSync(newPath + '/results/errors.txt', execData.error + '\n' + execData.stdout + '\n' + execData.stderr);
 						}
 					);
 				} else {

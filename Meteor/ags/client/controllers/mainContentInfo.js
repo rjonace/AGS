@@ -1,7 +1,5 @@
 Template.mainContent.rendered = function(){
 	//$('.dashboard.popup.tips .ui.button').popup();
-	$('#courseAccordion').accordion();
-	$('#assignmentAccordion').accordion();
 };
 
 Template.mainContent.helpers({
