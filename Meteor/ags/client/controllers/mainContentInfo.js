@@ -134,19 +134,6 @@ Template.mainContent.events({
 			return false;
 		} 
 		
-		if(availableCourseList) {
-			if(!availableCourseList.length){
-				if(availableCourseList.checked){
-					selectedCourseList.push(availableCourseList.value);
-				}
-			}
-
-			for( i=0; availableCourseList && i < availableCourseList.length; i++) {
-				if (availableCourseList[i].checked) {
-					selectedCourseList.push(availableCourseList[i].value);
-				}
-			}
-		}
 		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
 	},
 	'click #userCourse': function(){
