@@ -1,6 +1,40 @@
 <template name="addCourseForm">
 	{{#if currentUser}}
 			<div class="ui form">
+				{{#if isCourseDash}}
+					{{#with courseInfo}}
+						<div class="two required fields">
+							<div class="field">
+							  <label>Name</label>
+							  <input id="courseNameField" value={{name}} type="text">
+							</div>
+							<div class="field">
+							  <label>Number</label>
+							  <input id="courseNumberField" value={{number}} type="text">
+							</div>
+						</div>
+						<div class="two required fields">
+							<div class="field">
+							  <label>Year</label>
+							  <input id="courseYearField" value={{year}} type="text">
+							</div>
+							<div class="field">
+								<label>Semester</label>
+								<select id="courseSemesterField" value={{semester}} class="ui dropdown">
+									<option value="">Semester</option>
+									 <option value="Fall">Fall</option>
+		    						 <option value="Spring">Spring</option>
+		    						 <option value="Summer">Summer</option>
+								</select>
+								<script type="text/javascript">$('select.dropdown').dropdown();</script>
+							</div>
+						</div>
+						<div id="courseDescriptionField" class="field">
+							<label>Description</label>
+							<textarea><!--{{description}}--></textarea>
+						</div>
+						{{/with}}
+				{{else}}
 				<div class="two required fields">
 					<div class="field">
 					  <label>Name</label>
@@ -31,6 +65,7 @@
 					<label>Description</label>
 					<textarea></textarea>
 				</div>
+				{{/if}}
 			</div>
 	{{/if}}
 </template>
