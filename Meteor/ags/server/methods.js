@@ -54,7 +54,7 @@ Meteor.methods({
 								stderr:inner_stderr
 							}
 							fs.writeFileSync(newPath + '/results/errors.txt',
-							 '<h4>Errors</h4><br>' + execData.stderr);
+							 '<h4>Errors</h4><pre>' + execData.stderr + '</pre>');
 						}
 					);
 				} else {
