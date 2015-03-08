@@ -356,6 +356,9 @@ Template.mainContent.events({
 	},
 	'click .ui.icon.delete.button' : function(){
 		$('#deleteModal').modal('show');
+	},
+	'click #viewFilesButton' : function(){
+		$('#viewFilesModal').modal('show');
 	}
 
 })

@@ -55,6 +55,22 @@
     	</div>
 	</div>
 	<script>$('.ui.small.modal').modal();</script>
+	<div id="viewFilesModal" class="ui fullscreen modal files">
+		<i class="close icon"></i>
+		{{#if isAssignmentDash}}
+		 {{#with assignmentInfo}}
+		 	{{#each studentfiles}}
+			<div class="header">
+	      		{{name}}
+			</div>
+			<div class="content">
+				<pre>{{contents}}</pre>
+			</div>
+			{{/each}}
+		{{/with}}
+		{{/if}}
+	</div>
+	<script>$('.ui.fullscreen.modal.files').modal();</script>
 	<div class="ags-main-content-info">
 		{{#if unfinishedAccount}}
 			<div class="ui dividing header">
@@ -125,7 +141,7 @@
 			{{#if isAssignmentDash}}
 				{{#with assignmentInfo}}
 					<div class="ui dividing header">
-						<i class="book icon"></i>
+						<i class="code icon"></i>
 						<div class="content">
 							Assignment Dashboard
 						    <div class="sub header">{{name}}: {{description}}
@@ -193,8 +209,8 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="book icon"></i>
-						      View Assignments
+						      <i class="users icon"></i>
+						      View Course
 						    </div>
 						  </div>
 						  {{/each}}
@@ -233,8 +249,8 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="book icon"></i>
-						      View Assignments
+						      <i class="users icon"></i>
+						      View Course
 						    </div>
 						  </div>
 						  {{/each}}
@@ -281,8 +297,8 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="file text outline icon"></i>
-						      View Submissions
+						      <i class="code icon"></i>
+						      View Assignment
 						    </div>
 						  </div>
 						  {{/each}}
@@ -309,6 +325,9 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
+				<div class="ui form segment">
+					<div id="viewFilesButton" class="ui view files button">View Files</div>
+				</div>
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Submissions</h3>
 				{{/with}}
@@ -332,7 +351,7 @@
 						    </div>
 						    <div class="ui bottom attached button">
 						      <i class="file text outline icon"></i>
-						      Edit Submission
+						      View Submission
 						    </div>
 						  </div>
 						  {{/each}}
@@ -384,6 +403,7 @@
 					{{/with}} -->
 
 <!-- 					<button type="button" id="write" >Write</button> -->
+
 				{{/if}}
 			{{/if}}
 
