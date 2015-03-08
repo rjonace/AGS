@@ -359,6 +359,13 @@ Template.mainContent.events({
 	},
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
+	},
+	'change #submissionSolutionFile' : function(){
+		var value = $('#submissionSolutionFile').val();
+		if (value == "")
+			$('#fileNameField').val('No file chosen');
+		else
+			$('#fileNameField').val(value);
 	}
 
 })
