@@ -347,12 +347,53 @@ Template.mainContent.events({
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
 	},
-	'change #submissionSolutionFile' : function(){
-		var value = $('#submissionSolutionFile').val();
-		if (value == "")
-			$('#fileNameField').val('No file chosen');
-		else
-			$('#fileNameField').val(value);
+	'click #cancelButton #closeButton' : function(){
+		var isUserDash = function(){
+			return Session.get('currentDashboard') === "userDash";
+		}
+		var isCourseDash = function(){
+			return Session.get('currentDashboard') === "courseDash";
+		}
+		var is AssignmentDash = function(){
+			return Session.get('currentDashboard') === "assignmentDash";
+		}
+		if(isUserDash){
+			var currentUser = Session.get('userInfo');
+			
+			$('#firstNameField').val(currentUser.firstname);
+			$('#lastNameField').val(currentUser.lastname);
+		}
+		if(isCourseDash){
+			
+		}
+		if(isAssignmentDash){
+			
+		}
+	},
+	'click #updateButton' : function(){
+		var isUserDash = function(){
+			return Session.get('currentDashboard') === "userDash";
+		}
+		var isCourseDash = function(){
+			return Session.get('currentDashboard') === "courseDash";
+		}
+		var is AssignmentDash = function(){
+			return Session.get('currentDashboard') === "assignmentDash";
+		}
+		if(isUserDash){
+			var currentUser = Session.get('userInfo');
+			var newUser = currentUser;
+			
+			newUser.firstname = $('#firstNameField').val();
+			newUser.lastname = $('#lastNameField').val();
+			
+			AGSUsers.update(currentUser, newUser);
+		}
+		if(isCourseDash){
+			
+		}
+		if(isAssignmentDash){
+			
+		}
 	}
-
 })

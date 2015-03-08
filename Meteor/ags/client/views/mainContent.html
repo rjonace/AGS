@@ -1,6 +1,6 @@
 <template name="mainContent">
 	<div id="editModal" class="ui fullscreen modal">
-		<i class="close icon cancel"></i>
+		<i id="closeButton" class="close icon"></i>
 		<div class="header">
       		Edit Settings
 		</div>
@@ -16,27 +16,11 @@
 			{{/if}}
 		</div>
 		<div class="actions">
-		      <div class="ui button cancel">Cancel</div>
-		      <div class="ui green button approve">Update</div>
+		      <div id="cancelButton" class="ui button">Cancel</div>
+		      <div id="updateButton" class="ui green button">Update</div>
     	</div>
 	</div>
-	<script>$('.ui.fullscreen.modal').modal({
-		onApprove : function(){
-			var currentUser = Session.get('userInfo');
-			var newUser = currentUser;
-			
-			newUser.firstname = $('#firstNameField').val();
-			newUser.lastname = $('#lastNameField').val();
-			
-			AGSUsers.update(currentUser, newUser);
-		},
-		onDeny : function(){
-			var currentUser = Session.get('userInfo');
-			
-			$('#firstNameField').val(currentUser.firstname);
-			$('#lastNameField').val(currentUser.lastname);
-		}
-	});</script>
+	<script>$('.ui.fullscreen.modal').modal();</script>
 	<div id="deleteModal" class="ui small modal">
 		<i class="close icon"></i>
 
@@ -431,17 +415,8 @@
 				{{> submissionFilesForm}}
 			{{else}}
 				<h3>Submission</h3>
-				<div class="ui form segment">
-					<div class="field">
-						<label>Your Solution</label>
-						<div class="ui action input">
-							<input id="fileNameField" type="text" value={{submissionFilename}}>
-						    <label for="submissionSolutionFile" class="ui icon button">
-						        <i class="file icon"></i>
-						        View File(s)</label>
-						</div>
-					</div>
-				</div>
+				<label for="submissionFilenameText">Your Solution File:</label>
+				<span name="submissionFilenameText">{{submissionFilename}}</span>
 				<h3>Feedback</h3>
 				{{#if fileNotGraded}}
 					<button type="button" id="gradeSubmission" >Get Feedback</button>
