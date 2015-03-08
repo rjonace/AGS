@@ -10,13 +10,13 @@
 						</div>
 						<div class="field">
 							<label>Language</label>
-							<select id="assignmentLanguageField" class="ui dropdown" value={{language}}>
+							<select id="assignmentLanguageField" class="ui dropdown">
 								 <option value="">Language</option>
 								 <option value="C">C</option>
 	    						 <option value="Java">Java</option>
 	    						 <option value="Python">Python</option>
 							</select>
-							<script type="text/javascript">$('select.dropdown').dropdown();</script>
+							<script type="text/javascript">$('select.dropdown').dropdown('select',{{language}});</script>
 						</div>
 					</div>
 					<div class="two fields">
