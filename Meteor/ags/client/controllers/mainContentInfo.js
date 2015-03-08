@@ -12,6 +12,16 @@ Template.addCourseForm.helpers({
 	}
 });
 
+Template.addAssignmentForm.helpers({
+	'isAssignmentDash': function(){
+		return Session.get('currentDashboard') === "assignmentDash";
+	},
+	'assignmentInfo': function(){
+		// check if creator of course
+		return Session.get('currentAssignment');
+	}
+});
+
 Template.mainContent.helpers({
 	'studentCourseList': function(){
 		var courseIdList = AGSUsers.findOne({_id:Meteor.userId()}).id_Courses;
