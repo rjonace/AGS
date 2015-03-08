@@ -1,6 +1,6 @@
 Template.AGSCreateUser.helpers({
-	'courseList': function(){
-		return AGSCourses.find().fetch();
+	'userInfo': function(){
+		return AGSUsers.findOne({_id:Meteor.userId()});
 	},
 	'addIndex': function (all) {
 		var retVals = [];
