@@ -1,5 +1,6 @@
 <template name="AGSCreateUser">
 	<div class="ui form segment">
+		{{#if unfinishedAccount}}
 		<div class="field">
 			<label>First Name</label>
 			<input id="firstNameField" type="text" placeholder="John">
@@ -8,6 +9,18 @@
 			<label>Last Name</label>
 			<input id="lastNameField"  type="text" placeholder="Smith">
 		</div>
+		{{else}}
+			{{#with userInfo}}
+				<div class="field">
+					<label>First Name</label>
+					<input id="firstNameField" type="text" value={{firstname}}>
+				</div>
+				<div class="field">
+					<label>Last Name</label>
+					<input id="lastNameField"  type="text" value={{lastname}}>
+				</div>
+			{{/with}}
+		{{/if}}
 		  <div class="ui error message">
 		    <div class="header">Error</div>
 		  </div>
