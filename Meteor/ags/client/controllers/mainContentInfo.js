@@ -377,7 +377,7 @@ Template.mainContent.events({
 		var isCourseDash = function(){
 			return Session.get('currentDashboard') === "courseDash";
 		}
-		var is AssignmentDash = function(){
+		var isAssignmentDash = function(){
 			return Session.get('currentDashboard') === "assignmentDash";
 		}
 		if(isUserDash){
