@@ -43,7 +43,7 @@
 						<div class="field">
 							<label>Auto-Grader File</label>
 							<div class="ui action input">
-								<input id="agFileNameField" type="text" value={{ag.filename}}>
+								<input id="agFileNameField" type="text" value={{ag.name}}>
 							    <label for="assignmentAGField" class="ui icon button">
 							        <i class="file icon"></i>
 							        Choose File(s)</label>
@@ -53,7 +53,10 @@
 						<div class="field">
 							<label>Student File(s)</label>
 							<div class="ui action input">
-								<input id="studentFileNameField" type="text" value={{studentfiles.name}}>
+								<input id="studentFileNameField" type="text" value=
+								{{#each studentfiles}}
+									{{name}} 
+								{{/each}}>
 							    <label for="assignmentStudentField" class="ui icon button">
 							        <i class="file icon"></i>
 							        Choose File(s)</label>
