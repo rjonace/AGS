@@ -1,5 +1,7 @@
 cd /shared/
 
+compileString=""
+
 for cFile in *.c; do
 	classname=${cFile%.*}
 	compileString+=/shared/$cFile' '
