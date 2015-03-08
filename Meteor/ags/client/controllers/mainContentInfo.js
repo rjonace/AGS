@@ -347,8 +347,8 @@ Template.mainContent.events({
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
 	},
-	'change #submissionSolutionFile' : function() {
-		var fileName = $('#submissionSolutionFile').val();
+	'change #submissionSolutionFile #assignmentAGField #assignmentStudentField' : function(event) {
+		var fileName = event.target.val();
 		if (fileName != '')
 			$('#fileNameField').val(fileName);
 		else
