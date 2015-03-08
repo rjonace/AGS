@@ -349,6 +349,7 @@ Template.mainContent.events({
 	},
 	'change #submissionSolutionFile #assignmentAGField #assignmentStudentField' : function(event) {
 		var fileName = event.target.val();
+		console.log(fileName);
 		if (fileName != '')
 			$('#fileNameField').val(fileName);
 		else
