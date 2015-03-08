@@ -1,6 +1,6 @@
 <template name="mainContent">
 	<div id="editModal" class="ui fullscreen modal">
-		<i class="close icon"></i>
+		<i class="close icon cancel"></i>
 		<div class="header">
       		Edit Settings
 		</div>
@@ -16,11 +16,27 @@
 			{{/if}}
 		</div>
 		<div class="actions">
-		      <div class="ui button">Cancel</div>
-		      <div class="ui green button">Update</div>
+		      <div class="ui button cancel">Cancel</div>
+		      <div class="ui green button approve">Update</div>
     	</div>
 	</div>
-	<script>$('.ui.fullscreen.modal').modal();</script>
+	<script>$('.ui.fullscreen.modal').modal({
+		onApprove : function(){
+			var currentUser = Session.get('userInfo');
+			var newUser = currentUser;
+			
+			newUser.firstname = $('#firstNameField').val();
+			newUser.lastname = $('#lastNameField').val();
+			
+			AGSUsers.update(currentUser, newUser);
+		},
+		onDeny : function(){
+			var currentUser = Session.get('userInfo');
+			
+			$('#firstNameField').val(currentUser.firstname);
+			$('#lastNameField').val(currentUser.lastname);
+		}
+	});</script>
 	<div id="deleteModal" class="ui small modal">
 		<i class="close icon"></i>
 
