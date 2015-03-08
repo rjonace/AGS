@@ -347,6 +347,13 @@ Template.mainContent.events({
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
 	},
+	'change #submissionSolutionFile' : function() {
+		var fileName = $('#submissionSolutionFile').val();
+		if (fileName != '')
+			$('#fileNameField').val(fileName);
+		else
+			$('#fileNameField').val('No file chosen')
+	},
 	'click #cancelButton #closeButton' : function(){
 		var isUserDash = function(){
 			return Session.get('currentDashboard') === "userDash";
