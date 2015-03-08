@@ -1,5 +1,5 @@
 <template name="mainContent">
-	<div class="ui fullscreen modal">
+	<div id="editModal" class="ui fullscreen modal">
 		<i class="close icon"></i>
 		<div class="header">
       		Edit Settings
@@ -21,7 +21,7 @@
     	</div>
 	</div>
 	<script>$('.ui.fullscreen.modal').modal();</script>
-	<div class="ui small modal">
+	<div id="deleteModal" class="ui small modal">
 		<i class="close icon"></i>
 
 			{{#if isUserDash}}

@@ -342,10 +342,10 @@ Template.mainContent.events({
 		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
 	},
 	'click .ui.icon.edit.button' : function(){
-		$('.ui.fullscreen.modal').modal('show');
+		$('#editModal').modal('show');
 	},
 	'click .ui.icon.delete.button' : function(){
-		$('.ui.small.modal').modal('show');
+		$('#deleteModal').modal('show');
 	}
 
 })
