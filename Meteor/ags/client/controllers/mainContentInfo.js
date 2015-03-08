@@ -347,13 +347,28 @@ Template.mainContent.events({
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
 	},
-	'change #submissionSolutionFile #assignmentAGField #assignmentStudentField' : function(event) {
-		var fileName = event.target.val();
+	'change #submissionSolutionFile' : function(event) {
+		var fileName = $('#submissionSolutionFile').val();
+		if (fileName != '')
+			$('#subFileNameField').val(fileName);
+		else
+			$('#subFileNameField').val('No file chosen')
+	},
+	'change #assignmentAGField' : function(event) {
+		var fileName = $('#assignmentAGField').val();
 		console.log(fileName);
 		if (fileName != '')
-			$('#fileNameField').val(fileName);
+			$('#agFileNameField').val(fileName);
 		else
-			$('#fileNameField').val('No file chosen')
+			$('#agFileNameField').val('No file chosen')
+	},
+	'change #assignmentStudentField' : function(event) {
+		var fileName = $('#assignmentStudentField').val();
+		console.log(fileName);
+		if (fileName != '')
+			$('#studentFileNameField').val(fileName);
+		else
+			$('#studentFileNameField').val('No file chosen')
 	},
 	'click #cancelButton #closeButton' : function(){
 		var isUserDash = function(){
