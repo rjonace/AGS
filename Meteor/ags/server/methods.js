@@ -28,7 +28,7 @@ Meteor.methods({
 			exec("rm -Rf " + path);
 
 	},
-	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment) {		
+	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment, assignmentLang) {		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
@@ -39,6 +39,11 @@ Meteor.methods({
 
 		var newPath = path + "/" + folderName;
 		var subNumber = submission.subNumber;
+		var fileToExec = "";
+		if (assignmentLang == "Java")
+			fileToExec = "/execjavafiles.sh ";
+		if (assignmentLang == "C")
+			fileToExec = "/execcfiles.sh ";
 
 		// may not need cd becuase passing path into exec sh
 		exec("cp " + path + "/*.* " + newPath,
@@ -46,7 +51,7 @@ Meteor.methods({
 				if(!error){
 					console.log(stdout);
 					console.log(stderr);
-					exec("sh " + newPath + "/execjavafiles.sh " + randomFolderName + " " + newPath,
+					exec("sh " + newPath + fileToExec + randomFolderName + " " + newPath,
 						function(inner_error, inner_stdout, inner_stderr){
 							var execData = {
 								error: inner_error,

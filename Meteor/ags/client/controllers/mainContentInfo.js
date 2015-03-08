@@ -191,7 +191,7 @@ Template.mainContent.events({
 				newPath = filePath + "/" + folderName;
 				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
 				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id] , true);
+				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id, currentAssignment.language], true);
 				Session.set('fileNotGraded', false);
 		});
 
