@@ -3,15 +3,24 @@
 	
 		<form name="submissionFilesForm" id="submissionFilesForm" method="post" enctype="multipart/form-data">
 			<h3>Submission</h3>
-			<label for="submissionSolutionFile">Your Solution File:</label>
-			<input type="file" name="submissionSolutionFile" multiple>
-			<br>
+			<div class="ui form segment">
+				<div class="field">
+					<label>Your Solution</label>
+					<div class="ui action input">
+						<input id="fileNameField" type="text" value="No file chosen">
+					    <label for="submissionSolutionFile" class="ui icon button">
+					        <i class="file icon"></i>
+					        Choose File(s)</label>
+					    <input type="file" id="submissionSolutionFile" style="display:none" multiple>
+					</div>
+				</div>
+			</div>
 
 <!--			<label for="submissionInputField">Input File(s):</label>
 			<input type="file" name="submissionInputField" multiple>
 			<br>
--->
-			<input type="submit" value="Add Submission Files">
+-->	
+			<input type="submit" class="ui submit button" value="Add Submission Files">
 		</form>
 		
 	{{/if}}

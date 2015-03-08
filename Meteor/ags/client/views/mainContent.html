@@ -431,8 +431,17 @@
 				{{> submissionFilesForm}}
 			{{else}}
 				<h3>Submission</h3>
-				<label for="submissionFilenameText">Your Solution File:</label>
-				<span name="submissionFilenameText">{{submissionFilename}}</span>
+				<div class="ui form segment">
+					<div class="field">
+						<label>Your Solution</label>
+						<div class="ui action input">
+							<input id="fileNameField" type="text" value={{submissionFilename}}>
+						    <label for="submissionSolutionFile" class="ui icon button">
+						        <i class="file icon"></i>
+						        View File(s)</label>
+						</div>
+					</div>
+				</div>
 				<h3>Feedback</h3>
 				{{#if fileNotGraded}}
 					<button type="button" id="gradeSubmission" >Get Feedback</button>
