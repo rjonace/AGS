@@ -2,6 +2,16 @@ Template.mainContent.rendered = function(){
 	//$('.dashboard.popup.tips .ui.button').popup();
 };
 
+Template.addCourseForm.helpers({
+	'isCourseDash': function(){
+		return Session.get('currentDashboard') === "courseDash";
+	},
+	'courseInfo': function(){
+		// check if creator of course
+		return Session.get('currentCourse');
+	}
+});
+
 Template.mainContent.helpers({
 	'studentCourseList': function(){
 		var courseIdList = AGSUsers.findOne({_id:Meteor.userId()}).id_Courses;
