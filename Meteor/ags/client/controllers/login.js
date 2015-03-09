@@ -39,6 +39,8 @@ if (Meteor.isClient) {
 				  Accounts.createUser({email: email, password: pass},function(error){
 					if(error)
 						$('.ui.error.message').text(error).show();
+					//else
+						//Accounts.sendVerificationEmail(Meteor.userId(),email);
 				});
   			} else {
   				$('.ui.error.message').text("No password entered.").show();

@@ -2,14 +2,8 @@ Template.AGSCreateUser.helpers({
 	'userInfo': function(){
 		return AGSUsers.findOne({_id:Meteor.userId()});
 	},
-	'addIndex': function (all) {
-		var retVals = [];
-		var i = 0;
-		for (item in all) {
-			retVals.push({index: i, value: all[i] });
-			i++;
-		}
-		return retVals;
+	'unfinishedAccount': function(){
+		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
 	}
 });
 

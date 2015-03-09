@@ -143,12 +143,16 @@ Meteor.methods({
 		console.log("ins end");
 	},
 	'createUserData': function(id, first, last, id_Courses){
-		AGSUsers.insert({
+		AGSUsers.update(
+		{_id:id},			//selector
+		{					//modifier
 			_id: id,
 			firstname: first,
 			lastname: last,
 			id_Courses: id_Courses
-		}, function(err, id){
+		},
+		{upsert : true},	//options
+		 function(err, id){	//callback
 			if (err)
 				console.log(err);
 			else

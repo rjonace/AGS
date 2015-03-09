@@ -381,6 +381,7 @@ Template.mainContent.events({
 			$('#studentFileNameField').val('No file chosen')
 	},
 	'click #cancelButton #closeButton' : function(){
+		console.log('cancelled');
 		var isUserDash = function(){
 			return Session.get('currentDashboard') === "userDash";
 		}
@@ -404,28 +405,21 @@ Template.mainContent.events({
 		}
 	},
 	'click #updateButton' : function(){
-		var isUserDash = function(){
-			return Session.get('currentDashboard') === "userDash";
-		}
-		var isCourseDash = function(){
-			return Session.get('currentDashboard') === "courseDash";
-		}
-		var isAssignmentDash = function(){
-			return Session.get('currentDashboard') === "assignmentDash";
-		}
-		if(isUserDash){
-			var currentUser = Session.get('userInfo');
+		console.log('updated');
+		if(Session.get('currentDashboard') === "userDash"){
+			var currentUser = AGSUsers.findOne({_id:Meteor.userId()});
 			var newUser = currentUser;
 			
 			newUser.firstname = $('#firstNameField').val();
 			newUser.lastname = $('#lastNameField').val();
+
 			
-			AGSUsers.update(currentUser, newUser);
+			Meteor.call('createUserData', newUser._id, newUser.firstName, newUser.lastName, newUser.id_Courses);
 		}
-		if(isCourseDash){
+		if(Session.get('currentDashboard') === "courseDash"){
 			
 		}
-		if(isAssignmentDash){
+		if(Session.get('currentDashboard') === "assignmentDash"){
 			
 		}
 	}
