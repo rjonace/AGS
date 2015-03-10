@@ -129,7 +129,8 @@ Template.mainContent.events({
 		var courseNumber = event.target.courseNumberField.value;
 		var courseSemester = event.target.courseSemesterField.value;
 		var courseYear = event.target.courseYearField.value;
-		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear);
+		var courseDescription = event.target.courseDescriptionField.value;
+		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear, courseDescription);
 	},
 	'submit .createUser': function(event){
 
@@ -349,10 +350,113 @@ Template.mainContent.events({
 		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
 	},
 	'click .ui.icon.edit.button' : function(){
-		$('#editModal').modal('show');
+		$('#editModal').modal({
+			closable : false,
+			onDeny: function(){
+				if(Session.get('currentDashboard') === "userDash"){
+					var currentUser = AGSUsers.findOne({_id:Meteor.userId()});
+					
+					 $('#firstNameField').val(currentUser.firstname)
+					 $('#lastNameField').val(currentUser.lastname)
+				}
+				if(Session.get('currentDashboard') === "courseDash"){
+					var currentCourse = Session.get('currentCourse');
+
+					 $('#courseNameField').val(currentCourse.name)
+					 $('#courseNumberField').val(currentCourse.number)
+					 $('#courseSemesterField').val(currentCourse.semester)
+					 $('#courseYearField').val(currentCourse.year)
+					 $('#courseDescriptionField').val(currentCourse.description)
+
+				}
+				if(Session.get('currentDashboard') === "assignmentDash"){
+					var currentAssignment = Session.get('currentAssignment');
+
+					 $('#assignmentNameField').val(currentAssignment.name)
+					 $('#assignmentDescriptionField').val(currentAssignment.description)
+					 $('#assignmentLanguageField').val(currentAssignment.language)
+					 $('#assignmentDateAvailableField').val(currentAssignment.dateAvailable)
+					 $('#assignmentDateDueField').val(currentAssignment.dateDue)
+					 $('#assignmentPointsField').val(currentAssignment.points)
+
+				}
+			},
+			onApprove : function(event){
+				if(Session.get('currentDashboard') === "userDash"){
+					var currentUser = AGSUsers.findOne({_id:Meteor.userId()});
+					
+					Meteor.call('createUserData',
+					 currentUser._id, 
+					 $('#firstNameField').val(), 
+					 $('#lastNameField').val(), 
+					 currentUser.id_Courses);
+				}
+				if(Session.get('currentDashboard') === "courseDash"){
+					var currentCourse = Session.get('currentCourse');
+
+					Meteor.apply('updateCourseData',
+					 [currentCourse._id, 
+					 $('#courseNameField').val(), 
+					 $('#courseNumberField').val(),
+					 $('#courseSemesterField').val(), 
+					 $('#courseYearField').val(),  
+					 $('#courseDescriptionField').val()]);
+					Meteor.apply('resetCurrentCourse',[currentCourse._id], 					 
+				 		function(error,result){
+				 			if(!error){
+				 				Session.set('currentCourse',result);
+				 			}
+				 			else
+				 				console.log(error);
+				 		}
+					);
+
+				}
+				if(Session.get('currentDashboard') === "assignmentDash"){
+					var currentAssignment = Session.get('currentAssignment');
+
+					Meteor.apply('updateAssignmentData',
+						[currentAssignment._id,
+						 $('#assignmentNameField').val(),
+						 $('#assignmentDescriptionField').val(),
+						 $('#assignmentLanguageField').val(),
+						 $('#assignmentDateAvailableField').val(), 
+						 $('#assignmentDateDueField').val(), 
+						 $('#assignmentPointsField').val()]);
+					Meteor.apply('resetCurrentAssignment',[currentAssignment._id], 					 
+				 		function(error,result){
+				 			if(!error){
+				 				Session.set('currentAssignment',result);
+				 			}
+				 			else
+				 				console.log(error);
+				 		}
+					);
+				}
+			}
+	}).modal('show');
 	},
 	'click .ui.icon.delete.button' : function(){
-		$('#deleteModal').modal('show');
+		$('#deleteModal').modal({
+			closable:false,
+			onDeny : function(){
+
+			},
+			onApprove : function(){
+				if(Session.get('currentDashboard') === "courseDash"){
+					var currentCourse = Session.get('currentCourse');
+					Meteor.call('removeCourseData',currentCourse._id);
+					Session.set('currentCourse', null);
+					Session.set('currentDashboard', "userDash");
+				}
+				if(Session.get('currentDashboard') === "assignmentDash"){
+					var currentAssignment = Session.get('currentAssignment');
+					Meteor.call('removeAssignmentData',currentAssignment._id);
+					Session.set('currentAssignment', null);
+					Session.set('currentDashboard', "courseDash");
+				}
+			}
+		}).modal('show');
 	},
 	'click #viewFilesButton' : function(){
 		$('#viewFilesModal').modal('show');
@@ -379,48 +483,5 @@ Template.mainContent.events({
 			$('#studentFileNameField').val(fileName);
 		else
 			$('#studentFileNameField').val('No file chosen')
-	},
-	'click #cancelButton #closeButton' : function(){
-		console.log('cancelled');
-		var isUserDash = function(){
-			return Session.get('currentDashboard') === "userDash";
-		}
-		var isCourseDash = function(){
-			return Session.get('currentDashboard') === "courseDash";
-		}
-		var isAssignmentDash = function(){
-			return Session.get('currentDashboard') === "assignmentDash";
-		}
-		if(isUserDash){
-			var currentUser = Session.get('userInfo');
-			
-			$('#firstNameField').val(currentUser.firstname);
-			$('#lastNameField').val(currentUser.lastname);
-		}
-		if(isCourseDash){
-			
-		}
-		if(isAssignmentDash){
-			
-		}
-	},
-	'click #updateButton' : function(){
-		console.log('updated');
-		if(Session.get('currentDashboard') === "userDash"){
-			var currentUser = AGSUsers.findOne({_id:Meteor.userId()});
-			var newUser = currentUser;
-			
-			newUser.firstname = $('#firstNameField').val();
-			newUser.lastname = $('#lastNameField').val();
-
-			
-			Meteor.call('createUserData', newUser._id, newUser.firstName, newUser.lastName, newUser.id_Courses);
-		}
-		if(Session.get('currentDashboard') === "courseDash"){
-			
-		}
-		if(Session.get('currentDashboard') === "assignmentDash"){
-			
-		}
 	}
 })

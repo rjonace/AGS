@@ -159,7 +159,7 @@ Meteor.methods({
 				console.log(id);
 		});
 	},
-	'insertCourseData': function(name, number, semester, year) {
+	'insertCourseData': function(name, number, semester, year, description) {
 		var currentUserId = Meteor.userId();
 		var courseKey = AGSCourses._makeNewID();
 		AGSCourses.insert({
@@ -167,6 +167,7 @@ Meteor.methods({
 			number: number,
 			semester: semester,
 			year: year,
+			description: description,
 			key: courseKey,
 			id_Instructor: currentUserId,
 			id_Students: [],
@@ -178,9 +179,46 @@ Meteor.methods({
 			//);
 		});
 	},
-	'removeCourseData': function(selectedCourse){
-		AGSCourses.remove(selectedCourse);
+	'updateCourseData' :function(id, name, number, semester, year, description){
+		AGSCourses.update(
+		{_id:id},			//selector
+		{$set: {					//modifier
+			name: name,
+			number: number,
+			semester: semester,
+			year: year,
+			description: description
+		}},
+		{upsert : false},	//options
+		 function(err, result){	//callback
+			if (err)
+				console.log(err);
+		});
+	},
+	'removeCourseData': function(id_Course){
+		AGSCourses.remove({_id:id_Course});
+		AGSUsers.update(
+			{},
+			{ $pull : 
+				{id_Courses: id_Course}
+			},
+			{ multi:true });
+		AGSAssignments.remove({id_Course:id_Course});
 		// remove all references to the course?
+	},
+	'removeAssignmentData': function(id_Assignment){
+		AGSAssignments.remove({_id:id_Assignment});
+		AGSCourses.update(
+			{},
+			{ $pull : 
+				{id_Assignments: id_Assignment}
+			},
+			{ multi:true });
+		AGSSubmissions.remove({id_Assignment:id_Assignment});
+		// remove all references to the assignemnt?
+	},
+	'resetCurrentCourse': function(id_Course){
+		return AGSCourses.findOne({_id:id_Course});
 	},
 	'checkCourseKey' : function(courseKey) {
 		return AGSCourses.findOne({key:courseKey});
@@ -268,6 +306,25 @@ Meteor.methods({
 				{ $addToSet: { id_Assignments: id}}
 			);
 		});
+	},
+	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, points){
+		AGSAssignments.update(
+		{_id:id_Assignment},
+		{ $set: {
+			name: name,
+			description: description,
+			language: lang,
+			dateAvailable: dateAvailable,
+			dateDue: dateDue,
+			points: points
+		}},{upsert : false},	//options
+		 function(err, result){	//callback
+			if (err)
+				console.log(err);
+		});
+	},
+	'resetCurrentAssignment' : function(id_Assignment){
+		return AGSAssignments.findOne({_id:id_Assignment});
 	},
 	'insertAssignmentAG': function(id_Assignment, filename, contents){
 		AGSAssignments.update(

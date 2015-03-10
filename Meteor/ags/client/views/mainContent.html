@@ -1,6 +1,5 @@
 <template name="mainContent">
 	<div id="editModal" class="ui fullscreen modal">
-		<i id="closeButton" class="close icon"></i>
 		<div class="header">
       		Edit Settings
 		</div>
@@ -16,14 +15,13 @@
 			{{/if}}
 		</div>
 		<div class="actions">
-		      <div id="cancelButton" class="ui button">Cancel</div>
-		      <div id="updateButton" class="ui green button">Update</div>
+		      <div id="cancelButton" class="ui deny button">Cancel</div>
+		      <div id="updateButton" class="ui green approve button">Update</div>
     	</div>
 	</div>
 	<script>$('.ui.fullscreen.modal').modal();
 	</script>
 	<div id="deleteModal" class="ui small modal">
-		<i class="close icon"></i>
 
 			{{#if isUserDash}}
 				{{> AGSCreateUser}}
@@ -51,8 +49,8 @@
 				</div>
 			{{/if}}
 		<div class="actions">
-		      <div class="ui red button">No</div>
-		      <div class="ui green button">Yes</div>
+		      <div class="ui red deny button">No</div>
+		      <div class="ui green approve button">Yes</div>
     	</div>
 	</div>
 	<script>$('.ui.small.modal').modal();</script>
