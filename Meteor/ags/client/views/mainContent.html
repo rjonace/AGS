@@ -81,6 +81,7 @@
 	</div>
 	<script>$('.ui.fullscreen.modal.files').modal();</script>
 	<div class="ags-main-content-info">
+		<div class="ui yellow segment">
 		{{#if unfinishedAccount}}
 			<div class="ui dividing header">
 			  <i class="user icon"></i>
@@ -88,16 +89,14 @@
 			    Finish Creating Your Account
 			  </div>
 			</div>
-			<p>Enter your first and last name. <br>Sign up for a course by entering the course key provided by the instructor.</p>
+			<p>Enter your first and last name.</p>
 		{{else}}
 			{{#if isUserDash}}
 				{{#with userInfo}}
 					<div class="ui dividing header">
 					  <i class="user icon"></i>
 					  <div class="content">
-					    User Dashboard
-					    <div class="sub header">{{firstname}} {{lastname}}
-					    </div>
+					    {{firstname}} {{lastname}}
 					  </div>
 					</div>
 				{{/with}}
@@ -117,8 +116,8 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    Course Dashboard
-					    <div class="sub header">{{number}}: {{name}} <br>Key: {{key}}</div>
+					    {{number}}: {{name}}
+					    <div class="sub header">{{semester}} {{year}}<br>Key: {{key}}</div>
 					  </div>
 					</div>
 					<div class="dashboard popup tips">
@@ -139,8 +138,8 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    Course Dashboard
-					    <div class="sub header">{{number}}: {{name}}</div>
+					    {{number}}: {{name}}
+					    <div class="sub header">{{semester}} {{year}}</div>
 					  </div>
 					</div>
 					{{/if}}
@@ -150,14 +149,13 @@
 			{{#if isAssignmentDash}}
 				{{#with assignmentInfo}}
 					<div class="ui dividing header">
-						<i class="code icon"></i>
+						<i class="file text icon"></i>
 						<div class="content">
-							Assignment Dashboard
-						    <div class="sub header">{{name}}: {{description}}
+							{{name}}
+						    <div class="sub header">{{description}}<br>Available: {{dateAvailable}} | Due: {{dateDue}}
 							</div>
 				  		</div>
 					</div>
-					Date Available: {{dateAvailable}}<br> Date Due:{{dateDue}}
 				{{/with}}
 				{{#if isUserCreator}}
 				<div class="dashboard popup tips">
@@ -181,10 +179,10 @@
 			{{#if isSubmissionDash}}
 				{{#with submissionInfo}}
 					<div class="ui dividing header">
-						<i class="file text icon"></i>
+						<i class="code icon"></i>
 						<div class="content">
-							Submission Dashboard
-						    <div class="sub header">{{name}}: {{dateCreated}}
+							{{name}}
+						    <div class="sub header">Created: {{dateCreated}}
 							</div>
 				  		</div>
 					</div>
@@ -194,7 +192,9 @@
 
 		{{/if}}
 	</div>
+	</div>
 	<div class="ags-main-content-view">
+		<div class="ui inverted segment">
 		{{#if unfinishedAccount}}
 			<div id="signUpForm">
 				<form method="post" id="createUser" class="createUser">
@@ -208,13 +208,14 @@
 
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Courses</h3>
-					<div class="ui cards">
+					<div class="ui inverted cards">
 						{{#each studentCourseList}}
 						<div class="card" id="userCourse">
 						    <div class="content">
 						      <div class="header">{{number}}</div>
 						      <div class="description">
-						        {{name}}
+						        {{name}}<br>
+						        {{semester}} {{year}}
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -306,7 +307,7 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="code icon"></i>
+						      <i class="file text icon"></i>
 						      View Assignment
 						    </div>
 						  </div>
@@ -359,7 +360,7 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="file text outline icon"></i>
+						      <i class="code icon"></i>
 						      View Submission
 						    </div>
 						  </div>
@@ -384,7 +385,7 @@
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
-						      <i class="file text outline icon"></i>
+						      <i class="code icon"></i>
 						      View Submission
 						    </div>
 						  </div>
@@ -444,6 +445,6 @@
 				{{/if}}
 			{{/if}}
 		{{/if}}
-
+</div>
 	</div>
 </template>
