@@ -1,4 +1,213 @@
 Meteor.methods({
+
+/*	Server side User methods*/
+	'createUserData': function(id, first, last, id_Courses){
+		AGSUsers.update(
+		{_id:id},			//selector
+		{					//modifier
+			_id: id,
+			firstname: first,
+			lastname: last,
+			id_Courses: id_Courses
+		},
+		{upsert : true},	//options
+		 function(err, id){	//callback
+			if (err)
+				console.log(err);
+			else
+				console.log(id);
+		});
+	},
+	'checkCourseKey' : function(courseKey) {
+		return AGSCourses.findOne({key:courseKey});
+	},
+	'enrollInCourse': function(selectedCourse){
+		var currentUserId = Meteor.userId();
+		AGSCourses.update(
+			selectedCourse,
+			{ $addToSet: { id_Students: currentUserId } }
+		);
+		AGSUsers.update( 
+			{ _id: currentUserId },
+			{ $addToSet: { id_Courses: selectedCourse._id} }
+		);
+		AGSUsers.update( 
+			{ _id: selectedCourse.id_Instructor },
+			{ $addToSet: { id_Students: currentUserId} }
+		);
+	},
+
+/*	Server side Course Methods*/
+	'insertCourseData': function(name, number, semester, year, description) {
+		var currentUserId = Meteor.userId();
+		var courseKey = AGSCourses._makeNewID();
+		AGSCourses.insert({
+			name: name,
+			number: number,
+			semester: semester,
+			year: year,
+			description: description,
+			key: courseKey,
+			id_Instructor: currentUserId,
+			id_Students: [],
+			id_Assignments: []
+		}, function(err,id){
+			//AGSUsers.update(
+			//	{_id:currentUserId},
+			//	{ $addToSet: { id_Courses: id}}
+			//);
+		});
+	},
+	'updateCourseData' :function(id, name, number, semester, year, description){
+		AGSCourses.update(
+		{_id:id},			//selector
+		{$set: {					//modifier
+			name: name,
+			number: number,
+			semester: semester,
+			year: year,
+			description: description
+		}},
+		{upsert : false},	//options
+		 function(err, result){	//callback
+			if (err)
+				console.log(err);
+		});
+	},
+	'removeCourseData': function(id_Course){
+		AGSCourses.remove({_id:id_Course});
+		AGSUsers.update(
+			{},
+			{ $pull : 
+				{id_Courses: id_Course}
+			},
+			{ multi:true });
+		AGSAssignments.remove({id_Course:id_Course});
+		// remove all references to the course?
+	},
+	'resetCurrentCourse': function(id_Course){
+		return AGSCourses.findOne({_id:id_Course});
+	},
+
+/*	Server side Assignment Methods*/
+	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
+
+		return AGSAssignments.insert({
+			name: name,
+			description: description,
+			language: lang,
+			dateAvailable: dateAvailable,
+			dateDue: dateDue,
+			points: points,
+			id_Course: id_Course
+		}, function(err, id) {
+			console.log(err);
+			AGSCourses.update(
+				{_id:id_Course},
+				{ $addToSet: { id_Assignments: id}}
+			);
+		});
+	},	
+	'insertAssignmentAG': function(id_Assignment, filename, contents){
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$set: { ag: { name: filename, contents: contents} } }
+		);
+	},	
+	'insertAssignmentStudent': function(id_Assignment, filename, contents){
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
+		);
+	},
+	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, points){
+		AGSAssignments.update(
+		{_id:id_Assignment},
+		{ $set: {
+			name: name,
+			description: description,
+			language: lang,
+			dateAvailable: dateAvailable,
+			dateDue: dateDue,
+			points: points
+		}},{upsert : false},	//options
+		 function(err, result){	//callback
+			if (err)
+				console.log(err);
+		});
+	},
+	'removeAssignmentData': function(id_Assignment){
+		AGSAssignments.remove({_id:id_Assignment});
+		AGSCourses.update(
+			{},
+			{ $pull : 
+				{id_Assignments: id_Assignment}
+			},
+			{ multi:true });
+		AGSSubmissions.remove({id_Assignment:id_Assignment});
+		// remove all references to the assignemnt?
+	},
+	'resetCurrentAssignment' : function(id_Assignment){
+		return AGSAssignments.findOne({_id:id_Assignment});
+	},
+
+/*	Server side Submission methods*/
+	'createNewSubmission': function(id_User, id_Assignment, id_Instructor){
+		var sub = AGSSubmissions.findOne({
+			id_Student: id_User,
+			id_Assignment: id_Assignment
+		});
+
+		if (!sub) {
+
+			return AGSSubmissions.insert({
+				id_Student: id_User,
+				id_Assignment: id_Assignment,
+				id_Instructor: id_Instructor,
+				AttemptCount: 1,
+				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
+			}, function(err, id) {
+				console.log(err);
+				AGSAssignments.update(
+					{_id:id_Assignment},
+					{ $addToSet: { id_Submissions: id}}
+				);
+			});
+
+		} else {
+			AGSSubmissions.update(
+					sub,
+					{ 	$inc: { AttemptCount: 1 },
+						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
+					}
+			);
+			return AGSSubmissions.findOne({
+				id_Student: id_User,
+				id_Assignment: id_Assignment
+			});
+		}
+	},
+	'insertSubmissionSolution' : function(id_Student, id_Assignment, subNumber, filename, contents){
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set: {
+					"AttemptList.$.filename": filename, 
+					"AttemptList.$.contents": contents
+				} 
+			} 
+		);
+		return AGSSubmissions.findOne({ id_Student: id_Student, id_Assignment: id_Assignment });
+	},
+	'resetSubmissionSession' : function(id_User, id_Assignment, submission) {
+		return AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[submission.subNumber];
+	},
+
+/*	Server side Auto Grading methods*/
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		console.log("prep start");
 		
@@ -17,16 +226,30 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'resetSubmissionSession' : function(id_User, id_Assignment, submission) {
-		return AGSSubmissions.findOne({ id_Student: id_User, id_Assignment: id_Assignment }).AttemptList[submission.subNumber];
-	},
-	'gradeCleanUp' : function(path, id_User, id_Assignment, submission){
+	'writeSubmissionFiles' : function(submission, path) {
+		console.log("sub start");
+		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-
-		if (path)
-			exec("rm -Rf " + path);
-
+		var newPath = path + "/SubmissionFiles";
+		console.log("sub check 1");
+		fs.mkdirSync(newPath);
+		console.log("sub check 2");
+		fs.writeFileSync(newPath + "/" + submission.filename, submission.contents);
+		console.log("sub end");
+	},
+	'writeInstructorFiles' : function(assignment, path) {
+		console.log("ins start");
+		
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		var newPath = path + "/InstructorFiles";
+		
+		console.log("ins check 1");
+		fs.mkdirSync(newPath);
+		console.log("ins check 2");
+		fs.writeFileSync(newPath + "/" + assignment.ag.name, assignment.ag.contents);
+		console.log("ins end");
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment, assignmentLang) {		
 		var fs = Npm.require('fs');
@@ -99,250 +322,12 @@ Meteor.methods({
 				Meteor.clearInterval(fileCheck);
 			}))
 		}, 1000);
-/* 		var attempt = 1;
-		while(true){
-			setTimeout(function(){
-				try{
-					var comp;
-					console.log("Attempt " + attempt)
-					comp = fs.readFileSync(newPath + '/completed', 'utf8');
-					if(comp === "completed"){
-						break;
-					}
-				}catch (e){
-					
-				}
-				attempt++;
-			}, (1000));
-		} */
-		//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
 	},
-	'writeSubmissionFiles' : function(submission, path) {
-		console.log("sub start");
-		
+	'gradeCleanUp' : function(path, id_User, id_Assignment, submission){
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-		var newPath = path + "/SubmissionFiles";
-		console.log("sub check 1");
-		fs.mkdirSync(newPath);
-		console.log("sub check 2");
-		fs.writeFileSync(newPath + "/" + submission.filename, submission.contents);
-		console.log("sub end");
-	},
-	'writeInstructorFiles' : function(assignment, path) {
-		console.log("ins start");
-		
-		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
-		var newPath = path + "/InstructorFiles";
-		
-		console.log("ins check 1");
-		fs.mkdirSync(newPath);
-		console.log("ins check 2");
-		fs.writeFileSync(newPath + "/" + assignment.ag.name, assignment.ag.contents);
-		console.log("ins end");
-	},
-	'createUserData': function(id, first, last, id_Courses){
-		AGSUsers.update(
-		{_id:id},			//selector
-		{					//modifier
-			_id: id,
-			firstname: first,
-			lastname: last,
-			id_Courses: id_Courses
-		},
-		{upsert : true},	//options
-		 function(err, id){	//callback
-			if (err)
-				console.log(err);
-			else
-				console.log(id);
-		});
-	},
-	'insertCourseData': function(name, number, semester, year, description) {
-		var currentUserId = Meteor.userId();
-		var courseKey = AGSCourses._makeNewID();
-		AGSCourses.insert({
-			name: name,
-			number: number,
-			semester: semester,
-			year: year,
-			description: description,
-			key: courseKey,
-			id_Instructor: currentUserId,
-			id_Students: [],
-			id_Assignments: []
-		}, function(err,id){
-			//AGSUsers.update(
-			//	{_id:currentUserId},
-			//	{ $addToSet: { id_Courses: id}}
-			//);
-		});
-	},
-	'updateCourseData' :function(id, name, number, semester, year, description){
-		AGSCourses.update(
-		{_id:id},			//selector
-		{$set: {					//modifier
-			name: name,
-			number: number,
-			semester: semester,
-			year: year,
-			description: description
-		}},
-		{upsert : false},	//options
-		 function(err, result){	//callback
-			if (err)
-				console.log(err);
-		});
-	},
-	'removeCourseData': function(id_Course){
-		AGSCourses.remove({_id:id_Course});
-		AGSUsers.update(
-			{},
-			{ $pull : 
-				{id_Courses: id_Course}
-			},
-			{ multi:true });
-		AGSAssignments.remove({id_Course:id_Course});
-		// remove all references to the course?
-	},
-	'removeAssignmentData': function(id_Assignment){
-		AGSAssignments.remove({_id:id_Assignment});
-		AGSCourses.update(
-			{},
-			{ $pull : 
-				{id_Assignments: id_Assignment}
-			},
-			{ multi:true });
-		AGSSubmissions.remove({id_Assignment:id_Assignment});
-		// remove all references to the assignemnt?
-	},
-	'resetCurrentCourse': function(id_Course){
-		return AGSCourses.findOne({_id:id_Course});
-	},
-	'checkCourseKey' : function(courseKey) {
-		return AGSCourses.findOne({key:courseKey});
-	},
-	'enrollInCourse': function(selectedCourse){
-		var currentUserId = Meteor.userId();
-		AGSCourses.update(
-			selectedCourse,
-			{ $addToSet: { id_Students: currentUserId } }
-		);
-		AGSUsers.update( 
-			{ _id: currentUserId },
-			{ $addToSet: { id_Courses: selectedCourse._id} }
-		);
-		AGSUsers.update( 
-			{ _id: selectedCourse.id_Instructor },
-			{ $addToSet: { id_Students: currentUserId} }
-		);
-	},
-	'createNewSubmission': function(id_User, id_Assignment, id_Instructor){
-		var sub = AGSSubmissions.findOne({
-			id_Student: id_User,
-			id_Assignment: id_Assignment
-		});
 
-		if (!sub) {
-
-			return AGSSubmissions.insert({
-				id_Student: id_User,
-				id_Assignment: id_Assignment,
-				id_Instructor: id_Instructor,
-				AttemptCount: 1,
-				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
-			}, function(err, id) {
-				console.log(err);
-				AGSAssignments.update(
-					{_id:id_Assignment},
-					{ $addToSet: { id_Submissions: id}}
-				);
-			});
-
-		} else {
-			AGSSubmissions.update(
-					sub,
-					{ 	$inc: { AttemptCount: 1 },
-						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
-					}
-			);
-			return AGSSubmissions.findOne({
-				id_Student: id_User,
-				id_Assignment: id_Assignment
-			});
-		}
-	},
-	'insertSubmissionSolution' : function(id_Student, id_Assignment, subNumber, filename, contents){
-		AGSSubmissions.update(
-			{
-				"id_Student": id_Student,
-				"id_Assignment": id_Assignment,
-				"AttemptList.subNumber": subNumber
-			}, 
-			{ 
-				$set: {
-					"AttemptList.$.filename": filename, 
-					"AttemptList.$.contents": contents
-				} 
-			} 
-		);
-		return AGSSubmissions.findOne({ id_Student: id_Student, id_Assignment: id_Assignment });
-	},
-	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
-
-		return AGSAssignments.insert({
-			name: name,
-			description: description,
-			language: lang,
-			dateAvailable: dateAvailable,
-			dateDue: dateDue,
-			points: points,
-			id_Course: id_Course
-		}, function(err, id) {
-			console.log(err);
-			AGSCourses.update(
-				{_id:id_Course},
-				{ $addToSet: { id_Assignments: id}}
-			);
-		});
-	},
-	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, points){
-		AGSAssignments.update(
-		{_id:id_Assignment},
-		{ $set: {
-			name: name,
-			description: description,
-			language: lang,
-			dateAvailable: dateAvailable,
-			dateDue: dateDue,
-			points: points
-		}},{upsert : false},	//options
-		 function(err, result){	//callback
-			if (err)
-				console.log(err);
-		});
-	},
-	'resetCurrentAssignment' : function(id_Assignment){
-		return AGSAssignments.findOne({_id:id_Assignment});
-	},
-	'insertAssignmentAG': function(id_Assignment, filename, contents){
-		AGSAssignments.update(
-			{_id: id_Assignment}, 
-			{$set: { ag: { name: filename, contents: contents} } }
-		);
-	},	
-/*	'insertAssignmentSolution': function(id_Assignment, filename, contents){
-		AGSAssignments.update(
-			{_id: id_Assignment}, 
-			{$set: {solution: {name: filename, contents: contents} } }
-		);
-	},
-*/
-	'insertAssignmentStudent': function(id_Assignment, filename, contents){
-		AGSAssignments.update(
-			{_id: id_Assignment}, 
-			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
-		);
+		if (path)
+			exec("rm -Rf " + path);
 	}
 });
