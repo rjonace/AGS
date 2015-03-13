@@ -200,10 +200,13 @@ Meteor.methods({
 				"AttemptList.subNumber": subNumber
 			}, 
 			{ 
-				$set: {
-					"AttemptList.$.filename": filename, 
-					"AttemptList.$.contents": contents
-				} 
+				// $set: {
+				// 	"AttemptList.$.filename": filename, 
+				// 	"AttemptList.$.contents": contents
+				// } 
+				$addToSet : {
+					"AttemptList.$.files": { name : filename, contents : contents }
+				}
 			} 
 		);
 		return AGSSubmissions.findOne({ id_Student: id_Student, id_Assignment: id_Assignment });
@@ -240,7 +243,9 @@ Meteor.methods({
 		console.log("sub check 1");
 		fs.mkdirSync(newPath);
 		console.log("sub check 2");
-		fs.writeFileSync(newPath + "/" + submission.filename, submission.contents);
+		for (int i = 0; i < submission.files.length; i++){
+			fs.writeFileSync(newPath + "/" + submission.files[i].name, submission.files[i].contents);
+		}
 		console.log("sub end");
 	},
 	'writeInstructorFiles' : function(assignment, path) {

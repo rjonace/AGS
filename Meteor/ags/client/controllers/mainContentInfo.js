@@ -114,9 +114,9 @@ Template.mainContent.helpers({
 	'fileNotGraded': function(){
 		return Session.get('fileNotGraded');
 	},
-	'submissionFilename': function(){
+	'submissionFiles': function(){
 		var submission = Session.get('currentSubmission');
-		return submission.filename;
+		return submission.files;
 	},
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
@@ -166,7 +166,7 @@ Template.mainContent.events({
 	'click #assignmentSubmission': function(){
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
-		if(Session.get('currentSubmission').filename === undefined){
+		if(Session.get('currentSubmission').files === undefined){
 			Session.set('fileNotSubmitted', true);
 		}else{
 			Session.set('fileNotSubmitted', false);
