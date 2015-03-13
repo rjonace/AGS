@@ -90,20 +90,14 @@
 }
 
 .ags-main-content-info {
-	top : 25px;
-	left: 25px;
-	right: 20px;
-	height: 130px;
-	background: #fff;
+	top : 10px;
+	width: auto;
 	border-radius : 3px;
 }
 
 .ags-main-content-view {
-	top : 175px;
-	left: 25px;
-	right: 20px;
-	height: 100%;
-	background: #fff;
+	top : 10px;
+	width: auto;
 	border-radius : 3px;
 }
 
