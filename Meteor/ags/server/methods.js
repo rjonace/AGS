@@ -243,7 +243,7 @@ Meteor.methods({
 		console.log("sub check 1");
 		fs.mkdirSync(newPath);
 		console.log("sub check 2");
-		for (int i = 0; i < submission.files.length; i++){
+		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(newPath + "/" + submission.files[i].name, submission.files[i].contents);
 		}
 		console.log("sub end");
