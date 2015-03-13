@@ -158,6 +158,9 @@ Meteor.methods({
 			id_Assignment: id_Assignment
 		});
 
+		var student = AGSUsers.findOne({_id:id_User});
+		var studentName = student.lastname + ", " + student.firstname;
+
 		if (!sub) {
 
 			return AGSSubmissions.insert({
@@ -165,7 +168,7 @@ Meteor.methods({
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
 				AttemptCount: 1,
-				AttemptList: [{ name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
+				AttemptList: [{ id_Student: id_User, studentName: studentName, name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
 			}, function(err, id) {
 				console.log(err);
 				AGSAssignments.update(
@@ -178,7 +181,7 @@ Meteor.methods({
 			AGSSubmissions.update(
 					sub,
 					{ 	$inc: { AttemptCount: 1 },
-						$addToSet: { AttemptList: { name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
+						$addToSet: { AttemptList: { id_Student: id_User, studentName: studentName, name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
 					}
 			);
 			return AGSSubmissions.findOne({

@@ -181,7 +181,7 @@
 					<div class="ui dividing header">
 						<i class="code icon"></i>
 						<div class="content">
-							{{name}}
+							{{#if isUserCreator}}{{name}}{{else}}{{name}}: {{studentName}}{{/if}}
 						    <div class="sub header">Created: {{dateCreated}}
 							</div>
 				  		</div>
@@ -355,7 +355,7 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{description}}<br/>
+						        <br/>
 						        Created: {{dateCreated}}
 						      </div>
 						    </div>
@@ -380,7 +380,7 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{description}}<br/>
+						        {{studentName}}<br/>
 						        Created: {{dateCreated}}
 						      </div>
 						    </div>

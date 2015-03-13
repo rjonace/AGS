@@ -41,7 +41,9 @@ Template.mainContent.helpers({
 		if (curDash === "courseDash" || curDash === "assignmentDash") 
 			return Session.get('currentCourse').id_Instructor == Meteor.userId();
 
-		if (curDash === "submissionDash")
+		if (curDash === "submissionDash") {
+			return Session.get('currentSubmission').id_Student == Meteor.userId();
+		}
 			return true; // we have to change this later
 		
 		if (curDash == "userDash")
