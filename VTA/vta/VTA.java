@@ -82,11 +82,15 @@ final class VTA {
 		
 		for(int i = 0; i < pLength; i++){
 			
-			temp += (lengthsEqual)?((professorAnswers[i] != studentAnswers[i])?
-					("\t<tr style=\"background-color:red; color:white;\">\n"):("\t<tr>\n")):
-					((i >= sLength)?("\t<tr style=\"background-color:red; color:white;\">\n"):
-					((professorAnswers[i] != studentAnswers[i])?
-					("\t<tr style=\"background-color:red; color:white;\">\n"):("\t<tr>\n")));
+			temp += (lengthsEqual)
+				?((professorAnswers[i] != studentAnswers[i])
+					?("\t<tr style=\"background-color:red; color:white;\">\n")
+					:("\t<tr>\n"))
+				:((i >= sLength)
+					?("\t<tr style=\"background-color:red; color:white;\">\n")
+					:((professorAnswers[i] != studentAnswers[i])
+						?("\t<tr style=\"background-color:red; color:white;\">\n")
+						:("\t<tr>\n")));
 			
 			temp += "\t\t" + "<td>" + (i+1) + "</td> " + 
 					"<td>" + professorAnswers[i] + "</td> " +
