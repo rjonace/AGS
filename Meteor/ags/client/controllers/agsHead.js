@@ -13,6 +13,13 @@ Template.agsHead.events({
 		Meteor.logout(function(error){
 			if(error)
 				alert(error);
+			else {
+				Session.set('currentSubmission', null);
+				Session.set('currentAssignment', null);
+				Session.set('currentCourse', null);
+				Session.set('currentDashboard', 'userDash');
+			}
+
 		});
 	},
 	'click .ui.icon.settings.button' : function(){

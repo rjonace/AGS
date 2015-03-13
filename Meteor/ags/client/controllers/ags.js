@@ -5,6 +5,5 @@ Template.ags.helpers({
 });
 
 Template.ags.rendered = function(){
-	Session.keys = {};
 	Session.set('currentDashboard',"userDash");
 };
