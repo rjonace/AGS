@@ -78,7 +78,7 @@
 
 .ags-head-breadcrumb {
 	left : 80px;
-	top: 11px;
+	top: 10px;
 	font-family: Arial;
 }
 
@@ -127,5 +127,5 @@ a:link, a:visited, a:active {
 }
 
 .ui.steps{
-	line-height: 19px !important;
+	line-height: 20px !important;
 }
