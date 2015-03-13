@@ -40,9 +40,7 @@
 .ags-head-acct {
 	top: 10px;
 	right: 10px;
-	width: 300px;
-	height : 64px;
-	background : gold;
+	width: auto;
 }
 
 .ags-main {
