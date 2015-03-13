@@ -7,7 +7,7 @@ for cFile in *.c; do
 	compileString=$compileString/shared/$cFile' '
 done
 
-gcc -o /shared/AutoGrader $compileString
+gcc -std=c99 -o /shared/AutoGrader $compileString
 
 ./AutoGrader
 
