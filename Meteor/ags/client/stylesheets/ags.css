@@ -92,12 +92,14 @@
 .ags-main-content-info {
 	top : 10px;
 	width: auto;
+	position: relative;
 	border-radius : 3px;
 }
 
 .ags-main-content-view {
 	top : 10px;
 	width: auto;
+	position: relative;
 	border-radius : 3px;
 }
 
