@@ -3,7 +3,7 @@
 			<div class="ui form">
 				{{#if isAssignmentDash}}
 					{{#with assignmentInfo}}
-					<div class="two fields">
+					<div class="two required fields">
 						<div class="field">
 							<label>Name</label>
 							<input id="assignmentNameField" type="text" value={{name}}>
@@ -19,7 +19,7 @@
 							<script type="text/javascript">$('select.dropdown').dropdown('set selected','{{language}}');</script>
 						</div>
 					</div>
-					<div class="two fields">
+					<div class="two required fields">
 						<div class="field">
 							<label>Date Available</label>
 							<input id="assignmentDateDueField" type="date" value={{dateAvailable}}>
@@ -30,6 +30,10 @@
 						</div>
 					</div>
 					<div class="two fields">
+						<div class="required field">
+							<label>Max Time</label>
+							<input id="assignmentTimeField" type="text" value={{time}}>
+						</div>
 						<div class="field">
 							<label>Max Points</label>
 							<input id="assignmentPointsField" type="text" value={{points}}>
@@ -52,7 +56,7 @@
 					</div>
 					{{/with}}
 				{{else}}
-				<div class="two fields">
+				<div class="two required fields">
 						<div class="field">
 							<label>Name</label>
 							<input id="assignmentNameField" type="text">
@@ -68,7 +72,7 @@
 							<script type="text/javascript">$('select.dropdown').dropdown();</script>
 						</div>
 					</div>
-					<div class="two fields">
+					<div class="two required fields">
 						<div class="field">
 							<label>Date Available</label>
 							<input id="assignmentDateDueField" type="date">
@@ -79,6 +83,10 @@
 						</div>
 					</div>
 					<div class="two fields">
+						<div class="required field">
+							<label>Max Time</label>
+							<input id="assignmentTimeField" type="text">
+						</div>
 						<div class="field">
 							<label>Max Points</label>
 							<input id="assignmentPointsField" type="text">
@@ -88,7 +96,7 @@
 						<label>Description</label>
 						<textarea id="assignmentDescriptionField" ></textarea>
 					</div>
-					<div class="two fields">	
+					<div class="two required fields">	
 						<div class="field">
 							<label>Auto-Grader File</label>
 							<div class="ui action input">
@@ -111,6 +119,10 @@
 						</div>
 					</div>
 					{{/if}}
+					<div id="assignmentErrorMessage" class="ui error message">
+				    	<div class="header">Error</div>
+				  	</div>
+				  	<script>$('#assignmentErrorMessage').hide();</script>
 			</div>
 
 	{{/if}}

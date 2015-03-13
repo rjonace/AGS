@@ -65,7 +65,12 @@
 					<label>Description</label>
 					<textarea id="courseDescriptionField"></textarea>
 				</div>
+
 				{{/if}}
+				<div id="courseErrorMessage" class="ui error message">
+				    <div class="header">Error</div>
+				  </div>
+				  <script>$('#courseErrorMessage').hide();</script>
 			</div>
 	{{/if}}
 </template>

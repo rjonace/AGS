@@ -90,7 +90,7 @@ Meteor.methods({
 	},
 
 /*	Server side Assignment Methods*/
-	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, points){
+	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, points){
 
 		return AGSAssignments.insert({
 			name: name,
@@ -98,6 +98,7 @@ Meteor.methods({
 			language: lang,
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
+			time: time,
 			points: points,
 			id_Course: id_Course
 		}, function(err, id) {
@@ -120,7 +121,7 @@ Meteor.methods({
 			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
 		);
 	},
-	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, points){
+	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, time, points){
 		AGSAssignments.update(
 		{_id:id_Assignment},
 		{ $set: {
@@ -129,6 +130,7 @@ Meteor.methods({
 			language: lang,
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
+			time: time,
 			points: points
 		}},{upsert : false},	//options
 		 function(err, result){	//callback

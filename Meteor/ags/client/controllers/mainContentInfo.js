@@ -1,5 +1,5 @@
 Template.mainContent.rendered = function(){
-	//$('.dashboard.popup.tips .ui.button').popup();
+
 };
 
 Template.addCourseForm.helpers({
@@ -132,6 +132,12 @@ Template.mainContent.events({
 		var courseSemester = event.target.courseSemesterField.value;
 		var courseYear = event.target.courseYearField.value;
 		var courseDescription = event.target.courseDescriptionField.value;
+
+		if (courseTitle === "" || courseNumber === "" || courseSemester === "" || courseYear === "") {
+			$('#courseErrorMessage').text('Complete required fields').show();
+			return false;
+		}
+
 		Meteor.call('insertCourseData', courseTitle, courseNumber, courseSemester, courseYear, courseDescription);
 	},
 	'submit .createUser': function(event){
@@ -143,7 +149,7 @@ Template.mainContent.events({
 		var selectedCourseList = [];
 
 		if (firstName === "" || lastName === "") {
-			$('.ui.error.message').text('Enter first and last name').show();
+			$('#userErrorMessage').text('Enter first and last name').show();
 			return false;
 		} 
 		
@@ -241,8 +247,12 @@ Template.mainContent.events({
 					reader.readAsText(file);
 				})(fileList[i]);
 			};
+			Session.set('fileNotSubmitted', false);
+		} else {
+			$('#submissionErrorMessage').text('No solution file chosen.').show();
+			return false;
 		}
-		Session.set('fileNotSubmitted', false);
+
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
@@ -251,10 +261,25 @@ Template.mainContent.events({
 		var lang = event.target.assignmentLanguageField.value;
 		var dateAvailable = event.target.assignmentDateAvailableField.value;
 		var dateDue = event.target.assignmentDateDueField.value;
+		var time = event.target.assignmentTimeField.value;
 		var points = event.target.assignmentPointsField.value;
 
+		if (name === "" || lang === "" || dateAvailable === "" || dateDue === "" || time === "") {
+			$('#assignmentErrorMessage').text('Complete required data fields').show();
+			return false;
+		} else {
+			if (event.target.assignmentAGField.files.length == 0) {
+				$('#assignmentErrorMessage').text('Choose Auto-Grader File.').show();
+				return false;
+			}
+			if (event.target.assignmentStudentField.files.length == 0) {
+				$('#assignmentErrorMessage').text('Choose Student File(s).').show();
+				return false;
+			}
+		}
+
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, points, 
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, points, 
 			function(error, result) {
 				if(!error) {
 
@@ -352,6 +377,9 @@ Template.mainContent.events({
 		$('.dashboard.popup.tips .ui.icon.delete.button').popup('show');
 	},
 	'click .ui.icon.edit.button' : function(){
+		$('#userErrorMessage').hide();
+		$('#courseErrorMessage').hide();
+		$('#assignmentErrorMessage').hide();
 		$('#editModal').modal({
 			closable : false,
 			onDeny: function(){
@@ -387,22 +415,41 @@ Template.mainContent.events({
 				if(Session.get('currentDashboard') === "userDash"){
 					var currentUser = AGSUsers.findOne({_id:Meteor.userId()});
 					
+					var firstName = $('#firstNameField').val();
+					var lastName = $('#lastNameField').val();
+
+					if (firstName === "" || lastName === "") {
+						$('#userErrorMessage').text('Enter first and last name').show();
+						return false;
+					} 
+
 					Meteor.call('createUserData',
 					 currentUser._id, 
-					 $('#firstNameField').val(), 
-					 $('#lastNameField').val(), 
+					 firstName, 
+					 lastName, 
 					 currentUser.id_Courses);
 				}
 				if(Session.get('currentDashboard') === "courseDash"){
 					var currentCourse = Session.get('currentCourse');
 
+					var name = $('#courseNameField').val();
+					var number = $('#courseNumberField').val();
+					var semester = $('#courseSemesterField').val();
+					var year = $('#courseYearField').val();
+					var description = $('#courseDescriptionField').val();
+
+					if (name === "" || number === "" || semester === "" || year === "") {
+						$('#courseErrorMessage').text('Complete required fields').show();
+						return false;
+					}
+
 					Meteor.apply('updateCourseData',
 					 [currentCourse._id, 
-					 $('#courseNameField').val(), 
-					 $('#courseNumberField').val(),
-					 $('#courseSemesterField').val(), 
-					 $('#courseYearField').val(),  
-					 $('#courseDescriptionField').val()]);
+					 name, 
+					 number,
+					 semester, 
+					 year,  
+					 description]);
 					Meteor.apply('resetCurrentCourse',[currentCourse._id], 					 
 				 		function(error,result){
 				 			if(!error){
@@ -417,14 +464,28 @@ Template.mainContent.events({
 				if(Session.get('currentDashboard') === "assignmentDash"){
 					var currentAssignment = Session.get('currentAssignment');
 
+					 var name = $('#assignmentNameField').val();
+					 var description = $('#assignmentDescriptionField').val();
+					 var lang = $('#assignmentLanguageField').val();
+					 var dateAvailable = $('#assignmentDateAvailableField').val();
+					 var dateDue = $('#assignmentDateDueField').val();
+					 var time = $('#assignmentTimeField').val();
+					 var points = $('#assignmentPointsField').val();
+
+			 		if (name === "" || lang === "" || dateAvailable === "" || dateDue === "" || time === "") {
+						$('#assignmentErrorMessage').text('Complete required data fields').show();
+						return false;
+					}
+
 					Meteor.apply('updateAssignmentData',
 						[currentAssignment._id,
-						 $('#assignmentNameField').val(),
-						 $('#assignmentDescriptionField').val(),
-						 $('#assignmentLanguageField').val(),
-						 $('#assignmentDateAvailableField').val(), 
-						 $('#assignmentDateDueField').val(), 
-						 $('#assignmentPointsField').val()]);
+						 name,
+						 description,
+						 lang,
+						 dateAvailable, 
+						 dateDue,
+						 time, 
+						 points]);
 					Meteor.apply('resetCurrentAssignment',[currentAssignment._id], 					 
 				 		function(error,result){
 				 			if(!error){
