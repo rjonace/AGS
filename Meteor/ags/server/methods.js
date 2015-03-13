@@ -315,7 +315,7 @@ Meteor.methods({
 					console.log("Completed");
 					try{
 						outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
-						outputData += fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+						//outputData += fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
 						console.log(outputData);
 						AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 
