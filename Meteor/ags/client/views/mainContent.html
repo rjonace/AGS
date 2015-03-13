@@ -70,12 +70,14 @@
 		{{/if}}
 		{{#if isSubmissionDash}}
 			 {{#with submissionInfo}}
+			 	{{#each files}}
 				<div class="header">
-		      		{{filename}}
+		      		{{name}}
 				</div>
 				<div class="content">
 					<pre>{{contents}}</pre>
 				</div>
+				{{/each}}
 			{{/with}}
 		{{/if}}
 	</div>
