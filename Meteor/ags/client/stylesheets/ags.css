@@ -50,7 +50,6 @@
 	bottom : 40px;
 	right: 0;
 	height: 100%;
-	background: rgb(0,0,0,0) !important;
 }
 
 .ags-main-content,
@@ -71,7 +70,7 @@
 .ags-main-content {
 	left: 10px;
 	right : 10px;
-	background : #ddd;
+	background : rgb(0,0,0,0);
 }
 
 .ags-x-closed .ags-main-content {
