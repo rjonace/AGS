@@ -7,11 +7,12 @@
 #include <stdbool.h>
 
 typedef struct { 
-	const char* (* const displayScore)(int, char *);
-	const char* (* const display)(void);
-} namespace_struct;
+	void (* displayComment)(const char*);
+	void (* displayScore_I)(const char*, int, int);
+	void (* displayComparison_I)(int[], int, int[], int);
+} VTA_namespace;
 
-extern namespace_struct const VTA;
+extern VTA_namespace const VTA;
 
 
 

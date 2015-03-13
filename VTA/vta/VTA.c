@@ -1,18 +1,18 @@
 #include "VTA.h"
 
 void displayComment(const char*);
-void displayScore(const char*, int, int);
-void displayComparison(int[], int[]);
+void displayScore_I(const char*, int, int);
+void displayComparison_I(int[], int, int[], int);
 
-namespace_struct const VTA = {
+VTA_namespace const VTA = {
 	displayComment,
 	displayScore_I,
 	displayComparison_I
-}
+};
 
 void displayComment(const char* comment)
 {
-	printf("<\n>\t%s\n</p>", comment);
+	printf("<p>\n\t%s\n</p>", comment);
 }
 
 void displayScore_I(const char* title, int pointsEarned, int pointsPossible)
@@ -42,12 +42,15 @@ void displayComparison_I(int professorAnswers[], int pLength, int studentAnswers
 				?("\t<tr style=\"background-color:red; color:white;\">\n")
 				:((professorAnswers[i] != studentAnswers[i])
 					?("\t<tr style=\"background-color:red; color:white;\">\n")
-					:("\t<tr>\n")));
+					:("\t<tr>\n")))
 		);
 
-		printf("\t\t<td>%d</td> <td>%d</td> <td>%s</td>\n",
-			(i+1), professorAnswers[i], ((i < sLength)?(studentAnswers[i]):("N/array"))
-		);
+		printf("\t\t<td>%d</td> <td>%d</td> ", (i+1), professorAnswers[i]);
+
+		if (i < sLength)
+			printf("<td>%d</td>\n", studentAnswers[i]);
+		else
+			printf("<td>N/array</td>\n");
 
 		
 		printf("\t</tr>\n\n");
