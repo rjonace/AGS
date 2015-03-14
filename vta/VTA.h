@@ -8,8 +8,12 @@
 
 typedef struct { 
 	void (* displayComment)(const char*);
-	void (* displayScore_I)(const char*, int, int);
+	void (* displayScore)(const char*, int, int);
+	void (* displayScores)(const char**, int[], int[], int);
+	void (* displayTable)(int[], int);
 	void (* displayComparison_I)(int[], int, int[], int);
+	void (* displayComparison_D)(double[], int, double[], int);
+	void (* displayComparison_S)(const char**, int, const char**, int);
 } VTA_namespace;
 
 extern VTA_namespace const VTA;

@@ -122,7 +122,7 @@ public class AutoGrader {
 		double[] solution = new double[10];
 		
 		for(int i = 0; i < 10; i++){
-			studentAnswer[i] = SkeletonForStudents.tempConvert(modes[i], temps[i]);
+			studentAnswer[i] = StudentSolution.tempConvert(modes[i], temps[i]);
 			solution[i] = tempConvertSolution(modes[i], temps[i]);
 			if(studentAnswer[i] == solution[i]) counter++;
 		}
