@@ -1,6 +1,0 @@
-5
-Jenny 10
-Susie 20
-Sarah 3
-Amanda 13
-Lisa 32
