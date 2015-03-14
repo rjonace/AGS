@@ -55,7 +55,7 @@ Template.mainContent.events({
 		var submission = Session.get('currentSubmission');
 		var currentUserId = Meteor.userId();
 		var currentAssignment = Session.get('currentAssignment');
-		var filePath = '../grading';
+		var filePath = '/home/student/ags/grading';
 		var counter = 0;
 		var maxTime = 50;
 		var newPath;
