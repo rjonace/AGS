@@ -1,6 +1,6 @@
 
-public class SkeletonForStudents {
-	public static double tempCovnert(String mode, double temp){
+public class StudentSolution {
+	public static double tempConvert(String mode, double temp){
 		return 0;
 	}
 	public static double f2C(double temp){
