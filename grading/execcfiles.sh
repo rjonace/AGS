@@ -6,8 +6,8 @@ mkdir $currentPath/$1
 
 echo "Copying StudentFiles Contents"
 mkdir $currentPath/$1/shared
-cp $currentPath/../vta/VTA.c $currentPath/$1/shared
-cp $currentPath/../vta/VTA.h $currentPath/$1/shared
+cp $currentPath/VTA.c $currentPath/$1/shared
+cp $currentPath/VTA.h $currentPath/$1/shared
 cp $currentPath/cCompiler.sh $currentPath/$1/shared
 cp $currentPath/InstructorFiles/* $currentPath/$1/shared
 cp $currentPath/SubmissionFiles/* $currentPath/$1/shared
