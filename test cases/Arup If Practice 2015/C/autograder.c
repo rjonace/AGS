@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #include "VTA.h"
-#include "SkeletonForStudents.h"
+#include "skeletonforstudents.h"
 
 double c2FSolution(double temp)
 {
