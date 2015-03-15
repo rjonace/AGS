@@ -43,6 +43,9 @@ Meteor.methods({
 		fs.mkdirSync(newPath);
 		console.log("ins check 2");
 		fs.writeFileSync(newPath + "/" + assignment.ag.name, assignment.ag.contents);
+		for (var i = 0; i < assignment.studentfiles.length; i++){
+			fs.writeFileSync(newPath + "/" + assignment.studentfiles[i].name, assignment.studentfiles[i].contents);
+		}
 		console.log("ins end");
 	},
 	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment, assignmentLang) {		
