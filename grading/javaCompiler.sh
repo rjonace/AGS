@@ -1,12 +1,3 @@
 cd /shared/
-
-
-
-for javaFile in *.java; do
-
-    javac ${javaFile}
-
-done
-
+javac AutoGrader.java
 java AutoGrader
-
