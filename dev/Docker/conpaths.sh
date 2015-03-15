@@ -1,0 +1,1 @@
+docker ps -aq | while read line; do docker inspect --format='{{.ResolvConfPath}}' $line; done;

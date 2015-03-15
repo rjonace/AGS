@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>AGS - User Sign Up</title>
+		<!script src="><!/script>
+		<!link rel="stylesheet" href="relative file path">
+	</head>
+
+	<body>
+		<div id="signUpForm">
+			<form action= "http://localhost:3000/user/create" method="post" >
+				<fieldset>
+					<label for="userNameField">Username:</label>
+					<input type="text" id="userNameField" name="userNameField" placeholder="example1234" />
+					<br>
+					
+					<label for="firstNameField">First Name:</label>
+					<input type="text" id="firstNameField" name="firstNameField" placeholder="First Name Here" />
+					<br>
+					
+					<label for="lastNameField">Last Name:</label>
+					<input type="text" id="lastNameField" name="lastNameField" placeholder="Last Name Here" />
+					<br>
+					
+					<label for="emailField">Email:</label>
+					<input type="text" id="emailField" name="emailField" placeholder="example@domain.com" />
+					<br>
+					
+					<label for="passwordField">Password:</label>
+					<input type="password" id="passwordField" name="passwordField" placeholder="password1234" />
+					<br>
+					
+					<label for="passwordConfirmField">Confirm Password:</label>
+					<input type="password" id="passwordConfirmField" name="passwordConfirmField" placeholder="password1234" />
+					<br>
+				
+					<input type="submit" onClick=""  value="Sign Up" />
+					<label id="errorMsg" name="errorMsg"></label>
+				</fieldset>
+			</form>
+		</div>
+		
+	</body>
+</html> 

@@ -1,48 +1,15 @@
 
-public class SkeletonForStudents {
-	public static double tempConvert(String mode, double temp){
-		return 0;
-	}
-	public static double f2C(double temp){
-		return 0;
-	}
-	public static double c2F(double temp){
-		return 0;
-	}
-	
-	public static boolean doesDebbyLikeIt(int number){
-		return true;
-	}
-	
-	public static String moneyManager(int age, int money){
-		return "Answer";
-	}
-	
-	public static int scholarshipChecker(double sat, double gpa){
-		return 0;
-	}
-	
-	public static int guessingGame(int guess1, int guess2){
-		return 0;
-	}
-	
-	public static int bonusCalculator(int sold){
-		return 0;
-	}
-	
-	public static String lemonadePitchers(int tspPer, int lemonsPer, int tsp, int lemons){
-		return "Pitchers: #, Sugar Remaining: # teaspoons, Lemons Remaining: #";
-	}
-	
-	public static String buyCereal(double[] company1, double[] company2, int numBoxes){
-		return "Company Chosen: #, Cost: $####.##";		
-	}
-	
-	public static boolean leapYears(int year){
-		return true;
-	}
-	
-	public static int restaurantOverlap(int aStart, int aEnd, int bStart, int bEnd){
-		return 0;
-	}
+public abstract class SkeletonForStudents {
+	public abstract double tempConvert(String mode, double temp);
+	public abstract double f2C(double temp);
+	public abstract double c2F(double temp);
+	public abstract boolean doesDebbyLikeIt(int number);
+	public abstract String moneyManager(int age, int money);
+	public abstract int scholarshipChecker(double sat, double gpa);
+	public abstract int guessingGame(int guess1, int guess2);
+	public abstract int bonusCalculator(int sold);
+	public abstract String lemonadePitchers(int tspPer, int lemonsPer, int tsp, int lemons);
+	public abstract String buyCereal(double[] company1, double[] company2, int numBoxes);
+	public abstract boolean leapYears(int year);
+	public abstract int restaurantOverlap(int aStart, int aEnd, int bStart, int bEnd);
 }

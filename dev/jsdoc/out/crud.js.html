@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: crud.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: crud.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** 
+* @fileOverview crud.js - module to provide CRUD db capabilities
+*/
+
+
+/*jslint         node    : true, continue : true,
+  devel  : true, indent  : 2,    maxerr   : 50,
+  newcap : true, nomen   : true, plusplus : true,
+  regexp : true, sloppy  : true, vars     : false,
+  white  : true
+*/
+/*global */
+
+// ------------ BEGIN MODULE SCOPE VARIABLES --------------
+'use strict';
+var
+  loadSchema,   checkSchema,  clearIsOnline,
+  checkType,    constructObj, readObj,
+  updateObj,    connectObj,  destroyObj,
+  getObjectIdByMap,
+  addCourseToUser,
+  addAssignmentToUser,
+  addSubmissionToUser,
+  addStudentToUser,
+  addUserToCourse,
+  addAssignmentToCourse,
+  removeCourseFromUser,
+  removeAssignmentFromUser,
+  removeSubmissionFromUser,
+  removeStudentFromUser,
+  removeUserFromCourse,
+  removeAssignmentFromCourse,
+  createCourseAsInstructor,
+  createAssignmentForCourse,
+  createSubmissionByStudent,
+
+  mongodb     = require( 'mongodb' ),
+  fsHandle    = require( 'fs'      ),
+  JSV         = require( 'JSV'     ).JSV,
+
+  mongoServer = new mongodb.Server(
+    'localhost',
+    mongodb.Connection.DEFAULT_PORT
+  ),
+  dbHandle    = new mongodb.Db(
+    'ags', mongoServer, { safe : true }
+  ),
+  validator   = JSV.createEnvironment(),
+
+  objTypeMap  = { 
+                  'users'        : {}, 
+                  'courses'      : {}, 
+                  'assignments'  : {},
+                  'submissions'  : {}
+  }
+// ------------- END MODULE SCOPE VARIABLES ---------------
+
+// ---------------- BEGIN UTILITY METHODS -----------------
+
+/**
+* Loads JSON schema into the Object type map
+* @function
+* @param {String} schema_name Name of the schema to load
+* @param {String} schema_path Path to the JSON file that holds the object schema
+*/
+loadSchema = function ( schema_name, schema_path ) {
+  fsHandle.readFile( schema_path, 'utf8', function ( err, data ) {
+  	//console.log('loading ' + schema_name + ' schema');
+    objTypeMap[ schema_name ] = JSON.parse( data );
+    //console.log(schema_name + ' schema loaded');
+  });
+};
+
+/**
+* Validates data against schemas
+* @function
+* @param {String} obj_type Type of the data object to check
+* @param {Object} obj_map Data object to check
+* @param {function} callback Callback function that is called with the list of errors
+*/
+checkSchema = function ( obj_type, obj_map, callback ) {
+  var
+    schema_map = objTypeMap[ obj_type ],
+    report_map = validator.validate( obj_map, schema_map );
+
+  callback( report_map.errors );
+};
+
+/**
+* Sets all users to offline
+* @function
+* @returns logs a response
+*/
+clearIsOnline = function () {
+  updateObj(
+    'users',
+    { is_online : true  },
+    { is_online : false },
+    function ( response_map ) {
+      console.log( 'All users set to offline', response_map );
+    }
+  );
+};
+
+/**
+* Gets ID of object that matches map passed in
+* @function
+* @param { String } objType Type of object to find
+* @param {Object} find_map Map of object to find
+* @param {function} callback function to be called with object id as an argument
+*/
+getObjectIdByMap = function (objType, find_map, callback) {
+  dbHandle.collection(
+    objType,
+    function ( outer_error, collection ) {
+      collection.findOne( find_map, function (err, obj) {
+        callback( obj._id.toString());
+      });
+    }
+  );
+};
+
+
+/**
+* Inserts course id into appropriate array of user object
+* @function
+* @param {Object} course_find_map Map to find course being added
+* @param {Object} user_find_map Map to find user gaining the course
+*/
+addCourseToUser = function (course_find_map, user_find_map) {
+
+  var courseCol = dbHandle.collection('courses');
+
+  courseCol.findOne( course_find_map, function(err, course){ 
+
+    if(!err) {
+
+      var userCol = dbHandle.collection('users');
+
+      userCol.update(
+          user_find_map,
+          { $addToSet: {id_Courses: course._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              console.log({ update_count : update_count });
+            }    
+        );
+      }
+  });
+};
+
+/**
+* Inserts assignment id into appropriate array of user object
+* @function
+* @param {Object} ass_find_map Map to find assignment being added
+* @param {Object} user_find_map Map to find user gaining the course
+*/
+addAssignmentToUser = function ( ass_find_map, user_find_map) {
+
+};
+
+/**
+* Inserts a student user's id into appropriate array of an instructor user's object
+* @function
+* @param {Object} stud_find_map Map to find student user being added
+* @param {Object} user_find_map Map to find instructor user gaining the student user
+*/
+addStudentToUser = function (stud_find_map, user_find_map){
+
+};
+
+/**
+* Inserts submission id into appropriate array of user object
+* @function
+* @param {Object} sub_find_map Map to find submission being added
+* @param {Object} user_find_map Map to find user gaining the submission
+*/
+addSubmissionToUser = function(sub_find_map, user_find_map){
+
+};
+
+addUserToCourse = function ( user_find_map, course_find_map) {
+
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( user_find_map, function(err, user){ 
+
+    if(!err) {
+
+      var courseCol = dbHandle.collection('courses');
+
+      courseCol.update(
+          course_find_map,
+          { $addToSet: {id_Students: user._id.toString()}},
+          { safe : true, multi : true, upsert : false },
+            function ( inner_error, update_count ) {
+              console.log({ update_count : update_count });
+            }    
+        );
+      }
+  });
+};
+
+addAssignmentToCourse = function ( ass_find_map, course_find_map ) {
+  //...
+};
+
+removeCourseFromUser = function (course_find_map, user_find_map) {
+
+};
+
+removeAssignmentFromUser = function ( ass_find_map, user_find_map) {
+
+};
+
+removeSubmissionFromUser = function(sub_find_map, user_find_map) {
+
+};
+
+removeStudentFromUser = function (stud_find_map, user_find_map) {
+
+};
+
+removeUserFromCourse = function ( user_find_map, course_find_map) {
+
+};
+
+removeAssignmentFromCourse = function ( ass_find_map, course_find_map ) {
+
+};
+
+/**
+* Creates a course object in the database given an instructor user
+* @function
+* @param {Object} course_map Map of course object to add to database
+* @param {Object} instructor_find_map Map to find instructor creating the course  
+* @param {Object} callback callback function  
+*/
+createCourseAsInstructor = function ( course_map, instructor_find_map, callback) {
+// does not check for duplicates  
+  var userCol = dbHandle.collection('users');
+
+  userCol.findOne( instructor_find_map, function(err, user){ 
+
+    if(!err) {
+      course_map.id_Instructor = user._id.toString();
+
+      constructObj('courses', course_map, function (result_map) {
+        console.log(course_map.title + " course created by " + user.name );
+      });
+    }
+  });
+};
+
+createAssignmentForCourse = function ( ass_map, course_find_map, callback) {
+
+};
+
+createSubmissionByStudent = function ( sub_map, ass_find_map, stud_find_map) {
+
+};
+
+// ----------------- END UTILITY METHODS ------------------
+
+// ---------------- BEGIN PUBLIC METHODS ------------------
+
+/** Checks type map for valid data types
+* @function 
+* @param {String} obj_type Type to check
+* @return {null | error} error message object
+*/
+checkType = function ( obj_type ) {
+  if ( ! objTypeMap[ obj_type ] ) {
+    return ({ error_msg : 'Object type "' + obj_type
+      + '" is not supported.'
+    });
+  }
+  return null;
+};
+
+/**
+* Creates Object
+* @function
+*/
+constructObj = function ( obj_type, obj_map, callback ) {
+  var type_check_map = checkType( obj_type );
+  if ( type_check_map ) {
+    callback( type_check_map );
+    return;
+  }
+
+  checkSchema(
+    obj_type, obj_map,
+    function ( error_list ) {
+      if ( error_list.length === 0 ) {
+        dbHandle.collection(
+          obj_type,
+          function ( outer_error, collection ) {
+            var options_map = { safe: true };
+
+            collection.insert(
+              obj_map,
+              options_map,
+              function ( inner_error, result_map ) {
+                callback( result_map );
+              }
+            );
+          }
+        );
+      }
+      else {
+        callback({
+          error_msg  : 'Input document not valid',
+          error_list : error_list
+        });
+      }
+    }
+  );
+};
+
+/** Reads object
+* @function
+*/
+readObj = function ( obj_type, find_map, fields_map, callback ) {
+  var type_check_map = checkType( obj_type );
+  if ( type_check_map ) {
+    callback( type_check_map );
+    return;
+  }
+
+  dbHandle.collection(
+    obj_type,
+    function ( outer_error, collection ) {
+      collection.find( find_map, fields_map ).toArray(
+        function ( inner_error, map_list ) {
+          callback( map_list );
+        }
+      );
+    }
+  );
+};
+
+/**
+* Updates Object
+* @function
+*/
+updateObj = function ( obj_type, find_map, set_map, callback ) {
+  var type_check_map = checkType( obj_type );
+  if ( type_check_map ) {
+    callback( type_check_map );
+    return;
+  }
+
+  checkSchema(
+    obj_type, set_map,
+    function ( error_list ) {
+      if ( error_list.length === 0 ) {
+        dbHandle.collection(
+          obj_type,
+          function ( outer_error, collection ) {
+            collection.update(
+              find_map,
+              { $set : set_map },
+              { safe : true, multi : true, upsert : false },
+              function ( inner_error, update_count ) {
+                callback({ update_count : update_count });
+              }
+            );
+          }
+        );
+      }
+      else {
+        callback({
+          error_msg  : 'Input document not valid',
+          error_list : error_list
+        });
+      }
+    }
+  );
+};
+
+/**
+* Destroys Object
+* @function
+*/
+destroyObj = function ( obj_type, find_map, callback ) {
+  var type_check_map = checkType( obj_type );
+  if ( type_check_map ) {
+    callback( type_check_map );
+    return;
+  }
+
+  dbHandle.collection(
+    obj_type,
+    function ( outer_error, collection ) {
+      var options_map = { safe: true, single: true };
+
+      collection.remove( find_map, options_map,
+        function ( inner_error, delete_count ) {
+          callback({ delete_count: delete_count });
+        }
+      );
+    }
+  );
+};
+
+
+module.exports = {
+	makeMongoId	: mongodb.ObjectID,
+	checkType: checkType,
+	construct: constructObj,
+	read: 	readObj,
+	update: 	updateObj,
+  connect: connectObj, 
+	destroy: destroyObj,
+  createCourse: createCourseAsInstructor
+};
+// ----------------- END PUBLIC METHODS -------------------
+
+// ------------- BEGIN MODULE INITIALIZATION --------------
+dbHandle.open( function() {
+	console.log( '** Connected to MongoDB **');
+	clearIsOnline();
+
+  //addUserToCourse({username:"rjonace"},{number:"COP1234"});
+  //addCourseToUser({number:"COP1234"},{username:"rjonace"});
+
+  //readObj('users',{"username":"user1"}, {_id:true}, console.log);
+
+  /*
+  getObjectIdByMap('users', {username:"proff"}, function (instructor) {
+    var tempCourse = {
+      title: "Another CS Course",
+      number: "COP4321-001",
+      id_Instructor: instructor,
+      id_Students: [],
+      id_Assignments:[]
+    };
+    createCourseAsInstructor(
+      tempCourse,
+      {username:"proff"},
+      console.log
+    );
+
+  });
+  */
+
+
+});
+
+//load schemas into memory (objTypeMap)
+(function () {
+	var schema_name, schema_path;
+	for (schema_name in objTypeMap ) {
+		if ( objTypeMap.hasOwnProperty( schema_name ) ) {
+			schema_path = __dirname + '/json_schemas/' + schema_name + '.json';
+			loadSchema( schema_name, schema_path );
+		}
+	}
+}());
+// -------------- END MODULE INITIALIZATION ---------------</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addAssignmentToUser">addAssignmentToUser</a></li><li><a href="global.html#addCourseToUser">addCourseToUser</a></li><li><a href="global.html#addStudentToUser">addStudentToUser</a></li><li><a href="global.html#addSubmissionToUser">addSubmissionToUser</a></li><li><a href="global.html#checkSchema">checkSchema</a></li><li><a href="global.html#checkType">checkType</a></li><li><a href="global.html#clearIsOnline">clearIsOnline</a></li><li><a href="global.html#constructObj">constructObj</a></li><li><a href="global.html#createCourseAsInstructor">createCourseAsInstructor</a></li><li><a href="global.html#destroyObj">destroyObj</a></li><li><a href="global.html#getObjectIdByMap">getObjectIdByMap</a></li><li><a href="global.html#loadSchema">loadSchema</a></li><li><a href="global.html#readObj">readObj</a></li><li><a href="global.html#updateObj">updateObj</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Jan 22 2015 14:31:21 GMT-0500 (EST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

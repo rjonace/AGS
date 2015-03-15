@@ -1,0 +1,49 @@
+<p>
+	Temperature Conversion: 5/50
+</p>
+<table>
+	<th>
+		<td>Test Case #</td> <td>Professor Output</td> <td>Student Output</td>
+	</th>
+
+	<tr style="background-color:red; color:white;">
+		<td>1</td> <td>100.0</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>2</td> <td>212.0</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>3</td> <td>37.77777777777778</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>4</td> <td>36.99999999999999</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>5</td> <td>32.0</td> <td>0.0</td>
+	</tr>
+
+	<tr>
+		<td>6</td> <td>0.0</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>7</td> <td>-17.77777777777778</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>8</td> <td>-40.0</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>9</td> <td>-40.0</td> <td>0.0</td>
+	</tr>
+
+	<tr style="background-color:red; color:white;">
+		<td>10</td> <td>104.0</td> <td>0.0</td>
+	</tr>
+
+</table>

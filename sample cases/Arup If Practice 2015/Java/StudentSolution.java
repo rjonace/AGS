@@ -1,5 +1,5 @@
 
-public class StudentSolution {
+public class StudentSolution extends SkeletonForStudents {
 	public static double tempConvert(String mode, double temp){
 		return 0;
 	}

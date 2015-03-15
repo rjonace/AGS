@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class AutoGrader {
-	
+
 	public static double tempConvertSolution(String mode, double temp){
 		return (mode.toUpperCase().equals("F"))? f2CSolution(temp): c2FSolution(temp);
 	}
@@ -112,7 +112,6 @@ public class AutoGrader {
 	}
 	
 	public static void main(String[] args){
-		
 		int counter = 0;
 		
 		String[] modes = {"f", "c", "f", "f", "c", "f", "f", "c", "f", "c"};
@@ -120,9 +119,9 @@ public class AutoGrader {
 		
 		double[] studentAnswer = new double[10];
 		double[] solution = new double[10];
-		
+		StudentSolution student = new StudentSolution();
 		for(int i = 0; i < 10; i++){
-			studentAnswer[i] = StudentSolution.tempConvert(modes[i], temps[i]);
+			studentAnswer[i] = student.tempConvert(modes[i], temps[i]);
 			solution[i] = tempConvertSolution(modes[i], temps[i]);
 			if(studentAnswer[i] == solution[i]) counter++;
 		}

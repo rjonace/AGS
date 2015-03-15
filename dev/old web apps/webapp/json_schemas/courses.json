@@ -1,0 +1,43 @@
+{"type":"courses",
+	"additionalProperites":false,
+	"properties": {
+		"_id": {
+	  		"type"		: "string",
+	  		"minLength"	: 24,
+	  		"maxLength"	: 24
+		},
+		"title": {
+			"type":"string"
+		},
+		"number": {
+			"type":"string"
+		},
+		"semester": {
+			"type":"string"
+		},
+		"year": {
+			"type":"string"
+		},
+		"id_Instructor": {
+	  		"type"		: "string",
+	  		"minLength"	: 24,
+	  		"maxLength"	: 24
+	  	},
+	  	"id_Students" : {
+	  		"type" 		: "array",
+	  		"items" 	: 	{  	"type"		: "string",
+	  						 	"minLength"	: 24,
+	  						 	"maxLength"	: 24
+	  						},
+	  		"uniqueItems" : true
+	  	},
+	  	"id_Assignments" : {
+	  		"type" 		: "array",
+	  		"items" 	: 	{  	"type"		: "string",
+	  						 	"minLength"	: 24,
+	  						 	"maxLength"	: 24
+	  						},
+	  		"uniqueItems" : true
+	  	}
+	}
+}
