@@ -18,11 +18,16 @@ int main( int argc, const char* argv[] )
 
 	// Execution Points
 	for (int i = 0; i < VTA.numInputFiles(); i++) {
-		char* input = VTA.getInputN(i);
+		char* input = VTA.getInputFromFiles(i);
 		char* correct_output = VTA.runWithInput('i', input);
 		char* student_output = VTA.runWithInput('s', input);
+
 		int scores[] = VTA.compareOutputsByLine(correct_output, student_output, 50);
-		VTA.addExecResults(i, input, correct_output, student_output, scores); 
+		VTA.addExecResults(i, input, correct_output, student_output, scores);
+		
+		free(input);
+		free(correct_output);
+		free(student_output);
 	}
 
 	// Style Points
