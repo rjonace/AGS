@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #include "VTA.h"
+#include "autograderhelp.h"
 
 int main( int argc, const char* argv[] )
 {
@@ -19,8 +20,9 @@ int main( int argc, const char* argv[] )
 	// Execution Points
 	for (int i = 0; i < VTA.numInputFiles(); i++) {
 		char* input = VTA.getInputFromFiles(i);
+
 		char* correct_output = VTA.runWithInput('i', input);
-		char* student_output = VTA.runWithInput('s', input);
+		char* student_output = VTA.runWithInput('s', input); // struct
 
 		score_struct* scores = VTA.compareOutputsByLine(correct_output, student_output, 50);
 		VTA.addExecResults(i, input, correct_output, student_output, scores);
@@ -32,7 +34,7 @@ int main( int argc, const char* argv[] )
 	}
 
 	// Style Points
-	VTA.addStylePoints("Header comment w/name, program, date", 4);
+	VTA.addCheckHeader(HEADER_REGEX, 4);
 	VTA.addStylePoints("Appropriate variable names", 2);
 	VTA.addStylePoints("Appropriate use of white space", 2);
 	VTA.addStylePoints("Appropriate indenting", 2);

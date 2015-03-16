@@ -15,6 +15,7 @@ VTA_namespace const VTA = {
 	compareOutputsByCase,
 	compareOutputsByCaseRegex,
 	addExecResults,
+	addCheckHeader,
 	addStylePoints
 };
 
@@ -43,12 +44,12 @@ char* getInputFromFile(void)
 	return "getInputFromFile";
 }
 
-char* getInputFromFiles(int points)
+char* getInputFromFiles(int inputNumber)
 {
 	return "getInputFromFiles";
 }
 
-char* generateInputFile(const char* description, int points)
+char* generateInputFile(const char* pattern, int cases)
 {
 	return "generateInputFile";
 }
@@ -88,6 +89,10 @@ void addExecResults(int input_file_num, const char* input, const char* correct_o
 
 }
 
+void addCheckHeader(const char* regex, int points)
+{
+
+}
 void addStylePoints(const char* description, int points)
 {
 
