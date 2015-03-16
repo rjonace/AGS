@@ -22,12 +22,13 @@ int main( int argc, const char* argv[] )
 		char* correct_output = VTA.runWithInput('i', input);
 		char* student_output = VTA.runWithInput('s', input);
 
-		int scores[] = VTA.compareOutputsByLine(correct_output, student_output, 50);
+		score_struct* scores = VTA.compareOutputsByLine(correct_output, student_output, 50);
 		VTA.addExecResults(i, input, correct_output, student_output, scores);
 		
 		free(input);
 		free(correct_output);
 		free(student_output);
+		free(scores);
 	}
 
 	// Style Points
