@@ -2,7 +2,7 @@
 Meteor.methods({
 	'insertJSONFile' : function(id_Student, id_Assignment, subNumber){
 		var fs = Npm.require('fs');
-		var feedbackJSON = fs.readFileSync('/home/student/ags/vta/version2/feedback.json', 'utf8');
+		var feedbackJSON = JSON.parse(fs.readFileSync('/home/student/ags/vta/version2/feedback.json', 'utf8'));
 		AGSSubmissions.update(
 			{
 				"id_Student": id_Student,
