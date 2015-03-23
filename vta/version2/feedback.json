@@ -1,0 +1,57 @@
+{
+	codePoints : [
+		{
+			description : "Uses stdin",
+			pointsEarned : 5,
+			pointsPossible : 5,
+			comments : "",
+			graded : true
+		},
+		{
+			description : "Uses stdout",
+			pointsEarned : 5,
+			pointsPossible : 5,
+			comments : "",
+			graded : true
+		},
+		{
+			description : "Reads in all input",
+			pointsEarned : "Waiting for TA",
+			pointsPossible : 5,
+			comments : "",
+			graded : false
+		},
+		{
+			description : "Follows output format",
+			pointsEarned : "Waiting for TA",
+			pointsPossible : 5,
+			comments : "",
+			graded : false
+		}
+	],
+	executionPoints : [
+		{
+			description : "Input File 1",
+			pointsEarned : 14,
+			pointsPossible : 15,
+			casesMissed : "1 out of 15",
+			graded : true
+		},
+		{
+			description : "Input File 2",
+			pointsEarned : 20,
+			pointsPossible : 35,
+			casesMissed : "3 out of 7",
+			graded : true
+		}
+	],
+	stylePoints : [
+		{
+			description : "Header comment w/ name, program, date",
+			pointsEarned : 4,
+			pointsPossible : 4,
+			comments : "",
+			graded : true
+		}
+	]
+}

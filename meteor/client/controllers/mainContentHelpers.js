@@ -101,5 +101,9 @@ Template.mainContent.helpers({
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
+	},
+	'submissionFeedbackObject': function(){
+		var submission = Session.get('currentSubmission');
+		return submission.feedbackObj;
 	}
 });
