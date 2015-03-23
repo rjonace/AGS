@@ -443,8 +443,10 @@
 					<button type="button" id="gradeSubmission" >Get Feedback</button>
 				{{else}}
 					{{feedbackStatus}}
-					{{submissionFeedbackObject}}
 					{{{submissionFeedback}}}
+					{{#each submissionFeedbackObject}}
+						{{this}}
+					{{/each}}
 				{{/if}}
 			{{/if}}
 		{{/if}}
