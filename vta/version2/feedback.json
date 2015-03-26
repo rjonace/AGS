@@ -7,7 +7,10 @@
 				["Uses stdin", 5, 5, ""],
 				["Uses stdout", 5, 5, ""],
 				["Reads in all input","Waiting for TA",5,""],
-				["Follows output format","Waiting for TA",5,""]
+				["Follows output format","Waiting for TA",5,""],
+				["Has a queue struct","Waiting for TA",5,""],
+				["Has enqueue","Waiting for TA",5,""],
+				["Has dequeue","Waiting for TA",5,""]
 			] 
 		},
 		{
@@ -22,7 +25,11 @@
 			"header": "Style Points - 15 points possible",
 			"columns": ["Description","Points Earned", "Points Possible", "Comments"],
 			"rows" : [
-				["Header comment w/ name, program, date", 4, 4, ""]
+				["Header comment w/ name, program, date", 4, 4, ""],
+				["Appropriate variable names","Waiting for TA",2, ""],
+				["Appropriate use of white space","Waiting for TA",2, ""],
+				["Appropriate indenting","Waiting for TA",2, ""],
+				["Comments in code","Waiting for TA",5, ""]
 			] 
 		}
 	],
