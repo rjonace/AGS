@@ -104,6 +104,10 @@ Template.mainContent.helpers({
 	},
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
-		return submission.feedbackObj;
+
+		for(var name in submission.feedbackObj){
+			var objArray = submission.feedbackObj[name];
+		}
+		return objArray;
 	}
 });
