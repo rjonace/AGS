@@ -107,16 +107,16 @@ Template.mainContent.helpers({
 		var HTMLString = '<div "ui segment">'
 		for(var name in submission.feedbackObj){
 			if (name == "header"){
-				for (var val in submission.feedbackObj[name]) {
-					HTMLString += '<h2>' + submission.feedbackObj[name] + '</h2>'
+				for (var i in submission.feedbackObj[name]) {
+					HTMLString += '<h3>' + submission.feedbackObj[name][i] + '</h3>'
 				}
 			}
 
 			if (name == "table-with-header"){
 				for (var i in submission.feedbackObj[name]) {
 					var tabObj = submission.feedbackObj[name][i];
-					HTMLString += '<h2>' + tabObj.header + '</h2>'
-					HTMLString += '<table><thead><tr>'
+					HTMLString += '<h4>' + tabObj.header + '</h4>'
+					HTMLString += '<table class="ui celled table"><thead><tr>'
 					for (var c in tabObj.columns){
 						HTMLString += '<th>' + tabObj.columns[c] + '</th>';
 					}
