@@ -104,10 +104,35 @@ Template.mainContent.helpers({
 	},
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
-
+		var HTMLString = '<div "ui segment">'
 		for(var name in submission.feedbackObj){
-			var objArray = submission.feedbackObj[name];
+			if (name == "header"){
+				for (var val in submission.feedbackObj[name]) {
+					HTMLString += '<h2>' + submission.feedbackObj[name] + '</h2>'
+				}
+			}
+
+			if (name == "table-with-header"){
+				for (var tabObj in submission.feedbackObj[name]) {
+					HTMLString += '<h2>' + submission.feedbackObj[name].header + '</h2>'
+					HTMLString += '<table><thead><tr>'
+					for (var col in submission.feedbackObj[name].columns){
+						HTMLString += '<th>' + col + '</th>';
+					}
+					HTMLString += '</tr></thead>'
+					HTMLString += '<tbody>'
+					for (var row in submission.feedbackObj[name].rows){
+						HTMLString += '<tr>'
+						for (var val in submission.feedbackObj[name].rows[row]) {
+							HTMLString += '<td>' + val + '</td>'
+						}
+						HTMLString += '</tr>'
+					}
+					HTMLString += '</tbody></table>'
+				}
+			}
 		}
-		return objArray;
+		HTMLString += '</div>'
+		return HTMLString;
 	}
 });
