@@ -113,18 +113,19 @@ Template.mainContent.helpers({
 			}
 
 			if (name == "table-with-header"){
-				for (var tabObj in submission.feedbackObj[name]) {
-					HTMLString += '<h2>' + submission.feedbackObj[name].header + '</h2>'
+				for (var i in submission.feedbackObj[name]) {
+					var tabObj = submission.feedbackObj[name][i];
+					HTMLString += '<h2>' + tabObj.header + '</h2>'
 					HTMLString += '<table><thead><tr>'
-					for (var col in submission.feedbackObj[name].columns){
-						HTMLString += '<th>' + col + '</th>';
+					for (var c in tabObj.columns){
+						HTMLString += '<th>' + tabObj.columns[c] + '</th>';
 					}
 					HTMLString += '</tr></thead>'
 					HTMLString += '<tbody>'
-					for (var row in submission.feedbackObj[name].rows){
+					for (var r in tabObj.rows){
 						HTMLString += '<tr>'
-						for (var val in submission.feedbackObj[name].rows[row]) {
-							HTMLString += '<td>' + val + '</td>'
+						for (var val in tabObj.rows[r]) {
+							HTMLString += '<td>' + tabObj.rows[r][val] + '</td>'
 						}
 						HTMLString += '</tr>'
 					}
