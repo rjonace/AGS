@@ -96,10 +96,8 @@ int readStringLine(const char* src, char* dest, int pos)
 {
 	int i = 0;
 	while(src[pos] != '\n' && src[pos] != '\r') {
-		dest[i++] = src[pos];
-		pos++;
+		dest[i++] = src[pos++];
 	}
-	dest[i] = '\0';
 
 	if (src[pos-1] == '\r' && src[pos] == '\n') {
 		pos++;
@@ -108,6 +106,28 @@ int readStringLine(const char* src, char* dest, int pos)
 		pos++;
 	}
 
+	dest[i] = '\0';
+	return pos;
+}
+
+int readStringCase(int caseLines, const char* src, char* dest, int pos)
+{
+	int i = 0;
+	while(caseLines) {
+		if (src[pos] == '\n' || src[pos] == '\r')
+			caseLines--;
+
+		dest[i++] = src[pos++];
+
+		if (src[pos] == '\r' && src[pos+1] == '\n') {
+			pos++;
+		}
+		else if (src[pos] == '\n' && src[pos+1] == '\r') {
+			pos++;
+		}
+	}
+
+	dest[i] = '\0';
 	return pos;
 }
 
@@ -160,28 +180,81 @@ score_struct* compareOutputsByLine(const char* correct_output, const char* stude
 	return scores;
 }
 
+score_struct* compareOutputsByCase(int case_lines, const char* correct_output, const char* student_output, 
+	int total_points, int* numCases)
+{
+	int lineBufferSize = 256;
+	int scoresArraySize = 256;
+
+	*numCases = 0;
+	score_struct* scores = malloc(scoresArraySize * sizeof(score_struct));
+
+	int corrLength = strlen(correct_output);
+	int studLength = strlen(student_output);
+
+	int corrPos = 0, studPos = 0;
+
+	while (corrPos < corrLength && studPos < studLength) {
+		char corrLine[lineBufferSize], studLine[lineBufferSize];
+		corrPos = readStringCase(case_lines, correct_output, corrLine, corrPos);
+		studPos = readStringCase(case_lines, student_output, studLine, studPos);
+
+		scores[*numCases].correct = !strcmp(corrLine, studLine);
+		strncpy(scores[*numCases].correct_output, corrLine, lineBufferSize);
+		strncpy(scores[*numCases].student_output, studLine, lineBufferSize);
+
+		*numCases = *numCases + 1;
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize * sizeof(score_struct));
+		}
+	}
+
+	while (corrPos < corrLength) {
+		char corrLine[lineBufferSize];
+		corrPos = readStringLine(correct_output, corrLine, corrPos);
+		scores[*numCases].correct = false;
+		*numCases = *numCases + 1;
+
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize *sizeof(score_struct));
+		}
+	}
+
+	for (int i = 0; i < *numCases; i++) {
+		if (scores[i].correct)
+			scores[i].points = total_points / *numCases;
+	}
+
+	return scores;	
+}
+
+
 int main(void) 
 {
 	char* correctoutput = run('i');
 	char* studentoutput = run('s');
 
 	int numCases;
-	score_struct* scores = compareOutputsByLine(correctoutput, studentoutput, 100, &numCases);
+//	score_struct* scores = compareOutputsByLine(correctoutput, studentoutput, 100, &numCases);
+	score_struct* scores = compareOutputsByCase(2, correctoutput, studentoutput, 100, &numCases);
+
 
 	free(correctoutput);
 	free(studentoutput);
 
 	int correct_cases = 0, total_points = 0;
 	for (int i = 0; i < numCases; i++) {
-		printf("%s\n+%d points\n", scores[i].correct ? "correct!" : "wrong!", scores[i].points);
-		printf("correct answer: %s\n", scores[i].correct_output);
-		printf("student answer: %s\n\n", scores[i].student_output);
+		printf("%s\n+%d points\n\n", scores[i].correct ? "correct!" : "wrong!", scores[i].points);
+		printf("correct answer: \n%s\n", scores[i].correct_output);
+		printf("student answer: \n%s\n\n", scores[i].student_output);
 
 		if (scores[i].correct) correct_cases++;
 		total_points += scores[i].points;
 	}
-	
+
 	free(scores);
 
-	printf("%d correct cases, %d points total\n\n", correct_cases, total_points);
+	printf("%d out of %d correct cases, %d points total\n\n", correct_cases, numCases, total_points);
 }
