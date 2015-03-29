@@ -24,7 +24,7 @@ typedef struct {
 	char* (* runWithInput)(char, const char*);
 	score_struct* (* compareOutputsByLine)(const char*, const char*, int, int*);
 	score_struct* (* compareOutputsByLineRegex)(const char*, const char*, const char*, int);
-	score_struct* (* compareOutputsByCase)(int, const char*, const char*, int);
+	score_struct* (* compareOutputsByCase)(int, const char*, const char*, int, int*);
 	score_struct* (* compareOutputsByCaseRegex)(int, const char*, const char*, const char*, int);
 	void (* addExecResults)(int, const char*, const char*, const char*, const char*, score_struct[]);
 	void (* addCheckHeader)(const char*, int);

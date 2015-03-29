@@ -33,7 +33,7 @@ char* generateInputFile(const char* pattern, int numCases);
  *  struct of information about how the file ran---not just the output */
 char* run(char mode);
 
-/** Runs either the instructor's or student's compiled binary with the contents of "input" piped in and 
+/** Runs either the instructor's or student's compiled binary with the contents of "inputFileName" piped in and 
  *  returns the stdout as a string; "mode" determines which should be run 
  *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
  *  struct of information about how the file ran---not just the output */
@@ -57,7 +57,7 @@ score_struct* compareOutputsByLineRegex(const char* regex, const char* correct_o
  *
  *  Returns an array of score_struct */
 score_struct* compareOutputsByCase(int case_lines, const char* correct_output, const char* student_output, 
-	int total_points);
+	int total_points, int* numCases)
 
 /** Does a diff comparison of the results of regex capture of the text in correct_output and student_output,
  *  treating cases as groups of lines of length case_lines, and distributes the total_points evenly by number
@@ -78,8 +78,6 @@ void addCheckHeader(const char* regex, int points);
  *
  *  Adds/deducts points to Code Points object based on compliance */
 void addStylePoints(const char* description, int points);
-
-
 
 VTA_namespace const VTA = {
 	addGradeUseStdin,
@@ -104,10 +102,8 @@ int readStringLine(const char* src, char* dest, int pos)
 {
 	int i = 0;
 	while(src[pos] != '\n' && src[pos] != '\r') {
-		dest[i++] = src[pos];
-		pos++;
+		dest[i++] = src[pos++];
 	}
-	dest[i] = '\0';
 
 	if (src[pos-1] == '\r' && src[pos] == '\n') {
 		pos++;
@@ -116,10 +112,30 @@ int readStringLine(const char* src, char* dest, int pos)
 		pos++;
 	}
 
+	dest[i] = '\0';
 	return pos;
 }
 
+int readStringCase(int caseLines, const char* src, char* dest, int pos)
+{
+	int i = 0;
+	while(caseLines) {
+		if (src[pos] == '\n' || src[pos] == '\r')
+			caseLines--;
 
+		dest[i++] = src[pos++];
+
+		if (src[pos] == '\r' && src[pos+1] == '\n') {
+			pos++;
+		}
+		else if (src[pos] == '\n' && src[pos+1] == '\r') {
+			pos++;
+		}
+	}
+
+	dest[i] = '\0';
+	return pos;
+}
 
 void addGradeUseStdin(int points)
 {
@@ -292,9 +308,53 @@ score_struct* compareOutputsByLineRegex(const char* regex, const char* correct_o
 }
 
 score_struct* compareOutputsByCase(int case_lines, const char* correct_output, const char* student_output, 
-	int total_points)
+	int total_points, int* numCases)
 {
-	return NULL;
+	int lineBufferSize = 256;
+	int scoresArraySize = 256;
+
+	*numCases = 0;
+	score_struct* scores = malloc(scoresArraySize * sizeof(score_struct));
+
+	int corrLength = strlen(correct_output);
+	int studLength = strlen(student_output);
+
+	int corrPos = 0, studPos = 0;
+
+	while (corrPos < corrLength && studPos < studLength) {
+		char corrLine[lineBufferSize], studLine[lineBufferSize];
+		corrPos = readStringCase(case_lines, correct_output, corrLine, corrPos);
+		studPos = readStringCase(case_lines, student_output, studLine, studPos);
+
+		scores[*numCases].correct = !strcmp(corrLine, studLine);
+		strncpy(scores[*numCases].correct_output, corrLine, lineBufferSize);
+		strncpy(scores[*numCases].student_output, studLine, lineBufferSize);
+
+		*numCases = *numCases + 1;
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize * sizeof(score_struct));
+		}
+	}
+
+	while (corrPos < corrLength) {
+		char corrLine[lineBufferSize];
+		corrPos = readStringLine(correct_output, corrLine, corrPos);
+		scores[*numCases].correct = false;
+		*numCases = *numCases + 1;
+
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize *sizeof(score_struct));
+		}
+	}
+
+	for (int i = 0; i < *numCases; i++) {
+		if (scores[i].correct)
+			scores[i].points = total_points / *numCases;
+	}
+
+	return scores;
 }
 
 score_struct* compareOutputsByCaseRegex(int case_lines, const char* regex, const char* correct_output, 
