@@ -233,12 +233,17 @@ score_struct* compareOutputsByCase(int case_lines, const char* correct_output, c
 
 int main(void) 
 {
+
+/*
 	char* correctoutput = run('i');
 	char* studentoutput = run('s');
 
+	printf("%s\n", correctoutput);
+	printf("%s\n", studentoutput);
+
 	int numCases;
 //	score_struct* scores = compareOutputsByLine(correctoutput, studentoutput, 100, &numCases);
-	score_struct* scores = compareOutputsByCase(2, correctoutput, studentoutput, 100, &numCases);
+//	score_struct* scores = compareOutputsByCase(2, correctoutput, studentoutput, 100, &numCases);
 
 
 	free(correctoutput);
@@ -257,4 +262,6 @@ int main(void)
 	free(scores);
 
 	printf("%d out of %d correct cases, %d points total\n\n", correct_cases, numCases, total_points);
+
+*/	printf("%s\n", runWithInput('s', "basketballgame.in"));
 }
