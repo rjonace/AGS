@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 
 char* getInputFromFile(const char* fileName)
@@ -48,13 +49,11 @@ char* run(char mode)
 	
 	outputData[pos-1] = '\0';
 	pclose(output);
-
 	return outputData;
 }
 
 char* runWithInput(char mode, const char* inputFileName)
 {
-
 	char command[10 + strlen(inputFileName) + 1];
 	if (mode == 'i')
 		strcpy(command, "./execi < ");
@@ -86,14 +85,103 @@ char* runWithInput(char mode, const char* inputFileName)
 	return outputData;
 }
 
+typedef struct {
+	int points;
+	bool correct;
+	char correct_output[257];
+	char student_output[257];
+} score_struct;
+
+int readStringLine(const char* src, char* dest, int pos)
+{
+	int i = 0;
+	while(src[pos] != '\n' && src[pos] != '\r') {
+		dest[i++] = src[pos];
+		pos++;
+	}
+	dest[i] = '\0';
+
+	if (src[pos-1] == '\r' && src[pos] == '\n') {
+		pos++;
+	}
+	else if (src[pos-1] == '\n' && src[pos] == '\r') {
+		pos++;
+	}
+
+	return pos;
+}
+
+score_struct* compareOutputsByLine(const char* correct_output, const char* student_output, int total_points, int* numCases)
+{
+	int lineBufferSize = 256;
+	int scoresArraySize = 256;
+
+	*numCases = 0;
+	score_struct* scores = malloc(scoresArraySize * sizeof(score_struct));
+
+	int corrLength = strlen(correct_output);
+	int studLength = strlen(student_output);
+
+	int corrPos = 0, studPos = 0;
+
+	while (corrPos < corrLength && studPos < studLength) {
+		char corrLine[lineBufferSize], studLine[lineBufferSize];
+		corrPos = readStringLine(correct_output, corrLine, corrPos) + 1;
+		studPos = readStringLine(student_output, studLine, studPos) + 1;
+
+		scores[*numCases].correct = !strcmp(corrLine, studLine);
+		strncpy(scores[*numCases].correct_output, corrLine, lineBufferSize);
+		strncpy(scores[*numCases].student_output, studLine, lineBufferSize);
+
+		*numCases = *numCases + 1;
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize * sizeof(score_struct));
+		}
+	}
+
+	while (corrPos < corrLength) {
+		char corrLine[lineBufferSize];
+		corrPos = readStringLine(correct_output, corrLine, corrPos);
+		scores[*numCases].correct = false;
+		*numCases = *numCases + 1;
+
+		if (*numCases >= scoresArraySize) {
+			scoresArraySize *= 2;
+			scores = realloc(scores, scoresArraySize *sizeof(score_struct));
+		}
+	}
+
+	for (int i = 0; i < *numCases; i++) {
+		if (scores[i].correct)
+			scores[i].points = total_points / *numCases;
+	}
+
+	return scores;
+}
 
 int main(void) 
 {
-	const char* fileName = "basketballgame.in";
-//	char* input = getInputFromFile(fileName);
-//	printf("%s", input);
+	char* correctoutput = run('i');
+	char* studentoutput = run('s');
 
-	char* output = run('s');
+	int numCases;
+	score_struct* scores = compareOutputsByLine(correctoutput, studentoutput, 100, &numCases);
 
-	printf("%s", output);
+	free(correctoutput);
+	free(studentoutput);
+
+	int correct_cases = 0, total_points = 0;
+	for (int i = 0; i < numCases; i++) {
+		printf("%s\n+%d points\n", scores[i].correct ? "correct!" : "wrong!", scores[i].points);
+		printf("correct answer: %s\n", scores[i].correct_output);
+		printf("student answer: %s\n\n", scores[i].student_output);
+
+		if (scores[i].correct) correct_cases++;
+		total_points += scores[i].points;
+	}
+	
+	free(scores);
+
+	printf("%d correct cases, %d points total\n\n", correct_cases, total_points);
 }
