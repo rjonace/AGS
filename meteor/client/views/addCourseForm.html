@@ -1,0 +1,76 @@
+<template name="addCourseForm">
+	{{#if currentUser}}
+			<div class="ui form">
+				{{#if isCourseDash}}
+					{{#with courseInfo}}
+						<div class="two required fields">
+							<div class="field">
+							  <label>Name</label>
+							  <input id="courseNameField" value={{name}} type="text">
+							</div>
+							<div class="field">
+							  <label>Number</label>
+							  <input id="courseNumberField" value={{number}} type="text">
+							</div>
+						</div>
+						<div class="two required fields">
+							<div class="field">
+							  <label>Year</label>
+							  <input id="courseYearField" value={{year}} type="text">
+							</div>
+							<div class="field">
+								<label>Semester</label>
+								<select id="courseSemesterField" class="ui dropdown">
+									<option value="">Semester</option>
+									<option value="Fall">Fall</option>
+		    						<option value="Spring">Spring</option>
+		    						<option value="Summer">Summer</option>
+								</select>
+								<script type="text/javascript">$('select.dropdown').dropdown('set selected','{{semester}}');</script>
+							</div>
+						</div>
+						<div class="field">
+							<label>Description</label>
+							<textarea id="courseDescriptionField">{{description}}</textarea>
+						</div>
+						{{/with}}
+				{{else}}
+				<div class="two required fields">
+					<div class="field">
+					  <label>Name</label>
+					  <input id="courseNameField" placeholder="Computer Science 1" type="text">
+					</div>
+					<div class="field">
+					  <label>Number</label>
+					  <input id="courseNumberField" placeholder="COP3502C" type="text">
+					</div>
+				</div>
+				<div class="two required fields">
+					<div class="field">
+					  <label>Year</label>
+					  <input id="courseYearField" placeholder="2015" type="text">
+					</div>
+					<div class="field">
+						<label>Semester</label>
+						<select id="courseSemesterField" class="ui dropdown">
+							<option value="">Semester</option>
+							 <option value="Fall">Fall</option>
+    						 <option value="Spring">Spring</option>
+    						 <option value="Summer">Summer</option>
+						</select>
+						<script type="text/javascript">$('select.dropdown').dropdown();</script>
+					</div>
+				</div>
+				<div class="field">
+					<label>Description</label>
+					<textarea id="courseDescriptionField"></textarea>
+				</div>
+
+				{{/if}}
+				<div id="courseErrorMessage" class="ui error message">
+				    <div class="header">Error</div>
+				  </div>
+				  <script>$('#courseErrorMessage').hide();</script>
+			</div>
+	{{/if}}
+</template>

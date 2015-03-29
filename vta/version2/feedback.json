@@ -1,0 +1,41 @@
+{
+	"table-with-header" : [
+		{
+			"header": "Code Points - 35 points possible",
+			"columns": ["Description","Points Earned", "Points Possible", "Comments"],
+			"rows" : [
+				["Uses stdin", 5, 5, ""],
+				["Uses stdout", 5, 5, ""],
+				["Reads in all input","Waiting for TA",5,""],
+				["Follows output format","Waiting for TA",5,""],
+				["Has a queue struct","Waiting for TA",5,""],
+				["Has enqueue","Waiting for TA",5,""],
+				["Has dequeue","Waiting for TA",5,""]
+			] 
+		},
+		{
+			"header": "Execution Points - 50 points possible",
+			"columns": ["Description","Points Earned", "Points Possible", "Cases Missed"],
+			"rows" : [
+				["Input File 1",14,15,"1 out of 15"],
+				["Input File 2",20,35,"3 out of 7"]
+			] 
+		},
+		{
+			"header": "Style Points - 15 points possible",
+			"columns": ["Description","Points Earned", "Points Possible", "Comments"],
+			"rows" : [
+				["Header comment w/ name, program, date", 4, 4, ""],
+				["Appropriate variable names","Waiting for TA",2, ""],
+				["Appropriate use of white space","Waiting for TA",2, ""],
+				["Appropriate indenting","Waiting for TA",2, ""],
+				["Comments in code","Waiting for TA",5, ""]
+			] 
+		}
+	],
+	"header" : [
+		"Total Points Earned - 48 out of 64 graded",
+		"Total Points Ungraded - 36 points remaining",
+		"Max Possible Score - 84 out of 100 points"
+	]
+}

@@ -1,0 +1,17 @@
+<head>
+	<title>Auto-Grading System</title>
+</head>
+
+<body>
+	{{> ags}}
+</body>
+
+<template name="ags">
+	{{#if currentUser}}
+		{{> agsHead}}
+		{{> agsMain}}
+		{{> agsFoot}}
+	{{else}}
+		{{> agsLogin}}
+	{{/if}}
+</template>
