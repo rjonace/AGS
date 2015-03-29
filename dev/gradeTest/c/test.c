@@ -241,6 +241,7 @@ struct feedback {
 
 struct section {
 	int pointsPossible;
+	int xyz;
 }
 int main(void) 
 {
