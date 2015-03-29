@@ -3,6 +3,7 @@
 	[
 		{
 			"sectionName": "Code Points",
+			"isAuto": false,
 			"pointsPossible": 35,
 			"pointsEarned": 10,
 			"rows" : 
@@ -19,10 +20,10 @@
 
 		{
 			"sectionName": "Execution Points",
+			"isAuto": true,
 			"pointsPossible": 50,
 			"pointsEarned": 34,
-			"type":"AUTO",
-			"multipleInputs":true,
+			"multipleInputs": true,
 			"inputs": 
 			[
 				{
@@ -91,6 +92,7 @@
 
 		{
 			"sectionName": "Style Points",
+			"isAuto": true,
 			"pointsPossible": 15,
 			"pointsEarned": 4,
 			"rows" : 
