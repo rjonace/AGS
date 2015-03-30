@@ -24,7 +24,7 @@
 			"pointsPossible": 50,
 			"pointsEarned": 34,
 			"multipleInputs": true,
-			"inputs": 
+			"gradedInputs": 
 			[
 				{
 					"name": "Input 1",
@@ -34,22 +34,25 @@
 					"cases": 
 					[
 						{
-							"correctOutput": 31,
-							"studentOutput": 31,
+							"input": "2 45",
+							"correctOutput": "31",
+							"studentOutput": "31",
 							"correct": true,
 							"points": 5,
 							"comments": ""
 						},
 						{
-							"correctOutput": 48,
-							"studentOutput": 31,
+							"input": "6 5",
+							"correctOutput": "48",
+							"studentOutput": "31",
 							"correct": false,
 							"points": 0,
 							"comments": ""
 						},
 						{
-							"correctOutput": 58,
-							"studentOutput": 58,
+							"input": "7 54",
+							"correctOutput": "58",
+							"studentOutput": "58",
 							"correct": true,
 							"points": 5,
 							"comments": ""

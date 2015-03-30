@@ -235,18 +235,80 @@ void addManualScore(const char* sectionName, const char* description, int points
 
 }
 
-struct feedback {
-	struct section*;
+
+
+struct sectionRow {
+	char* description;
+	int pointsEarned;
+	int pointsPossible;
+	char* comments;
+};
+
+
+struct inputCaseData {
+	char* correctOutput;
+	char* studentOutput;
+	bool correct;
+	int points;
+	char* comments;
+
+}
+
+stuct inputFileGradeData {
+	char* name;
+	char* contents;
+	int pointsPossible;
+	int pointsEarned;
+	struct inputCase* cases;	
 }
 
 struct section {
+	char* sectionName;
+	bool isAuto;
+	
 	int pointsPossible;
-	int xyz;
+	int pointsEarned;
+	
+	struct sectionRow* rows;
+
+	bool multipleInputs;
+	struct sectionInput* inputs;
+
+	struct section* nextSection;
+};
+
+struct section* sectionList = NULL;
+
+void addSection(const char* name, bool isAuto)
+{
+	struct section* temp = (struct section*)malloc(sizeof(struct section));
+	strcpy(temp->sectionName, name);
+	temp->isAuto = isAuto;
+	temp->nextSection = NULL;
+
+	struct section* helper = sectionList;
+
+
+	if(sectionList == NULL) {
+		sectionList = temp;
+	}
+	else {
+		while (sectionList->nextSection != NULL) helper = helper->nextSection;
+		helper -> nextSection = temp;
+	}
 }
+
+bool addManuallyGradedRow
+
+bool addAutoGradedInput
+
+bool addCaseToGradedInput
+
+
+
+
 int main(void) 
 {
-
-
 	char* correctoutput = run('i');
 	char* studentoutput = run('s');
 
