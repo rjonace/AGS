@@ -132,8 +132,31 @@ Template.mainContent.helpers({
 					HTMLString += '</tbody></table>'
 				}
 			}
+
+			if (name == "sections"){
+				for (var i in submission.feedbackObj[name]) {
+					var tabObj = submission.feedbackObj[name][i];
+					//
+					HTMLString += '<h4>' + tabObj["sectionName"] + '</h4>'
+
+					HTMLString += '<table class="ui celled table"><thead><tr>'
+						
+					HTMLString += '<th>Description</th><th>Points Earned</th><th>Points Possible</th><th>Comments</th>';
+					HTMLString += '</tr></thead>'
+					HTMLString += '<tbody>'
+					for (var rowObj in tabObj["rows"]){
+						HTMLString += '<tr>'
+						for (var val in tabObj["rows"][rowObj]) {
+							HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
+						}
+						HTMLString += '</tr>'
+					}
+					HTMLString += '</tbody></table>'
+				}
+			}
 		}
 		HTMLString += '</div>'
+		console.log(HTMLString);
 		return HTMLString;
 	}
 });
