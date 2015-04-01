@@ -1,0 +1,104 @@
+{
+	"sections": 
+	[
+		{
+			"sectionName": "Code Points",
+			"pointsPossible": 35,
+			"pointsEarned": 10,
+			"rows" : 
+			[
+				{
+					"description":"Uses stdin",
+					"pointsEarned": -1,
+					"pointsPossible": 5,
+					"comments": ""
+				},
+				{
+					"description":"Uses stdout",
+					"pointsEarned": -1,
+					"pointsPossible": 5,
+					"comments": ""
+				}
+				{
+					"description":"Reads in all input",
+					"pointsEarned":-1,
+					"pointsPossible":5,
+					"comments": ""
+				}
+			] 
+		},
+
+		{
+			"sectionName": "Execution Points",
+			"pointsPossible": 50,
+			"pointsEarned": 34,
+			"gradedInputs": 
+			[
+				{
+					"name": "Input 1",
+					"contents": "sfadfafasf s...",
+					"pointsPossible": 15,
+					"pointsEarned": 10,
+					"cases": 
+					[
+						{
+							"input": "2 45",
+							"correctOutput": "31",
+							"studentOutput": "31",
+							"correct": true,
+							"points": 5,
+							"comments": ""
+						},
+						{
+							"input": "6 5",
+							"correctOutput": "48",
+							"studentOutput": "31",
+							"correct": false,
+							"points": 0,
+							"comments": ""
+						},
+						{
+							"input": "7 54",
+							"correctOutput": "58",
+							"studentOutput": "58",
+							"correct": true,
+							"points": 5,
+							"comments": ""
+						}
+					]
+				},
+				{
+					"name": "Input 2",
+					"contents": "sfadfafasfasf safs as \nasf s...",
+					"pointsPossible": 35,
+					"pointsEarned": 24,
+					"cases": 
+					[
+						{
+							"correctOutput": 122,
+							"studentOutput": 333,
+							"correct": false,
+							"points": 0,
+							"comments": ""
+						},
+						{
+							"correctOutput": 248,
+							"studentOutput": 248,
+							"correct": true,
+							"points": 12,
+							"comments": ""
+						},
+						{
+							"correctOutput": 58,
+							"studentOutput": 58,
+							"correct": true,
+							"points": 12,
+							"comments": ""
+						}
+					]
+				}
+
+			]
+		}		
+	]
+}
