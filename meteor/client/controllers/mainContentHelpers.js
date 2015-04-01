@@ -116,7 +116,7 @@ Template.mainContent.helpers({
 				for (var i in submission.feedbackObj[name]) {
 					var tabObj = submission.feedbackObj[name][i];
 					HTMLString += '<h4>' + tabObj.header + '</h4>'
-					HTMLString += '<table class="ui celled table"><thead><tr>'
+					HTMLString += '<table class="ui table"><thead><tr>'
 					for (var c in tabObj.columns){
 						HTMLString += '<th>' + tabObj.columns[c] + '</th>';
 					}
@@ -132,8 +132,56 @@ Template.mainContent.helpers({
 					HTMLString += '</tbody></table>'
 				}
 			}
+
+			if (name == "sections"){
+				for (var i in submission.feedbackObj[name]) {
+					var tabObj = submission.feedbackObj[name][i];
+					//
+					HTMLString += '<h4>' + tabObj["sectionName"] + '</h4>'
+
+					HTMLString += '<table class="ui celled table"><thead><tr>'
+						
+					HTMLString += '<th>Description</th><th>Points Earned</th><th>Points Possible</th><th>Comments</th>';
+					HTMLString += '</tr></thead>'
+					HTMLString += '<tbody>'
+					for (var rowObj in tabObj["rows"]){
+						HTMLString += '<tr>'
+						for (var val in tabObj["rows"][rowObj]) {
+							if (tabObj["rows"][rowObj][val] < 0)
+								HTMLString += '<td><div class="ui button">'+rowObj+'</div></td>'
+							else
+								HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
+						}
+						HTMLString += '</tr>'
+					}
+					for (var r in tabObj["gradedInputs"]){
+						HTMLString += '<tr class="gradedInputRow" index='+r+'>'
+						HTMLString += '<td>' + tabObj["gradedInputs"][r].name + '</td>'
+						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsPossible + '</td>'
+						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsEarned + '</td>'
+						HTMLString += '<td>' + tabObj["gradedInputs"][r].comments + '</td>'
+						HTMLString += '</tr>'
+						HTMLString += '<tr><td colspan="4" style="display: none;"><table class="ui celled table"><thead><tr><th>test case #</th><th>correct output</th><th>student output</th><th>points</th><th>comments</th></tr></thead><tbody>'
+						for (var caseIndex in tabObj["gradedInputs"][r].cases){
+							if (!tabObj["gradedInputs"][r].cases[caseIndex].correct)
+								HTMLString += '<tr class="error">'
+							else
+								HTMLString += '<tr>'
+							HTMLString += '<td>' + caseIndex + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].correctOutput + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].studentOutput + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].points + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].comments + '</td>'
+							HTMLString += '</td></tr>'
+						}
+						HTMLString += '</tbody></table></tr>'
+					}
+					HTMLString += '</tbody></table>'
+				}
+			}
 		}
 		HTMLString += '</div>'
+		console.log(HTMLString);
 		return HTMLString;
 	}
 });

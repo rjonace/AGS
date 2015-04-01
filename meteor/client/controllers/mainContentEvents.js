@@ -415,5 +415,8 @@ Template.mainContent.events({
 			$('#studentFileNameField').val(fileName);
 		else
 			$('#studentFileNameField').val('No file chosen')
+	},
+	'click .gradedInputRow' : function(event) {
+		console.log($(this).index);
 	}
 });
