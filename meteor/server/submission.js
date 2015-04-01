@@ -1,8 +1,9 @@
 /*	Server side Submission methods*/
 Meteor.methods({
 	'insertJSONFile' : function(id_Student, id_Assignment, subNumber){
+		//Meteor.call('insertJSONFile',Meteor.userId(),'Ny3mL2TDncYQ9Aoqx',1)
 		var fs = Npm.require('fs');
-		var feedbackJSON = JSON.parse(fs.readFileSync('/home/student/ags/vta/version2/feedback.json', 'utf8'));
+		var feedbackJSON = JSON.parse(fs.readFileSync('/home/student/ags/vta/version2/feedback2.json', 'utf8'));
 		AGSSubmissions.update(
 			{
 				"id_Student": id_Student,
