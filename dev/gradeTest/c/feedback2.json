@@ -18,7 +18,7 @@
 					"pointsEarned": -1,
 					"pointsPossible": 5,
 					"comments": ""
-				}
+				},
 				{
 					"description":"Reads in all input",
 					"pointsEarned":-1,
@@ -27,7 +27,6 @@
 				}
 			] 
 		},
-
 		{
 			"sectionName": "Execution Points",
 			"pointsPossible": 50,
@@ -42,7 +41,6 @@
 					"cases": 
 					[
 						{
-							"input": "2 45",
 							"correctOutput": "31",
 							"studentOutput": "31",
 							"correct": true,
@@ -50,7 +48,6 @@
 							"comments": ""
 						},
 						{
-							"input": "6 5",
 							"correctOutput": "48",
 							"studentOutput": "31",
 							"correct": false,
@@ -58,7 +55,6 @@
 							"comments": ""
 						},
 						{
-							"input": "7 54",
 							"correctOutput": "58",
 							"studentOutput": "58",
 							"correct": true,
@@ -97,7 +93,6 @@
 						}
 					]
 				}
-
 			]
 		}		
 	]

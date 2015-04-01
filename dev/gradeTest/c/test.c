@@ -242,15 +242,20 @@ struct sectionRow {
 	int pointsEarned;
 	int pointsPossible;
 	char* comments;
+
+	sectionRow* nextRow;
 };
 
 
 struct inputCaseData {
+	char* input;
 	char* correctOutput;
 	char* studentOutput;
 	bool correct;
 	int points;
 	char* comments;
+
+	struct inputCaseData* nextCase;
 
 }
 
@@ -259,7 +264,8 @@ stuct inputFileGradeData {
 	char* contents;
 	int pointsPossible;
 	int pointsEarned;
-	struct inputCase* cases;	
+	struct inputCase* cases;
+	struct inputFileGradeData* nextInput;	
 }
 
 struct section {
@@ -281,6 +287,8 @@ void addSection(const char* name)
 {
 	struct section* temp = (struct section*)malloc(sizeof(struct section));
 	strcpy(temp->sectionName, name);
+	temp->rows = NULL;
+	temp->inputs = NULL;
 	temp->nextSection = NULL;
 
 	if(sectionList == NULL) {
@@ -288,7 +296,6 @@ void addSection(const char* name)
 	}
 	else {
 		struct section* helper = sectionList;
-
 		while (helper->nextSection != NULL) helper = helper->nextSection;
 		helper->nextSection = temp;
 	}
@@ -298,11 +305,131 @@ bool addManuallyGradedRow(char* sectionName, char* description, int pointsPossib
 	if(sectionList == NULL){
 		return false;
 	}
+	else{
+		struct section* sectionHelper = sectionList;
+
+		while(strcmp(sectionHelper->sectionName, sectionName) != 0){
+			sectionHelper = sectionHelper->nextSection;
+			if(sectionHelper == NULL){
+				return false;
+			}
+		}
+
+		struct sectionRow* temp = (sectionRow*)malloc(sizeof(sectionRow));
+		strcpy(temp->description, description);
+		temp->pointsEarned = -1;
+		temp->pointsPossible = pointsPossible;
+		strcpy(temp->comments, "");
+		temp->nextRow = NULL;
+
+		if(sectionHelper->rows == NULL){
+			helper->rows = temp;
+		}
+		else{
+			struct sectionRow* rowHelper = helper->rows;
+			while(rowHelper->nextRow != NULL) rowHelper = rowHelper->nextRow;
+			rowHelper->nextRow = temp;
+		}
+
+		helper->pointsPossible += temp->pointsPossible;
+		return true;
+	}
 }
 
-bool addAutoGradedInput
+bool addAutoGradedInput(char* sectionName, char* inputName, char* inputFileName){
+	if(sectionList == NULL){
+		return false;
+	}
+	else{
+		struct section* sectionHelper = sectionList;
 
-bool addCaseToGradedInput
+		while(strcmp(sectionHelper->sectionName, sectionName) != 0){
+			sectionHelper = sectionHelper->nextSection;
+			if(sectionHelper == NULL){
+				return false;
+			}
+		}
+
+		struct inputFileGradeData* temp = (inputFileGradeData*)malloc(sizeof(inputFileGradeData));
+		strcpy(temp->name, inputName);
+		temp->contents = getInputFromFile(fileName));
+		temp->pointsEarned = 0;
+		temp->pointsPossible = 0;
+		temp->nextInput = NULL;
+
+		if(sectionHelper->inputs == NULL){
+			sectionHelper->inputs = temp;
+		}
+		else{
+			struct inputFileGradeData* inputHelper = sectionHelper->inputs;
+			while(inputHelper->nextInput != NULL) inputHelper = inputHelper->nextInput;
+			inputHelper->nextInput = temp;
+		}
+
+		return true;
+	}
+}
+
+bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctoutput, char* studentoutput, int points, char* comments){
+	if(sectionList == NULL){
+		return false;
+	}
+	else{
+		struct section* sectionHelper = sectionList;
+
+		while(strcmp(sectionHelper->sectionName, sectionName) != 0){
+			sectionHelper = sectionHelper->nextSection;
+			if(sectionHelper == NULL){
+				return false;
+			}
+		}
+
+		if(sectionHelper->inputs == NULL){
+			return false;
+		}
+		else(
+			struct inputFileGradeData* inputHelper = sectionHelper->inputs
+			while(strcmp(inputHelper->name, inputName) != 0){
+				inputHelper = inputHelper->nextInput;
+				if(inputHelper == NULL){
+					return false;
+				}
+			}
+
+			struct inputCaseData* temp = (inputCaseData*) malloc(sizeof(inputCaseData));
+			strcpy(temp->correctoutput, correctoutput);
+			strcpy(temp->studentoutput, studentoutput);
+
+			if(strcmp(correctoutput, studentoutput) == 0){
+				temp->correct = true;
+			}
+			else{
+				temp->correct = false;
+			}
+
+			temp->points = points;
+			strcpy(temp->comments, comments);
+			temp->nextCase = NULL;
+
+			if(inputHelper->cases == NULL){
+				inputHelper->cases = temp;
+			}
+			else{
+				struct inputCaseData* caseHelper = inputHelper->cases;
+				while(caseHelper->nextCase != NULL) caseHelper = caseHelper->nextCase;
+				caseHelper->nextCase = temp;
+			}
+
+			inputHelper->pointsPossible += pointsPossible;
+			sectionHelper->pointsPossible += pointsPossible 
+			if (temp->correct){
+				inputHelper->pointsEarned += pointsPossible;
+				sectionHelper->pointsPossible += pointsPossible;
+			}
+			
+			return true;
+		)
+}
 
 
 
