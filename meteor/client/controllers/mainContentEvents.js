@@ -418,7 +418,7 @@ Template.mainContent.events({
 	},
 	'click .gradedInputRow' : function(event) {
 		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));
-		var displayMode = $($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display');
+		var displayMode = $($(event.currentTarget)[0].parentElement.children[2*curIndex+1].children[0]).css('display');
 		if (displayMode == 'none')
 			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','table-cell');
 		else if (displayMode == 'table-cell')
