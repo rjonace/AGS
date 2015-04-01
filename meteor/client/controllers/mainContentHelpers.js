@@ -147,7 +147,10 @@ Template.mainContent.helpers({
 					for (var rowObj in tabObj["rows"]){
 						HTMLString += '<tr>'
 						for (var val in tabObj["rows"][rowObj]) {
-							HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
+							if (tabObj["rows"][rowObj][val] < 0)
+								HTMLString += '<td><div class="ui button">'+tabObj["rows"][rowObj]+'</div></td>'
+							else
+								HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
 						}
 						HTMLString += '</tr>'
 					}
