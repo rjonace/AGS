@@ -417,12 +417,12 @@ Template.mainContent.events({
 			$('#studentFileNameField').val('No file chosen')
 	},
 	'click .gradedInputRow' : function(event) {
-		var curIndex = Number($(event.currentTarget).getAttribute('index'));
+		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));
 		console.log($(event.currentTarget).getAttribute('index'));
-		var displayMode = $($(event.currentTarget).parentElement.children[curIndex+1].children[0]).css('display');
+		var displayMode = $($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display');
 		if (displayMode == 'none')
-			$($(event.currentTarget).parentElement.children[curIndex+1].children[0]).css('display','table-row');
+			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','table-row');
 		else if (displayMode == 'table-row')
-			$($(event.currentTarget).parentElement.children[curIndex+1].children[0]).css('display','none');
+			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','none');
 	}
 });
