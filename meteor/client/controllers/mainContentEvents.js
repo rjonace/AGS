@@ -420,8 +420,8 @@ Template.mainContent.events({
 		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));
 		var displayMode = $($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display');
 		if (displayMode == 'none')
-			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','table-row');
-		else if (displayMode == 'table-row')
+			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','table-cell');
+		else if (displayMode == 'table-cell')
 			$($(event.currentTarget)[0].parentElement.children[curIndex+1].children[0]).css('display','none');
 	}
 });
