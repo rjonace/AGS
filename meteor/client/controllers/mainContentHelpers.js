@@ -148,7 +148,7 @@ Template.mainContent.helpers({
 						HTMLString += '<tr>'
 						for (var val in tabObj["rows"][rowObj]) {
 							if (tabObj["rows"][rowObj][val] < 0)
-								HTMLString += '<td><div class="ui button">'+tabObj["rows"][rowObj]+'</div></td>'
+								HTMLString += '<td><div class="ui button">'+rowObj+'</div></td>'
 							else
 								HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
 						}
