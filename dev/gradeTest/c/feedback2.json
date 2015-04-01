@@ -3,27 +3,35 @@
 	[
 		{
 			"sectionName": "Code Points",
-			"isAuto": false,
 			"pointsPossible": 35,
 			"pointsEarned": 10,
 			"rows" : 
 			[
-				["Uses stdin", 5, 5, ""],
-				["Uses stdout", 5, 5, ""],
-				["Reads in all input",-1,5,""],
-				["Follows output format",-1,5,""],
-				["Has a queue struct",-1,5,""],
-				["Has enqueue",-1,5,""],
-				["Has dequeue",-1,5,""]
+				{
+					"description":"Uses stdin",
+					"pointsEarned": -1,
+					"pointsPossible": 5,
+					"comments": ""
+				},
+				{
+					"description":"Uses stdout",
+					"pointsEarned": -1,
+					"pointsPossible": 5,
+					"comments": ""
+				}
+				{
+					"description":"Reads in all input",
+					"pointsEarned":-1,
+					"pointsPossible":5,
+					"comments": ""
+				}
 			] 
 		},
 
 		{
 			"sectionName": "Execution Points",
-			"isAuto": true,
 			"pointsPossible": 50,
 			"pointsEarned": 34,
-			"multipleInputs": true,
 			"gradedInputs": 
 			[
 				{
@@ -91,21 +99,6 @@
 				}
 
 			]
-		},
-
-		{
-			"sectionName": "Style Points",
-			"isAuto": true,
-			"pointsPossible": 15,
-			"pointsEarned": 4,
-			"rows" : 
-			[
-				["Header comment w/ name, program, date", 4, 4, ""],
-				["Appropriate variable names",-1,2, ""],
-				["Appropriate use of white space",-1,2, ""],
-				["Appropriate indenting",-1,2, ""],
-				["Comments in code",-1,5, ""]
-			] 
 		}		
 	]
 }

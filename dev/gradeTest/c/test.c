@@ -264,14 +264,12 @@ stuct inputFileGradeData {
 
 struct section {
 	char* sectionName;
-	bool isAuto;
 	
 	int pointsPossible;
 	int pointsEarned;
 	
 	struct sectionRow* rows;
 
-	bool multipleInputs;
 	struct sectionInput* inputs;
 
 	struct section* nextSection;
@@ -279,26 +277,28 @@ struct section {
 
 struct section* sectionList = NULL;
 
-void addSection(const char* name, bool isAuto)
+void addSection(const char* name)
 {
 	struct section* temp = (struct section*)malloc(sizeof(struct section));
 	strcpy(temp->sectionName, name);
-	temp->isAuto = isAuto;
 	temp->nextSection = NULL;
-
-	struct section* helper = sectionList;
-
 
 	if(sectionList == NULL) {
 		sectionList = temp;
 	}
 	else {
-		while (sectionList->nextSection != NULL) helper = helper->nextSection;
-		helper -> nextSection = temp;
+		struct section* helper = sectionList;
+
+		while (helper->nextSection != NULL) helper = helper->nextSection;
+		helper->nextSection = temp;
 	}
 }
 
-bool addManuallyGradedRow
+bool addManuallyGradedRow(char* sectionName, char* description, int pointsPossible){
+	if(sectionList == NULL){
+		return false;
+	}
+}
 
 bool addAutoGradedInput
 
