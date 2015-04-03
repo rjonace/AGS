@@ -102,6 +102,14 @@ Template.mainContent.helpers({
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
 	},
+	'manGraded' : function(){
+		return Session.get('manGradedRow') != null;
+	},
+	'manGradedRowHTML' : function(){
+		var HTMLString = '<div class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div>'
+		HTMLString += '<div class="ui right floated approve button">Update</div>'
+		return HTMLString;
+	},
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
 		var HTMLString = '<div "ui segment">'

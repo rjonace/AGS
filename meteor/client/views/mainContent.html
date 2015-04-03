@@ -69,6 +69,10 @@
 		{{/with}}
 		{{/if}}
 		{{#if isSubmissionDash}}
+			{{#if manGrade}}
+			<div class="header"> Enter points earned. </div>
+			<div class="content"> {{{manGradedRowHTML}}} </div>
+			{{/if}}
 			 {{#with submissionInfo}}
 			 	{{#each files}}
 				<div class="header">
