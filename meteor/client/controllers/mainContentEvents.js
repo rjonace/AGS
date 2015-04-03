@@ -433,9 +433,9 @@ Template.mainContent.events({
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
 			onApprove: function() {
-				
+				//Meteor.call('updateFeedBackObject', submission)
 			}
-		})modal('show');
+		}).modal('show');
 
 		console.log(curRow);
 	}
