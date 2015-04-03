@@ -147,8 +147,12 @@ Template.mainContent.helpers({
 					for (var rowObj in tabObj["rows"]){
 						HTMLString += '<tr>'
 						for (var val in tabObj["rows"][rowObj]) {
-							if (tabObj["rows"][rowObj][val] < 0)
-								HTMLString += '<td><div class="ui button">'+rowObj+'</div></td>'
+							if (tabObj["rows"][rowObj][val] < 0){
+								if(Session.get('currentCourse').id_Instructor == Meteor.userId())
+									HTMLString += '<td><div id="manualGradedRowButton' + i + rowObj + ' class="ui button">Grade</div></td>'
+								else
+									HTMLString += '<td>Waiting for TA</td>'
+							}
 							else
 								HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
 						}
