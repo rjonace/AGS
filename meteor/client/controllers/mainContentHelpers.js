@@ -149,7 +149,7 @@ Template.mainContent.helpers({
 						for (var val in tabObj["rows"][rowObj]) {
 							if (tabObj["rows"][rowObj][val] < 0){
 								if(Session.get('currentCourse').id_Instructor == Meteor.userId())
-									HTMLString += '<td><div object="'+ tabObj["rows"] + '" index="'+i+'" class="ui fluid manual row button">Grade</div></td>'
+									HTMLString += '<td><div object="'+ JSON.stringify(tabObj["rows"]) + '" index="'+i+'" class="ui fluid manual row button">Grade</div></td>'
 								else
 									HTMLString += '<td>Waiting for TA</td>'
 							}
