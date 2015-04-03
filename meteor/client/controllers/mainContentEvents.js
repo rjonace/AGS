@@ -425,8 +425,11 @@ Template.mainContent.events({
 			$($(event.currentTarget)[0].parentElement.children[2*curIndex+1].children[0]).css('display','none');
 	},
 	'click .ui.fluid.manual.row.button' : function(event) {
-		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));
-		var curObject = $(event.currentTarget)[0].getAttribute('object');
-		console.log(curIndex, curObject);
+		var tableIndex = Number($(event.currentTarget)[0].getAttribute('tableIndex'));
+		var rowIndex = Number($(event.currentTarget)[0].getAttribute('rowIndex'));
+
+		var submission = Session.get('currentSubmission');
+		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
+		console.log(curRow);
 	}
 });
