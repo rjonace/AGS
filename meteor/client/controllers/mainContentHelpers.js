@@ -171,7 +171,7 @@ Template.mainContent.helpers({
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].correctOutput + '</td>'
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].studentOutput + '</td>'
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].points + '</td>'
-							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].comments + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].comments + '<i class="drop down icon"></i></td>'
 							HTMLString += '</td></tr>'
 						}
 						HTMLString += '</tbody></table></tr>'
@@ -181,7 +181,7 @@ Template.mainContent.helpers({
 			}
 		}
 		HTMLString += '</div>'
-		console.log(HTMLString);
+
 		return HTMLString;
 	}
 });
