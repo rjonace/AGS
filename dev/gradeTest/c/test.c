@@ -248,7 +248,6 @@ struct sectionRow {
 
 
 struct inputCaseData {
-	char* input;
 	char* correctOutput;
 	char* studentOutput;
 	bool correct;
@@ -399,7 +398,6 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctoutpu
 			struct inputCaseData* temp = (inputCaseData*) malloc(sizeof(inputCaseData));
 			strcpy(temp->correctoutput, correctoutput);
 			strcpy(temp->studentoutput, studentoutput);
-
 			if(strcmp(correctoutput, studentoutput) == 0){
 				temp->correct = true;
 			}
@@ -436,7 +434,7 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctoutpu
 
 int main(void) 
 {
-	char* correctoutput = run('i');
+	/*char* correctoutput = run('i');
 	char* studentoutput = run('s');
 
 	printf("%s\n", correctoutput);
@@ -464,5 +462,40 @@ int main(void)
 
 	printf("%d out of %d correct cases, %d points total\n\n", correct_cases, numCases, total_points);
 
-	printf("%s\n", runWithInput('s', "basketballgame.in"));
+	printf("%s\n", runWithInput('s', "basketballgame.in"));*/
+
+	if(!addCaseToGradedInput("a", "b", "c", "d", 5, "e")){
+		printf("Input doesn't exist yet.\n");
+	}
+	if(!addAutoGradedInput("a", "b", "input.txt")){
+		printf("Section doesn't exist yet.\n");
+	}
+	if(!addManuallyGradedRow("a", "b", 5)){
+		printf("Section doesn't exist yet.\n");
+	}
+
+	addSection("a");
+	printf("Section a exists now.\n");
+
+	if(addManuallyGradedRow("a", "row1", 5)){
+		printf("Adding MGR to a null list worked.\n");
+	}
+	if(addManuallyGradedRow("a", "row2", 5)){
+		printf("Adding MGR to a non null list worked.\n");
+	}
+	if(addAutoGradedInput("a", "input1", "input.txt")){
+		printf("Adding AGI to a null list worked.\n");
+	}
+	if(addAutoGradedInput("a", "input2", "input.txt")){
+		printf("Adding AGI to a non null list worked.\n");
+	}
+	if(addCaseToGradedInput("a","input1","1","1112", 5,"no comment")){
+		printf("Adding Case to null list worked\n");
+	}
+	if(addCaseToGradedInput("a","input1", "1","1", 5, "no comment")){
+		printf("Adding Case to non null list worked\n");
+	}
+
+	printf("Section Name: %s, PointsPossible: %d, PointsEarned: %d\n\nInputs\nCorrect: %d\nCorrect %d\n", sectionList->sectionName, sectionList->pointsPossible, sectionList->pointsEarned, sectionList->inputs->cases->correct, sectionList->inputs->cases->nextCase->correct);
+
 }
