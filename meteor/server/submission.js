@@ -1,5 +1,19 @@
 /*	Server side Submission methods*/
 Meteor.methods({
+	'updateFeedbackObj' : function(id_Student, id_Assignment, subNumber, newFeedbackObj){
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				 $set: {
+				 	"AttemptList.$.feedbackObj": newFeedbackObj
+				 } 
+			} 
+		);
+	},
 	'insertJSONFile' : function(id_Student, id_Assignment, subNumber){
 		//Meteor.call('insertJSONFile',Meteor.userId(),'Ny3mL2TDncYQ9Aoqx',1)
 		var fs = Npm.require('fs');

@@ -433,7 +433,18 @@ Template.mainContent.events({
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
 			onApprove: function() {
-				//Meteor.call('updateFeedBackObject', submission)
+				curRow.pointsEarned = $('#pointsEarnedInput').val();
+				curRow.comments = $('#commentsInput').val();
+				var updatedFeedback = submission.feedbackObj;
+				updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
+				Meteor.call('updateFeedbackObject', submission.id_Student, Session.get('currentAssignment')._id, submission.subNumber, updatedFeedback, 
+					function(error, result) {
+						if (!error)
+							Meteor.call('resetSubmissionSession', submission.id_Student, Session.get('currentAssignment')._id, submission);
+						else
+							console.log(error);
+					}
+				);
 				Session.set('manGradedRow', null);
 			}
 		}).modal('show');

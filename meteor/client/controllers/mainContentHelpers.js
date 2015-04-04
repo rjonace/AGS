@@ -106,17 +106,17 @@ Template.mainContent.helpers({
 		return Session.get('manGradedRow') != null;
 	},
 	'manGradedRowHTML' : function(){
-		var HTMLString;
+		var HTMLString = '';
 		var row = Session.get('manGradedRow');
 		HTMLString += '<div class="header">' + row.description + '</div>';
 		HTMLString += '<div class="content"> '
-		HTMLString += '<div class="ui grid"><div class="one column row">'
+		HTMLString += '<div class="ui grid"><div class="two column row">'
 		HTMLString += '<div class="column"><span>Enter points earned for "' + row.description + '" out of ' + row.pointsPossible + ' points</span></div>';
-		HTMLString += '</div><div class="two column row">'
-		HTMLString += '<div class="column"><div class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div></div>'
-		HTMLString += '<div class="column"><div class="ui labeled input"><div class="ui label">Comments</div><input type="text"></div></div>'
+		HTMLString += '<div class="column"><div id="pointsEarnedInput" class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div></div>'		
 		HTMLString += '</div><div class="one column row">'
-		HTMLString += '<div class="ui right floated approve button">Update</div></div></div>'
+		HTMLString += '<div class="column"><div id="commentsInput" class="ui labeled fluid input"><div class="ui label">Comments</div><input type="text"></div></div>'
+		HTMLString += '</div><div class="one column row">'
+		HTMLString += '<div class="ui right floated green approve button">Update</div></div></div>'
 		HTMLString += '</div>'
 		return HTMLString;
 	},
