@@ -437,7 +437,7 @@ Template.mainContent.events({
 				curRow.comments = $('#commentsInput').val();
 				var updatedFeedback = submission.feedbackObj;
 				updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
-				Meteor.call('updateFeedbackObject', submission.id_Student, Session.get('currentAssignment')._id, submission.subNumber, updatedFeedback, 
+				Meteor.call('updateFeedbackObj', submission.id_Student, Session.get('currentAssignment')._id, submission.subNumber, updatedFeedback, 
 					function(error, result) {
 						if (!error)
 							Meteor.call('resetSubmissionSession', submission.id_Student, Session.get('currentAssignment')._id, submission);
