@@ -88,6 +88,7 @@ char* runWithInput(char mode, const char* inputFileName)
 typedef struct {
 	int points;
 	bool correct;
+	char input; 
 	char correct_output[257];
 	char student_output[257];
 } score_struct;

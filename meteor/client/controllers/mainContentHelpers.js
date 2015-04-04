@@ -102,6 +102,22 @@ Template.mainContent.helpers({
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
 	},
+	'manGraded' : function(){
+		return Session.get('manGradedRow') != null;
+	},
+	'manGradedRowHTML' : function(){
+		var HTMLString;
+		var row = Session.get('manGradedRow');
+		HTMLString += '<div class="ui grid"><div class="two column row">'
+		HTMLString += '<div class="column">' + row.description + '</div>';
+		HTMLString += '<div class="column"> Max Points: ' + row.pointsPossible + '</div>';
+		HTMLString += '</div><div class="two column row">'
+		HTMLString += '<div class="ui labeled input"><div class="ui label">Comments</div><input type="text"></div>'
+		HTMLString += '<div class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div>'
+		HTMLString += '</div><div class="one column row">'
+		HTMLString += '<div class="ui right floated approve button">Update</div></div></div>'
+		return HTMLString;
+	},
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
 		var HTMLString = '<div "ui segment">'
@@ -149,7 +165,7 @@ Template.mainContent.helpers({
 						for (var val in tabObj["rows"][rowObj]) {
 							if (tabObj["rows"][rowObj][val] < 0){
 								if(Session.get('currentCourse').id_Instructor == Meteor.userId())
-									HTMLString += '<td><div object="'+ JSON.stringify(tabObj["rows"]) + '" index="'+i+'" class="ui fluid manual row button">Grade</div></td>'
+									HTMLString += '<td><div rowIndex="'+ rowObj + '" tableIndex="'+i+'" class="ui fluid manual row button">Grade</div></td>'
 								else
 									HTMLString += '<td>Waiting for TA</td>'
 							}
