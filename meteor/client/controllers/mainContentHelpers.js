@@ -106,8 +106,16 @@ Template.mainContent.helpers({
 		return Session.get('manGradedRow') != null;
 	},
 	'manGradedRowHTML' : function(){
-		var HTMLString = '<div class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div>'
-		HTMLString += '<div class="ui right floated approve button">Update</div>'
+		var HTMLString;
+		var row = Session.get('manGradedRow');
+		HTMLString += '<div class="ui grid"><div class="two column row">'
+		HTMLString += '<div class="column">' + row.description + '</div>';
+		HTMLString += '<div class="column"> Max Points: ' + row.pointsPossible + '</div>';
+		HTMLString += '</div><div class="two column row">'
+		HTMLString += '<div class="ui labeled input"><div class="ui label">Comments</div><input type="text"></div>'
+		HTMLString += '<div class="ui labeled input"><div class="ui label">Points Earned</div><input type="text"></div>'
+		HTMLString += '</div><div class="one column row">'
+		HTMLString += '<div class="ui right floated approve button">Update</div></div></div>'
 		return HTMLString;
 	},
 	'submissionFeedbackObject': function(){
