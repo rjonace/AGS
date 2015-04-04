@@ -40,7 +40,9 @@ int bfs(char grid[][MAXSIZE], int rows, int cols, pointT* sLoc);
 
 int main() {
 
+
     int numCases, loop;
+    
     scanf("%d", &numCases);
 
     for (loop=0; loop<numCases; loop++) {
