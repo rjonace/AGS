@@ -229,22 +229,14 @@ score_struct* compareOutputsByCase(int case_lines, const char* correct_output, c
 
 	return scores;	
 }
-
-void addManualScore(const char* sectionName, const char* description, int points)
-{
-
-}
-
-
-
-struct sectionRow {
+typedef struct sectionRow{
 	char* description;
 	int pointsEarned;
 	int pointsPossible;
 	char* comments;
 
 	sectionRow* nextRow;
-};
+}sectionRow;
 
 
 struct inputCaseData {
@@ -275,7 +267,7 @@ struct section {
 	
 	struct sectionRow* rows;
 
-	struct sectionInput* inputs;
+	struct inputFileGradeData* inputs;
 
 	struct section* nextSection;
 };
