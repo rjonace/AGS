@@ -432,6 +432,9 @@ Template.mainContent.events({
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
+			onDeny: function() {
+				
+			},
 			onApprove: function() {
 				curRow.pointsEarned = $('#pointsEarnedInput').val();
 				curRow.comments = $('#commentsInput').val();
