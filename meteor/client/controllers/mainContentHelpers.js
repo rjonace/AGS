@@ -117,7 +117,7 @@ Template.mainContent.helpers({
 		HTMLString += '<div class="column"><div class="ui labeled input"><div class="ui label">Comments</div><input type="text"></div></div>'
 		HTMLString += '</div><div class="one column row">'
 		HTMLString += '<div class="ui right floated approve button">Update</div></div></div>'
-		HTMLString += '</div>''
+		HTMLString += '</div>'
 		return HTMLString;
 	},
 	'submissionFeedbackObject': function(){
