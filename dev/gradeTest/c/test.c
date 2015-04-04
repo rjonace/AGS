@@ -230,15 +230,24 @@ score_struct* compareOutputsByCase(int case_lines, const char* correct_output, c
 
 	return scores;	
 }
+<<<<<<< HEAD
 
 struct sectionRow {
+=======
+typedef struct sectionRow{
+>>>>>>> ac6ef74dd958517dc109c45685a831e08dc28bb0
 	char* description;
 	int pointsEarned;
 	int pointsPossible;
 	char* comments;
 
+<<<<<<< HEAD
 	struct sectionRow* nextRow;
 };
+=======
+	sectionRow* nextRow;
+}sectionRow;
+>>>>>>> ac6ef74dd958517dc109c45685a831e08dc28bb0
 
 
 struct inputCaseData {
