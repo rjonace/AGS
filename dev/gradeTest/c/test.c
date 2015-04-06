@@ -244,7 +244,7 @@ struct inputCaseData {
 	char* correctOutput;
 	char* studentOutput;
 	bool correct;
-	int points;
+	int pointsPossible;
 	char* comments;
 
 	struct inputCaseData* nextCase;
@@ -397,7 +397,7 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 				temp->correct = false;
 			}
 
-			temp->points = points;
+			temp->pointsPossible = points;
 			strcpy(temp->comments, comments);
 			temp->nextCase = NULL;
 
@@ -410,11 +410,11 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 				caseHelper->nextCase = temp;
 			}
 
-			inputHelper->pointsPossible += pointsPossible;
-			sectionHelper->pointsPossible += pointsPossible
+			inputHelper->pointsPossible += points;
+			sectionHelper->pointsPossible += points;
 			if (temp->correct){
-				inputHelper->pointsEarned += pointsPossible;
-				sectionHelper->pointsPossible += pointsPossible;
+				inputHelper->pointsEarned += points;
+				sectionHelper->pointsPossible += points;
 			}
 
 			return true;
