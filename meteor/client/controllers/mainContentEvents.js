@@ -432,6 +432,7 @@ Template.mainContent.events({
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
+			closable: false,
 			onDeny : function() {
 				
 			},
