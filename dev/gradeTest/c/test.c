@@ -255,7 +255,7 @@ struct inputFileGradeData {
 	char* contents;
 	int pointsPossible;
 	int pointsEarned;
-	struct inputCase* cases;
+	struct inputCaseData* cases;
 	struct inputFileGradeData* nextInput;
 };
 
