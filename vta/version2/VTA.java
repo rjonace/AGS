@@ -175,7 +175,7 @@ public class VTA
 
 		String command;
 		if (mode == 'i' || mode == 's')
-			command = "java Exec" + mode;
+			command = "java -jar Exec" + mode + ".jar";
 		else {
 			return "Error: Invalid run Mode\n";
 		}

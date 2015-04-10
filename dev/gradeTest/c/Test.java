@@ -3,14 +3,13 @@ import java.io.*;
 
 public class Test 
 {
-
 	public static String run(char mode) throws IOException
 	{
 		Runtime rt = Runtime.getRuntime();
 
 		String command;
 		if (mode == 'i' || mode == 's')
-			command = "java Exec" + mode;
+			command = "java -jar Exec" + mode + ".jar";
 		else {
 			return "Error: Invalid run Mode\n";
 		}
@@ -35,9 +34,6 @@ public class Test
 		}
 
 		stdInput.close();		
-
-		// read any errors from the attempted command
-
 		return outputData.toString();
 	}
 
