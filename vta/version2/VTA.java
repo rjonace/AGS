@@ -1,11 +1,9 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
-
 import java.lang.Runtime;
+import java.util.*;
 
 class Score
 {
@@ -22,7 +20,10 @@ class Section{
 
 	ArrayList<SectionRow> rows;
 	ArrayList<InputFileGradeData> inputs;
-
+	
+	public Section(){
+		
+	}
 }
 
 class SectionRow{
@@ -52,8 +53,11 @@ class InputFileGradeData{
 			contents += in.nextLine() + "\n";
 		}
 		in.close();
-
 		
+		this.pointsPossible = 0;
+		this.pointsEarned = 0;
+		
+		this.cases = new ArrayList<InputCaseData>();
 	}
 }
 
@@ -89,13 +93,46 @@ public class VTA
 	/** No-arg constructor */
 	public VTA()
 	{
-		
+		sections = new ArrayList<Section>();
 	}
 
 	/** String[] constructor */
 	public VTA(String[] args)
 	{
-
+		sections = new ArrayList<Section>();
+	}
+	
+	public void addManuallyGradedRow(){
+		
+	}
+	
+	public void addAutoGradedInput(){
+		
+	}
+	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, int points){
+		
+		int sectionIndex = -1;
+		for(Section a : sections){
+			if(a.name.equals(SectionName){
+				sectionIndex = sections.indexOf(a);
+				break;
+			}
+		}
+		if(sectionIndex < 0){
+			return false;
+		}
+		
+		for(InputFileGradeData a : sections.get(sectionIndex).inputs){
+			
+		}
+		
+		
+		
+		InputCaseData a = new InputCaseData(correctOutput, studentOutput, points);
+		pointsPossible += points;
+		pointsEarned += a.getPoints();
+		
+		return true;
 	}
 
 	/** Automatically checks whether stdin was used. 
