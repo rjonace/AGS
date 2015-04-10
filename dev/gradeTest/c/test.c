@@ -414,7 +414,7 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 			sectionHelper->pointsPossible += points;
 			if (temp->correct){
 				inputHelper->pointsEarned += points;
-				sectionHelper->pointsPossible += points;
+				sectionHelper->pointsEarned += points;
 			}
 
 			return true;
@@ -489,6 +489,6 @@ int main(void)
 		printf("Adding Case to non null list worked\n");
 	}
 
-	printf("Section Name: %s, PointsPossible: %d, PointsEarned: %d\n\nInputs\nCorrect: %d\nCorrect %d\n", sectionList->sectionName, sectionList->pointsPossible, sectionList->pointsEarned, sectionList->inputs->cases->correct, sectionList->inputs->cases->nextCase->correct);
+	printf("\nSection Name: %s, PointsPossible: %d, PointsEarned: %d\n\nInputs\nCorrect: %d\nCorrect %d\n", sectionList->sectionName, sectionList->pointsPossible, sectionList->pointsEarned, sectionList->inputs->cases->correct, sectionList->inputs->cases->nextCase->correct);
 
 }
