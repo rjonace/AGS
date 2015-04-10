@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
 
+import java.lang.Runtime;
+
 class Score
 {
 	public int score;
@@ -39,7 +41,7 @@ public class VTA
 	/** String[] constructor */
 	public VTA(String[] args)
 	{
-		process
+
 	}
 
 	/** Automatically checks whether stdin was used. 
@@ -76,7 +78,47 @@ public class VTA
 	 *  determines which should be run 
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
-	public String run(char mode);
+	public String run(char mode)
+	{
+		Runtime rt = Runtime.getRuntime();
+
+		String command;
+		if (mode == 'i' || mode == 's')
+			command = "java Exec" + mode;
+		else {
+			return "Error: Invalid run Mode\n";
+		}
+
+		Process proc = rt.exec(commands);
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+		BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+		int bufferSize = 1024;
+		StringBuilder outputData = new StringBuilder(bufferSize);
+		int pos = 0;
+		while ((outData[pos++] = stdInput.read()) != -1) {
+		    if (pos >= bufferSize) {
+		    	bufferSize *= 2;
+		    	StringBuilder tempString = new StringBuilder(bufferSize);
+		    	tempString.append(outputData);
+		    	outputData = tempString;
+		    }
+		}
+
+		stdInput.close();		
+
+		// read any errors from the attempted command
+		System.out.println("Here is the standard error of the command (if any):\n");
+		while ((s = stdError.readLine()) != null) {
+		    System.out.println(s);
+		}
+
+		stdError.close();
+
+		return outputData.toString();
+	}
+
+
 
 	/** Runs either the instructor's or student's compiled binary with the contents of "input" piped in and 
 	 *  returns the stdout as a string; "mode" determines which should be run 
