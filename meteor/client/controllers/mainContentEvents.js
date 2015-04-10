@@ -433,8 +433,11 @@ Template.mainContent.events({
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
 			closable: false,
+			onShow : function() {
+				console.log('Show');
+			},
 			onDeny : function() {
-				
+				console.log('Deny');
 			},
 			onApprove : function() {
 				curRow.pointsEarned = $('#pointsEarnedInput').val();
