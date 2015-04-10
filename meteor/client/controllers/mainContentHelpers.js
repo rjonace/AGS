@@ -102,9 +102,6 @@ Template.mainContent.helpers({
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
 	},
-	'manGraded' : function(){
-		return Session.get('manGradedRow') != null;
-	},
 	'manGradedRowHTML' : function(){
 		var HTMLString = '';
 		var row = Session.get('manGradedRow');
