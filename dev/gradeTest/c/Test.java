@@ -4,7 +4,7 @@ import java.io.*;
 public class Test 
 {
 
-	public static String run(char mode)
+	public static String run(char mode) throws IOException
 	{
 		Runtime rt = Runtime.getRuntime();
 
@@ -22,8 +22,11 @@ public class Test
 		int bufferSize = 1024;
 		StringBuilder outputData = new StringBuilder(bufferSize);
 		int pos = 0;
-		while ((outputData = stdInput.read()) != -1) {
-		    if (pos >= bufferSize) {
+		int curr;
+		while ((curr = stdInput.read()) != -1) {
+			outputData.append((char)curr);
+
+		    if (++pos >= bufferSize) {
 		    	bufferSize *= 2;
 		    	StringBuilder tempString = new StringBuilder(bufferSize);
 		    	tempString.append(outputData);
@@ -38,7 +41,7 @@ public class Test
 		return outputData.toString();
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		System.out.println(run('i'));
 	}
