@@ -440,7 +440,7 @@ Template.mainContent.events({
 				console.log('Deny');
 			},
 			onApprove : function() {
-				curRow.pointsEarned = $('#pointsEarnedInput').val();
+				curRow.pointsEarned = Number($('#pointsEarnedInput').val());
 				curRow.comments = $('#commentsInput').val();
 				var updatedFeedback = submission.feedbackObj;
 				updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
