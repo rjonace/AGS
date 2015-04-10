@@ -452,9 +452,7 @@ Template.mainContent.events({
 									if(!error){
 										Session.set('currentSubmission',result);
 									}
-									else
-										console.log(error);
-									}
+									else console.log(error);
 								}
 							);
 						else
