@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
-import java.io.BufferedReader;
 
 import java.lang.Runtime;
 
@@ -14,9 +13,78 @@ class Score
 	public boolean correct;
 }
 
+class Section{
+
+	String name;
+
+	int pointsPossible;
+	int pointsEarned;
+
+	ArrayList<SectionRow> rows;
+	ArrayList<InputFileGradeData> inputs;
+
+}
+
+class SectionRow{
+	String description;
+	
+	int pointsPossible;
+	int pointsEarned;
+
+	String comments;
+}
+
+class InputFileGradeData{
+	String name;
+	String contents;
+
+	int pointsPossible;
+	int pointsEarned;
+
+	ArrayList<InputCaseData> cases;
+
+	public InputFileGradeData(String inputName, String fileName){
+		this.name = inputName;
+		this.contents = "";
+		Scanner in = new Scanner(new File(fileName));
+
+		while(in.hasNextLine()){
+			contents += in.nextLine() + "\n";
+		}
+		in.close();
+
+		
+	}
+}
+
+class InputCaseData{
+	String correctOutput;
+	String studentOutput;
+
+	boolean correct;
+	int pointsPossible;
+
+	public InputCaseData(String correctOutput, String studentOutput, int points){
+		this.correctOutput = correctOutput;
+		this.studentOutput = studentOutput;
+
+		correct = correctOutput.equals(studentOutput);
+
+		this.pointsPossible = points
+	}
+
+	public int getPoints(){
+		if(correct){
+			return pointsPossible
+		}
+		return 0;
+	}
+}
+
 public class VTA
 {
 
+	ArrayList<Section> sections;
 
 	/** No-arg constructor */
 	public VTA()

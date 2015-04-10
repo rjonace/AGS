@@ -188,7 +188,7 @@ Template.mainContent.helpers({
 								HTMLString += '<tr class="error">'
 							else
 								HTMLString += '<tr>'
-							HTMLString += '<td>' + Number(caseIndex + 1) + '</td>'
+							HTMLString += '<td>' + (Number(caseIndex) + 1) + '</td>'
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].correctOutput + '</td>'
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].studentOutput + '</td>'
 							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].points + '</td>'
