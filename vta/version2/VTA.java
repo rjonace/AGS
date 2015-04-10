@@ -16,22 +16,7 @@ class Score
 
 public class VTA
 {
-	// Instance fields: 
-		// working directory
-		Path directory;
 
-		// files for each output object
-		File codePointsJSON;
-		File execPointsJSON;
-		File stylePointsJSON;
-	
-		// input files
-		File[] inputFiles;
-		
-		// student solution
-
-
-		// instructor solution file
 
 	/** No-arg constructor */
 	public VTA()
@@ -90,15 +75,18 @@ public class VTA
 			return "Error: Invalid run Mode\n";
 		}
 
-		Process proc = rt.exec(commands);
+		Process proc = rt.exec(command);
 		BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 		BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
 		int bufferSize = 1024;
 		StringBuilder outputData = new StringBuilder(bufferSize);
 		int pos = 0;
-		while ((outData[pos++] = stdInput.read()) != -1) {
-		    if (pos >= bufferSize) {
+		int curr;
+		while ((curr = stdInput.read()) != -1) {
+			outputData.append((char)curr);
+
+		    if (++pos >= bufferSize) {
 		    	bufferSize *= 2;
 		    	StringBuilder tempString = new StringBuilder(bufferSize);
 		    	tempString.append(outputData);
@@ -107,15 +95,6 @@ public class VTA
 		}
 
 		stdInput.close();		
-
-		// read any errors from the attempted command
-		System.out.println("Here is the standard error of the command (if any):\n");
-		while ((s = stdError.readLine()) != null) {
-		    System.out.println(s);
-		}
-
-		stdError.close();
-
 		return outputData.toString();
 	}
 
