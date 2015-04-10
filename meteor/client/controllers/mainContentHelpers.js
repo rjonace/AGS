@@ -119,6 +119,9 @@ Template.mainContent.helpers({
 
 		return HTMLString;
 	},
+	'manGradedRow' : function(){
+		return Session.get('manGradedRow');
+	},
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
 		var HTMLString = '<div "ui segment">'

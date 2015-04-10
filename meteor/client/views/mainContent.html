@@ -69,9 +69,35 @@
 		{{/with}}
 		{{/if}}
 		{{#if isSubmissionDash}}
-			{{#if manGraded}}
-				{{{manGradedRowHTML}}} 
-			{{/if}}
+			{{#with manGradedRow}}
+				<div class="header">{{description}}</div>
+				<div class="content"> 
+				  <div class="ui grid">
+					<div class="two column row">
+
+					  <div class="column">
+						<div class="ui fluid label" style="text-align:center;">Points Earned</div>
+						<div id="pointsEarnedInput" class="ui fluid right labeled input">
+						  <input type="text">
+						  <div class="ui label">/ {{pointsPossible}} Points</div>
+						</div>
+					  </div>
+
+					  <div class="column">
+						<div id="commentsInput" class="ui fluid input">
+						  <div class="ui fluid label" style="text-align:center;">Comments</div>
+						  <input type="text" value={{comments}}>
+						</div>
+					  </div>
+					  
+					</div>
+				  </div>
+				</div>   
+				<div class="actions">
+					<div class="ui right floated big green approve button">Update</div>
+					<div class="ui right floated big red deny button">Cancel</div>
+				</div>
+			 {{/with}}
 			 {{#with submissionInfo}}
 			 	{{#each files}}
 				<div class="header">
