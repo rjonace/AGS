@@ -307,10 +307,10 @@ bool addManuallyGradedRow(char* sectionName, char* description, int pointsPossib
 		}
 
 		struct sectionRow* temp = (struct sectionRow*)malloc(sizeof(struct sectionRow));
-		strcpy(temp->description, description);
+		temp->description = description;
 		temp->pointsEarned = -1;
 		temp->pointsPossible = pointsPossible;
-		strcpy(temp->comments, "");
+		temp->comments = "";
 		temp->nextRow = NULL;
 
 		if(sectionHelper->rows == NULL){
@@ -342,7 +342,7 @@ bool addAutoGradedInput(char* sectionName, char* inputName, char* inputFileName)
 		}
 
 		struct inputFileGradeData* temp = (struct inputFileGradeData*)malloc(sizeof(struct inputFileGradeData));
-		strcpy(temp->name, inputName);
+		temp->name = inputName;
 		temp->contents = getInputFromFile(inputFileName);
 		temp->pointsEarned = 0;
 		temp->pointsPossible = 0;
@@ -388,8 +388,8 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 			}
 
 			struct inputCaseData* temp = (struct inputCaseData*) malloc(sizeof(struct inputCaseData));
-			strcpy(temp->correctOutput, correctOutput);
-			strcpy(temp->studentOutput, studentOutput);
+			temp->correctOutput = correctOutput;
+			temp->studentOutput = studentOutput;
 			if(strcmp(correctOutput, studentOutput) == 0){
 				temp->correct = true;
 			}
@@ -398,7 +398,7 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 			}
 
 			temp->pointsPossible = points;
-			strcpy(temp->comments, comments);
+			temp->comments = comments;
 			temp->nextCase = NULL;
 
 			if(inputHelper->cases == NULL){
