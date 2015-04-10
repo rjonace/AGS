@@ -277,7 +277,7 @@ struct section* sectionList = NULL;
 void addSection(const char* name)
 {
 	struct section* temp = (struct section*)malloc(sizeof(struct section));
-	strcpy(temp->sectionName, name);
+	temp->sectionName = name;
 	temp->rows = NULL;
 	temp->inputs = NULL;
 	temp->nextSection = NULL;
