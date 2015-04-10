@@ -274,7 +274,7 @@ struct section {
 
 struct section* sectionList = NULL;
 
-void addSection(const char* name)
+void addSection(char* name)
 {
 	struct section* temp = (struct section*)malloc(sizeof(struct section));
 	temp->sectionName = name;
