@@ -8,6 +8,9 @@ Meteor.subscribe('submissionData');
 
 Tracker.autorun(function() {
 	if(Session.get('manGradedRow')){
+	    var curRow = Session.get('manGradedRow');
+	    console.log(curRow);
+	    $('#viewFilesModal').modal('show');
 		$('#viewFilesModal').modal({
 			onDeny : function() {
 				console.log('Deny');
@@ -39,4 +42,4 @@ Tracker.autorun(function() {
 	} else {
 		console.log('else');
 	}
-})
+}, function(error){ console.log(error); })
