@@ -431,6 +431,7 @@ Template.mainContent.events({
 		var submission = Session.get('currentSubmission');
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
+		$('#viewFilesModal').modal('show');
 	}
 });
 

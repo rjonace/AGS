@@ -10,7 +10,7 @@ Tracker.autorun(function() {
 	if(Session.get('manGradedRow')){
 	    var curRow = Session.get('manGradedRow');
 	    console.log(curRow);
-		$('#viewFilesModal').modal('show').modal({
+		$('#viewFilesModal').modal({
 			onDeny : function() {
 				console.log('Deny');
 				Session.set('manGradedRow', null);
