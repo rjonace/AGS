@@ -432,12 +432,19 @@ Template.mainContent.events({
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
-			closable: false,
-			onShow : function() {
-				console.log('Show');
-			},
+			closable: false
+		}).modal('show');
+
+		console.log(curRow);
+	}
+});
+
+Tracker.autorun(function() {
+	if(Session.get('manGradedRow')){
+		$('#viewFilesModal').modal({
 			onDeny : function() {
 				console.log('Deny');
+				Session.set('manGradedRow', null);
 			},
 			onApprove : function() {
 				curRow.pointsEarned = Number($('#pointsEarnedInput').val());
@@ -461,8 +468,8 @@ Template.mainContent.events({
 				);
 				Session.set('manGradedRow', null);
 			}
-		}).modal('show');
-
-		console.log(curRow);
+		});
+	} else {
+		console.log('else');
 	}
-});
+})
