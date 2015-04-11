@@ -10,11 +10,11 @@ Tracker.autorun(function() {
 	if(Session.get('manGradedRow')){
 	    var curRow = Session.get('manGradedRow');
 	    console.log(curRow);
-		$('#viewFilesModal').modal({
+		$('#viewFilesModal').modal('show').modal({
 			onDeny : function() {
 				console.log('Deny');
 				Session.set('manGradedRow', null);
-			},
+			}/*,
 			onApprove : function() {
 				curRow.pointsEarned = Number($('#pointsEarnedInput').val());
 				curRow.comments = $('#commentsInput').val();
@@ -36,10 +36,10 @@ Tracker.autorun(function() {
 					}
 				);
 				Session.set('manGradedRow', null);
-			}
-		}).modal('show');
+			}*/
+		});
 	} else {
 	    $('#viewFilesModal').modal('hide');
 		console.log('else');
 	}
-}, function(error){ console.log(error); })
+}, {onError: function(error){ console.log(error); }})
