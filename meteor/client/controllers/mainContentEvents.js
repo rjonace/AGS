@@ -432,6 +432,9 @@ Template.mainContent.events({
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
+				onHide : function() {
+					Session.set('manGradedRow',null);
+				},
                 onDeny : function() {
                     console.log('Deny');
                     Session.set('manGradedRow', null);
@@ -442,18 +445,15 @@ Template.mainContent.events({
                     var updatedFeedback = submission.feedbackObj;
                     updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
                     Meteor.call('updateFeedbackObj', submission.id_Student, Session.get('currentAssignment')._id, submission.subNumber, updatedFeedback, 
-                        function(error, result) {
-                            if (!error)
-                                Meteor.call('resetSubmissionSession', submission.id_Student, Session.get('currentAssignment')._id, submission,
-                                    function(error,result){
-                                        if(!error){
-                                            Session.set('currentSubmission',result);
-                                        }
-                                        else console.log(error);
-                                    }
-                                );
-                            else
-                                console.log(error);
+                        function() {
+							Meteor.call('resetSubmissionSession', submission.id_Student, Session.get('currentAssignment')._id, submission,
+								function(error,result){
+									if(!error){
+										Session.set('currentSubmission',result);
+									}
+									else console.log(error);
+								}
+							);
                         }
                     );
                     Session.set('manGradedRow', null);

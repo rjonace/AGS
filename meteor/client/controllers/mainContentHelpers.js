@@ -178,8 +178,8 @@ Template.mainContent.helpers({
 					for (var r in tabObj["gradedInputs"]){
 						HTMLString += '<tr class="gradedInputRow" index='+r+'>'
 						HTMLString += '<td>' + tabObj["gradedInputs"][r].name + '</td>'
-						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsPossible + '</td>'
 						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsEarned + '</td>'
+						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsPossible + '</td>'
 						HTMLString += '<td>' + tabObj["gradedInputs"][r].comments + '<div class="ui right floated mini compact icon button"><i class="dropdown icon"></i></div></td>'
 						HTMLString += '</tr>'
 						HTMLString += '<tr><td colspan="4" style="display: none;"><table class="ui celled table"><thead><tr><th>test case #</th><th>correct output</th><th>student output</th><th>points</th><th>comments</th></tr></thead><tbody>'
