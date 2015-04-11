@@ -10,7 +10,6 @@ class Score{
 	public boolean correct;
 }
 
-// TEst
 class Section{
 
 	String name;
@@ -268,18 +267,14 @@ public class VTA{
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
 	public String run(char mode){
-		Runtime rt = Runtime.getRuntime();
-
-		String command;
-		if (mode == 'i' || mode == 's')
-			command = "java -jar Exec" + mode + ".jar";
-		else {
+		if (!(mode == 'i' || mode == 's'))
 			return "Error: Invalid run Mode\n";
-		}
 
-		Process proc;
+		Runtime rt = Runtime.getRuntime();
+		String command = "java -jar Exec" + mode + ".jar";
+
 		try {
-			proc = rt.exec(command);
+			Process proc = rt.exec(command);
 			
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
@@ -304,11 +299,10 @@ public class VTA{
 			return outputData.toString();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "";
+		return "Exception";
 	}
 
 
@@ -318,7 +312,40 @@ public class VTA{
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
 	public String runWithInput(char mode, String input){
-		return "";
+		if (!(mode == 'i' || mode == 's'))
+			return "Error: Invalid run Mode\n";
+
+		Runtime rt = Runtime.getRuntime();
+		String command[] = {"/bin/sh", "-c","java -jar Exec" + mode + ".jar < " + inputFileName};
+		
+		try {
+			Process proc = rt.exec(command);
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+			int bufferSize = 1024;
+			StringBuilder outputData = new StringBuilder(bufferSize);
+			int pos = 0;
+			String curr = null;
+			while ((curr = stdInput.readLine()) != null) {
+				outputData.append(curr + '\n');
+			    if (++pos >= bufferSize) {
+			    	bufferSize *= 2;
+			    	StringBuilder tempString = new StringBuilder(bufferSize);
+			    	tempString.append(outputData);
+			    	outputData = tempString;
+			    }
+			}
+
+			stdInput.close();
+			
+			return outputData.toString();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "Exception";
 	}
 
 	/** Does a diff comparison of the text in correct_output and student_output, treating each line as a case,
