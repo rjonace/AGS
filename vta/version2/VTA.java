@@ -254,6 +254,56 @@ public class VTA{
 		return "";
 	}
 
+
+/*	public Score compareOutputsByLine(final String[] correct_output, final String[] student_output, int total_points, Integer numCases)
+	{
+		int lineBufferSize = 256;
+		int scoresArraySize = 256;
+
+		numCases = 0;
+		score_struct* scores = malloc(scoresArraySize * sizeof(score_struct));
+
+		int corrLength = strlen(correct_output);
+		int studLength = strlen(student_output);
+
+		int corrPos = 0, studPos = 0;
+
+		while (corrPos < corrLength && studPos < studLength) {
+			char corrLine[lineBufferSize], studLine[lineBufferSize];
+			corrPos = readStringLine(correct_output, corrLine, corrPos) + 1;
+			studPos = readStringLine(student_output, studLine, studPos) + 1;
+
+			scores[*numCases].correct = !strcmp(corrLine, studLine);
+			strncpy(scores[*numCases].correct_output, corrLine, lineBufferSize);
+			strncpy(scores[*numCases].student_output, studLine, lineBufferSize);
+
+			*numCases = *numCases + 1;
+			if (*numCases >= scoresArraySize) {
+				scoresArraySize *= 2;
+				scores = realloc(scores, scoresArraySize * sizeof(score_struct));
+			}
+		}
+
+		while (corrPos < corrLength) {
+			char corrLine[lineBufferSize];
+			corrPos = readStringLine(correct_output, corrLine, corrPos);
+			scores[*numCases].correct = false;
+			*numCases = *numCases + 1;
+
+			if (*numCases >= scoresArraySize) {
+				scoresArraySize *= 2;
+				scores = realloc(scores, scoresArraySize *sizeof(score_struct));
+			}
+		}
+
+		for (int i = 0; i < *numCases; i++) {
+			if (scores[i].correct)
+				scores[i].points = total_points / *numCases;
+		}
+
+		return scores;
+	}*/
+
 	/** Returns a string that represents the contents of an input file containing numCases of input cases,
 	 *  each of which follows the pattern in the first argument 
 	 *  Implementation idea: probably should make the first line the number of cases, and make the beginning of

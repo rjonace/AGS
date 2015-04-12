@@ -91,6 +91,32 @@ void printAllInList()
     }
 }
 
+
+int main()
+{
+    int* ptr = malloc(sizeof(int)*10);
+    free(malloc(10));
+    printAllInList();
+
+
+    int* cptr = calloc(20,sizeof(int));
+    printAllInList();
+    int* rptr = realloc(cptr, 30*sizeof(int));
+    printAllInList();
+    int* rptr2 = realloc(rptr, 20*sizeof(int));
+    printAllInList();
+
+    free(ptr);
+
+    printf("Sum = %d\n", sum);
+    if(list == NULL) printf("No memory leaks\n");
+    else {
+        printf("Memory leak detected\n");
+        printAllInList();
+    }
+    return 0;
+}
+
 void* realloc(void* p, size_t sz)
 {
     void *(*libc_realloc)(void*,size_t) = dlsym(RTLD_NEXT, "realloc");
@@ -122,29 +148,4 @@ void free(void *p)
     void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
     removePointerFromList(p);
     libc_free(p);
-}
-
-int main()
-{
-	int* ptr = malloc(sizeof(int)*10);
-    free(malloc(10));
-    printAllInList();
-
-
-    int* cptr = calloc(20,sizeof(int));
-    printAllInList();
-    int* rptr = realloc(cptr, 30*sizeof(int));
-    printAllInList();
-    int* rptr2 = realloc(rptr, 20*sizeof(int));
-    printAllInList();
-
-    free(ptr);
-
-    printf("Sum = %d\n", sum);
-    if(list == NULL) printf("No memory leaks\n");
-    else {
-        printf("Memory leak detected\n");
-        printAllInList();
-    }
-    return 0;
 }

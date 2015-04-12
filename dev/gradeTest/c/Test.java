@@ -5,36 +5,42 @@ public class Test
 {
 	public static String run(char mode) throws IOException
 	{
-		Runtime rt = Runtime.getRuntime();
-
-		String command;
-		if (mode == 'i' || mode == 's')
-			command = "java -jar Exec" + mode + ".jar";
-		else {
+		if (!(mode == 'i' || mode == 's'))
 			return "Error: Invalid run Mode\n";
+
+		Runtime rt = Runtime.getRuntime();
+		String command = "java -jar Exec" + mode + ".jar";
+
+		try {
+			Process proc = rt.exec(command);
+			
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+			
+			int bufferSize = 1024;
+			StringBuilder outputData = new StringBuilder(bufferSize);
+			int pos = 0;
+			int curr;
+			while ((curr = stdInput.read()) != -1) {
+				outputData.append((char)curr);
+
+			    if (++pos >= bufferSize) {
+			    	bufferSize *= 2;
+			    	StringBuilder tempString = new StringBuilder(bufferSize);
+			    	tempString.append(outputData);
+			    	outputData = tempString;
+			    }
+			}
+
+			stdInput.close();		
+			
+			return outputData.toString();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		Process proc = rt.exec(command);
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-		BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
-
-		int bufferSize = 1024;
-		StringBuilder outputData = new StringBuilder(bufferSize);
-		int pos = 0;
-		String curr = null;
-		while ((curr = stdInput.readLine()) != null) {
-			outputData.append(curr + '\n');
-
-		    if (++pos >= bufferSize) {
-		    	bufferSize *= 2;
-		    	StringBuilder tempString = new StringBuilder(bufferSize);
-		    	tempString.append(outputData);
-		    	outputData = tempString;
-		    }
-		}
-
-		stdInput.close();		
-		return outputData.toString();
+		
+		return "Exception";
 	}
 
 	public static String runWithInput(char mode, final String inputFileName) throws IOException
@@ -44,28 +50,35 @@ public class Test
 
 		Runtime rt = Runtime.getRuntime();
 		String command[] = {"/bin/sh", "-c","java -jar Exec" + mode + ".jar < " + inputFileName};
-		Process proc = rt.exec(command);
+		
+		try {
+			Process proc = rt.exec(command);
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-		BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+			int bufferSize = 1024;
+			StringBuilder outputData = new StringBuilder(bufferSize);
+			int pos = 0;
+			String curr = null;
+			while ((curr = stdInput.readLine()) != null) {
+				outputData.append(curr + '\n');
+			    if (++pos >= bufferSize) {
+			    	bufferSize *= 2;
+			    	StringBuilder tempString = new StringBuilder(bufferSize);
+			    	tempString.append(outputData);
+			    	outputData = tempString;
+			    }
+			}
 
-		int bufferSize = 1024;
-		StringBuilder outputData = new StringBuilder(bufferSize);
-		int pos = 0;
-		String curr = null;
-		while ((curr = stdInput.readLine()) != null) {
-			outputData.append(curr + '\n');
-		    if (++pos >= bufferSize) {
-		    	bufferSize *= 2;
-		    	StringBuilder tempString = new StringBuilder(bufferSize);
-		    	tempString.append(outputData);
-		    	outputData = tempString;
-		    }
+			stdInput.close();
+			
+			return outputData.toString();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		stdInput.close();
-		
-		return outputData.toString();
+		return "Exception";
 	}
 
 	public static void main(String[] args) throws IOException

@@ -1,8 +1,131 @@
-#include <stdlib.h>
-#include <stdio.h>
+#define _GNU_SOURCE
 #include <string.h>
 #include <stdbool.h>
+#include <dlfcn.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+/*struct pointer {
+    int name;
+    size_t size;
+    struct pointer* next;
+};
+
+struct pointer* list;
+int sum = 0;
+
+void addPointerToList(int name, size_t size){
+    void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
+    struct pointer* temp = libc_malloc(sizeof(struct pointer));
+    temp->name = name;
+    temp->size = size;
+    temp->next = NULL;
+    if(list == NULL){
+        list = temp;
+    } else {
+        struct pointer* helper = list;
+        while(helper->next != NULL) helper = helper->next;
+        helper->next = temp;
+    }
+}
+
+bool removePointerFromList(int name){
+    void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
+    if(list == NULL){
+        return false;
+    } else {
+        struct pointer* helper = list;
+        if( helper->name == name){
+            list = helper->next;
+            libc_free(helper);
+            return true;
+        }
+        while(helper->next != NULL && helper->next->name != name) helper = helper->next;
+        struct pointer* temp = helper->next;
+        if(temp == NULL) return false;
+        else {
+            helper->next = temp->next;
+            libc_free(temp);
+            return true;
+        }
+    }
+}
+
+bool findAndUpdateInList(int oldName, int newName, size_t size){
+    void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
+    if(list == NULL){
+        return false;
+    } else {
+        struct pointer* helper = list;
+        if( helper->name == oldName){
+            helper->name = newName;
+            int diff = helper->size - size;
+            if (diff < 0) sum += -diff;
+            helper->size = size;
+            return true;
+        }
+        while(helper->next != NULL && helper->next->name != oldName) helper = helper->next;
+        helper = helper->next;
+        if(helper == NULL) return false;
+        else {
+            helper->name = newName;
+            int diff = helper->size - size;
+            if (diff < 0) sum += -diff;
+            helper->size = size;
+            return true;
+        }
+    }
+}
+
+void printAllInList()
+{
+    if(list == NULL){
+        printf("No nodes in list\n");
+    } else {
+        printf("-----------\n");
+        struct pointer* helper = list;
+        do
+        {
+            printf("%u | %u \n",helper->name, helper->size);
+            helper = helper->next;
+        } while(helper != NULL);
+        printf("-----------\n");
+    }
+}
+
+void* realloc(void* p, size_t sz)
+{
+    void *(*libc_realloc)(void*,size_t) = dlsym(RTLD_NEXT, "realloc");
+    void *ptr = libc_realloc(p,sz);
+    findAndUpdateInList(p,ptr,sz);
+    return ptr;
+}
+
+void* calloc(size_t n, size_t sz)
+{
+    void *(*libc_calloc)(size_t,size_t) = dlsym(RTLD_NEXT, "calloc");
+    void *p = libc_calloc(n,sz);
+    sum += (sz*n);
+    addPointerToList(p,(sz*n));
+    return p;
+}
+
+void* malloc(size_t sz)
+{
+    void *(*libc_malloc)(size_t) = dlsym(RTLD_NEXT, "malloc");
+    void *p = libc_malloc(sz);
+    sum += sz;
+    addPointerToList(p,sz);
+    return p;
+}
+
+void free(void *p)
+{
+    void (*libc_free)(void*) = dlsym(RTLD_NEXT, "free");
+    removePointerFromList(p);
+    libc_free(p);
+}
+*/
 
 char* getInputFromFile(const char* fileName)
 {
@@ -427,7 +550,7 @@ bool addCaseToGradedInput(char* sectionName, char* inputName, char* correctOutpu
 
 int main(void) 
 {
-	/*char* correctoutput = run('i');
+	char* correctoutput = run('i');
 	char* studentoutput = run('s');
 
 	printf("%s\n", correctoutput);
@@ -435,7 +558,7 @@ int main(void)
 
 	int numCases;
 	score_struct* scores = compareOutputsByLine(correctoutput, studentoutput, 100, &numCases);
-	score_struct* scores = compareOutputsByCase(2, correctoutput, studentoutput, 100, &numCases);
+//	score_struct* scores = compareOutputsByCase(2, correctoutput, studentoutput, 100, &numCases);
 
 
 	free(correctoutput);
@@ -455,8 +578,8 @@ int main(void)
 
 	printf("%d out of %d correct cases, %d points total\n\n", correct_cases, numCases, total_points);
 
-	printf("%s\n", runWithInput('s', "basketballgame.in"));*/
-
+//	printf("%s\n", runWithInput('s', "basketballgame.in"));
+/*
 	if(!addCaseToGradedInput("a", "b", "c", "d", 5, "e")){
 		printf("Input doesn't exist yet.\n");
 	}
@@ -490,5 +613,5 @@ int main(void)
 	}
 
 	printf("\nSection Name: %s, PointsPossible: %d, PointsEarned: %d\n\nInputs\nCorrect: %d\nCorrect %d\n", sectionList->sectionName, sectionList->pointsPossible, sectionList->pointsEarned, sectionList->inputs->cases->correct, sectionList->inputs->cases->nextCase->correct);
-
+*/
 }
