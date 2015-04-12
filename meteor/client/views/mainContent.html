@@ -467,15 +467,47 @@
 						</div>
 					</div>
 				</div>
-				<h3>Feedback</h3>
-				{{#if fileNotGraded}}
-					<button type="button" id="gradeSubmission" >Get Feedback</button>
-				{{else}}
-					{{feedbackStatus}}
-					{{{submissionFeedback}}}
-					<br>
-					{{{submissionFeedbackObject}}}
-				{{/if}}
+				<div class="ui segment">
+				
+					{{#if fileNotGraded}}
+						<div class="ui icon positive message">
+							<i class="file icon"></i>
+							<div class="content">
+								<div class="header">
+									Added
+								</div>
+								<p>Valid solution file(s) chosen.</p>
+							</div>
+						</div>
+						<div class="ui button" id="gradeSubmission" >Grade Submission</div>
+					{{else}}
+						{{#if feedbackStatusCheck feedbackStatus}}
+						<div class="ui icon message">
+							<i class="notched circle loading icon"></i>
+							<div class="content">
+								<div class="header">
+									Feedback Status
+								</div>
+								<p>{{feedbackStatus}}</p>
+							</div>
+						</div>
+						{{else}}
+						<div class="ui icon positive message">
+							<i class="checkmark icon"></i>
+							<div class="content">
+								<div class="header">
+									Finished
+								</div>
+								<p>{{feedbackStatus}}</p>
+							</div>
+						</div>
+						{{/if}}
+						<h3>Feedback</h3>
+						{{{submissionFeedback}}}
+						<br>
+						{{{submissionFeedbackObject}}}
+					{{/if}}
+				</div>
 			{{/if}}
 		{{/if}}
 </div>

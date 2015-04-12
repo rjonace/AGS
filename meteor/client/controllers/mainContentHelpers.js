@@ -1,5 +1,5 @@
 Template.mainContent.rendered = function(){
-	
+
 };
 
 Template.mainContent.helpers({
@@ -47,6 +47,9 @@ Template.mainContent.helpers({
 	},
 	'feedbackStatus' : function(){
 		return Session.get('feedbackStatus');
+	},
+	'feedbackStatusCheck' : function( status ){
+		return status == 'Submission graded.'
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
@@ -101,20 +104,6 @@ Template.mainContent.helpers({
 	'submissionFeedback': function(){
 		var submission = Session.get('currentSubmission');
 		return submission.feedback;
-	},
-	'manGradedRowHTML' : function(){
-		var HTMLString = '';
-		var row = Session.get('manGradedRow');
-
-		HTMLString += '<div class="header">' + row.description + '</div>';
-		HTMLString += '<div class="content"> '
-		HTMLString += '<div class="ui grid"><div class="two column row"><div class="column">'
-		HTMLString += '<div class="ui fluid label" style="text-align:center;">Points Earned</div><div id="pointsEarnedInput" class="ui fluid right labeled input"><input type="text"><div class="ui label">/ ' + row.pointsPossible + ' Points</div></div></div>';
-		HTMLString += '<div class="column"><div id="commentsInput" class="ui fluid input"><div class="ui fluid label" style="text-align:center;">Comments</div><input type="text"></div></div></div><div class="one column row">';
-		HTMLString += '<div class="column"><div class="ui right floated big green approve button">Update</div><div class="ui right floated big red deny button">Cancel</div>'		
-		HTMLString += '</div></div></div></div>'
-
-		return HTMLString;
 	},
 	'manGradedRow' : function(){
 		return Session.get('manGradedRow');
