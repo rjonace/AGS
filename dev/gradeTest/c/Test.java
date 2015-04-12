@@ -98,7 +98,7 @@ System.out.println(j++);
 		vta.addManuallyGradedRow("Code Points", "Uses stdout", 10, "Edit this comment");
 System.out.println(j++);		
 
-System.out.println(vta.addAutoGradedInput("Execution Points", "The hard one", "basketballgame.in"));
+System.out.println(vta.addAutoGradedInput("Execution Points", "The hard one", "inputTest.txt"));
 System.out.println(j++);		
 		int numCases = 10;
 		// studentoutput, instructoroutput
