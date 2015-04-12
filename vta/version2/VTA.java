@@ -299,7 +299,7 @@ public class VTA{
 					out += d.pointsPossible + ",\n";
 					
 					out += "\t\t\t\t\t\t\t\"comments\":\"";
-					out += d.comments + "\",\n";
+					out += d.comments + "\"\n";
 					
 					out += "\t\t\t\t\t\t},\n";					
 				}
