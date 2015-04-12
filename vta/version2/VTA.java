@@ -216,8 +216,10 @@ public class VTA{
 		String out = "";
 		
 		out += "{\n" + "\t\"sections\":\n" + "\t[\n";
+		boolean sectionsRan = false, rowsRan = false, inputsRan = false, casesRan = false;
 		
 		for(Section a : sections){
+			sectionsRan = true;
 			out += "\t\t{\n";
 			
 			out += "\t\t\t\"sectionName\":";
@@ -233,7 +235,8 @@ public class VTA{
 			out += "\t\t\t[\n";
 			
 			for(SectionRow b : a.rows){
-				out += "\t\t\t\t{";
+				rowsRan = true;
+				out += "\t\t\t\t{\n";
 				
 				out += "\t\t\t\t\t\"description\":\"";
 				out += b.description + "\",\n";
@@ -249,9 +252,11 @@ public class VTA{
 				
 				out += "\t\t\t\t},\n";
 			}
-			
-			out = out.substring(0, (out.length()-2));
-			out += "\n";
+			if(rowsRan){
+				out = out.substring(0, (out.length()-2));
+				out += "\n";
+				rowsRan = false;
+			}
 			
 			out += "\t\t\t],\n";
 			
@@ -259,6 +264,7 @@ public class VTA{
 			out += "\t\t\t[\n";
 			
 			for(InputFileGradeData c : a.inputs){
+				inputsRan = true;
 				out += "\t\t\t\t{\n";
 				
 				out += "\t\t\t\t\t\"name\":\"";
@@ -277,6 +283,7 @@ public class VTA{
 				out += "\t\t\t\t\t[\n";
 				
 				for(InputCaseData d : c.cases){
+					casesRan = true;
 					out += "\t\t\t\t\t\t{\n";
 					
 					out += "\t\t\t\t\t\t\t\"correctOutput\":\"";
@@ -296,26 +303,35 @@ public class VTA{
 					
 					out += "\t\t\t\t\t\t},\n";					
 				}
+				if(casesRan){
+					out = out.substring(0, (out.length()-2));
+					out += "\n";
+					casesRan = false;
+				}
 				
-				out = out.substring(0, (out.length()-2));
-				out += "\n";
-				
+				out += "\t\t\t\t\t]\n";
 				out += "\t\t\t\t},\n";
 			}
 			
-			out = out.substring(0, (out.length()-2));
-			out += "\n";
+			if(inputsRan){
+				out = out.substring(0, (out.length()-2));
+				out += "\n";
+				inputsRan = false;
+			}
 			
 			out += "\t\t\t]\n";
 			
 			out += "\t\t},\n";
 		}
 		
-		out = out.substring(0, (out.length()-2));
-		out += "\n";
+		if(sectionsRan){
+			out = out.substring(0, (out.length()-2));
+			out += "\n";
+			sectionsRan = false;
+		}
 		
 		out += "\t]\n";
-		out += "}";
+		out += "}\n";
 		
 		try {
 			PrintWriter output = new PrintWriter("autograderOutput.json", "UTF-8");
@@ -362,56 +378,6 @@ public class VTA{
 		return "";
 	}
 
-
-/*	public Score compareOutputsByLine(final String[] correct_output, final String[] student_output, int total_points, Integer numCases)
-	{
-		int lineBufferSize = 256;
-		int scoresArraySize = 256;
-
-		numCases = 0;
-		score_struct* scores = malloc(scoresArraySize * sizeof(score_struct));
-
-		int corrLength = strlen(correct_output);
-		int studLength = strlen(student_output);
-
-		int corrPos = 0, studPos = 0;
-
-		while (corrPos < corrLength && studPos < studLength) {
-			char corrLine[lineBufferSize], studLine[lineBufferSize];
-			corrPos = readStringLine(correct_output, corrLine, corrPos) + 1;
-			studPos = readStringLine(student_output, studLine, studPos) + 1;
-
-			scores[*numCases].correct = !strcmp(corrLine, studLine);
-			strncpy(scores[*numCases].correct_output, corrLine, lineBufferSize);
-			strncpy(scores[*numCases].student_output, studLine, lineBufferSize);
-
-			*numCases = *numCases + 1;
-			if (*numCases >= scoresArraySize) {
-				scoresArraySize *= 2;
-				scores = realloc(scores, scoresArraySize * sizeof(score_struct));
-			}
-		}
-
-		while (corrPos < corrLength) {
-			char corrLine[lineBufferSize];
-			corrPos = readStringLine(correct_output, corrLine, corrPos);
-			scores[*numCases].correct = false;
-			*numCases = *numCases + 1;
-
-			if (*numCases >= scoresArraySize) {
-				scoresArraySize *= 2;
-				scores = realloc(scores, scoresArraySize *sizeof(score_struct));
-			}
-		}
-
-		for (int i = 0; i < *numCases; i++) {
-			if (scores[i].correct)
-				scores[i].points = total_points / *numCases;
-		}
-
-		return scores;
-	}*/
-
 	/** Returns a string that represents the contents of an input file containing numCases of input cases,
 	 *  each of which follows the pattern in the first argument 
 	 *  Implementation idea: probably should make the first line the number of cases, and make the beginning of
@@ -425,14 +391,18 @@ public class VTA{
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
 	public String run(char mode){
-		if (!(mode == 'i' || mode == 's'))
-			return "Error: Invalid run Mode\n";
-
 		Runtime rt = Runtime.getRuntime();
-		String command = "java -jar Exec" + mode + ".jar";
 
+		String command;
+		if (mode == 'i' || mode == 's')
+			command = "java -jar Exec" + mode + ".jar";
+		else {
+			return "Error: Invalid run Mode\n";
+		}
+
+		Process proc;
 		try {
-			Process proc = rt.exec(command);
+			proc = rt.exec(command);
 			
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
@@ -457,10 +427,11 @@ public class VTA{
 			return outputData.toString();
 			
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "Exception";
+		return "";
 	}
 
 
@@ -470,40 +441,7 @@ public class VTA{
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
 	public String runWithInput(char mode, String input){
-		if (!(mode == 'i' || mode == 's'))
-			return "Error: Invalid run Mode\n";
-
-		Runtime rt = Runtime.getRuntime();
-		String command[] = {"/bin/sh", "-c","java -jar Exec" + mode + ".jar < " + inputFileName};
-		
-		try {
-			Process proc = rt.exec(command);
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
-
-			int bufferSize = 1024;
-			StringBuilder outputData = new StringBuilder(bufferSize);
-			int pos = 0;
-			String curr = null;
-			while ((curr = stdInput.readLine()) != null) {
-				outputData.append(curr + '\n');
-			    if (++pos >= bufferSize) {
-			    	bufferSize *= 2;
-			    	StringBuilder tempString = new StringBuilder(bufferSize);
-			    	tempString.append(outputData);
-			    	outputData = tempString;
-			    }
-			}
-
-			stdInput.close();
-			
-			return outputData.toString();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return "Exception";
+		return "";
 	}
 
 	/** Does a diff comparison of the text in correct_output and student_output, treating each line as a case,
