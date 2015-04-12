@@ -1,5 +1,5 @@
 Template.mainContent.rendered = function(){
-
+	$('#manGradedRowActions').hide();
 };
 
 Template.mainContent.helpers({
