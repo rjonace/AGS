@@ -7,12 +7,14 @@
 			"pointsEarned":0,
 			"rows":
 			[
-				{					"description":"Uses stdin",
+				{
+					"description":"Uses stdin",
 					"pointsEarned":-1,
 					"PointsPossible":10,
 					"comments":"Edit this comment"
 				},
-				{					"description":"Uses stdout",
+				{
+					"description":"Uses stdout",
 					"pointsEarned":-1,
 					"PointsPossible":10,
 					"comments":"Edit this comment"
@@ -50,70 +52,70 @@ fda
 							"studentOutput":"stud0",
 							"correct":false,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"same",
 							"studentOutput":"same",
 							"correct":true,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"corr2",
 							"studentOutput":"stud2",
 							"correct":false,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"same",
 							"studentOutput":"same",
 							"correct":true,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"corr4",
 							"studentOutput":"stud4",
 							"correct":false,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"same",
 							"studentOutput":"same",
 							"correct":true,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"corr6",
 							"studentOutput":"stud6",
 							"correct":false,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"same",
 							"studentOutput":"same",
 							"correct":true,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"corr8",
 							"studentOutput":"stud8",
 							"correct":false,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						},
 						{
 							"correctOutput":"same",
 							"studentOutput":"same",
 							"correct":true,
 							"points":5,
-							"comments":"good job",
+							"comments":"good job"
 						}
 					]
 				}
