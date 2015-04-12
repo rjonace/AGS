@@ -87,15 +87,17 @@ class InputCaseData{
 	String studentOutput;
 	boolean correct;
 	int pointsPossible;
+	String comments;
 
 	
-	public InputCaseData(String correctOutput, String studentOutput, int points){
+	public InputCaseData(String correctOutput, String studentOutput, int points, String comments){
 		this.correctOutput = correctOutput;
 		this.studentOutput = studentOutput;
 
 		correct = correctOutput.equals(studentOutput);
 
 		this.pointsPossible = points;
+		this.comments = comments;
 	}
 
 	public int getPoints(){
@@ -168,7 +170,7 @@ public class VTA{
 		
 		return true;
 	}
-	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, int points){
+	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, int points, String comments){
 		
 		int sectionIndex = -1;
 		int inputIndex = -1;
@@ -193,7 +195,7 @@ public class VTA{
 			return false;
 		}
 		
-		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, points);
+		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, points, comments);
 		
 		sections.get(sectionIndex).pointsPossible += points;
 		sections.get(sectionIndex).pointsEarned += temp.getPoints();
@@ -213,9 +215,115 @@ public class VTA{
 	private void createJSON(){
 		String out = "";
 		
-		out += "{" + "\n\t" + "\"sections\":" + "\n\t" + "[" + "\n\t\t";
+		out += "{\n" + "\t\"sections\":\n" + "\t[\n";
 		
-		out += "";
+		for(Section a : sections){
+			out += "\t\t{\n";
+			
+			out += "\t\t\t\"sectionName\":";
+			out += "\"" + a.name + "\",\n";
+			
+			out += "\t\t\t\"pointsPossible\":";
+			out += a.pointsPossible + ",\n";
+			
+			out += "\t\t\t\"pointsEarned\":";
+			out += a.pointsEarned + ",\n";
+			
+			out += "\t\t\t\"rows\":\n";
+			out += "\t\t\t[\n";
+			
+			for(SectionRow b : a.rows){
+				out += "\t\t\t\t{";
+				
+				out += "\t\t\t\t\t\"description\":\"";
+				out += b.description + "\",\n";
+				
+				out += "\t\t\t\t\t\"pointsEarned\":";
+				out += b.pointsEarned + ",\n";
+				
+				out += "\t\t\t\t\t\"PointsPossible\":";
+				out += b.pointsPossible + ",\n";
+				
+				out += "\t\t\t\t\t\"comments\":\"";
+				out += b.comments + "\"\n";
+				
+				out += "\t\t\t\t},\n";
+			}
+			
+			out = out.substring(0, (out.length()-2));
+			out += "\n";
+			
+			out += "\t\t\t],\n";
+			
+			out += "\t\t\t\"gradedInputs\":\n";
+			out += "\t\t\t[\n";
+			
+			for(InputFileGradeData c : a.inputs){
+				out += "\t\t\t\t{\n";
+				
+				out += "\t\t\t\t\t\"name\":\"";
+				out += c.name + "\",\n";
+				
+				out += "\t\t\t\t\t\"contents\":\"";
+				out += c.contents + "\",\n";
+				
+				out += "\t\t\t\t\t\"pointsPossible\":";
+				out += c.pointsPossible + ",\n";
+				
+				out += "\t\t\t\t\t\"pointsEarned\":";
+				out += c.pointsEarned + ",\n";
+				
+				out += "\t\t\t\t\t\"cases\":\n";
+				out += "\t\t\t\t\t[\n";
+				
+				for(InputCaseData d : c.cases){
+					out += "\t\t\t\t\t\t{\n";
+					
+					out += "\t\t\t\t\t\t\t\"correctOutput\":\"";
+					out += d.correctOutput + "\",\n";
+					
+					out += "\t\t\t\t\t\t\t\"studentOutput\":\"";
+					out += d.studentOutput + "\",\n";
+					
+					out += "\t\t\t\t\t\t\t\"correct\":";
+					out += d.correct + ",\n";
+					
+					out += "\t\t\t\t\t\t\t\"points\":";
+					out += d.pointsPossible + ",\n";
+					
+					out += "\t\t\t\t\t\t\t\"comments\":\"";
+					out += d.comments + "\",\n";
+					
+					out += "\t\t\t\t\t\t},\n";					
+				}
+				
+				out = out.substring(0, (out.length()-2));
+				out += "\n";
+				
+				out += "\t\t\t\t},\n";
+			}
+			
+			out = out.substring(0, (out.length()-2));
+			out += "\n";
+			
+			out += "\t\t\t]\n";
+			
+			out += "\t\t},\n";
+		}
+		
+		out = out.substring(0, (out.length()-2));
+		out += "\n";
+		
+		out += "\t]\n";
+		out += "}";
+		
+		try {
+			PrintWriter output = new PrintWriter("autograderOutput.json", "UTF-8");
+			output.print(out);
+			output.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/** Automatically checks whether stdin was used. 
