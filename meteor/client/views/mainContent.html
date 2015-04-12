@@ -476,17 +476,19 @@
 								<div class="header">
 									Added
 								</div>
-							<p>Valid solution file(s) chosen.</p>
+								<p>Valid solution file(s) chosen.</p>
+							</div>
 						</div>
 						<div class="ui button" id="gradeSubmission" >Grade Submission</div>
 					{{else}}
 						<div class="ui icon message">
 							<i class="notched circle loading icon"></i>
 							<div class="content">
-							<div class="header">
-								Feedback Status
+								<div class="header">
+									Feedback Status
+								</div>
+								<p>{{feedbackStatus}}</p>
 							</div>
-							<p>{{feedbackStatus}}</p>
 						</div>
 						{{{submissionFeedback}}}
 						<br>
