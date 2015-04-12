@@ -19,7 +19,7 @@
 				}
 			],
 			"gradedInputs":
-			
+			[
 			]
 		},
 		{
@@ -27,7 +27,7 @@
 			"pointsPossible":50,
 			"pointsEarned":25,
 			"rows":
-			
+			[
 			],
 			"gradedInputs":
 			[
@@ -470,6 +470,7 @@ Josh 30 115
 							"points":5,
 							"comments":"good job",
 						}
+					]
 				}
 			]
 		}
