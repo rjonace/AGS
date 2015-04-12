@@ -17,7 +17,7 @@ Meteor.methods({
 	'insertJSONFile' : function(id_Student, id_Assignment, subNumber){
 		//Meteor.call('insertJSONFile',Meteor.userId(),'Ny3mL2TDncYQ9Aoqx',1)
 		var fs = Npm.require('fs');
-		var feedbackJSON = JSON.parse(fs.readFileSync('/home/student/ags/dev/gradeTest/c/feedback2.json', 'utf8'));
+		var feedbackJSON = JSON.parse(fs.readFileSync('/home/student/ags/dev/gradeTest/c/AutoGraderOutput.json', 'utf8'));
 		AGSSubmissions.update(
 			{
 				"id_Student": id_Student,
