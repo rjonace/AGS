@@ -1,5 +1,5 @@
 Template.mainContent.rendered = function(){
-
+	
 };
 
 Template.mainContent.helpers({
