@@ -48,8 +48,8 @@ Template.mainContent.helpers({
 	'feedbackStatus' : function(){
 		return Session.get('feedbackStatus');
 	},
-	'feedbackStatusCheck' : function( status ){
-		return status == 'Submission graded.'
+	'isGrading' : function( status ){
+		return Session.get('feedbackStatus') != 'Submission graded.'
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
