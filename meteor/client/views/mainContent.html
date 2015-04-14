@@ -147,8 +147,13 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    {{number}}: {{name}}
-					    <div class="sub header">{{semester}} {{year}}<br>Key: {{key}}</div>
+					    {{number}}
+					    <div class="sub header">
+                          <b>Name:</b> {{name}}<br/>
+                          <b>Semester:</b> {{semester}} {{year}}<br/>
+                          <b>Description:</b> {{description}}<br/>
+                          <b>Key:</b> {{key}}
+                        </div>
 					  </div>
 					</div>
 					<div class="dashboard popup tips">
@@ -169,8 +174,12 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    {{number}}: {{name}}
-					    <div class="sub header">{{semester}} {{year}}</div>
+					    {{number}}
+					    <div class="sub header">
+                          <b>Name:</b> {{name}}<br/>
+                          <b>Semester:</b> {{semester}} {{year}}<br/>
+                          <b>Description:</b> {{description}}<br/>
+                        </div>
 					  </div>
 					</div>
 					{{/if}}
@@ -183,7 +192,11 @@
 						<i class="file text icon"></i>
 						<div class="content">
 							{{name}}
-						    <div class="sub header">{{description}}<br>Available: {{dateAvailable}} | Due: {{dateDue}}
+						    <div class="sub header">
+						        <b>Language:</b> {{language}}<br/>
+						        <b>Available:</b> {{dateAvailable}}<br/>
+						        <b>Due:</b> {{dateDue}}<br/>
+						        <b>Description:</b> {{description}}<br/>
 							</div>
 				  		</div>
 					</div>
@@ -212,8 +225,14 @@
 					<div class="ui dividing header">
 						<i class="code icon"></i>
 						<div class="content">
-							{{#if isUserCreator}}{{name}}{{else}}{{name}}: {{studentName}}{{/if}}
-						    <div class="sub header">Created: {{dateCreated}}
+								{{name}}
+						    <div class="sub header">
+								{{#if isUserCreator}}
+						        <b>Created:</b> {{dateCreated}}<br/>
+								{{else}}
+								<b>Student:</b> {{studentName}}<br/>
+						        <b>Created:</b> {{dateCreated}}<br/>
+								{{/if}}
 							</div>
 				  		</div>
 					</div>
@@ -239,14 +258,14 @@
 
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Courses</h3>
-					<div class="ui inverted cards">
+					<div class="ui cards">
 						{{#each studentCourseList}}
 						<div class="card" id="userCourse">
 						    <div class="content">
 						      <div class="header">{{number}}</div>
 						      <div class="description">
-						        {{name}}<br>
-						        {{semester}} {{year}}
+						        <b>Name:</b> {{name}}<br>
+						        <b>Semester:</b> {{semester}} {{year}}
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -286,7 +305,8 @@
 						    <div class="content">
 						      <div class="header">{{number}}</div>
 						      <div class="description">
-						        {{name}}
+						        <b>Name:</b> {{name}}<br>
+						        <b>Semester:</b> {{semester}} {{year}}
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -333,8 +353,9 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{description}}<br/>
-						        Due: {{dateDue}}
+						        <b>Language:</b> {{language}}<br/>
+						        <b>Available:</b> {{dateAvailable}}<br/>
+						        <b>Due:</b> {{dateDue}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -386,8 +407,7 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        <br/>
-						        Created: {{dateCreated}}
+						      	<b>Created:</b> {{dateCreated}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -411,8 +431,8 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{studentName}}<br/>
-						        Created: {{dateCreated}}
+						        <b>Student:</b> {{studentName}}<br/>
+						        <b>Created:</b> {{dateCreated}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -461,8 +481,7 @@
 						<label>Your Solution</label>
 						<div class="ui action input">
 							<input id="subFileNameField" type="text" value={{#each submissionFiles}}{{name}} {{/each}}>
-						    <label id="viewFilesButton" for="submissionSolutionFile" class="ui icon button">
-						        <i class="file icon"></i>
+						    <label id="viewFilesButton" for="submissionSolutionFile" class="ui icon button"> 
 						        View File(s)</label>
 						</div>
 					</div>
@@ -481,7 +500,7 @@
 						</div>
 						<div class="ui button" id="gradeSubmission" >Grade Submission</div>
 					{{else}}
-						{{#if isGrading}}
+						{{#if isGrading feedbackStatus}}
 						<div class="ui icon message">
 							<i class="notched circle loading icon"></i>
 							<div class="content">
