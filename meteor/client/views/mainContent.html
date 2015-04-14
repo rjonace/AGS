@@ -239,21 +239,22 @@
 
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Courses</h3>
-						<div class="ui divided list">
+					<div class="ui inverted cards">
 						{{#each studentCourseList}}
-							<div class="item">
-								<i class="users icon"></i>
-								<div  id="userCourse" class="right floated compact ui button">View Course</div>
-								<div class="content">
-								  <div class="header">{{number}}</div>
-								  <div class="description">
-									{{name}}<br>
-									{{semester}} {{year}}
-								  </div>
-								</div>
-							</div>
-						{{/each}}
-						</div>						  
+						<div class="card" id="userCourse">
+						    <div class="content">
+						      <div class="header">{{number}}</div>
+						      <div class="description">
+						        {{name}}<br>
+						        {{semester}} {{year}}
+						      </div>
+						    </div>
+						    <div class="ui bottom attached button">
+						      <i class="users icon"></i>
+						      View Course
+						    </div>
+						  </div>
+						  {{/each}}
 					 </div>
 <!-- 					<ul>
 						{{#each studentCourseList}}
