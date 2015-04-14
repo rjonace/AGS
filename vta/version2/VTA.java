@@ -53,7 +53,7 @@ class SectionRow{
 class InputFileGradeData{
 	
 	String name;
-	String contents;
+	String contentsFileName;
 	int pointsPossible;
 	int pointsEarned;
 	ArrayList<InputCaseData> cases;
@@ -61,20 +61,7 @@ class InputFileGradeData{
 	
 	public InputFileGradeData(String inputName, String fileName){
 		this.name = inputName;
-		this.contents = "";
-		Scanner in;
-		
-		try {
-			in = new Scanner(new File(fileName));
-			
-			while(in.hasNextLine()){
-				contents += in.nextLine() + "\n";
-			}
-			
-			in.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		this.contentsFileName = fileName;
 		
 		this.pointsPossible = 0;
 		this.pointsEarned = 0;
@@ -217,123 +204,120 @@ public class VTA{
 	private void createJSON(){
 		String out = "";
 		
-		out += "{\n" + "\t\"sections\":\n" + "\t[\n";
+		out += "{" + "\"sections\":" + "[";
 		boolean sectionsRan = false, rowsRan = false, inputsRan = false, casesRan = false;
 		
 		for(Section a : sections){
 			sectionsRan = true;
-			out += "\t\t{\n";
+			out += "{";
 			
-			out += "\t\t\t\"sectionName\":";
-			out += "\"" + a.name + "\",\n";
+			out += "\"sectionName\":";
+			out += "\"" + a.name + "\",";
 			
-			out += "\t\t\t\"pointsPossible\":";
-			out += a.pointsPossible + ",\n";
+			out += "\"pointsPossible\":";
+			out += a.pointsPossible + ",";
 			
-			out += "\t\t\t\"pointsEarned\":";
-			out += a.pointsEarned + ",\n";
+			out += "\"pointsEarned\":";
+			out += a.pointsEarned + ",";
 			
-			out += "\t\t\t\"rows\":\n";
-			out += "\t\t\t[\n";
+			out += "\"rows\":";
+			out += "[";
 			
 			for(SectionRow b : a.rows){
 				rowsRan = true;
-				out += "\t\t\t\t{\n";
+				out += "{";
 				
-				out += "\t\t\t\t\t\"description\":\"";
-				out += b.description + "\",\n";
+				out += "\"description\":\"";
+				out += b.description + "\",";
 				
-				out += "\t\t\t\t\t\"pointsEarned\":";
-				out += b.pointsEarned + ",\n";
+				out += "\"pointsEarned\":";
+				out += b.pointsEarned + ",";
 				
-				out += "\t\t\t\t\t\"PointsPossible\":";
-				out += b.pointsPossible + ",\n";
+				out += "\"PointsPossible\":";
+				out += b.pointsPossible + ",";
 				
-				out += "\t\t\t\t\t\"comments\":\"";
-				out += b.comments + "\"\n";
+				out += "\"comments\":\"";
+				out += b.comments + "\"";
 				
-				out += "\t\t\t\t},\n";
+				out += "},";
 			}
 			if(rowsRan){
-				out = out.substring(0, (out.length()-2));
-				out += "\n";
+				out = out.substring(0, (out.length()-1));
 				rowsRan = false;
 			}
 			
-			out += "\t\t\t],\n";
+			out += "],";
 			
-			out += "\t\t\t\"gradedInputs\":\n";
-			out += "\t\t\t[\n";
+			out += "\"gradedInputs\":";
+			out += "[";
 			
 			for(InputFileGradeData c : a.inputs){
 				inputsRan = true;
-				out += "\t\t\t\t{\n";
+				out += "{";
 				
-				out += "\t\t\t\t\t\"name\":\"";
-				out += c.name + "\",\n";
+				out += "\"name\":\"";
+				out += c.name + "\",";
 				
-				out += "\t\t\t\t\t\"contents\":\"";
-				out += c.contents + "\",\n";
+				out += "\"contents\":\"";
+				out += c.contentsFileName + "\",";
 				
-				out += "\t\t\t\t\t\"pointsPossible\":";
-				out += c.pointsPossible + ",\n";
+				out += "\"pointsPossible\":";
+				out += c.pointsPossible + ",";
 				
-				out += "\t\t\t\t\t\"pointsEarned\":";
-				out += c.pointsEarned + ",\n";
+				out += "\"pointsEarned\":";
+				out += c.pointsEarned + ",";
 				
-				out += "\t\t\t\t\t\"cases\":\n";
-				out += "\t\t\t\t\t[\n";
+				out += "\"cases\":";
+				out += "[";
 				
 				for(InputCaseData d : c.cases){
 					casesRan = true;
-					out += "\t\t\t\t\t\t{\n";
+					out += "{";
 					
-					out += "\t\t\t\t\t\t\t\"correctOutput\":\"";
-					out += d.correctOutput + "\",\n";
+					out += "\"correctOutput\":\"";
+					out += d.correctOutput + "\",";
 					
-					out += "\t\t\t\t\t\t\t\"studentOutput\":\"";
-					out += d.studentOutput + "\",\n";
+					out += "\"studentOutput\":\"";
+					out += d.studentOutput + "\",";
 					
-					out += "\t\t\t\t\t\t\t\"correct\":";
-					out += d.correct + ",\n";
+					out += "\"correct\":";
+					out += d.correct + ",";
 					
-					out += "\t\t\t\t\t\t\t\"points\":";
-					out += d.pointsPossible + ",\n";
+					out += "\"points\":";
+					out += d.pointsPossible + ",";
 					
-					out += "\t\t\t\t\t\t\t\"comments\":\"";
-					out += d.comments + "\"\n";
+					out += "\"comments\":\"";
+					out += d.comments + "\"";
 					
-					out += "\t\t\t\t\t\t},\n";					
+					out += "},";					
 				}
 				if(casesRan){
-					out = out.substring(0, (out.length()-2));
-					out += "\n";
+					out = out.substring(0, (out.length()-1));
 					casesRan = false;
 				}
 				
-				out += "\t\t\t\t\t]\n";
-				out += "\t\t\t\t},\n";
+				out += "]";
+				out += "},";
 			}
 			
 			if(inputsRan){
-				out = out.substring(0, (out.length()-2));
-				out += "\n";
+				out = out.substring(0, (out.length()-1));
+				out += "";
 				inputsRan = false;
 			}
 			
-			out += "\t\t\t]\n";
+			out += "]";
 			
-			out += "\t\t},\n";
+			out += "},";
 		}
 		
 		if(sectionsRan){
-			out = out.substring(0, (out.length()-2));
-			out += "\n";
+			out = out.substring(0, (out.length()-1));
 			sectionsRan = false;
 		}
 		
-		out += "\t]\n";
-		out += "}\n";
+		out += "]";
+		out += "}";
 		
 		try {
 			PrintWriter output = new PrintWriter("autograderOutput.json", "UTF-8");
@@ -344,67 +328,20 @@ public class VTA{
 		}
 	}
 	
-	/** Automatically checks whether stdin was used. 
-	 *
-	 *  Adds/deducts points to Code Points object based on compliance */
-	public void addGradeUseStdin(int points){
-		
-	}
-
-	/** Automatically checks whether stdout was used
-	 *  
-	 *  Adds/deducts points to Code Points object based on compliance */
-	public void addGradeUseStdout(int points){
-		
-	}
-
-	/** Adds an entry to the Code Points of the results object that must be manually graded by the TA */
-	public void addCodePoints(String description, int points){
-		
-	}
-
-	/** Returns the total number of instructor created input files that are available;
-	 *  Implementation idea: Maybe just put all of the input files in the a directory and run the 
-	 *  command: "ls -1 | wc" on it */
-	public int numInputFiles(){
-		return 0;
-	}
-
-	/** Assuming there is one and only one input file, this returns its contents as a string */
-	public String getInputFromFile(){
-		return "";
-	}
-
-	/** Returns the contents of file with inputNumber as a string */
-	public String getInputFromFiles(int inputNumber){
-		return "";
-	}
-
-	/** Returns a string that represents the contents of an input file containing numCases of input cases,
-	 *  each of which follows the pattern in the first argument 
-	 *  Implementation idea: probably should make the first line the number of cases, and make the beginning of
-	 *  each case contain the number of lines for that case */ 
-	public String generateInputFile(String pattern, int numCases){
-		return "";
-	}
 
 	/** Runs either the instructor's or student's compiled binary and returns its stdout as a string; "mode"
 	 *  determines which should be run 
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
 	public String run(char mode){
-		Runtime rt = Runtime.getRuntime();
-
-		String command;
-		if (mode == 'i' || mode == 's')
-			command = "java -jar Exec" + mode + ".jar";
-		else {
+		if (!(mode == 'i' || mode == 's'))
 			return "Error: Invalid run Mode\n";
-		}
 
-		Process proc;
+		Runtime rt = Runtime.getRuntime();
+		String command = "java -jar Exec" + mode + ".jar";
+
 		try {
-			proc = rt.exec(command);
+			Process proc = rt.exec(command);
 			
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
@@ -429,11 +366,10 @@ public class VTA{
 			return outputData.toString();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "";
+		return "Exception";
 	}
 
 
@@ -442,8 +378,41 @@ public class VTA{
 	 *  returns the stdout as a string; "mode" determines which should be run 
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
-	public String runWithInput(char mode, String input){
-		return "";
+	public String runWithInput(char mode, String inputFileName){
+		if (!(mode == 'i' || mode == 's'))
+			return "Error: Invalid run Mode\n";
+
+		Runtime rt = Runtime.getRuntime();
+		String command[] = {"/bin/sh", "-c","java -jar Exec" + mode + ".jar < " + inputFileName};
+		
+		try {
+			Process proc = rt.exec(command);
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+			int bufferSize = 1024;
+			StringBuilder outputData = new StringBuilder(bufferSize);
+			int pos = 0;
+			String curr = null;
+			while ((curr = stdInput.readLine()) != null) {
+				outputData.append(curr + '\n');
+			    if (++pos >= bufferSize) {
+			    	bufferSize *= 2;
+			    	StringBuilder tempString = new StringBuilder(bufferSize);
+			    	tempString.append(outputData);
+			    	outputData = tempString;
+			    }
+			}
+
+			stdInput.close();
+			
+			return outputData.toString();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return "Exception";
 	}
 
 	/** Does a diff comparison of the text in correct_output and student_output, treating each line as a case,
