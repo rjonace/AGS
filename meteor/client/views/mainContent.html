@@ -239,14 +239,14 @@
 
 				{{#with userInfo}}
 					<h3>{{firstname}}'s Courses</h3>
-					<div class="ui inverted cards">
+					<div class="ui cards">
 						{{#each studentCourseList}}
 						<div class="card" id="userCourse">
 						    <div class="content">
 						      <div class="header">{{number}}</div>
 						      <div class="description">
-						        {{name}}<br>
-						        {{semester}} {{year}}
+						        <b>Name:</b> {{name}}<br>
+						        <b>Semester:</b> {{semester}} {{year}}
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -286,7 +286,8 @@
 						    <div class="content">
 						      <div class="header">{{number}}</div>
 						      <div class="description">
-						        {{name}}
+						        <b>Name:</b> {{name}}<br>
+						        <b>Semester:</b> {{semester}} {{year}}
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -333,8 +334,9 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{description}}<br/>
-						        Due: {{dateDue}}
+						        <b>Language:</b> {{language}}<br/>
+						        <b>Available:</b> {{dateAvailable}}<br/>
+						        <b>Due:</b> {{dateDue}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -386,8 +388,7 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        <br/>
-						        Created: {{dateCreated}}
+						      	<b>Created:</b> {{dateCreated}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
@@ -411,8 +412,8 @@
 						    <div class="content">
 						      <div class="header">{{name}}</div>
 						      <div class="description">
-						        {{studentName}}<br/>
-						        Created: {{dateCreated}}
+						        <b>Student:</b> {{studentName}}<br/>
+						        <b>Created:</b> {{dateCreated}}<br/>
 						      </div>
 						    </div>
 						    <div class="ui bottom attached button">
