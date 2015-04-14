@@ -49,7 +49,9 @@ Template.mainContent.helpers({
 		return Session.get('feedbackStatus');
 	},
 	'isGrading' : function( status ){
-		return Session.get('feedbackStatus') != 'Submission graded.'
+		if (Session.get('currentSubmission').feedbackObj) return true;
+		else if (Session.get('currentSubmission').feedback) return true;
+		else return false;
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
