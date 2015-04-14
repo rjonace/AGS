@@ -147,8 +147,13 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    {{number}}: {{name}}
-					    <div class="sub header">{{semester}} {{year}}<br>Key: {{key}}</div>
+					    {{number}}
+					    <div class="sub header">
+                          <b>Name:</b> {{name}}<br/>
+                          <b>Semester:</b> {{semester}} {{year}}<br/>
+                          <b>Description:</b> {{description}}<br/>
+                          <b>Key:</b> {{key}}
+                        </div>
 					  </div>
 					</div>
 					<div class="dashboard popup tips">
@@ -169,8 +174,12 @@
 					<div class="ui dividing header">
 					  <i class="users icon"></i>
 					  <div class="content">
-					    {{number}}: {{name}}
-					    <div class="sub header">{{semester}} {{year}}</div>
+					    {{number}}
+					    <div class="sub header">
+                          <b>Name:</b> {{name}}<br/>
+                          <b>Semester:</b> {{semester}} {{year}}<br/>
+                          <b>Description:</b> {{description}}<br/>
+                        </div>
 					  </div>
 					</div>
 					{{/if}}
@@ -183,7 +192,11 @@
 						<i class="file text icon"></i>
 						<div class="content">
 							{{name}}
-						    <div class="sub header">{{description}}<br>Available: {{dateAvailable}} | Due: {{dateDue}}
+						    <div class="sub header">
+						        <b>Language:</b> {{language}}<br/>
+						        <b>Available:</b> {{dateAvailable}}<br/>
+						        <b>Due:</b> {{dateDue}}<br/>
+						        <b>Description:</b> {{description}}<br/>
 							</div>
 				  		</div>
 					</div>
@@ -212,8 +225,14 @@
 					<div class="ui dividing header">
 						<i class="code icon"></i>
 						<div class="content">
-							{{#if isUserCreator}}{{name}}{{else}}{{name}}: {{studentName}}{{/if}}
-						    <div class="sub header">Created: {{dateCreated}}
+								{{name}}
+						    <div class="sub header">
+								{{#if isUserCreator}}
+						        <b>Created:</b> {{dateCreated}}<br/>
+								{{else}}
+								<b>Student:</b> {{studentName}}<br/>
+						        <b>Created:</b> {{dateCreated}}<br/>
+								{{/if}}
 							</div>
 				  		</div>
 					</div>
