@@ -79,11 +79,11 @@ class InputCaseData{
 	String comments;
 
 	
-	public InputCaseData(String correctOutput, String studentOutput, int points, String comments){
+	public InputCaseData(String correctOutput, String studentOutput, boolean correct, int points, String comments){
 		this.correctOutput = correctOutput;
 		this.studentOutput = studentOutput;
 
-		correct = correctOutput.equals(studentOutput);
+		this.correct = correct;
 
 		this.pointsPossible = points;
 		this.comments = comments;
@@ -98,20 +98,29 @@ class InputCaseData{
 }
 
 public class VTA{
+	public ArrayList<Section> sections;
 	
-	ArrayList<Section> sections;
+	public HashMap<String, String> correctOutputText;
+	public String[] correctAnswers;
+	public HashMap<String, String> studentOutputText;
+	public String[] studentAnswers;
+	public int numCases;
 
 	
 	/** No-arg constructor */
 	public VTA()
 	{
 		sections = new ArrayList<Section>();
+		correctOutputText = new HashMap<String,String>();
+		studentOutputText = new HashMap<String, String>();
 	}
 
 	/** String[] constructor */
 	public VTA(String[] args)
 	{
 		sections = new ArrayList<Section>();
+		correctOutputText = new HashMap<String,String>();
+		studentOutputText = new HashMap<String, String>();
 	}
 	
 	public void addSection(String name){
@@ -159,7 +168,8 @@ public class VTA{
 		
 		return true;
 	}
-	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, int points, String comments){
+
+	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
 		
 		int sectionIndex = -1;
 		int inputIndex = -1;
@@ -184,7 +194,7 @@ public class VTA{
 			return false;
 		}
 		
-		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, points, comments);
+		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, correct, points, comments);
 		
 		sections.get(sectionIndex).pointsPossible += points;
 		sections.get(sectionIndex).pointsEarned += temp.getPoints();
@@ -197,10 +207,9 @@ public class VTA{
 	}
 
 	public void cleanUp(){
-		createJSON();
-		
-		
+		createJSON();	
 	}
+
 	private void createJSON(){
 		String out = "";
 		
@@ -328,14 +337,41 @@ public class VTA{
 		}
 	}
 	
+	public boolean parseCases(String inputFilename, int numLinesPerCase){
+		String[] instructorTemp = correctOutputText.get(inputFilename).split("\n");
+		String[] studentTemp = studentOutputText.get(inputFilename).split("\n");
+
+		numCases = instructorTemp.length/numLinesPerCase;
+
+		this.correctAnswers = new String[numCases];
+		this.studentAnswers = new String[numCases];
+
+		Arrays.fill(correctAnswers, "");
+		Arrays.fill(studentAnswers, "");
+
+
+		for(int i = 0, k = 0; i < instructorTemp.length - numLinesPerCase + 1 && k < numCases; i += numLinesPerCase, k++){
+			for(int j = 0; j < numLinesPerCase; j++){
+				correctAnswers[k] += instructorTemp[i+j];
+				if(i+j < studentTemp.length)studentAnswers[k] += studentTemp[i+j];
+			}
+		}
+
+		return true;
+	}
+
+	public boolean parseCases(String inputFilename, char mode, String regex){
+		return false;
+	}
+
 
 	/** Runs either the instructor's or student's compiled binary and returns its stdout as a string; "mode"
 	 *  determines which should be run 
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
-	public String run(char mode){
+	public boolean run(char mode){
 		if (!(mode == 'i' || mode == 's'))
-			return "Error: Invalid run Mode\n";
+			return false;
 
 		Runtime rt = Runtime.getRuntime();
 		String command = "java -jar Exec" + mode + ".jar";
@@ -363,24 +399,28 @@ public class VTA{
 
 			stdInput.close();		
 			
-			return outputData.toString();
-			
-		} catch (IOException e) {
+			if (mode == 'i') {
+				correctOutputText.put("NOINPUTFILE", outputData.toString());
+			}
+			else {
+				studentOutputText.put("NOINPUTFILE", outputData.toString());
+			}
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
-		
-		return "Exception";
+
+		return true;
 	}
-
-
 
 	/** Runs either the instructor's or student's compiled binary with the contents of "input" piped in and 
 	 *  returns the stdout as a string; "mode" determines which should be run 
 	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
 	 *  struct of information about how the file ran---not just the output */
-	public String runWithInput(char mode, String inputFileName){
+	public boolean runWithInput(char mode, String inputFileName){
 		if (!(mode == 'i' || mode == 's'))
-			return "Error: Invalid run Mode\n";
+			return false;
 
 		Runtime rt = Runtime.getRuntime();
 		String command[] = {"/bin/sh", "-c","java -jar Exec" + mode + ".jar < " + inputFileName};
@@ -406,66 +446,18 @@ public class VTA{
 
 			stdInput.close();
 			
-			return outputData.toString();
+			if (mode == 'i'){
+				correctOutputText.put(inputFileName, outputData.toString());
+			}
+			else {
+				studentOutputText.put(inputFileName, outputData.toString());
+			}
 		}
 		catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 
-		return "Exception";
-	}
-
-	/** Does a diff comparison of the text in correct_output and student_output, treating each line as a case,
-	 *  and distributes the total_points evenly by number of cases
-	 *
-	 *  Returns an array of score_struct */
-	public void compareOutputsByLine(String correct_output, String student_output, int total_points){
-		
-	}
-
-	/** Does a diff comparison of the results of regex capture of the text in correct_output and student_output, 
-	 *  treating each line as a case, and distributes the total_points evenly by number of cases
-	 *
-	 *  Returns an array of score_struct */
-	public void compareOutputsByLineRegex(String regex, String correctOutput, 
-		String studentOutput, int totalPoints){
-		
-	}
-
-	/** Does a diff comparison of the text in correct_output and student_output, treating cases as groups of 
-	 *  lines of length case_lines, and distributes the total_points evenly by number of cases
-	 *
-	 *  Returns an array of score_struct */
-	public void compareOutputsByCase(int case_lines, String correctOutput, String studentOutput, 
-		int totalPoints){
-		
-	}
-
-	/** Does a diff comparison of the results of regex capture of the text in correct_output and student_output,
-	 *  treating cases as groups of lines of length case_lines, and distributes the total_points evenly by number
-	 *  of cases
-	 *
-	 *  Returns an array of score_struct */
-	public void compareOutputsByCaseRegex(int case_lines, String regex, String correctOutput, 
-		String studentOutput, int totalPoints){
-		
-	}
-
-	/** Adds an entry to the Execution Points of the results object with the results of the scores array */
-	public void addExecResults(int inputFileNum, String description, String input, 
-		String correct_output, String studentOutput, Score scores[]){
-		
-	}
-
-	/** Checks whether header comment of student source code matches regex */
-	public void addCheckHeader(String regex, int points){
-		
-	}
-
-	/** Adds an entry to the Style Points of the results object that must be manually graded by the TA 
-	 *
-	 *  Adds/deducts points to Code Points object based on compliance */
-	public void addStylePoints(String description, int points){
-		
+		return true;
 	}
 }

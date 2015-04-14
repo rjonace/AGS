@@ -6,6 +6,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.lang.Runtime;
 import java.util.*;
+import 
 
 class Score{
 	public int score;
@@ -79,11 +80,11 @@ class InputCaseData{
 	String comments;
 
 	
-	public InputCaseData(String correctOutput, String studentOutput, boolean correct, int points, String comments){
+	public InputCaseData(String correctOutput, String studentOutput, int points, String comments){
 		this.correctOutput = correctOutput;
 		this.studentOutput = studentOutput;
 
-		this.correct = correct;
+		correct = correctOutput.equals(studentOutput);
 
 		this.pointsPossible = points;
 		this.comments = comments;
@@ -98,29 +99,24 @@ class InputCaseData{
 }
 
 public class VTA{
-	public ArrayList<Section> sections;
+	ArrayList<Section> sections;
 	
-	public HashMap<String, String> correctOutputText;
-	public String[] correctAnswers;
-	public HashMap<String, String> studentOutputText;
-	public String[] studentAnswers;
-	public int numCases;
+	HashMap<String, String> correctOutputText;
+	String[] correctAnswers;
+	HashMap<String, String> studentOutputText;
+	String[] studentAnswers;
 
 	
 	/** No-arg constructor */
 	public VTA()
 	{
 		sections = new ArrayList<Section>();
-		correctOutputText = new HashMap<String,String>();
-		studentOutputText = new HashMap<String, String>();
 	}
 
 	/** String[] constructor */
 	public VTA(String[] args)
 	{
 		sections = new ArrayList<Section>();
-		correctOutputText = new HashMap<String,String>();
-		studentOutputText = new HashMap<String, String>();
 	}
 	
 	public void addSection(String name){
@@ -169,7 +165,7 @@ public class VTA{
 		return true;
 	}
 
-	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
+	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, int points, String comments){
 		
 		int sectionIndex = -1;
 		int inputIndex = -1;
@@ -194,7 +190,7 @@ public class VTA{
 			return false;
 		}
 		
-		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, correct, points, comments);
+		InputCaseData temp = new InputCaseData(correctOutput, studentOutput, points, comments);
 		
 		sections.get(sectionIndex).pointsPossible += points;
 		sections.get(sectionIndex).pointsEarned += temp.getPoints();
@@ -337,23 +333,26 @@ public class VTA{
 		}
 	}
 	
-	public boolean parseCases(String inputFilename, int numLinesPerCase){
-		String[] instructorTemp = correctOutputText.get(inputFilename).split("\n");
-		String[] studentTemp = studentOutputText.get(inputFilename).split("\n");
+	public boolean parseCases(String inputFilename, char mode, int numLinesPerCase){
+		if (!(mode == 'i' || mode == 's'))
+			return false;
 
-		numCases = instructorTemp.length/numLinesPerCase;
+		String outputText = (mode == 'i') ? 
+			correctOutputText.get(inputFilename) : 
+			studentOutputText.get(inputFilename);
 
-		this.correctAnswers = new String[numCases];
-		this.studentAnswers = new String[numCases];
+		if (outputText == null)
+			return false;
 
-		Arrays.fill(correctAnswers, "");
-		Arrays.fill(studentAnswers, "");
+		Sring[] temp = outputText.split("\n");
+		int numCases = temp.length/numLinesPerCase;
 
+		if(mode != 'i')this.studentAnswers = new String[numCases];
+		else this.correctAnswers = new String[numCases];
 
-		for(int i = 0, k = 0; i < instructorTemp.length - numLinesPerCase + 1 && k < numCases; i += numLinesPerCase, k++){
+		for(int i = 0, k = 0; i < temp.length - numLinesPerCase + 1 && k < numCases; i += numLinesPerCase, k++){
 			for(int j = 0; j < numLinesPerCase; j++){
-				correctAnswers[k] += instructorTemp[i+j];
-				if(i+j < studentTemp.length)studentAnswers[k] += studentTemp[i+j];
+				vta.studentAnswers[k] += temp[i+j]; 
 			}
 		}
 
@@ -361,7 +360,7 @@ public class VTA{
 	}
 
 	public boolean parseCases(String inputFilename, char mode, String regex){
-		return false;
+		return false
 	}
 
 
@@ -400,10 +399,13 @@ public class VTA{
 			stdInput.close();		
 			
 			if (mode == 'i') {
-				correctOutputText.put("NOINPUTFILE", outputData.toString());
+				correctOutput = new HashMap<String, String>();
+				correctOutput.put("NOINPUTFILE", outputData.toString());
 			}
 			else {
-				studentOutputText.put("NOINPUTFILE", outputData.toString());
+				if (studOutput == null)
+					correctOutput = new HashMap<String, String>();
+				correctOutput.put("NOINPUTFILE", outputData.toString());
 			}
 		} 
 		catch (IOException e) {
@@ -447,10 +449,14 @@ public class VTA{
 			stdInput.close();
 			
 			if (mode == 'i'){
-				correctOutputText.put(inputFileName, outputData.toString());
+				if (correntOutput == NULL)
+					correctOutput = new HashMap<String, String>();
+				correctOutput.put(inputFilename, outputData.toString());
 			}
 			else {
-				studentOutputText.put(inputFileName, outputData.toString());
+				if (studentOutput == NULL)
+					studentOutput = new HashMap<String, String>();
+				studentOutput.put(inputFilename, outputData.toString());
 			}
 		}
 		catch (IOException e) {

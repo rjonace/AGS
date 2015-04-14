@@ -1,0 +1,6 @@
+cp ~/Desktop/AGS/vta/version2/VTA.java ~/Desktop/AGS/dev/gradeTest/c/vta/
+
+
+java -jar Execs.jar < hopscotch.in
+
+jar -cfe Execi.jar Hopscotch Hopscotch.class
