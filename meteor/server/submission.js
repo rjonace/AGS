@@ -47,7 +47,7 @@ Meteor.methods({
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
 				AttemptCount: 1,
-				AttemptList: [{ id_Student: id_User, studentName: studentName, name: 'Submission 1' , dateCreated: new Date() , subNumber : 0}]
+				AttemptList: [{ id_Student: id_User, studentName: studentName, name: 'Submission 1' , dateCreated: new Date().toLocaleString() , subNumber : 0}]
 			}, function(err, id) {
 				console.log(err);
 				AGSAssignments.update(
