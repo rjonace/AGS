@@ -48,14 +48,16 @@ Meteor.methods({
 		}
 		console.log("ins end");
 	},
-	'gradeSubmission' : function(submission, path, folderName, id_User, id_Assignment, assignmentLang) {		
+	'gradeSubmission' : function(submission, path, folderName, id_User, assignment) {		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		// create temporary folder
 		var randomFolderName = Math.floor(Math.random()*1000000);
 		var counter = 0;
-		var maxTime = 50;
+		var maxTime = assignment.time;
 		// check assignment language
+		var id_Assignment = assignment._id;
+		var assignmentLang = assignment.language;
 
 		var newPath = path + "/" + folderName;
 		var subNumber = submission.subNumber;

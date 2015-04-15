@@ -57,7 +57,7 @@ Template.mainContent.events({
 		var currentAssignment = Session.get('currentAssignment');
 		var filePath = '/home/student/ags/grading';
 		var counter = 0;
-		var maxTime = 50;
+		var maxTime = currentAssignment.time;
 		var newPath;
 		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
@@ -66,7 +66,7 @@ Template.mainContent.events({
 				newPath = filePath + "/" + folderName;
 				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
 				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment._id, currentAssignment.language], true);
+				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
 				Session.set('fileNotGraded', false);
 		});
 
@@ -153,15 +153,14 @@ Template.mainContent.events({
 				if(!error) {
 
 					var agReader = new FileReader();
-//					var solutionReader = new FileReader();
+					var inputReader = new FileReader();
 					var studentReader = new FileReader();
 
 					var ag = event.target.assignmentAGField.files[0];
-//					var solution = event.target.assignmentSolutionField.files[0];
+					var inputFileList = event.target.assignmentInputField.files;
 					var studentFileList = event.target.assignmentStudentField.files;
 
-					var agObj
-//						solutionObj;
+					var agObj;
 
 					agReader.onloadend = function(){
 						agObj = {name: ag.name, contents:agReader.result};
@@ -189,6 +188,19 @@ Template.mainContent.events({
 								}
 								reader.readAsText(file);
 							})(studentFileList[i]);
+						};
+					}
+
+					if(inputFileList.length > 0) {
+						for (var i = 0; i < inputFileList.length; i++) {
+							(function(file) {
+								var name = file.name;
+								var reader = new FileReader();
+								reader.onloadend = function(event) {
+									Meteor.call('insertAssignmentInput', result, name, reader.result);
+								}
+								reader.readAsText(file);
+							})(inputFileList[i]);
 						};
 					}
 
@@ -415,6 +427,14 @@ Template.mainContent.events({
 			$('#studentFileNameField').val(fileName);
 		else
 			$('#studentFileNameField').val('No file chosen')
+	},
+	'change #assignmentInputField' : function(event) {
+		var fileName = $('#assignmentInputField').val();
+		console.log(fileName);
+		if (fileName != '')
+			$('#inputFileNameField').val(fileName);
+		else
+			$('#inputFileNameField').val('No file chosen')
 	},
 	'click .gradedInputRow' : function(event) {
 		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));

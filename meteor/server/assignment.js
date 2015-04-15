@@ -30,6 +30,12 @@ Meteor.methods({
 			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
 		);
 	},
+	'insertAssignmentInput': function(id_Assignment, filename, contents){
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$addToSet: { inputfiles: { name: filename, contents: contents } } }
+		);
+	},
 	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, time, points){
 		AGSAssignments.update(
 		{_id:id_Assignment},
