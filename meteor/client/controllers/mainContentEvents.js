@@ -128,12 +128,22 @@ Template.mainContent.events({
 		var name = event.target.assignmentNameField.value;
 		var description = event.target.assignmentDescriptionField.value;
 		var lang = event.target.assignmentLanguageField.value;
-		var dateAvailable = event.target.assignmentDateAvailableField.value;
-		var dateDue = event.target.assignmentDateDueField.value;
+		var dateAvailable = "";
+		if (event.target.assignmentDateAvailableField.value != ""){
+				dateAvailable = new Date(event.target.assignmentDateAvailableField.value);
+				dateAvailable.setMinutes(dateAvailable.getMinutes() + dateAvailable.getTimezoneOffset());
+				dateAvailable = dateAvailable.toLocaleString();
+		}
+		var dateDue = "";
+		if (event.target.assignmentDateDueField.value != ""){
+				dateDue = new Date(event.target.assignmentDateDueField.value);
+				dateDue.setMinutes(dateDue.getMinutes() + dateDue.getTimezoneOffset());
+				dateDue = dateDue.toLocaleString();
+		}
 		var time = event.target.assignmentTimeField.value;
 		var points = event.target.assignmentPointsField.value;
 
-		if (name === "" || lang === "" || dateAvailable === "" || dateDue === "" || time === "") {
+		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "") {
 			$('#assignmentErrorMessage').text('Complete required data fields').show();
 			return false;
 		} else {
@@ -344,6 +354,19 @@ Template.mainContent.events({
 				}
 				if(Session.get('currentDashboard') === "assignmentDash"){
 					var currentAssignment = Session.get('currentAssignment');
+
+					var dateAvailable = "";
+					if ($('#assignmentDateAvailableField').val() != ""){
+							dateAvailable = new Date($('#assignmentDateAvailableField').val());
+							dateAvailable.setMinutes(dateAvailable.getMinutes() + dateAvailable.getTimezoneOffset());
+							dateAvailable = dateAvailable.toLocaleString();
+					}
+					var dateDue = "";
+					if ($('#assignmentDateDueField').val() !=""){
+							dateDue = new Date($('#assignmentDateDueField').val());
+							dateDue.setMinutes(dateDue.getMinutes() + dateDue.getTimezoneOffset());
+							dateDue = dateDue.toLocaleString();
+					}
 
 					 var name = $('#assignmentNameField').val();
 					 var description = $('#assignmentDescriptionField').val();
