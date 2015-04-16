@@ -99,7 +99,6 @@ class InputCaseData{
 
 public class VTA{
 	public ArrayList<Section> sections;
-	
 	public HashMap<String, String> correctOutputText;
 	public String[] correctAnswers;
 	public HashMap<String, String> studentOutputText;
@@ -211,122 +210,121 @@ public class VTA{
 	}
 
 	private void createJSON(){
-		String out = "";
+		StringBuilder out = new StringBuilder();
 		
-		out += "{" + "\"sections\":" + "[";
+		out.append("{" + "\"sections\":" + "[");
 		boolean sectionsRan = false, rowsRan = false, inputsRan = false, casesRan = false;
 		
 		for(Section a : sections){
 			sectionsRan = true;
-			out += "{";
+			out.append("{");
 			
-			out += "\"sectionName\":";
-			out += "\"" + a.name + "\",";
+			out.append("\"sectionName\":");
+			out.append("\"" + a.name + "\",");
 			
-			out += "\"pointsPossible\":";
-			out += a.pointsPossible + ",";
+			out.append("\"pointsPossible\":");
+			out.append(a.pointsPossible + ",");
 			
-			out += "\"pointsEarned\":";
-			out += a.pointsEarned + ",";
+			out.append("\"pointsEarned\":");
+			out.append(a.pointsEarned + ",");
 			
-			out += "\"rows\":";
-			out += "[";
+			out.append("\"rows\":");
+			out.append("[");
 			
 			for(SectionRow b : a.rows){
 				rowsRan = true;
-				out += "{";
+				out.append("{");
 				
-				out += "\"description\":\"";
-				out += b.description + "\",";
+				out.append("\"description\":\"");
+				out.append(b.description + "\",");
 				
-				out += "\"pointsEarned\":";
-				out += b.pointsEarned + ",";
+				out.append("\"pointsEarned\":");
+				out.append(b.pointsEarned + ",");
 				
-				out += "\"PointsPossible\":";
-				out += b.pointsPossible + ",";
+				out.append("\"PointsPossible\":");
+				out.append(b.pointsPossible + ",");
 				
-				out += "\"comments\":\"";
-				out += b.comments + "\"";
+				out.append("\"comments\":\"");
+				out.append(b.comments + "\"");
 				
-				out += "},";
+				out.append("},");
 			}
 			if(rowsRan){
-				out = out.substring(0, (out.length()-1));
+				out.deleteCharAt(out.length() - 1);
 				rowsRan = false;
 			}
 			
-			out += "],";
+			out.append("],");
 			
-			out += "\"gradedInputs\":";
-			out += "[";
+			out.append("\"gradedInputs\":");
+			out.append("[");
 			
 			for(InputFileGradeData c : a.inputs){
 				inputsRan = true;
-				out += "{";
+				out.append("{");
 				
-				out += "\"name\":\"";
-				out += c.name + "\",";
+				out.append("\"name\":\"");
+				out.append(c.name + "\",");
 				
-				out += "\"contents\":\"";
-				out += c.contentsFileName + "\",";
+				out.append("\"contents\":\"");
+				out.append(c.contentsFileName + "\",");
 				
-				out += "\"pointsPossible\":";
-				out += c.pointsPossible + ",";
+				out.append("\"pointsPossible\":");
+				out.append(c.pointsPossible + ",");
 				
-				out += "\"pointsEarned\":";
-				out += c.pointsEarned + ",";
+				out.append("\"pointsEarned\":");
+				out.append(c.pointsEarned + ",");
 				
-				out += "\"cases\":";
-				out += "[";
+				out.append("\"cases\":");
+				out.append("[");
 				
 				for(InputCaseData d : c.cases){
 					casesRan = true;
-					out += "{";
+					out.append("{");
 					
-					out += "\"correctOutput\":\"";
-					out += d.correctOutput + "\",";
+					out.append("\"correctOutput\":\"");
+					out.append(d.correctOutput + "\",");
 					
-					out += "\"studentOutput\":\"";
-					out += d.studentOutput + "\",";
+					out.append("\"studentOutput\":\"");
+					out.append(d.studentOutput + "\",");
 					
-					out += "\"correct\":";
-					out += d.correct + ",";
+					out.append("\"correct\":");
+					out.append(d.correct + ",");
 					
-					out += "\"points\":";
-					out += d.pointsPossible + ",";
+					out.append("\"points\":");
+					out.append(d.pointsPossible + ",");
 					
-					out += "\"comments\":\"";
-					out += d.comments + "\"";
+					out.append("\"comments\":\"");
+					out.append(d.comments + "\"");
 					
-					out += "},";					
+					out.append("},");					
 				}
 				if(casesRan){
-					out = out.substring(0, (out.length()-1));
+					out.deleteCharAt(out.length() - 1);
 					casesRan = false;
 				}
 				
-				out += "]";
-				out += "},";
+				out.append("]");
+				out.append("},");
 			}
 			
 			if(inputsRan){
-				out = out.substring(0, (out.length()-1));
-				out += "";
+				out = out.deleteCharAt(out.length() - 1);
 				inputsRan = false;
 			}
 			
-			out += "]";
+			out.append("]");
 			
-			out += "},";
+			out.append("},");
 		}
 		
 		if(sectionsRan){
-			out = out.substring(0, (out.length()-1));
+			out.deleteCharAt((out.length() - 1));
 			sectionsRan = false;
 		}
 		
-		out += "]";
-		out += "}";
+		out.append("]");
+		out.append("}");
 		
 		try {
 			PrintWriter output = new PrintWriter("autograderOutput.json", "UTF-8");
@@ -336,6 +334,11 @@ public class VTA{
 			e.printStackTrace();
 		}
 	}
+
+	public boolean parseCases(int numLinesPerCase){
+		return parseCases("NOINPUTFILE", numLinesPerCase);
+	}
+
 	
 	public boolean parseCases(String inputFilename, int numLinesPerCase){
 		String[] instructorTemp = correctOutputText.get(inputFilename).split("\n");
@@ -430,21 +433,18 @@ public class VTA{
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
-			int bufferSize = 1024;
+			int bufferSize = (int)(new File(inputFileName)).length() + 1;
+
 			StringBuilder outputData = new StringBuilder(bufferSize);
 			int pos = 0;
 			String curr = null;
 			while ((curr = stdInput.readLine()) != null) {
-				outputData.append(curr + '\n');
-			    if (++pos >= bufferSize) {
-			    	bufferSize *= 2;
-			    	StringBuilder tempString = new StringBuilder(bufferSize);
-			    	tempString.append(outputData);
-			    	outputData = tempString;
-			    }
+				outputData.append(curr );
+				outputData.append('\n');
 			}
 
 			stdInput.close();
+
 			
 			if (mode == 'i'){
 				correctOutputText.put(inputFileName, outputData.toString());

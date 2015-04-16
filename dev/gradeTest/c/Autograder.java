@@ -14,7 +14,8 @@ public class Autograder
 		vta.addSection("Execution Points");
 		String[][] inputs = {
 			{"The hard one", "hopscotch.in"},
-			{"The easy one", "hopscotch_easy.in"}
+			{"The easy one", "hopscotch_easy.in"},
+			{"The huge one", "hopscotch_huge.in"}
 		};
 
 		for (String[] inputInfo : inputs) {
@@ -28,11 +29,13 @@ public class Autograder
 
 			for(int i = 0; i < vta.correctAnswers.length; i++){
 				boolean correct = vta.correctAnswers[i].equals(vta.studentAnswers[i]);
-				vta.addInputCase("Execution Points", inputDescription, vta.studentAnswers[i],
-					vta.correctAnswers[i], correct,  5, correct ? "Yeah good job" : "suckaahhhh!");
+				vta.addInputCase("Execution Points", inputDescription, vta.correctAnswers[i], 
+					vta.studentAnswers[i], correct, 5, correct ? "Yeah good job" : "suckaahhhh!");
 			}
 		}
 
-		vta.cleanUp();	
+System.out.println("here");
+		vta.cleanUp();
+System.out.println("there");	
 	}
 }
