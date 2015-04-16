@@ -39,6 +39,15 @@
 							<input id="assignmentPointsField" type="text" value={{points}}>
 						</div>
 					</div>
+					<div class="required field">
+						<label>AutoGrader Type</label>
+						<select id="assignmentAGTypeField" class="ui dropdown">
+							<option value="">Type</option>
+							 <option value="API">API</option>
+    						 <option value="Main">With Student Main</option>
+    						 <script type="text/javascript">$('select.dropdown').dropdown(/*'set selected','{{language}}'*/);</script>
+						</select>
+					</div>
 					<div class="fluid field">
 						<label>Description</label>
 						<textarea id="assignmentDescriptionField" >{{description}}</textarea>
