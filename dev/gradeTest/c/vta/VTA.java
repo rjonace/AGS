@@ -367,11 +367,6 @@ public class VTA{
 		return false;
 	}
 
-
-	/** Runs either the instructor's or student's compiled binary and returns its stdout as a string; "mode"
-	 *  determines which should be run 
-	 *  Implementation idea:  Per Professor Heinrch's suggestion, we should probably return an entire 
-	 *  struct of information about how the file ran---not just the output */
 	public boolean run(char mode){
 		if (!(mode == 'i' || mode == 's'))
 			return false;

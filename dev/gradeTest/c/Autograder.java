@@ -22,11 +22,11 @@ public class Autograder
 			String inputDescription = inputInfo[0];
 			String inputFilename = inputInfo[1];
 
-			vta.addAutoGradedInput("Execution Points", inputDescription, inputFilename);
 			vta.runWithInput('i', inputFilename);
 			vta.runWithInput('s', inputFilename);
 			vta.parseCases(inputFilename, 1);
 
+			vta.addAutoGradedInput("Execution Points", inputDescription, inputFilename);
 			for(int i = 0; i < vta.correctAnswers.length; i++){
 				boolean correct = vta.correctAnswers[i].equals(vta.studentAnswers[i]);
 				vta.addInputCase("Execution Points", inputDescription, vta.correctAnswers[i], 
@@ -34,8 +34,6 @@ public class Autograder
 			}
 		}
 
-System.out.println("here");
 		vta.cleanUp();
-System.out.println("there");	
 	}
 }
