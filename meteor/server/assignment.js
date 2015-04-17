@@ -39,7 +39,7 @@ Meteor.methods({
 			{$addToSet: { studentfiles: { name: filename, contents: contents } } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/student files/'+filename,contents);
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files/'+filename,contents);
 			}
 		);
 	},
