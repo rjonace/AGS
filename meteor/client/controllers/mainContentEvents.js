@@ -191,7 +191,7 @@ Template.mainContent.events({
 								var name = file.name;
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
-									Meteor.call('insertAssignmentSolution', result, name, reader.result);
+									Meteor.call('insertAssignmentSolution',currentCourseId, result, name, reader.result);
 								}
 								reader.readAsText(file);
 							})(solutionFileList[i]);
@@ -205,7 +205,7 @@ Template.mainContent.events({
 								var name = file.name;
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
-									Meteor.call('insertAssignmentAG', result, name, reader.result);
+									Meteor.call('insertAssignmentAG',currentCourseId, result, name, reader.result);
 								}
 								reader.readAsText(file);
 							})(agFileList[i]);
@@ -219,7 +219,7 @@ Template.mainContent.events({
 								var name = file.name;
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
-									Meteor.call('insertAssignmentStudent', result, name, reader.result);
+									Meteor.call('insertAssignmentStudent',currentCourseId, result, name, reader.result);
 								}
 								reader.readAsText(file);
 							})(studentFileList[i]);
@@ -232,7 +232,7 @@ Template.mainContent.events({
 								var name = file.name;
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
-									Meteor.call('insertAssignmentInput', result, name, reader.result);
+									Meteor.call('insertAssignmentInput',currentCourseId, result, name, reader.result);
 								}
 								reader.readAsText(file);
 							})(inputFileList[i]);

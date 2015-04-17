@@ -24,7 +24,7 @@ Meteor.methods({
 			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files');
 		});
 	},	
-	'insertAssignmentAG': function(id_Assignment, filename, contents){
+	'insertAssignmentAG': function(id_Course,id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
 			{$addToSet: { ag: { name: filename, contents: contents} } },
@@ -34,7 +34,7 @@ Meteor.methods({
 			}
 		);
 	},	
-	'insertAssignmentSolution': function(id_Assignment, filename, contents){
+	'insertAssignmentSolution': function(id_Course,id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
 			{$addToSet: { solution: { name: filename, contents: contents} } },
@@ -44,7 +44,7 @@ Meteor.methods({
 			}
 		);
 	},
-	'insertAssignmentStudent': function(id_Assignment, filename, contents){
+	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
 			{$addToSet: { studentfiles: { name: filename, contents: contents } } },
@@ -54,7 +54,7 @@ Meteor.methods({
 			}
 		);
 	},
-	'insertAssignmentInput': function(id_Assignment, filename, contents){
+	'insertAssignmentInput': function(id_Course,sid_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
 			{$addToSet: { inputfiles: { name: filename, contents: contents } } },
