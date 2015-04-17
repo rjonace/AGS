@@ -97,14 +97,13 @@
 						<textarea id="assignmentDescriptionField" ></textarea>
 					</div>
 					<div class="field">
-						<div id="assignmentTypeField" class="ui fluid dropdown labeled icon button">
-							<i class="dropdown icon"></i>
-							<span class="text">Type</span>
-							<div class="menu">
-								<div class="item" data-value="api">API</div>
-								<div class="item" data-value="main">With Student Main</div>
-						  </div>
-						</div>
+						<label>Type</label>
+						<select id="assignmentTypeField" class="ui dropdown">
+							 <option value="">Type</option>
+							 <option value="integrate">Compile student code with Autograder.</option>
+							 <option value="seperate">Compile student code and Autograder separately.</option>
+						</select>
+						<script type="text/javascript">$('select.dropdown').dropdown();</script>
 					</div>
 					<script>$('.ui.dropdown.labeled.icon.button').dropdown();</script>
 					<div class="two required fields">	
