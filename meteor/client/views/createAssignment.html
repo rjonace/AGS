@@ -39,17 +39,6 @@
 							<input id="assignmentPointsField" type="text" value={{points}}>
 						</div>
 					</div>
-					<div class="field">
-						<div id="assignmentTypeField" class="ui fluid dropdown labeled icon button">
-							<i class="dropdown icon"></i>
-							<span class="text">Type</span>
-							<div class="menu">
-								<div class="item" data-value="api">API</div>
-								<div class="item" data-value="main">With Student Main</div>
-						  </div>
-						</div>
-					</div>
-					<script>$('.ui.dropdown.labeled.search.icon.button').dropdown();</script>
 					<div class="fluid field">
 						<label>Description</label>
 						<textarea id="assignmentDescriptionField" >{{description}}</textarea>
@@ -107,6 +96,17 @@
 						<label>Description</label>
 						<textarea id="assignmentDescriptionField" ></textarea>
 					</div>
+					<div class="field">
+						<div id="assignmentTypeField" class="ui fluid dropdown labeled icon button">
+							<i class="dropdown icon"></i>
+							<span class="text">Type</span>
+							<div class="menu">
+								<div class="item" data-value="api">API</div>
+								<div class="item" data-value="main">With Student Main</div>
+						  </div>
+						</div>
+					</div>
+					<script>$('.ui.dropdown.labeled.search.icon.button').dropdown();</script>
 					<div class="two required fields">	
 						<div class="field">
 							<label>Auto-Grader File</label>
