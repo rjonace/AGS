@@ -44,11 +44,17 @@ Meteor.methods({
 			{upsert : false},	//options
 			 function(err, result){	//callback
 				if (!err) {
-					fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
-					exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+'courses/'+id_Course,
-					function(error,stdout,stderr){
-						if (error) console.log("There was an error creating instructor solution",error);
-					});
+					fs.writeFile('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents,
+						function(fileErr) {
+							if (!fileErr) {
+								exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+'courses/'+id_Course,
+								function(error,stdout,stderr){
+									if (error) console.log("There was an error creating instructor solution",error);
+								});
+							} else console.log("There was an error writing solution files",error);
+						}
+					);
+
 				}
 			}
 		);
