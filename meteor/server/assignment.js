@@ -1,4 +1,5 @@
 /*	Server side Assignment Methods*/
+var fs = Npm.require('fs');
 Meteor.methods({
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, points){
 		return AGSAssignments.insert({
@@ -16,7 +17,7 @@ Meteor.methods({
 				{_id:id_Course},
 				{ $addToSet: { id_Assignments: id}}
 			);
-			var fs = Npm.require('fs');
+
 			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id);
 			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/autograder files');
 			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/input files');
