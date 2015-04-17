@@ -1,5 +1,6 @@
 /*	Server side Assignment Methods*/
 var fs = Npm.require('fs');
+var exec = Npm.require('child_process').exec;
 Meteor.methods({
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, points){
 		return AGSAssignments.insert({
@@ -42,7 +43,13 @@ Meteor.methods({
 			{$addToSet: { solution: { name: filename, contents: contents} } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
+				if (!err) {
+					fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
+					exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+'courses/'+id_Course,
+					function(error,stdout,stderr){
+						if (error) console.log("There was an error creating instructor solution",error);
+					});
+				}
 			}
 		);
 	},
