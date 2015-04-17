@@ -162,10 +162,7 @@ Template.mainContent.events({
 			function(error, result) {
 				if(!error) {
 
-					var agReader = new FileReader();
-					var inputReader = new FileReader();
-					var studentReader = new FileReader();
-
+					var solutionFileList = event.target.assignmentSolutionField.files;
 					var agFileList = event.target.assignmentAGField.files;
 					var inputFileList = event.target.assignmentInputField.files;
 					var studentFileList = event.target.assignmentStudentField.files;
@@ -187,6 +184,19 @@ Template.mainContent.events({
 
 //					if (solution)
 //						solutionReader.readAsText(solution);
+					if(solutionFileList.length > 0) {
+						for (var i = 0; i < solutionFileList.length; i++) {
+							(function(file) {
+								var name = file.name;
+								var reader = new FileReader();
+								reader.onloadend = function(event) {
+									Meteor.call('insertAssignmentSolution', result, name, reader.result);
+								}
+								reader.readAsText(file);
+							})(solutionFileList[i]);
+						};
+					}
+
 
 					if(agFileList.length > 0) {
 						for (var i = 0; i < agFileList.length; i++) {

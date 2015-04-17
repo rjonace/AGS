@@ -33,6 +33,16 @@ Meteor.methods({
 			}
 		);
 	},	
+	'insertAssignmentSolution': function(id_Assignment, filename, contents){
+		AGSAssignments.update(
+			{_id: id_Assignment}, 
+			{$addToSet: { solution: { name: filename, contents: contents} } },
+			{upsert : false},	//options
+			 function(err, result){	//callback
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files/'+filename,contents);
+			}
+		);
+	},
 	'insertAssignmentStudent': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
