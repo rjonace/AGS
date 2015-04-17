@@ -63,7 +63,7 @@ Meteor.methods({
 			}
 		);
 	},
-	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, time, points){
+	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, time, points,type){
 		AGSAssignments.update(
 		{_id:id_Assignment},
 		{ $set: {
@@ -73,7 +73,8 @@ Meteor.methods({
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			time: time,
-			points: points
+			points: points,
+			type: type
 		}},{upsert : false},	//options
 		 function(err, result){	//callback
 			if (err)

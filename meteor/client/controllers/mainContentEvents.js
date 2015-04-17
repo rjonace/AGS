@@ -142,8 +142,9 @@ Template.mainContent.events({
 		}
 		var time = event.target.assignmentTimeField.value;
 		var points = event.target.assignmentPointsField.value;
+		var type = event.target.assignmentTypeField.value;
 
-		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "") {
+		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "" || type == "") {
 			$('#assignmentErrorMessage').text('Complete required data fields').show();
 			return false;
 		} else {
@@ -151,14 +152,14 @@ Template.mainContent.events({
 				$('#assignmentErrorMessage').text('Choose Auto-Grader File.').show();
 				return false;
 			}
-			if (event.target.assignmentStudentField.files.length == 0) {
-				$('#assignmentErrorMessage').text('Choose Student File(s).').show();
+			if (event.target.assignmentSolutionField.files.length == 0) {
+				$('#assignmentErrorMessage').text('Choose Solution File(s).').show();
 				return false;
 			}
 		}
 
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, points, 
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, points, type,
 			function(error, result) {
 				if(!error) {
 
@@ -482,6 +483,14 @@ Template.mainContent.events({
 			$('#inputFileNameField').val(fileName);
 		else
 			$('#inputFileNameField').val('No file chosen')
+	},
+	'change #assignmentSolutionField' : function(event) {
+		var fileName = $('#assignmentSolutionField').val();
+		console.log(fileName);
+		if (fileName != '')
+			$('#solutionFileNameField').val(fileName);
+		else
+			$('#solutionFileNameField').val('No file chosen')
 	},
 	'click .gradedInputRow' : function(event) {
 		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));
