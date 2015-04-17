@@ -29,7 +29,7 @@ Meteor.methods({
 			{$addToSet: { ag: { name: filename, contents: contents} } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/autograder files/'+filename,contents);
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/autograder files/'+filename,contents);
 			}
 		);
 	},	
@@ -39,7 +39,7 @@ Meteor.methods({
 			{$addToSet: { solution: { name: filename, contents: contents} } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files/'+filename,contents);
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
 			}
 		);
 	},
@@ -49,7 +49,7 @@ Meteor.methods({
 			{$addToSet: { studentfiles: { name: filename, contents: contents } } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files/'+filename,contents);
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
 			}
 		);
 	},
@@ -59,7 +59,7 @@ Meteor.methods({
 			{$addToSet: { inputfiles: { name: filename, contents: contents } } },
 			{upsert : false},	//options
 			 function(err, result){	//callback
-				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/input files/'+filename,contents);
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/input files/'+filename,contents);
 			}
 		);
 	},
