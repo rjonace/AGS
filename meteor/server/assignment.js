@@ -11,29 +11,46 @@ Meteor.methods({
 			points: points,
 			id_Course: id_Course
 		}, function(err, id) {
-			console.log(err);
+			console.log(err);			
 			AGSCourses.update(
 				{_id:id_Course},
 				{ $addToSet: { id_Assignments: id}}
 			);
+			var fs = Npm.require('fs');
+			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id);
+			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/autograder files');
+			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/input files');
+			fs.mkdirSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/solution files');
 		});
 	},	
 	'insertAssignmentAG': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
-			{$set: { ag: { name: filename, contents: contents} } }
+			{$addToSet: { ag: { name: filename, contents: contents} } },
+			{upsert : false},	//options
+			 function(err, result){	//callback
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/autograder files/'+filename,contents);
+			}
 		);
 	},	
 	'insertAssignmentStudent': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
-			{$addToSet: { studentfiles: { name: filename, contents: contents } } }
+			{$addToSet: { studentfiles: { name: filename, contents: contents } } },
+			{upsert : false},	//options
+			 function(err, result){	//callback
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/student files/'+filename,contents);
+			}
 		);
 	},
 	'insertAssignmentInput': function(id_Assignment, filename, contents){
 		AGSAssignments.update(
 			{_id: id_Assignment}, 
-			{$addToSet: { inputfiles: { name: filename, contents: contents } } }
+			{$addToSet: { inputfiles: { name: filename, contents: contents } } },
+			{upsert : false},	//options
+			 function(err, result){	//callback
+				if (!err) fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id+'/input files/'+filename,contents);
+			}
 		);
 	},
 	'updateAssignmentData' : function(id_Assignment, name, description, lang, dateAvailable, dateDue, time, points){

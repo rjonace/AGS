@@ -14,6 +14,8 @@ Meteor.methods({
 			id_Students: [],
 			id_Assignments: []
 		}, function(err,id){
+			var fs = Npm.require('fs');
+			fs.mkdirSync('/home/student/ags/grading/courses/'+id);
 			//AGSUsers.update(
 			//	{_id:currentUserId},
 			//	{ $addToSet: { id_Courses: id}}
@@ -45,6 +47,7 @@ Meteor.methods({
 			},
 			{ multi:true });
 		AGSAssignments.remove({id_Course:id_Course});
+		
 		// remove all references to the course?
 	},
 	'resetCurrentCourse': function(id_Course){

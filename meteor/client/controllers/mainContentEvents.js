@@ -166,27 +166,41 @@ Template.mainContent.events({
 					var inputReader = new FileReader();
 					var studentReader = new FileReader();
 
-					var ag = event.target.assignmentAGField.files[0];
+					var agFileList = event.target.assignmentAGField.files;
 					var inputFileList = event.target.assignmentInputField.files;
 					var studentFileList = event.target.assignmentStudentField.files;
 
-					var agObj;
+					//var agObj;
 
-					agReader.onloadend = function(){
-						agObj = {name: ag.name, contents:agReader.result};
-						Meteor.call('insertAssignmentAG', result, agObj.name, agObj.contents);
-					}
+					//agReader.onloadend = function(){
+						//agObj = {name: ag.name, contents:agReader.result};
+						//Meteor.call('insertAssignmentAG', result, agObj.name, agObj.contents);
+					//}
 
 /*					solutionReader.onloadend = function(){
 						solutionObj = {name: solution.name, contents:solutionReader.result};
 						Meteor.call('insertAssignmentSolution', result, solutionObj.name, solutionObj.contents);
 					}
 */
-					if (ag)
-						agReader.readAsText(ag);
+					//if (ag)
+						//agReader.readAsText(ag);
 
 //					if (solution)
 //						solutionReader.readAsText(solution);
+
+					if(agFileList.length > 0) {
+						for (var i = 0; i < agFileList.length; i++) {
+							(function(file) {
+								var name = file.name;
+								var reader = new FileReader();
+								reader.onloadend = function(event) {
+									Meteor.call('insertAssignmentAG', result, name, reader.result);
+								}
+								reader.readAsText(file);
+							})(agFileList[i]);
+						};
+					}
+
 
 					if(studentFileList.length > 0) {
 						for (var i = 0; i < studentFileList.length; i++) {
