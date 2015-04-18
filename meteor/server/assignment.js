@@ -64,7 +64,7 @@ Meteor.methods({
 				}
 			);
 */
-			exec('cd ' + path + '/' + id_Assignment +'/solution files &&' + 
+			exec('cd ' + path + '/' + id_Assignment +'/solution\ files &&' + 
 				'gcc -std=gnu99 -o execi *.c', 
 				function(error,stdout,stderr){console.log(error,stdout,stderr)}
 			)
