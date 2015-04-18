@@ -254,8 +254,8 @@ Template.mainContent.events({
 							console.log("creating Execs")
 							Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 						}
-							console.log(numFiles + 'solution files written thus far');
 						else{
+							console.log(numFiles + 'solution files written thus far');
 						}
 					}
 
