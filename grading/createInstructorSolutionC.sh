@@ -8,10 +8,4 @@ CURRENT_PATH=$2
 COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution files"
-compileString=""
-for cFile in *.c; do		
-	compileString=$compileString $cFile		
-done		
-
-echo $compileString
-gcc "-lm $COMPFLAGS -std=gnu99 -o execi $compileString"
+gcc "$COMPFLAGS" -std=gnu99 -o execi *.c
