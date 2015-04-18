@@ -10,5 +10,5 @@ cd "$CURRENT_PATH/$ASS_ID/solution files"
 pwd
 for i in *.c
 do
-	gcc $COMPFLAGS -std=gnu99 -o execi i
+	gcc $COMPFLAGS -std=gnu99 -o execi $i
 done
