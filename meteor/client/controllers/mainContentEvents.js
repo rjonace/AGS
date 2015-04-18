@@ -196,7 +196,7 @@ Template.mainContent.events({
 								reader.readAsText(file);
 							})(solutionFileList[i]);
 						};
-						Meteor.call('createAssignmentSolution',currentCourseId, result, name, reader.result);
+						Meteor.call('createAssignmentSolution',currentCourseId, result);
 					}
 
 
