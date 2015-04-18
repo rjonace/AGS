@@ -11,4 +11,4 @@ cd "$CURRENT_PATH/$ASS_ID/solution_files"
 pwd
 touch testfile
 ls -GlRh --full-time
-gcc $cFile -std=gnu99 -o execi "$COMPFLAGS"
+gcc *.c -std=gnu99 -o execi "$COMPFLAGS"
