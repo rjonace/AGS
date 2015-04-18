@@ -10,4 +10,6 @@ COMPFLAGS=$3
 cd "$CURRENT_PATH/$ASS_ID/solution files"
 pwd
 echo `pwd`
-gcc *.c -std=gnu99 -o execi #"$COMPFLAGS"
+for cFile in *.c; do
+	gcc $cFile -std=gnu99 -o execi #"$COMPFLAGS"
+done

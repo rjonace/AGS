@@ -57,18 +57,18 @@ Meteor.methods({
 			);
 		}
 		else if (lang == "C"){
-/*			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
+			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
 					if (error) console.log("There was an error creating instructor solution C",error);
 					console.log(stdout,stderr);
 				}
 			);
-*/
+/*
 			exec('cd ' + path + '/' + id_Assignment +'/solution_files &&' + 
 				'gcc *.c -std=gnu99 -o execi', 
 				function(error,stdout,stderr){console.log(error,stdout,stderr)}
 			)
-
+*/
 		}
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
