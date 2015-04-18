@@ -245,7 +245,7 @@ Template.mainContent.events({
 					var createdSolutionFile = false;
 					while (!createdSolutionFile){
 						var numFiles = Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files');
-						if (numFiles == solution_files.length){
+						if (numFiles == solutionFileList.length){
 							createdSolutionFile = true;
 							console.log("creating Execs")
 							Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
