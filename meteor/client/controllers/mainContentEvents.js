@@ -168,6 +168,8 @@ Template.mainContent.events({
 					var inputFileList = event.target.assignmentInputField.files;
 					var studentFileList = event.target.assignmentStudentField.files;
 
+					var filePath = '/home/student/ags/grading/courses/'+result;
+
 					//var agObj;
 
 					//agReader.onloadend = function(){
@@ -196,7 +198,7 @@ Template.mainContent.events({
 								reader.readAsText(file);
 							})(solutionFileList[i]);
 						};
-						Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
+//						Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 					}
 
 
@@ -238,6 +240,23 @@ Template.mainContent.events({
 								reader.readAsText(file);
 							})(inputFileList[i]);
 						};
+					}
+
+					var numberOfFilesInDirectory = function (dirName) {
+						var readdirSync = Npm.require('fs').readdirSync;
+						return readdirSync(dirName).length;
+					}
+					var createdSolutionFile = false;
+					while (!createdSolutionFile){
+						var numFiles = numberOfFilesInDirectory(filePath +'/'+'solution_files');
+						if (numFiles == solution_files.length){
+							createdSolutionFile = true;
+							console.log("creating Execs")
+							Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
+						}
+							console.log(numFiles + 'solution files written thus far');
+						else{
+						}
 					}
 
 
