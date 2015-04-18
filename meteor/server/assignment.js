@@ -58,7 +58,10 @@ Meteor.methods({
 		}
 		else if (lang == "C"){
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
-				function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution C",error)}
+				function(error,stdout,stderr){
+					if (error) console.log("There was an error creating instructor solution C",error);
+					console.log(stdout,stderr);
+				}
 			);
 		}
 	},
