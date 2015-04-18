@@ -6,9 +6,4 @@ CURRENT_PATH=$2
 COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution files"
-#touch testfile
-pwd
-for i in *.c
-do
-	gcc $COMPFLAGS -std=gnu99 -o execi $i
-done
+gcc -lm *.c $COMPFLAGS -std=gnu99 -o execi
