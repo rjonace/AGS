@@ -44,22 +44,15 @@ Meteor.methods({
 			{upsert : false},	//options
 			 function(err, result){	//callback
 				if (!err) {
-					fs.writeFile('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents,
-						function(fileErr) {
-							if (!fileErr) {
-								var path = '/home/student/ags/grading/courses/'+id_Course;
-								//exec is being called for each solution file submitted.
-								//Meteor.setInterval but not in here because we dont want it to run a lot
-								exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
-								function(error,stdout,stderr){
-									if (error) console.log("There was an error creating instructor solution",error);
-								});
-							} else console.log("There was an error writing solution files",error);
-						}
-					);
-
+					fs.writeFile('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution files/'+filename,contents);
 				}
 			}
+		);
+	},
+	'createAssignmentSolution': function(id_Course,id_Assignment){
+		var path = '/home/student/ags/grading/courses/'+id_Course;
+		exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
+			function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution",error)};
 		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
