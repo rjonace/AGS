@@ -5,5 +5,4 @@ ASS_ID=$1
 CURRENT_PATH=$2
 COMPFLAGS=$3
 
-cd "$CURRENT_PATH/$ASS_ID/solution files"
 gcc $COMPFLAGS -o execi *.c
