@@ -52,7 +52,7 @@ Meteor.methods({
 	'createAssignmentSolution': function(id_Course,id_Assignment){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
 		exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
-			function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution",error)};
+			function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution",error)}
 		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){

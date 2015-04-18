@@ -192,6 +192,7 @@ Template.mainContent.events({
 								var reader = new FileReader();
 								reader.onloadend = function(event) {
 									Meteor.call('insertAssignmentSolution',currentCourseId, result, name, reader.result);
+								}
 								reader.readAsText(file);
 							})(solutionFileList[i]);
 						};
