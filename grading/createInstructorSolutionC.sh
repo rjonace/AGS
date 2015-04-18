@@ -7,4 +7,4 @@ COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution files"
 touch testfile
-gcc $COMPFLAGS -std=gnu99 -o execi *.c
+gcc $COMPFLAGS -std=gnu99 -o execi basketballgame.c
