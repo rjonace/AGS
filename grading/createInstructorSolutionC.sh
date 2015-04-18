@@ -6,5 +6,6 @@ CURRENT_PATH=$2
 COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution files"
-touch testfile
-`gcc $COMPFLAGS -std=gnu99 -o execi basketballgame.c`
+#touch testfile
+`pwd`
+gcc $COMPFLAGS -std=gnu99 -o execi "$CURRENT_PATH/$ASS_ID/solution files/*.c"
