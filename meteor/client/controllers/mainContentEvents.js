@@ -242,15 +242,9 @@ Template.mainContent.events({
 						};
 					}
 
-					var numberOfFilesInDirectory = function (dirName) {
-						var readdirSync = Npm.require('fs').readdirSync;
-						var numFiles = readdirSync(dirName).length;
-						console.log("number of files: " +numFiles);
-						return numFiles;
-					}
 					var createdSolutionFile = false;
 					while (!createdSolutionFile){
-						var numFiles = numberOfFilesInDirectory(filePath +'/'+'solution_files');
+						var numFiles = Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files');
 						if (numFiles == solution_files.length){
 							createdSolutionFile = true;
 							console.log("creating Execs")
