@@ -168,7 +168,7 @@ Template.mainContent.events({
 					var inputFileList = event.target.assignmentInputField.files;
 					var studentFileList = event.target.assignmentStudentField.files;
 
-					var filePath = '/home/student/ags/grading/courses/'+result;
+					var filePath = '/home/student/ags/grading/courses/'+currentCourseId+'/'+result;
 
 					//var agObj;
 
