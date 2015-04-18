@@ -9,4 +9,4 @@ echo here
 echo `pwd`
 cd "$CURRENT_PATH/$ASS_ID/solution files"
 echo `pwd`
-gcc $COMPFLAGS -std=gnu99 -o execi *.c
+#gcc $COMPFLAGS -std=gnu99 -o execi *.c
