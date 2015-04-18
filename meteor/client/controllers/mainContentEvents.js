@@ -245,14 +245,17 @@ Template.mainContent.events({
 					var createdSolutionFile = false;
 					while (!createdSolutionFile){
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files',
-							function (numFiles) {
-								if (numFiles == solutionFileList.length){
-									createdSolutionFile = true;
-									console.log("creating Execs")
-									Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
-								}
+							function (error, numFiles) {
+								if (error) console.log(error);
 								else{
-									console.log(numFiles + ' solution files written thus far');
+									if (numFiles == solutionFileList.length){
+										createdSolutionFile = true;
+										console.log("creating Execs")
+										Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
+									}
+									else{
+										console.log(numFiles + ' solution files written thus far');
+									}
 								}
 							}
 						);
