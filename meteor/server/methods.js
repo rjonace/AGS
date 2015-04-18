@@ -1,7 +1,7 @@
 Meteor.methods({				
 	'numberOfFilesInDirectory': function (dirName) {
-		var readdirSync = Npm.require('fs').readdirSync;
-		var numFiles = readdirSync(dirName).length;
+		var readdir = Npm.require('fs').readdir;
+		var numFiles = readdir(dirName).length;
 		console.log("number of files: " +numFiles);
 		return numFiles;
 	}

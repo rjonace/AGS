@@ -242,8 +242,7 @@ Template.mainContent.events({
 						};
 					}
 
-					var createdSolutionFile = false;
-					while (!createdSolutionFile){
+					var fileCheck = Meteor.setInterval(function(){
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files',
 							function (error, numFiles) {
 								if (error) console.log(error);
@@ -255,11 +254,13 @@ Template.mainContent.events({
 									}
 									else{
 										console.log(numFiles + ' solution files written thus far');
+										return;
 									}
 								}
+								Meteor.clearInterval(fileCheck);
 							}
 						);
-					}
+					},1000);
 
 
 				} else {
