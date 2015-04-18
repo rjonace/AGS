@@ -14,4 +14,4 @@ for cFile in *.c; do
 done		
 
 echo $compileString
-gcc -lm $COMPFLAGS -std=gnu99 -o execi $compileString
+gcc "-lm $COMPFLAGS -std=gnu99 -o execi $compileString"
