@@ -9,5 +9,6 @@ COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution_files"
 pwd
-echo `pwd`
+touch testfile
+ls -GlRh --full-time
 gcc $cFile -std=gnu99 -o execi "$COMPFLAGS"
