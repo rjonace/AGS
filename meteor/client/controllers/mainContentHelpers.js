@@ -61,7 +61,7 @@ Template.mainContent.helpers({
 		var assIdList = AGSCourses.findOne({_id:courseId}).id_Assignments;
 		if (assIdList==null)
 			return [];
-		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {dateDue: 1, name: 1} });
+		return AGSAssignments.find(({_id : { $in: assIdList}}), {sort: {/*dateDue: 1*/, name: 1} });
 	},
 	// returns all submissions for the current assignment
 	'assignmentSubmissionList' : function() {
