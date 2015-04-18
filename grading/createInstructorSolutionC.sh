@@ -5,6 +5,7 @@ ASS_ID=$1
 CURRENT_PATH=$2
 COMPFLAGS=$3
 
+echo here
 echo `pwd`
 cd "$CURRENT_PATH/$ASS_ID/solution files"
 echo `pwd`
