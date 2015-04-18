@@ -244,7 +244,9 @@ Template.mainContent.events({
 
 					var numberOfFilesInDirectory = function (dirName) {
 						var readdirSync = Npm.require('fs').readdirSync;
-						return readdirSync(dirName).length;
+						var numFiles = readdirSync(dirName).length;
+						console.log("number of files: " +numFiles);
+						return numFiles;
 					}
 					var createdSolutionFile = false;
 					while (!createdSolutionFile){
