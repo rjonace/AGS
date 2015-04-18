@@ -8,4 +8,4 @@ COMPFLAGS=$3
 cd "$CURRENT_PATH/$ASS_ID/solution_files"
 pwd
 ls -GlRh --full-time
-gcc basketballgame.c -std=gnu99 -o execi "$COMPFLAGS"
+gcc basketballgame.c -std=gnu99 -o execi #$COMPFLAGS
