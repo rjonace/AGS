@@ -6,6 +6,7 @@ echo whatTheFuck
 ASS_ID=$1
 CURRENT_PATH=$2
 COMPFLAGS=$3
-
+pwd
+echo `pwd`
 cd "$CURRENT_PATH/$ASS_ID/solution files"
 gcc -std=gnu99 -o execi *.c #"$COMPFLAGS"
