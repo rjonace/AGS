@@ -7,4 +7,5 @@ COMPFLAGS=$3
 
 echo `pwd`
 cd "$CURRENT_PATH/$ASS_ID/solution files"
+echo `pwd`
 gcc $COMPFLAGS -o execi *.c
