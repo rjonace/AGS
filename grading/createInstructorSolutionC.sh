@@ -1,6 +1,8 @@
 #create Autograder executable (name of file given)
 #store executables in assignment specific directory
 
+echo whatTheFuck
+
 ASS_ID=$1
 CURRENT_PATH=$2
 COMPFLAGS=$3
@@ -12,4 +14,4 @@ for cFile in *.c; do
 done		
 
 echo $compileString
-gcc -lm *.c $COMPFLAGS -std=gnu99 -o execi $compileString		
+gcc -lm $COMPFLAGS -std=gnu99 -o execi $compileString")
