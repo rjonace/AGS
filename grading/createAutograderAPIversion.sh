@@ -3,10 +3,8 @@
 
 ASS_ID=$1
 CURRENT_PATH=$2
-COMPFLAGS=$3
+VTA_PATH=$3
 
 cd "$CURRENT_PATH/$ASS_ID/autograder_files"
-echo before
 javac $COMPFLAGS *.java
-echo after
-bash ../../../../createJar.sh Autograder.jar
+bash ../../../../createAGJar.sh Autograder.jar $VTA_PATH
