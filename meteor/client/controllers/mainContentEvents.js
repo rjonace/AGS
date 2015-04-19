@@ -263,6 +263,7 @@ Template.mainContent.events({
 
 
 					var agFileCheck = Meteor.setInterval(function(){
+						console.log("checking AG files");
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'autograder_files',
 							function (error, numFiles) {
 								if (error) console.log(error);
