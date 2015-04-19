@@ -68,7 +68,7 @@ Meteor.methods({
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
 		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path,
-			function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution Java",error)}
+			function(error,stdout,stderr){if (error) console.log("There was an error creating autograder ns",error)}
 		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){

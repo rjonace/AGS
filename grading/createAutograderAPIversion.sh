@@ -5,7 +5,7 @@ ASS_ID=$1
 CURRENT_PATH=$2
 COMPFLAGS=$3
 
-cd "$CURRENT_PATH/$ASS_ID/autograder_files
+cd "$CURRENT_PATH/$ASS_ID/autograder_files"
 pwd
 ls
 javac $COMPFLAGS *.java
