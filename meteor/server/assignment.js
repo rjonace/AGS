@@ -60,7 +60,6 @@ Meteor.methods({
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
 					if (error) console.log("There was an error creating instructor solution C",error);
-					console.log(stdout,stderr);
 				}
 			);
 		}
@@ -71,7 +70,6 @@ Meteor.methods({
 			' /home/student/ags/vta/bin',
 			function(error,stdout,stderr){
 				if (error) console.log("There was an error creating autograder ns",error);
-				else console.log(stdout,stderr);
 			}
 		);
 	},

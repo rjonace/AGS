@@ -121,7 +121,6 @@ Template.mainContent.events({
 			$('#submissionErrorMessage').text('No solution file chosen.').show();
 			return false;
 		}
-
 	},
 	'submit #createAssignment': function(event){
 		event.preventDefault();
