@@ -422,7 +422,7 @@ public class VTA{
 			return false;
 		if (!(this.language == 'C' || this.language == 'J'))
 			return false;
-
+/// not allowed to use "NOINPUTFILE" for inputFileName
 		Runtime rt = Runtime.getRuntime();
 
 		String[] command = {"/bin/sh", "-c", ""};
