@@ -1,6 +1,7 @@
 #create an executable jar file with name set as JAR_NAME
 
 JAR_NAME=$1
+VTA_PATH=$2
 
 #compiles all .java
 javac *.java
