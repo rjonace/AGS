@@ -271,7 +271,7 @@ Template.mainContent.events({
 									if (numFiles == agFileList.length){
 										console.log("creating Autograder.jar")
 										Meteor.call('createAutograderNonskeleton',currentCourseId, result,
-											function (argument) {
+											function (err) {
 												console.log(err);
 											});
 									}

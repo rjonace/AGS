@@ -6,11 +6,6 @@ CURRENT_PATH=$2
 COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/autograder_files"
-pwd
-ls
-javac $COMPFLAGS *.java
-pwd
-ls
+echo "$COMPFLAGS"
+javac "$COMPFLAGS" *.java
 bash ../../../../createJar.sh Autograder.jar
-pwd
-ls
