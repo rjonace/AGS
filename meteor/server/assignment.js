@@ -63,13 +63,13 @@ Meteor.methods({
 					console.log(stdout,stderr);
 				}
 			);
-/*
-			exec('cd ' + path + '/' + id_Assignment +'/solution_files &&' + 
-				'gcc *.c -std=gnu99 -o execi', 
-				function(error,stdout,stderr){console.log(error,stdout,stderr)}
-			)
-*/
 		}
+	},	
+	'createAutograderNonskeleton': function(id_Course,id_Assignment){
+		var path = '/home/student/ags/grading/courses/'+id_Course;
+		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path,
+			function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution Java",error)}
+		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
 		AGSAssignments.update(

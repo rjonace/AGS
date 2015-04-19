@@ -242,14 +242,13 @@ Template.mainContent.events({
 						};
 					}
 
-					var fileCheck = Meteor.setInterval(function(){
+					var solutionFileCheck = Meteor.setInterval(function(){
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files',
 							function (error, numFiles) {
 								if (error) console.log(error);
 								else{
 									if (numFiles == solutionFileList.length){
-										createdSolutionFile = true;
-										console.log("creating Execs")
+										console.log("creating Execi.jar")
 										Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 									}
 									else{
@@ -257,11 +256,30 @@ Template.mainContent.events({
 										return;
 									}
 								}
-								Meteor.clearInterval(fileCheck);
+								Meteor.clearInterval(solutionFileCheck);
 							}
 						);
 					},1000);
 
+
+					var agFileCheck = Meteor.setInterval(function(){
+						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'autograder_files',
+							function (error, numFiles) {
+								if (error) console.log(error);
+								else{
+									if (numFiles == agFileList.length){
+										console.log("creating Autograder.jar")
+										Meteor.call('createAutograderNonskeleton',currentCourseId, result);
+									}
+									else{
+										console.log(numFiles + ' autograder files written thus far');
+										return;
+									}
+								}
+								Meteor.clearInterval(agFileCheck);
+							}
+						);
+					},1000);
 
 				} else {
 					console.log(error);

@@ -1,4 +1,4 @@
-#create Autograder executable (name of file given)
+#create instructor executable
 #store executables in assignment specific directory
 
 ASS_ID=$1
