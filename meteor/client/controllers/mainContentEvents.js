@@ -66,7 +66,7 @@ Template.mainContent.events({
 				newPath = filePath + tempFolderName;
 				Meteor.apply('writeSubmissionFiles', [submission, newPath] , true);
 				Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
-				//Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
+				Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
 
 				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);

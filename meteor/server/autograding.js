@@ -56,16 +56,18 @@ Meteor.methods({
 		var assignmentLang = assignment.language;
 		var subNumber = submission.subNumber;
 
-		if(assignmentLang == 'C')
-			exec("sh /home/student/ags/grading/gradeC.sh ");
-		else if(assignmentLang == 'Java')
-			exec("sh /home/student/ags/grading/gradeJava.sh ");
+		//if(assignmentLang == 'C')
+			//exec("sh /home/student/ags/grading/gradeC.sh ");
+		//else if(assignmentLang == 'Java')
+			//exec("sh /home/student/ags/grading/gradeJava.sh ");
 	
+		exec('java -jar Autograder.jar');
+
 		var fileCheck = Meteor.setInterval(function(){
-				console.log("Checking for completed in " + path + " " + counter);
+				console.log("Checking for feedback in " + path + " " + counter);
 				counter++;
 
-				fs.readFile(path + '/completed', 'utf8', Meteor.bindEnvironment(function(error, data) {
+				fs.readFile(path + '/feedback.json', 'utf8', Meteor.bindEnvironment(function(error, data) {
 					if (error && counter < maxTime) {
 						//console.log(error);
 						return;
@@ -79,8 +81,9 @@ Meteor.methods({
 							//AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 							//AGSSubmissions.find({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}).fetch()
 							console.log('insert json file now',
-								fs.readFile(path + '/feedback.json', 'utf8')
+								fs.readFileSync(path + '/feedback.json', 'utf8')
 							);
+							Meteor.call('insertJSONFile',submission.id_Student, submission.id_Assignment, subNumber, path + '/feedback.json');
 						}catch(e){
 							console.log(e.message);
 							console.log("didn't get output.");
