@@ -7,4 +7,4 @@ COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution_files"
 javac $COMPFLAGS *.java
-bash ../../../../createJar.sh Execi.jar
+bash ../../../../createJar.sh execi
