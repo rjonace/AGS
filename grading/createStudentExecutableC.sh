@@ -1,3 +1,5 @@
 SUB_PATH=$1
-cp $SUB_PATH/../student_files/*.* $SUB_PATH/
+
+cd $SUB_PATH
+cp ../student_files/* .
 gcc -std="gnu99" -o execs -lm *.c
