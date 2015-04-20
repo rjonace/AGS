@@ -35,10 +35,12 @@ Meteor.methods({
 	},
 	'copyInstructorFiles' : function(path, newPath) {
 		var fs = Npm.require('fs');
-		var exec = Npm.require('child_process').exec;
-		exec('cp ' + path + '/autograder_files/Autograder.jar ' + newPath);
-		exec('cp ' + path + '/solution_files/*' + newPath);
-		exec('cp ' + path + '/input_files/* ' + newPath);
+		var exec = Npm.require('child_process').exec
+		exec('sh /home/student/ags/grading/copyInstructorFiles.sh ' + path + ' ' + newPath, 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
 	},
 	'gradeSubmissionNew' : function(submission, assignment, path){
 		var fs = Npm.require('fs');
@@ -50,7 +52,44 @@ Meteor.methods({
 		var assignmentLang = assignment.language;
 		var subNumber = submission.subNumber;
 
-		exec("cp " + path + "/*.* " + newPath);
+		if(assignmentLang == 'C')
+			exec("sh /home/student/ags/grading/gradeC.sh ");
+		else if(assignmentLang == 'Java')
+			exec("sh /home/student/ags/grading/gradeJava.sh ")
+	
+		var fileCheck = Meteor.setInterval(function(){
+				console.log("Checking for completed in " + path + " " + counter);
+				counter++;
+
+				fs.readFile(newPath + '/completed', 'utf8', Meteor.bindEnvironment(function(error, data) {
+					if (error && counter < maxTime) {
+						//console.log(error);
+						return;
+					}
+					else if (counter < maxTime) {
+						console.log("Completed");
+						try{
+							//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+							//outputData += fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+							//console.log(outputData);
+							//AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+							//AGSSubmissions.find({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}).fetch()
+							console.log('insert json file now',
+								fs.readFile(newPath + '/feedback.json', 'utf8')
+							);
+						}catch(e){
+							console.log(e.message);
+							console.log("didn't get output.");
+						}
+					}
+					else { 
+						// exceeded max time
+						console.log("Timed out");
+					}
+
+					Meteor.clearInterval(fileCheck);
+				}))
+			}, 1000);
 	},
 	'writeInstructorFiles' : function(assignment, path) {
 		console.log("ins start");
