@@ -20,16 +20,18 @@ Meteor.methods({
 	},
 	'writeSubmissionFiles' : function(submission, path) {
 		console.log("sub start");
-		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-		var newPath = path + "/SubmissionFiles";
-		console.log("sub check 1");
-		fs.mkdirSync(newPath);
-		console.log("sub check 2");
+		//var newPath = path + "/SubmissionFiles";
+
+		//console.log("sub check 1");
+		//fs.mkdirSync(newPath);
+		//console.log("sub check 2");
 		for (var i = 0; i < submission.files.length; i++){
-			fs.writeFileSync(newPath + "/" + submission.files[i].name, submission.files[i].contents);
+			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
+
+		exec('cp '+ path + '/../student_files/*.* ' + path);
 		console.log("sub end");
 	},
 	'writeInstructorFiles' : function(assignment, path) {

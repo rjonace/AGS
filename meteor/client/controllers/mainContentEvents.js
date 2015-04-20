@@ -55,19 +55,19 @@ Template.mainContent.events({
 		var submission = Session.get('currentSubmission');
 		var currentUserId = Meteor.userId();
 		var currentAssignment = Session.get('currentAssignment');
-		var filePath = '/home/student/ags/grading';
+		var currentCourse = Session.get('currentCourse');
+		var filePath = '/home/student/ags/grading/courses/' + currentCourse._id + '/' + currentAssignment._id + '/';
 		var counter = 0;
 		var maxTime = currentAssignment.time;
 		var newPath;
 		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
-			function(error, result) {
-				var folderName = result;
-				newPath = filePath + "/" + folderName;
-				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
-				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
-				Session.set('fileNotGraded', false);
+			function(error, tempFolderName) {
+				newPath = filePath + "/" + tempFolderName;
+				Meteor.apply('writeSubmissionFiles', [submission, newPath] , true);
+				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
+				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
+				//Session.set('fileNotGraded', false);
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){
