@@ -65,6 +65,9 @@ Template.mainContent.events({
 			function(error, tempFolderName) {
 				newPath = filePath + "/" + tempFolderName;
 				Meteor.apply('writeSubmissionFiles', [submission, newPath] , true);
+				Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
+				//Meteor.apply('gradeSubmission')
+
 				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
 				//Session.set('fileNotGraded', false);

@@ -30,9 +30,27 @@ Meteor.methods({
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
-
-		exec('cp '+ path + '/../student_files/*.* ' + path);
+		exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path);
 		console.log("sub end");
+	},
+	'copyInstructorFiles' : function(path, newPath) {
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		exec('cp ' + path + '/autograder_files/Autograder.jar ' + newPath);
+		exec('cp ' + path + '/solution_files/*' + newPath);
+		exec('cp ' + path + '/input_files/* ' + newPath);
+	},
+	'gradeSubmissionNew' : function(submission, assignment, path){
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		var counter = 0;
+		var maxTime = assignment.time;
+		// check assignment language
+		var id_Assignment = assignment._id;
+		var assignmentLang = assignment.language;
+		var subNumber = submission.subNumber;
+
+		exec("cp " + path + "/*.* " + newPath);
 	},
 	'writeInstructorFiles' : function(assignment, path) {
 		console.log("ins start");
