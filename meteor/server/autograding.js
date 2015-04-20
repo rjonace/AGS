@@ -61,7 +61,11 @@ Meteor.methods({
 		//else if(assignmentLang == 'Java')
 			//exec("sh /home/student/ags/grading/gradeJava.sh ");
 	
-		exec('java -jar Autograder.jar');
+		exec('java -jar '+ path +'/Autograder.jar', 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
 
 		var fileCheck = Meteor.setInterval(function(){
 				console.log("Checking for feedback in " + path + " " + counter);
