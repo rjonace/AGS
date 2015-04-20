@@ -61,7 +61,7 @@ Meteor.methods({
 		//else if(assignmentLang == 'Java')
 			//exec("sh /home/student/ags/grading/gradeJava.sh ");
 	
-		exec('java -jar '+ path +'/Autograder.jar', 
+		exec('sh /home/student/ags/grading/runAutograder.sh ' + path, 
 			function(error, stdout, stderr){
 				console.log(error, stdout, stderr);
 			}

@@ -70,7 +70,7 @@ Template.mainContent.events({
 
 				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
 				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
-				//Session.set('fileNotGraded', false);
+				Session.set('fileNotGraded', false);
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){
