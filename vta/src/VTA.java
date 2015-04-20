@@ -177,6 +177,10 @@ public class VTA{
 		return true;
 	}
 
+	public boolean addAutoGradedInput(String sectionName){
+		return addAutoGradedInput(sectionName, "No input file", "No input file");
+	}
+
 	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
 		
 		int sectionIndex = -1;
@@ -212,6 +216,10 @@ public class VTA{
 		sections.get(sectionIndex).inputs.get(inputIndex).cases.add(temp);
 		
 		return true;
+	}
+
+	public boolean addInputCase(String sectionName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
+		return addInputCase(sectionName, "No input file",  correctOutput, studentOutput, correct, points, comments){
 	}
 
 	public void cleanUp(){
@@ -403,10 +411,10 @@ public class VTA{
 			stdInput.close();		
 			
 			if (mode == 'i') {
-				correctOutputText.put("NOINPUTFILE", outputData.toString());
+				correctOutputText.put("No input file", outputData.toString());
 			}
 			else {
-				studentOutputText.put("NOINPUTFILE", outputData.toString());
+				studentOutputText.put("No input file", outputData.toString());
 			}
 		} 
 		catch (IOException e) {
