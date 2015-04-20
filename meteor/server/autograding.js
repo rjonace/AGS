@@ -87,7 +87,11 @@ Meteor.methods({
 							console.log('insert json file now',
 								fs.readFileSync(path + '/feedback.json', 'utf8')
 							);
-							Meteor.call('insertJSONFile',submission.id_Student, submission.id_Assignment, subNumber, path + '/feedback.json');
+							//Meteor.call('insertJSONFile','d3vutS9HEsWT5bkvW','9mT7qpdoEcSzqLMzS',2,'/home/student/ags/grading/courses/cQeR3YmG4qWB9zFx9/9mT7qpdoEcSzqLMzS/d4NuGonszivpLPiAA2/feedback.json');
+							Meteor.call('insertJSONFile',submission.id_Student, submission.id_Assignment, subNumber, path + '/feedback.json',
+							function(error){
+								console.log("insert error:", error);
+							});
 						}catch(e){
 							console.log(e.message);
 							console.log("didn't get output.");
