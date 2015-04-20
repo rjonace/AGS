@@ -45,7 +45,7 @@ Template.mainContent.events({
 		}else{
 			Session.set('fileNotSubmitted', false);
 		}
-		if(Session.get('currentSubmission').feedback === undefined){
+		if(Session.get('currentSubmission').feedbackObj === undefined){
 			Session.set('fileNotGraded', true);
 		}else{
 			Session.set('fileNotGraded', false);
@@ -89,7 +89,6 @@ Template.mainContent.events({
 					} else {
 						Session.set('feedbackStatus', "Timed out");
 					}
-
 					Meteor.clearInterval(feedbackCheck);
 			});
 		}, 1000);
