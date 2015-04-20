@@ -30,7 +30,11 @@ Meteor.methods({
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
-		exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path);
+		exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
 		console.log("sub end");
 	},
 	'copyInstructorFiles' : function(path, newPath) {
@@ -55,13 +59,13 @@ Meteor.methods({
 		if(assignmentLang == 'C')
 			exec("sh /home/student/ags/grading/gradeC.sh ");
 		else if(assignmentLang == 'Java')
-			exec("sh /home/student/ags/grading/gradeJava.sh ")
+			exec("sh /home/student/ags/grading/gradeJava.sh ");
 	
 		var fileCheck = Meteor.setInterval(function(){
 				console.log("Checking for completed in " + path + " " + counter);
 				counter++;
 
-				fs.readFile(newPath + '/completed', 'utf8', Meteor.bindEnvironment(function(error, data) {
+				fs.readFile(path + '/completed', 'utf8', Meteor.bindEnvironment(function(error, data) {
 					if (error && counter < maxTime) {
 						//console.log(error);
 						return;
@@ -75,7 +79,7 @@ Meteor.methods({
 							//AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
 							//AGSSubmissions.find({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}).fetch()
 							console.log('insert json file now',
-								fs.readFile(newPath + '/feedback.json', 'utf8')
+								fs.readFile(path + '/feedback.json', 'utf8')
 							);
 						}catch(e){
 							console.log(e.message);
