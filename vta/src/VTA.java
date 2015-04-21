@@ -177,11 +177,18 @@ public class VTA{
 		return true;
 	}
 
+<<<<<<< HEAD
 	public boolean addAutoGradedInput(String sectionName, String fileName){
 		return addAutoGradedInput(sectionName, "No input file", "No input file");
 	}
 
 
+=======
+	public boolean addAutoGradedInput(String sectionName){
+		return addAutoGradedInput(sectionName, "No input file", "No input file");
+	}
+
+>>>>>>> a0bf52ef5b6f6390dfb71b0deb00ae22c580fb87
 	public boolean addInputCase(String sectionName, String inputName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
 		
 		int sectionIndex = -1;
@@ -220,10 +227,16 @@ public class VTA{
 	}
 
 	public boolean addInputCase(String sectionName, String correctOutput, String studentOutput, boolean correct, int points, String comments){
+<<<<<<< HEAD
 		return addInputCase(sectionName, "No input file", correctOutput, studentOutput, correct, points, comments);
 	}
 
 
+=======
+		return addInputCase(sectionName, "No input file",  correctOutput, studentOutput, correct, points, comments){
+	}
+
+>>>>>>> a0bf52ef5b6f6390dfb71b0deb00ae22c580fb87
 	public void cleanUp(){
 		createJSON();	
 	}

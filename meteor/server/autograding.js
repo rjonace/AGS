@@ -20,17 +20,91 @@ Meteor.methods({
 	},
 	'writeSubmissionFiles' : function(submission, path) {
 		console.log("sub start");
-		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-		var newPath = path + "/SubmissionFiles";
-		console.log("sub check 1");
-		fs.mkdirSync(newPath);
-		console.log("sub check 2");
+		//var newPath = path + "/SubmissionFiles";
+
+		//console.log("sub check 1");
+		//fs.mkdirSync(newPath);
+		//console.log("sub check 2");
 		for (var i = 0; i < submission.files.length; i++){
-			fs.writeFileSync(newPath + "/" + submission.files[i].name, submission.files[i].contents);
+			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
+		exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
 		console.log("sub end");
+	},
+	'copyInstructorFiles' : function(path, newPath) {
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec
+		exec('sh /home/student/ags/grading/copyInstructorFiles.sh ' + path + ' ' + newPath, 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
+	},
+	'gradeSubmissionNew' : function(submission, assignment, path){
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		var counter = 0;
+		var maxTime = assignment.time;
+		// check assignment language
+		var id_Assignment = assignment._id;
+		var assignmentLang = assignment.language;
+		var subNumber = submission.subNumber;
+
+		//if(assignmentLang == 'C')
+			//exec("sh /home/student/ags/grading/gradeC.sh ");
+		//else if(assignmentLang == 'Java')
+			//exec("sh /home/student/ags/grading/gradeJava.sh ");
+	
+		exec('sh /home/student/ags/grading/runAutograder.sh ' + path, 
+			function(error, stdout, stderr){
+				console.log(error, stdout, stderr);
+			}
+		);
+
+		var fileCheck = Meteor.setInterval(function(){
+				console.log("Checking for feedback in " + path + " " + counter);
+				counter++;
+
+				fs.readFile(path + '/feedback.json', 'utf8', Meteor.bindEnvironment(function(error, data) {
+					if (error && counter < maxTime) {
+						//console.log(error);
+						return;
+					}
+					else if (counter < maxTime) {
+						console.log("Completed");
+						try{
+							//outputData = fs.readFileSync(newPath + '/results/output.txt', 'utf8');
+							//outputData += fs.readFileSync(newPath + '/results/errors.txt', 'utf8');
+							//console.log(outputData);
+							//AGSSubmissions.update({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}, {$set: {"AttemptList.$.feedback":outputData}});
+							//AGSSubmissions.find({id_Student: id_User, id_Assignment: id_Assignment, "AttemptList.subNumber":subNumber}).fetch()
+							console.log('insert json file now',
+								fs.readFileSync(path + '/feedback.json', 'utf8')
+							);
+							//Meteor.call('insertJSONFile','d3vutS9HEsWT5bkvW','9mT7qpdoEcSzqLMzS',2,'/home/student/ags/grading/courses/cQeR3YmG4qWB9zFx9/9mT7qpdoEcSzqLMzS/d4NuGonszivpLPiAA2/feedback.json');
+							Meteor.call('insertJSONFile',submission.id_Student, id_Assignment, subNumber, path + '/feedback.json',
+							function(error){
+								console.log("insert error:", error);
+							});
+						}catch(e){
+							console.log(e.message);
+							console.log("didn't get output.");
+						}
+					}
+					else { 
+						// exceeded max time
+						console.log("Timed out");
+					}
+
+					Meteor.clearInterval(fileCheck);
+				}))
+			}, 1000);
 	},
 	'writeInstructorFiles' : function(assignment, path) {
 		console.log("ins start");

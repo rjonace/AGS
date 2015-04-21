@@ -45,7 +45,7 @@ Template.mainContent.events({
 		}else{
 			Session.set('fileNotSubmitted', false);
 		}
-		if(Session.get('currentSubmission').feedback === undefined){
+		if(Session.get('currentSubmission').feedbackObj === undefined){
 			Session.set('fileNotGraded', true);
 		}else{
 			Session.set('fileNotGraded', false);
@@ -55,18 +55,21 @@ Template.mainContent.events({
 		var submission = Session.get('currentSubmission');
 		var currentUserId = Meteor.userId();
 		var currentAssignment = Session.get('currentAssignment');
-		var filePath = '/home/student/ags/grading';
+		var currentCourse = Session.get('currentCourse');
+		var filePath = '/home/student/ags/grading/courses/' + currentCourse._id + '/' + currentAssignment._id + '/';
 		var counter = 0;
 		var maxTime = currentAssignment.time;
 		var newPath;
 		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
-			function(error, result) {
-				var folderName = result;
-				newPath = filePath + "/" + folderName;
-				Meteor.apply('writeSubmissionFiles', [submission, filePath + "/" + folderName] , true);
-				Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-				Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
+			function(error, tempFolderName) {
+				newPath = filePath + tempFolderName;
+				Meteor.apply('writeSubmissionFiles', [submission, newPath] , true);
+				Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
+				Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
+
+				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
+				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
 				Session.set('fileNotGraded', false);
 		});
 
@@ -77,7 +80,7 @@ Template.mainContent.events({
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
-					if (!result.feedback && counter < maxTime) {
+					if (!result.feedbackObj && counter < maxTime) {
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
@@ -86,7 +89,6 @@ Template.mainContent.events({
 					} else {
 						Session.set('feedbackStatus', "Timed out");
 					}
-
 					Meteor.clearInterval(feedbackCheck);
 			});
 		}, 1000);
