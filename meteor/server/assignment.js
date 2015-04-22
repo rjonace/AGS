@@ -77,9 +77,9 @@ Meteor.methods({
 		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path +
 			' /home/student/ags/vta/bin',
 			function(error,stdout,stderr){
-			//		if (error) console.log("createAutograder error: " + error);
-					if (stdout) console.log("createAutograder stdout: " + stdout +'\n');
-					if (stderr) console.log("createAutograder stderr: " + stderr, "+@#+#@+#+$@#+@+$+@#+@+$@+$@+@++@+$@+$@#+$@+$@");
+					if (error) console.log("createAutograder error: " + error);
+			//		if (stdout) console.log("createAutograder stdout: " + stdout +'\n');
+			//		if (stderr) console.log("createAutograder stderr: " + stderr, "+@#+#@+#+$@#+@+$+@#+@+$@+$@+@++@+$@+$@#+$@+$@");
 				}
 		);
 	},
