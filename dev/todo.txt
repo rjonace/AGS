@@ -1,7 +1,7 @@
 X	Run Java submissions
 X	Move server-side logic into scripts
 /	Consolidate scripts
-X	Default cmments on manually-graded rows
+X	Default comments on manually-graded rows
 -	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 -	Let professor choose whether student can see case outputs
