@@ -79,7 +79,7 @@ Meteor.methods({
 			function(error,stdout,stderr){
 			//		if (error) console.log("createAutograder error: " + error);
 			//		if (stdout) console.log("createAutograder stdout: " + stdout);
-					if (stderr) console.log("createAutograder stderr: " + stderr);
+					if (stderr) console.log("createAutograder stderr: " + stderr, "+@#+#@+#+$@#+@+$+@#+@+$@+$@+@++@+$@+$@#+$@+$@");
 				}
 		);
 	},
