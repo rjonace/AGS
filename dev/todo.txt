@@ -10,7 +10,7 @@ X	Default cmments on manually-graded rows
 -	Don't show your submission among students' submissions
 -	Change screens on submit
 -	Deal with files that do not compile
--	Center login
+X	Center login
 -	Clear error when everything for assignment is ready
 -	Help menu
 -	Compilation options
