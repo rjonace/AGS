@@ -3,7 +3,7 @@ X	Move server-side logic into scripts
 /	Consolidate scripts
 X	Default cmments on manually-graded rows
 -	Fix comments field when updating manually-graded rows
--	Change "check submission" to "submit"
+X	Change "check submission" to "submit"
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
 -	Let professor know he/she is looking at a course he/she created
