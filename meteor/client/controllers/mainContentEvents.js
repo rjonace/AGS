@@ -65,13 +65,8 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-//				Meteor.apply('writeSubmissionFiles', [submission, newPath, currentAssignment.language] , true);
-				Meteor.apply('writeAndGradeSubmission', [submission, newPath, currentAssignment.language] , true);
-		//		Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
-				Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
-
-				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);
-				//Meteor.apply('gradeSubmission', [submission, filePath, folderName, currentUserId, currentAssignment], true);
+				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language] , true);
+				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
 		});
 
@@ -79,7 +74,6 @@ Template.mainContent.events({
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
-
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.feedbackObj && counter < maxTime) {
@@ -173,23 +167,6 @@ Template.mainContent.events({
 
 					var filePath = '/home/student/ags/grading/courses/'+currentCourseId+'/'+result;
 
-					//var agObj;
-
-					//agReader.onloadend = function(){
-						//agObj = {name: ag.name, contents:agReader.result};
-						//Meteor.call('insertAssignmentAG', result, agObj.name, agObj.contents);
-					//}
-
-/*					solutionReader.onloadend = function(){
-						solutionObj = {name: solution.name, contents:solutionReader.result};
-						Meteor.call('insertAssignmentSolution', result, solutionObj.name, solutionObj.contents);
-					}
-*/
-					//if (ag)
-						//agReader.readAsText(ag);
-
-//					if (solution)
-//						solutionReader.readAsText(solution);
 					if(solutionFileList.length > 0) {
 						for (var i = 0; i < solutionFileList.length; i++) {
 							(function(file) {
@@ -201,7 +178,6 @@ Template.mainContent.events({
 								reader.readAsText(file);
 							})(solutionFileList[i]);
 						};
-//						Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 					}
 
 
@@ -327,13 +303,15 @@ Template.mainContent.events({
 					$('.ui.message.enroll').text('Invalid Course key').show();
 			});
 	},
-/*	'click #createCourseTitle' : function(){
-		$('#courseAccordion').accordion('toggle',0);
-		console.log('course title clicked');
-	},
-	'click #createAssignmentTitle' : function(){
-		$('#assignmentAccordion').accordion('toggle',0);
-	},*/
+/*
+'click #createCourseTitle' : function(){
+	$('#courseAccordion').accordion('toggle',0);
+	console.log('course title clicked');
+},
+'click #createAssignmentTitle' : function(){
+	$('#assignmentAccordion').accordion('toggle',0);
+},
+*/
 	'mouseenter .ui.icon.edit.button' : function(){
 		$('.dashboard.popup.tips .ui.icon.edit.button').popup('show');
 	},

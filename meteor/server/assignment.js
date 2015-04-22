@@ -44,7 +44,7 @@ Meteor.methods({
 			{upsert : false},	//options
 			 function(err, result){	//callback
 				if (!err) {
-					fs.writeFile('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution_files/'+filename,contents);
+					fs.writeFileSync('/home/student/ags/grading/courses/'+id_Course+'/'+id_Assignment+'/solution_files/'+filename,contents);
 				}
 			}
 		);
@@ -122,6 +122,15 @@ Meteor.methods({
 			},
 			{ multi:true });
 		AGSSubmissions.remove({id_Assignment:id_Assignment});
+
+		var exec = require( 'child_process' ).exec;
+		if (id_Course){
+			var path = '/home/student/ags/grading/courses/' +id_Course;
+			exec( 'rm -r ' + path, function ( err, stdout, stderr ){
+			  if (!err) console.log("course removed!");
+			  else console.log(err);
+			});
+		};
 		// remove all references to the assignemnt?
 	},
 	'resetCurrentAssignment' : function(id_Assignment){

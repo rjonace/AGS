@@ -15,7 +15,6 @@ Meteor.methods({
 		);
 	},
 	'insertJSONFile' : function(id_Student, id_Assignment, subNumber, path){
-		//Meteor.call('insertJSONFile',Meteor.userId(),'Ny3mL2TDncYQ9Aoqx',1)
 		var fs = Npm.require('fs');
 		var feedbackJSON = JSON.parse(fs.readFileSync(path, 'utf8'));
 		AGSSubmissions.update(
@@ -77,10 +76,6 @@ Meteor.methods({
 				"AttemptList.subNumber": subNumber
 			}, 
 			{ 
-				// $set: {
-				// 	"AttemptList.$.filename": filename, 
-				// 	"AttemptList.$.contents": contents
-				// } 
 				$addToSet : {
 					"AttemptList.$.files": { name : filename, contents : contents }
 				}
