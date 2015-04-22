@@ -30,19 +30,22 @@ Meteor.methods({
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
-		if (submission.language == "C")
+		if (submission.language == "C") {
+			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
 				function(error, stdout, stderr){
 					console.log(error, stdout, stderr);
 				}
 			);
-		else (submission.language == "Java")
+		}
+		else (submission.language == "Java") {
+			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
 				function(error, stdout, stderr){
 					console.log(error, stdout, stderr);
 				}
 			);
-
+		}
 		console.log("sub end");
 	},
 	'copyInstructorFiles' : function(path, newPath) {
