@@ -227,7 +227,7 @@ Template.mainContent.events({
 								if (error) console.log(error);
 								else{
 									if (numFiles == solutionFileList.length){
-										console.log("creating execi")
+										console.log("creating execi");
 										Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 									}
 									else{
@@ -245,13 +245,13 @@ Template.mainContent.events({
 						console.log("checking AG files");
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'autograder_files',
 							function (error, numFiles) {
-								if (error) console.log(error);
+								if (error);// console.log(error);
 								else{
 									if (numFiles == agFileList.length){
 										console.log("creating Autograder.jar")
 										Meteor.call('createAutograderNonskeleton',currentCourseId, result,
 											function (err) {
-												console.log(err);
+											//	console.log(err);
 											});
 									}
 									else{
