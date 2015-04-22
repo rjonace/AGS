@@ -224,7 +224,7 @@ Template.mainContent.events({
 					var solutionFileCheck = Meteor.setInterval(function(){
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files',
 							function (error, numFiles) {
-								if (error) console.log(error);
+								if (error) console.log("solutionfilecheck:" + error);
 								else{
 									if (numFiles == solutionFileList.length){
 										console.log("creating execi")
