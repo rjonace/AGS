@@ -9,7 +9,7 @@ X	Change "check submission" to "submit"
 -	Download input file
 -	Let professor know they are looking at a course they created
 -	Don't show your submission among students' submissions
--	Change screens on submit for first one
+X	Change screens on submit for first one
 -	Deal with files that do not compile
 X	Center login
 -	Clear error when everything for assignment is ready
