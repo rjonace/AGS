@@ -23,7 +23,6 @@ public class Autograder4
 				vta.studentAnswers[i], correct, 5, correct ? "Yeah good job" : "suckaahhhh!");
 		}
 		
-
 		vta.cleanUp();
 	}
 }

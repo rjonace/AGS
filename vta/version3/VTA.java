@@ -228,8 +228,12 @@ public class VTA{
 		return addInputCase(sectionName, "No input file", correctOutput, studentOutput, correct, points, comments);
 	}
 
+	private void calculateTotals(){
+		
+	}
 
 	public void cleanUp(){
+		calculateTotals();
 		createJSON();	
 	}
 
@@ -301,7 +305,7 @@ public class VTA{
 
 				out.append("\"comments\":");
 				if (c.casesTotal > 1)
-					out.append("\"" + c.casesCorrect + " out of " + c.casesTotal + " cases\",");
+					out.append("\"" + c.casesCorrect + " out of " + c.casesTotal + " cases correct\",");
 				else 
 					out.append("\"\",");
 				
