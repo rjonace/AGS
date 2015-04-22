@@ -11,8 +11,7 @@ javac *.java
 for classfile in *.class; do
     classname=${classfile%.*}
     COND=`javap -classpath .:$VTA_PATH -public $classfile | fgrep 'public static void main(java.lang.String[])'`
-    if [ -n "$CONls
-    	D" ]; then
+    if [ -n "$COND" ]; then
     	echo $classfile
         jar cfe $JAR_NAME $classname *.class -C $VTA_PATH vta
     fi
