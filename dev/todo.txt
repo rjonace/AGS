@@ -24,7 +24,6 @@ X	Delete server data when deleting course or assignment
 -	Say that max time is in seconds
 -	Server staying up
 -	Get error log while server is up
--	Comment code
 -	Email verification
 
 -	Autograder examples
