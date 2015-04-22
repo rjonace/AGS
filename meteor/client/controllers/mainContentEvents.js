@@ -468,8 +468,9 @@ Template.mainContent.events({
 					Session.set('currentDashboard', "userDash");
 				}
 				if(Session.get('currentDashboard') === "assignmentDash"){
+					var currentCourse = Session.get('currentCourse');
 					var currentAssignment = Session.get('currentAssignment');
-					Meteor.call('removeAssignmentData',currentAssignment._id);
+					Meteor.call('removeAssignmentData',currentAssignment._id, currentCourse._id);
 					Session.set('currentAssignment', null);
 					Session.set('currentDashboard', "courseDash");
 				}

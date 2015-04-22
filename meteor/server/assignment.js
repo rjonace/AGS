@@ -113,7 +113,7 @@ Meteor.methods({
 				console.log(err);
 		});
 	},
-	'removeAssignmentData': function(id_Assignment){
+	'removeAssignmentData': function(id_Assignment, id_Course){
 		AGSAssignments.remove({_id:id_Assignment});
 		AGSCourses.update(
 			{},
@@ -124,8 +124,8 @@ Meteor.methods({
 		AGSSubmissions.remove({id_Assignment:id_Assignment});
 
 		var exec = Npm.require( 'child_process' ).exec;
-		if (id_Course){
-			var path = '/home/student/ags/grading/courses/' +id_Course;
+		if (id_Course && id_Assignment){
+			var path = '/home/student/ags/grading/courses/' +id_Course + '/' + id_Assignment;
 			exec( 'rm -r ' + path, function ( err, stdout, stderr ){
 			  if (!err) console.log("course removed!");
 			  else console.log(err);
