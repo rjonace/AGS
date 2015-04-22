@@ -1,3 +1,4 @@
+set -e 
 #create autograder executable
 #store executables in assignment specific directory
 
