@@ -44,7 +44,7 @@ X	Say that max time is in seconds
 -	Testing plan and documentation
 -	90-page paper final draft
 -	Conference paper
--	Email reminders to committee members
+X	Email reminders to committee members
 X	Blurb for website
 -	Pictures for website
 -	Presentation for website
