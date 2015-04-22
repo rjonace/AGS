@@ -9,10 +9,10 @@ Each group member's preferred name, and a head shot
 	Rodney Jonace
 	Matt Rouse
 Project Description 
-	Auto-Grading system is a web oriented service that allows professors to create an assignment, upload it, and display it to their students. 
+	Auto-Grading system is a web based service that allows professors to create assignments, upload them, and display them to their students. Students can then complete the assignments, upload them, and receive instant feedback for their submission. This automatic feedback will help significantly reduce the workload for professors and TAs, allowing them to focus on things more conducive to helping students learn.
 Required Files 
-	- Please send me the required files as attachments to the email. Please make sure the file name states what the file is
-		Document				Current Location
+	- Please send me the required files as attachments to the email. Please make sure the file name states what the file is.
+		Document Name			Current Location
 		final presentation		not written
 		conference paper		not written
 		final design doc 	 	not written
