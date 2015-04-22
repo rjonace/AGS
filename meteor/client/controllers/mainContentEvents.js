@@ -65,8 +65,9 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-				Meteor.apply('writeSubmissionFiles', [submission, newPath, currentAssignment.language] , true);
-				Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
+//				Meteor.apply('writeSubmissionFiles', [submission, newPath, currentAssignment.language] , true);
+				Meteor.apply('writeAndGradeSubmission', [submission, newPath, currentAssignment.language] , true);
+		//		Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
 				Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
 
 				//Meteor.apply('writeInstructorFiles', [currentAssignment, filePath + "/" + folderName], true);

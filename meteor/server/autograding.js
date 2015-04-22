@@ -49,6 +49,37 @@ Meteor.methods({
 		}
 		console.log("sub end");
 	},
+	'writeAndGradeSubmission' : function(submission, path, language) {
+		console.log("sub start");
+		var fs = Npm.require('fs');
+		var exec = Npm.require('child_process').exec;
+		//var newPath = path + "/SubmissionFiles";
+
+		//console.log("sub check 1");
+		//fs.mkdirSync(newPath);
+		//console.log("sub check 2");
+		for (var i = 0; i < submission.files.length; i++){
+			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
+		}
+		console.log("Langauge: " + language);
+		if (language == "C") {
+			console.log("creating C student solution file");
+			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path, 
+				function(error, stdout, stderr){
+					console.log(error, stdout, stderr);
+				}
+			);
+		}
+		else if (language == "Java") {
+			console.log("creating Java student solution file");
+			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path, 
+				function(error, stdout, stderr){
+					console.log(error, stdout, stderr);
+				}
+			);
+		}
+		console.log("sub end");
+	},
 	'copyInstructorFiles' : function(path, newPath) {
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec
@@ -73,12 +104,14 @@ Meteor.methods({
 		//else if(assignmentLang == 'Java')
 			//exec("sh /home/student/ags/grading/gradeJava.sh ");
 	
+/*		
+	Put into writeAndGradeSubmission
 		exec('sh /home/student/ags/grading/runAutograder.sh ' + path, 
 			function(error, stdout, stderr){
 				console.log(error, stdout, stderr);
 			}
 		);
-
+*/
 		var fileCheck = Meteor.setInterval(function(){
 				console.log("Checking for feedback in " + path + " " + counter);
 				counter++;
