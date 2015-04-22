@@ -26,6 +26,11 @@ X	Say that max time is in seconds
 -	Server staying up
 -	Get error log while server is up
 -	Email verification
+-	Assignment Creation only shows one file path when multi
+	upload
+-	If no files in assignment say No files or remove view		button
+-	In edit comments modal, it doesn't say how many points
+-	Show total points earned on a submission page
 
 -	Autograder examples
 -	Blurbs for senior design day
@@ -33,8 +38,8 @@ X	Say that max time is in seconds
 -	Display for senior design day
 -	Presentation outline
 -	Presentation slides text
--	Presenation graphics
--	90-page paper outline
+-	Presentation graphics
+/	90-page paper outline
 -	90-page paper first draft
 -	90-page paper graphics
 -	Testing plan and documentation

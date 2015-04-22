@@ -1,0 +1,18 @@
+Project/Group Name (Ex: Simulated Exhibit Experience) 
+	Auto-Grading System
+Acronym (Ex: SEE) 
+	AGS
+Sponsor Company/Faculty 
+	Faculty Mentor - Pawel Wocjan
+Each group member's preferred name, and a head shot
+	William Adkins
+	Rodney Jonace
+	Matt Rouse
+Project Description 
+	Auto-Grading system is a web oriented service that allows professors to create an assignment, upload it, and display it to their students. 
+Required Files 
+	- Please send me the required files as attachments to the email. Please make sure the file name states what the file is
+		Document				Current Location
+		final presentation		not written
+		conference paper		not written
+		final design doc 	 	not written
