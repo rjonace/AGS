@@ -13,7 +13,7 @@ for classfile in *.class; do
     COND=`javap -classpath .:$VTA_PATH -public $classfile | fgrep 'public static void main(java.lang.String[])'`
     if [ -n "$COND" ]; then
     	echo $classfile
-        jar cfe $JAR_NAME $classname *.class -C $VTA_PATH vta
+        jar cfe $JAR_NAME $classname *.class -C $VTA_PATH vta -C $CUSTOM_PATH *
     fi
 done
 
