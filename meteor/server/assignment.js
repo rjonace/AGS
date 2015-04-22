@@ -52,11 +52,13 @@ Meteor.methods({
 	'createAssignmentSolution': function(id_Course,id_Assignment,lang){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
 		if (lang == "Java"){
+			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution Java",error)}
 			);
 		}
 		else if (lang == "C"){
+			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
 					if (error) console.log("There was an error creating instructor solution C",error);
