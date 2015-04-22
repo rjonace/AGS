@@ -55,6 +55,7 @@ Template.mainContent.events({
 		var submission = Session.get('currentSubmission');
 		var currentUserId = Meteor.userId();
 		var currentAssignment = Session.get('currentAssignment');
+		var language = currentAssignment.language;
 		var currentCourse = Session.get('currentCourse');
 		var filePath = '/home/student/ags/grading/courses/' + currentCourse._id + '/' + currentAssignment._id + '/';
 		var counter = 0;
@@ -64,7 +65,7 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-				Meteor.apply('writeSubmissionFiles', [submission, newPath] , true);
+				Meteor.apply('writeSubmissionFiles', [submission, newPath, currentAssignment.language] , true);
 				Meteor.apply('copyInstructorFiles', [filePath, newPath], true);
 				Meteor.apply('gradeSubmissionNew',[submission,currentAssignment,newPath] , true);
 

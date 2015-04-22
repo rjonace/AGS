@@ -18,7 +18,7 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'writeSubmissionFiles' : function(submission, path) {
+	'writeSubmissionFiles' : function(submission, path, language) {
 		console.log("sub start");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -30,8 +30,8 @@ Meteor.methods({
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
-		console.log("Langauge: " + submission.language);
-		if (submission.language == "C") {
+		console.log("Langauge: " + language);
+		if (language == "C") {
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
 				function(error, stdout, stderr){
@@ -39,9 +39,9 @@ Meteor.methods({
 				}
 			);
 		}
-		else if (submission.language == "Java") {
+		else if (language == "Java") {
 			console.log("creating Java student solution file");
-			exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
+			exec('sh /home/student/ags/grading/createStudentExecutableJava.sh ' + path, 
 				function(error, stdout, stderr){
 					console.log(error, stdout, stderr);
 				}
