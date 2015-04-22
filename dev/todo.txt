@@ -2,35 +2,32 @@ X	Run Java submissions
 X	Move server-side logic into scripts
 X	Consolidate scripts
 X	Default comments on manually-graded rows
+-	Show total points earned on a submission page
 -	Deal with files that do not compile
 -	In edit comments modal, it doesn't say how many points
 -	Help menu
--	Say "Auto-Grading System" on homepage
 -	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 -	Clear error when everything for assignment is ready
--	Show total points earned on a submission page
 -	If no files in assignment say No files or remove view button
 -	Don't show your submission among students' submissions
--	Show input file
 -	Compilation options
+-	Show input file
 -	Assignment Creation only shows one file path when multi upload
--	Integrate input file creator
 -	Let professor know they are looking at a course they created
--	Hide extra database data from client
+-	Scroll to the top on viewing assignment
+X	Say that max time is in seconds
+X	Change screens on submit for first one
+X	Center login
+
+-	Integrate input file creator
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
 -	Skeleton mode
 -	No skeleton option when using C
-X	Change screens on submit for first one
-X	Center login
-X	Delete server data when deleting course or assignment
--	Python
-X	Say that max time is in seconds
--	Server staying up
--	Get error log while server is up
--	Email verification
 
+-	Hide extra database data from client
+X	Delete server data when deleting course or assignment
 
 
 -	Auto-Grader examples
