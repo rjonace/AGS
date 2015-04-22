@@ -127,7 +127,7 @@ Meteor.methods({
 		if (id_Course && id_Assignment){
 			var path = '/home/student/ags/grading/courses/' +id_Course + '/' + id_Assignment;
 			exec( 'rm -r ' + path, function ( err, stdout, stderr ){
-			  if (!err) console.log("course removed!");
+			  if (!err) console.log("assignment removed!");
 			  else console.log(err);
 			});
 		};
