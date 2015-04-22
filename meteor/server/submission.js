@@ -14,9 +14,9 @@ Meteor.methods({
 			} 
 		);
 	},
-	'insertJSONFile' : function(id_Student, id_Assignment, subNumber, path){
+	'insertJSONFile' : function(id_Student, id_Assignment, subNumber, feedbackFile){
 		var fs = Npm.require('fs');
-		var feedbackJSON = JSON.parse(fs.readFileSync(path, 'utf8'));
+		var feedbackJSON = JSON.parse(fs.readFileSync(feedbackFile, 'utf8'));
 		AGSSubmissions.update(
 			{
 				"id_Student": id_Student,

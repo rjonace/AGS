@@ -71,7 +71,9 @@ Template.mainContent.helpers({
 	// returns all submissions for the current assignment that have been submitted by the current user
 	'studentSubmissionList' : function() {
 		var assignmentId = Session.get('currentAssignment')._id;
-		return AGSSubmissions.find({id_Assignment: assignmentId, id_Student: Meteor.userId()});
+		var submissions = AGSSubmissions.find({id_Assignment: assignmentId, id_Student: Meteor.userId()});
+		if (submissions.length == 1) return [submissions];
+		else return submissions;
 	},
 	// returns all submissions for the current assignment based on instructor
 	'instructorSubmissionList' : function() {

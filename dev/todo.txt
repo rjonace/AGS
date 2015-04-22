@@ -6,9 +6,10 @@ X	Default cmments on manually-graded rows
 X	Change "check submission" to "submit"
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
+-	Download input file
 -	Let professor know he/she is looking at a course he/she created
 -	Don't show your submission among students' submissions
--	Change screens on submit
+-	Change screens on submit for first one
 -	Deal with files that do not compile
 X	Center login
 -	Clear error when everything for assignment is ready
@@ -21,7 +22,7 @@ X	Delete server data when deleting course or assignment
 -	Skeleton mode
 -	No skeleton option when using C or Python
 -	Python
--	Say that max time is in seconds
+X	Say that max time is in seconds
 -	Server staying up
 -	Get error log while server is up
 -	Email verification

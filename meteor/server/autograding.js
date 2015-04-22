@@ -67,12 +67,9 @@ Meteor.methods({
 					else if (counter < maxTime) {
 						console.log("Completed");
 						try{
-							console.log('insert json file now',
-								fs.readFileSync(path + '/feedback.json', 'utf8')
-							);
 							Meteor.call('insertJSONFile',submission.id_Student, id_Assignment, subNumber, path + '/feedback.json',
-							function(error){
-								console.log("insert error:", error);
+								function(error){
+									console.log("insert error:", error);
 							});
 						}catch(e){
 							console.log(e.message);
