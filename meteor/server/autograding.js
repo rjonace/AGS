@@ -26,24 +26,34 @@ Meteor.methods({
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
-		console.log("Langauge: " + language);
+
+		var compileError;
 		if (language == "C") {
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path, 
-				function(error, stdout, stderr){
-					console.log(error, stdout, stderr);
+				function(error,stdout,stderr){
+					if (stderr) {
+						console.log("Compilation error creating Auto-Grader: ", stderr);
+						compileError = stderr;
+// Insert logic for dealing with non compiling EXECS
+					}
 				}
 			);
 		}
 		else if (language == "Java") {
 			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path, 
-				function(error, stdout, stderr){
-					console.log(error, stdout, stderr);
+				function(error,stdout,stderr){
+					if (stderr) {
+						console.log("Compilation error creating Auto-Grader: ", stderr);
+						compileError = stderr;
+// Insert logic for dealing with non compiling EXECS
+					}
 				}
 			);
 		}
 		console.log("sub end");
+		return compileError;
 	},
 	'storeSubmissionFeedback' : function(submission, assignment, path){
 		var fs = Npm.require('fs');
@@ -69,7 +79,7 @@ Meteor.methods({
 						try{
 							Meteor.call('insertJSONFile',submission.id_Student, id_Assignment, subNumber, path + '/feedback.json',
 								function(error){
-									console.log("insert error:", error);
+									if(error) console.log("insert error:", error);
 							});
 						}catch(e){
 							console.log(e.message);

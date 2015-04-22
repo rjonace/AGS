@@ -20,16 +20,6 @@ X	Say that max time is in seconds
 X	Change screens on submit for first one
 X	Center login
 
--	Integrate input file creator
--	Let professor choose whether student can see case outputs
--	Let professor choose whether student can see input file
--	Skeleton mode
--	No skeleton option when using C
-
--	Hide extra database data from client
-X	Delete server data when deleting course or assignment
-
-
 -	Auto-Grader examples
 -	Blurbs for senior design day
 -	Examples for senior design day
@@ -50,3 +40,11 @@ X	Blurb for website
 -	Fully practice presentation
 -	Group peer review forms
 -	Turn in everything for website
+
+-	Integrate input file creator
+-	Let professor choose whether student can see case outputs
+-	Let professor choose whether student can see input file
+-	Skeleton mode
+-	No skeleton option when using C
+-	Hide extra database data from client
+X	Delete server data when deleting course or assignment

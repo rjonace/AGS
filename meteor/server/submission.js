@@ -55,11 +55,6 @@ Meteor.methods({
 				);
 			});
 
-			return AGSSubmissions.findOne({
-				id_Student: id_User,
-				id_Assignment: id_Assignment
-			});
-
 		} else {
 			AGSSubmissions.update(
 					sub,
@@ -67,11 +62,9 @@ Meteor.methods({
 						$addToSet: { AttemptList: { id_Student: id_User, studentName: studentName, name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
 					}
 			);
-			return AGSSubmissions.findOne({
-				id_Student: id_User,
-				id_Assignment: id_Assignment
-			});
-		}
+		};
+
+		return AGSSubmissions.findOne({id_Student: id_User, id_Assignment: id_Assignment});
 	},
 	'insertSubmissionSolution' : function(id_Student, id_Assignment, subNumber, filename, contents){
 		AGSSubmissions.update(
