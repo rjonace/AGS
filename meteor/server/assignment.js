@@ -123,7 +123,7 @@ Meteor.methods({
 			{ multi:true });
 		AGSSubmissions.remove({id_Assignment:id_Assignment});
 
-		var exec = require( 'child_process' ).exec;
+		var exec = Npm.require( 'child_process' ).exec;
 		if (id_Course){
 			var path = '/home/student/ags/grading/courses/' +id_Course;
 			exec( 'rm -r ' + path, function ( err, stdout, stderr ){

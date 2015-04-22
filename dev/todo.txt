@@ -1,0 +1,16 @@
+-	Run Java submissions
+-	Move server-side logic into scripts
+-	Consolidate scripts
+-	Fix cmments on manually-graded rows
+-	Change "check submission" to "submit"
+-	Let professor choose whether student can see case outputs
+-	Let professor choose whether student can see input file
+-	Let professor know he/she is looking at a course he/she created
+-	Don't show your submission among students' submissions
+-	Change screens on submit
+-	Deal with files that do not compile
+-	Center login
+-	Help menu
+-	Hide extra database stuff
+-	Integrate input file creator
+-	Delete server data when deleting course or assignment

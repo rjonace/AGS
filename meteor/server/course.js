@@ -49,7 +49,7 @@ Meteor.methods({
 		AGSAssignments.remove({id_Course:id_Course});
 		
 		// remove all references to the course?
-		var exec = require( 'child_process' ).exec;
+		var exec = Npm.require( 'child_process' ).exec;
 		if (id_Course){
 			var path = '/home/student/ags/grading/courses/' +id_Course;
 			exec( 'rm -r ' + path, function ( err, stdout, stderr ){
