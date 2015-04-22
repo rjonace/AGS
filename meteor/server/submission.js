@@ -41,7 +41,7 @@ Meteor.methods({
 
 		if (!sub) {
 
-			return AGSSubmissions.insert({
+			AGSSubmissions.insert({
 				id_Student: id_User,
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
@@ -53,6 +53,11 @@ Meteor.methods({
 					{_id:id_Assignment},
 					{ $addToSet: { id_Submissions: id}}
 				);
+			});
+
+			return AGSSubmissions.findOne({
+				id_Student: id_User,
+				id_Assignment: id_Assignment
 			});
 
 		} else {
