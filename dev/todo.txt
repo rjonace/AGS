@@ -15,7 +15,7 @@ X	Change "check submission" to "submit"
 -	Show input file
 -	Assignment Creation only shows one file path when multi upload
 -	Let professor know they are looking at a course they created
--	Scroll to the top on viewing assignment
+X	Scroll to the top on viewing assignment
 X	Say that max time is in seconds
 X	Change screens on submit for first one
 X	Center login
