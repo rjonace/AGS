@@ -77,10 +77,11 @@ Meteor.methods({
 		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path +
 			' /home/student/ags/vta/bin',
 			function(error,stdout,stderr){
-					if (error) console.log("createAutograder error: " + error);
-			//		if (stdout) console.log("createAutograder stdout: " + stdout +'\n');
-			//		if (stderr) console.log("createAutograder stderr: " + stderr, "+@#+#@+#+$@#+@+$+@#+@+$@+$@+@++@+$@+$@#+$@+$@");
+				if (stderr) {
+					console.log("Compilation error creating Auto-Grader: ", stderr);
+// Insert logic for dealing with non compiling autograder
 				}
+			}
 		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){

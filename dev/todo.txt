@@ -1,35 +1,37 @@
 X	Run Java submissions
 X	Move server-side logic into scripts
-/	Consolidate scripts
+X	Consolidate scripts
 X	Default comments on manually-graded rows
+-	Deal with files that do not compile
+-	In edit comments modal, it doesn't say how many points
+-	Help menu
+-	Say "Auto-Grading System" on homepage
 -	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
+-	Clear error when everything for assignment is ready
+-	Show total points earned on a submission page
+-	If no files in assignment say No files or remove view button
+-	Don't show your submission among students' submissions
+-	Show input file
+-	Compilation options
+-	Assignment Creation only shows one file path when multi upload
+-	Integrate input file creator
+-	Let professor know they are looking at a course they created
+-	Hide extra database data from client
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
--	Download input file
--	Let professor know they are looking at a course they created
--	Don't show your submission among students' submissions
-X	Change screens on submit for first one
--	Deal with files that do not compile
-X	Center login
--	Clear error when everything for assignment is ready
--	Help menu
--	Compilation options
--	Hide extra database data from client
--	Integrate input file creator
-X	Delete server data when deleting course or assignment
--	Say "Auto-Grading System" on homepage
 -	Skeleton mode
--	No skeleton option when using C or Python
+-	No skeleton option when using C
+X	Change screens on submit for first one
+X	Center login
+X	Delete server data when deleting course or assignment
 -	Python
 X	Say that max time is in seconds
 -	Server staying up
 -	Get error log while server is up
 -	Email verification
--	Assignment Creation only shows one file path when multi upload
--	If no files in assignment say No files or remove view button
--	In edit comments modal, it doesn't say how many points
--	Show total points earned on a submission page
+
+
 
 -	Auto-Grader examples
 -	Blurbs for senior design day
