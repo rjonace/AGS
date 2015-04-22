@@ -96,13 +96,13 @@ Meteor.methods({
 			}, 1000);
 	},
 	'gradeCleanUp' : function(path, id_User, id_Assignment, submission){
-		console.log("gradeCleanUp");
+/*		console.log("gradeCleanUp");
 		
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 
 		if (path)
 			exec("rm -Rf " + path);
-
+*/
 	}
 });
