@@ -154,6 +154,11 @@ public class VTA{
 		return true;
 	}
 	
+	public boolean addManuallyGradedRow(String sectionName, String description, int points){		
+		return addManuallyGradedRow(sectionName, description, points, "To be manually graded");
+	}
+
+
 	public boolean addAutoGradedInput(String sectionName, String inputName, String fileName){
 		int sectionIndex = -1;
 		
