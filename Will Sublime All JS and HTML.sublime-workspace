@@ -55,7 +55,7 @@
 			"file": "meteor/client/views/createAssignment.html",
 			"settings":
 			{
-				"buffer_size": 5318,
+				"buffer_size": 5973,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,7 +87,7 @@
 			"file": "meteor/client/views/login.html",
 			"settings":
 			{
-				"buffer_size": 680,
+				"buffer_size": 690,
 				"line_ending": "Windows"
 			}
 		},
@@ -111,7 +111,15 @@
 			"file": "meteor/client/views/submissionFilesForm.html",
 			"settings":
 			{
-				"buffer_size": 1070,
+				"buffer_size": 1065,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dev/todo.txt",
+			"settings":
+			{
+				"buffer_size": 1778,
 				"line_ending": "Windows"
 			}
 		},
@@ -143,7 +151,7 @@
 			"file": "meteor/server/assignment.js",
 			"settings":
 			{
-				"buffer_size": 1970,
+				"buffer_size": 5070,
 				"line_ending": "Windows"
 			}
 		},
@@ -151,7 +159,7 @@
 			"file": "meteor/server/autograding.js",
 			"settings":
 			{
-				"buffer_size": 4063,
+				"buffer_size": 2857,
 				"line_ending": "Windows"
 			}
 		},
@@ -175,7 +183,7 @@
 			"file": "meteor/server/course.js",
 			"settings":
 			{
-				"buffer_size": 1282,
+				"buffer_size": 1652,
 				"line_ending": "Windows"
 			}
 		},
@@ -207,7 +215,7 @@
 			"file": "meteor/client/controllers/login.js",
 			"settings":
 			{
-				"buffer_size": 1409,
+				"buffer_size": 1253,
 				"line_ending": "Windows"
 			}
 		},
@@ -215,7 +223,7 @@
 			"file": "meteor/client/controllers/mainContentEvents.js",
 			"settings":
 			{
-				"buffer_size": 18196,
+				"buffer_size": 20331,
 				"line_ending": "Windows"
 			}
 		},
@@ -223,7 +231,7 @@
 			"file": "meteor/client/controllers/mainContentHelpers.js",
 			"settings":
 			{
-				"buffer_size": 7518,
+				"buffer_size": 7613,
 				"line_ending": "Windows"
 			}
 		},
@@ -231,7 +239,7 @@
 			"file": "meteor/server/methods.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 192,
 				"line_ending": "Windows"
 			}
 		},
@@ -247,7 +255,7 @@
 			"file": "meteor/server/submission.js",
 			"settings":
 			{
-				"buffer_size": 2798,
+				"buffer_size": 2582,
 				"line_ending": "Windows"
 			}
 		},
@@ -266,20 +274,41 @@
 				"buffer_size": 881,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "senior design website/website blurbles.txt",
+			"settings":
+			{
+				"buffer_size": 959,
+				"line_ending": "Windows",
+				"name": "Project/Group Name (Ex: Simulated Exhibit Experien"
+			}
+		},
+		{
+			"file": "vta/version3/VTA.java",
+			"settings":
+			{
+				"buffer_size": 11614,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 58.0,
+		"height": 334.0,
 		"selected_items":
 		[
 			[
-				"save al",
+				"sav",
 				"File: Save All"
 			],
 			[
 				"save",
+				"File: Save All"
+			],
+			[
+				"save al",
 				"File: Save All"
 			],
 			[
@@ -307,7 +336,7 @@
 				"Set Syntax: Plain Text"
 			]
 		],
-		"width": 415.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -349,7 +378,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -381,7 +410,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -443,15 +472,15 @@
 					"file": "meteor/client/views/createAssignment.html",
 					"settings":
 					{
-						"buffer_size": 5318,
+						"buffer_size": 5973,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1439,
-								1439
+								0,
+								0
 							]
 						],
 						"settings":
@@ -460,7 +489,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 586.0,
+						"translation.y": 316.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -550,15 +579,15 @@
 					"file": "meteor/client/views/login.html",
 					"settings":
 					{
-						"buffer_size": 680,
+						"buffer_size": 690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								649,
-								649
+								0,
+								0
 							]
 						],
 						"settings":
@@ -630,7 +659,7 @@
 					"file": "meteor/client/views/submissionFilesForm.html",
 					"settings":
 					{
-						"buffer_size": 1070,
+						"buffer_size": 1065,
 						"regions":
 						{
 						},
@@ -651,15 +680,41 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "dev/todo.txt",
+					"settings":
+					{
+						"buffer_size": 1778,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1592,
+								1592
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 356.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 3,
+			"selected": 20,
 			"sheets":
 			[
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "meteor/client/controllers/addCourseForm.js",
 					"settings":
 					{
@@ -685,7 +740,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "meteor/client/controllers/ags.js",
 					"settings":
 					{
@@ -711,7 +766,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "meteor/client/controllers/addAssignmentForm.js",
 					"settings":
 					{
@@ -737,11 +792,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "meteor/server/assignment.js",
 					"settings":
 					{
-						"buffer_size": 1970,
+						"buffer_size": 5070,
 						"regions":
 						{
 						},
@@ -764,11 +819,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "meteor/server/autograding.js",
 					"settings":
 					{
-						"buffer_size": 4063,
+						"buffer_size": 2857,
 						"regions":
 						{
 						},
@@ -791,7 +846,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "meteor/client/controllers/breadCrumb.js",
 					"settings":
 					{
@@ -818,7 +873,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 17,
 					"file": "meteor/lib/collections.js",
 					"settings":
 					{
@@ -844,11 +899,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 18,
 					"file": "meteor/server/course.js",
 					"settings":
 					{
-						"buffer_size": 1282,
+						"buffer_size": 1652,
 						"regions":
 						{
 						},
@@ -871,7 +926,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 19,
 					"file": "meteor/client/controllers/createUser.js",
 					"settings":
 					{
@@ -898,7 +953,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 20,
 					"file": "meteor/client/controllers/head.js",
 					"settings":
 					{
@@ -925,7 +980,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 21,
 					"file": "meteor/lib/init.js",
 					"settings":
 					{
@@ -951,11 +1006,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 22,
 					"file": "meteor/client/controllers/login.js",
 					"settings":
 					{
-						"buffer_size": 1409,
+						"buffer_size": 1253,
 						"regions":
 						{
 						},
@@ -979,38 +1034,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 23,
 					"file": "meteor/client/controllers/mainContentEvents.js",
 					"settings":
 					{
-						"buffer_size": 18196,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 23,
-					"file": "meteor/client/controllers/mainContentHelpers.js",
-					"settings":
-					{
-						"buffer_size": 7518,
+						"buffer_size": 20331,
 						"regions":
 						{
 						},
@@ -1034,10 +1062,37 @@
 				},
 				{
 					"buffer": 24,
+					"file": "meteor/client/controllers/mainContentHelpers.js",
+					"settings":
+					{
+						"buffer_size": 7613,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
 					"file": "meteor/server/methods.js",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 192,
 						"regions":
 						{
 						},
@@ -1059,7 +1114,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 25,
+					"buffer": 26,
 					"file": "meteor/server/lib/publications.js",
 					"settings":
 					{
@@ -1085,11 +1140,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 26,
+					"buffer": 27,
 					"file": "meteor/server/submission.js",
 					"settings":
 					{
-						"buffer_size": 2798,
+						"buffer_size": 2582,
 						"regions":
 						{
 						},
@@ -1112,7 +1167,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 27,
+					"buffer": 28,
 					"file": "meteor/client/lib/subscriptions.js",
 					"settings":
 					{
@@ -1138,7 +1193,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 28,
+					"buffer": 29,
 					"file": "meteor/server/user.js",
 					"settings":
 					{
@@ -1160,6 +1215,60 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "senior design website/website blurbles.txt",
+					"settings":
+					{
+						"buffer_size": 959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								823,
+								823
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Project/Group Name (Ex: Simulated Exhibit Experien",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "vta/version3/VTA.java",
+					"settings":
+					{
+						"buffer_size": 11614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								166,
+								167
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 722.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1195,7 +1304,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.533129904098,
 			1.0
 		],
 		"rows":
