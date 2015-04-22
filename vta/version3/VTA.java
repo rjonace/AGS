@@ -56,16 +56,14 @@ class InputFileGradeData{
 	String contentsFileName;
 	int pointsPossible;
 	int pointsEarned;
+	int casesCorrect;
+	int casesTotal;
 	ArrayList<InputCaseData> cases;
 
 	
 	public InputFileGradeData(String inputName, String fileName){
 		this.name = inputName;
 		this.contentsFileName = fileName;
-		
-		this.pointsPossible = 0;
-		this.pointsEarned = 0;
-		
 		this.cases = new ArrayList<InputCaseData>();
 	}
 }
@@ -212,7 +210,10 @@ public class VTA{
 		sections.get(sectionIndex).pointsEarned += temp.getPoints();
 		sections.get(sectionIndex).inputs.get(inputIndex).pointsPossible += points;
 		sections.get(sectionIndex).inputs.get(inputIndex).pointsEarned += temp.getPoints();
+		sections.get(sectionIndex).inputs.get(inputIndex).casesTotal++;
+		sections.get(sectionIndex).inputs.get(inputIndex).casesCorrect += correct ? 1 : 0;
 		
+
 		sections.get(sectionIndex).inputs.get(inputIndex).cases.add(temp);
 		
 		return true;
@@ -292,6 +293,12 @@ public class VTA{
 				
 				out.append("\"pointsEarned\":");
 				out.append(c.pointsEarned + ",");
+
+				out.append("\"comments\":");
+				if (c.casesTotal > 1)
+					out.append("\"" + c.casesCorrect + " out of " + c.casesTotal + " cases\",");
+				else 
+					out.append("\"\",");
 				
 				out.append("\"cases\":");
 				out.append("[");
