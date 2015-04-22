@@ -32,7 +32,8 @@ X	Say that max time is in seconds
 -	Email verification
 
 
--	Autograder examples
+
+-	Auto-Grader examples
 -	Blurbs for senior design day
 -	Examples for senior design day
 -	Display for senior design day
@@ -45,8 +46,8 @@ X	Say that max time is in seconds
 -	Testing plan and documentation
 -	90-page paper final draft
 -	Conference paper
-X	Blurb for website
 X	Email reminders to committee members
+X	Blurb for website
 -	Pictures for website
 -	Presentation for website
 -	Fully practice presentation
