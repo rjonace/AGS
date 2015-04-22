@@ -103,7 +103,7 @@
 			"file": "meteor/client/views/mainContent.html",
 			"settings":
 			{
-				"buffer_size": 14603,
+				"buffer_size": 14741,
 				"line_ending": "Windows"
 			}
 		},
@@ -119,7 +119,7 @@
 			"file": "dev/todo.txt",
 			"settings":
 			{
-				"buffer_size": 1778,
+				"buffer_size": 1748,
 				"line_ending": "Windows"
 			}
 		},
@@ -151,7 +151,7 @@
 			"file": "meteor/server/assignment.js",
 			"settings":
 			{
-				"buffer_size": 5070,
+				"buffer_size": 5402,
 				"line_ending": "Windows"
 			}
 		},
@@ -159,7 +159,7 @@
 			"file": "meteor/server/autograding.js",
 			"settings":
 			{
-				"buffer_size": 2857,
+				"buffer_size": 3143,
 				"line_ending": "Windows"
 			}
 		},
@@ -223,7 +223,7 @@
 			"file": "meteor/client/controllers/mainContentEvents.js",
 			"settings":
 			{
-				"buffer_size": 20331,
+				"buffer_size": 20333,
 				"line_ending": "Windows"
 			}
 		},
@@ -231,7 +231,7 @@
 			"file": "meteor/client/controllers/mainContentHelpers.js",
 			"settings":
 			{
-				"buffer_size": 7613,
+				"buffer_size": 7811,
 				"line_ending": "Windows"
 			}
 		},
@@ -255,7 +255,7 @@
 			"file": "meteor/server/submission.js",
 			"settings":
 			{
-				"buffer_size": 2582,
+				"buffer_size": 2563,
 				"line_ending": "Windows"
 			}
 		},
@@ -632,7 +632,7 @@
 					"file": "meteor/client/views/mainContent.html",
 					"settings":
 					{
-						"buffer_size": 14603,
+						"buffer_size": 14741,
 						"regions":
 						{
 						},
@@ -686,15 +686,15 @@
 					"file": "dev/todo.txt",
 					"settings":
 					{
-						"buffer_size": 1778,
+						"buffer_size": 1748,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1592,
-								1592
+								0,
+								0
 							]
 						],
 						"settings":
@@ -796,7 +796,7 @@
 					"file": "meteor/server/assignment.js",
 					"settings":
 					{
-						"buffer_size": 5070,
+						"buffer_size": 5402,
 						"regions":
 						{
 						},
@@ -823,7 +823,7 @@
 					"file": "meteor/server/autograding.js",
 					"settings":
 					{
-						"buffer_size": 2857,
+						"buffer_size": 3143,
 						"regions":
 						{
 						},
@@ -1038,7 +1038,7 @@
 					"file": "meteor/client/controllers/mainContentEvents.js",
 					"settings":
 					{
-						"buffer_size": 20331,
+						"buffer_size": 20333,
 						"regions":
 						{
 						},
@@ -1065,7 +1065,7 @@
 					"file": "meteor/client/controllers/mainContentHelpers.js",
 					"settings":
 					{
-						"buffer_size": 7613,
+						"buffer_size": 7811,
 						"regions":
 						{
 						},
@@ -1144,7 +1144,7 @@
 					"file": "meteor/server/submission.js",
 					"settings":
 					{
-						"buffer_size": 2582,
+						"buffer_size": 2563,
 						"regions":
 						{
 						},
@@ -1238,7 +1238,8 @@
 						"settings":
 						{
 							"auto_name": "Project/Group Name (Ex: Simulated Exhibit Experien",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
