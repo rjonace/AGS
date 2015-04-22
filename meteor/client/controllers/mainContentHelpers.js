@@ -70,7 +70,8 @@ Template.mainContent.helpers({
 	},
 	// returns all submissions for the current assignment that have been submitted by the current user
 	'studentSubmissionList' : function() {
-		var assignmentId = Session.get('currentAssignment')._id;
+		var assignment = Session.get('currentAssignment');
+		var assignmentId = assignment ? assignment._id : null;
 		return AGSSubmissions.find({id_Assignment: assignmentId, id_Student: Meteor.userId()});
 //		var submissions = AGSSubmissions.find({id_Assignment: assignmentId, id_Student: Meteor.userId()});
 //		if (submissions.length == 1) return [submissions];
@@ -78,7 +79,8 @@ Template.mainContent.helpers({
 	},
 	// returns all submissions for the current assignment based on instructor
 	'instructorSubmissionList' : function() {
-		var assignmentId = Session.get('currentAssignment')._id;
+		var assignment = Session.get('currentAssignment');
+		var assignmentId = assignment ? assignment._id : null;
 		return AGSSubmissions.find({id_Assignment: assignmentId, id_Instructor: Meteor.userId()});
 	},
 	'currentDashboard': function(){
