@@ -6,5 +6,5 @@ CURRENT_PATH=$2
 VTA_PATH=$3
 
 cd "$CURRENT_PATH/$ASS_ID/autograder_files"
-javac -classpath $VTA_PATH:. *.java
+javac -classpath $VTA_PATH *.java
 bash ../../../../createAGJar.sh Autograder.jar $VTA_PATH
