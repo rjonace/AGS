@@ -39,7 +39,7 @@ Meteor.methods({
 			);
 		}
 		else (submission.language == "Java") {
-			console.log("creating C student solution file");
+			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createStudentExecutableC.sh ' + path, 
 				function(error, stdout, stderr){
 					console.log(error, stdout, stderr);
