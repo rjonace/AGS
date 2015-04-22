@@ -1,7 +1,8 @@
--	Run Java submissions
--	Move server-side logic into scripts
--	Consolidate scripts
--	Fix cmments on manually-graded rows
+X	Run Java submissions
+X	Move server-side logic into scripts
+/	Consolidate scripts
+X	Default cmments on manually-graded rows
+-	Fix comments field when updating manually-graded rows
 -	Change "check submission" to "submit"
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
@@ -10,7 +11,39 @@
 -	Change screens on submit
 -	Deal with files that do not compile
 -	Center login
+-	Clear error when everything for assignment is ready
 -	Help menu
--	Hide extra database stuff
+-	Compilation options
+-	Hide extra database data from client
 -	Integrate input file creator
--	Delete server data when deleting course or assignment
+X	Delete server data when deleting course or assignment
+-	Say "Auto-Grading System" on homepage
+-	Skeleton mode
+-	No skeleton option when using C or Python
+-	Python
+-	Say that max time is in seconds
+-	Server staying up
+-	Get error log while server is up
+-	Comment code
+-	Email verification
+
+-	Autograder examples
+-	Blurbs for senior design day
+-	Examples for senior design day
+-	Display for senior design day
+-	Presentation outline
+-	Presentation slides text
+-	Presenation graphics
+-	90-page paper outline
+-	90-page paper first draft
+-	90-page paper graphics
+-	Testing plan and documentation
+-	90-page paper final draft
+-	Conference paper
+-	Blurb for website
+-	Email reminders to committee members
+-	Pictures for website
+-	Presentation for website
+-	Fully practice presentation
+-	Group peer review forms
+-	Turn in everything for website
