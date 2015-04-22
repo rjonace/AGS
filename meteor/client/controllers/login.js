@@ -1,9 +1,3 @@
-// Template.loginButtons.rendered = function(){
-// 	if (!Meteor.userId()){
-// 	    Accounts._loginButtonsSession.set('dropdownVisible', true);
-// 	}
-// };
-
 Template.agsLogin.rendered = function () {
  	$('.ui.error.message').hide();
 }
