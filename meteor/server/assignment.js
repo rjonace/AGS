@@ -51,13 +51,16 @@ Meteor.methods({
 	},
 	'createAssignmentSolution': function(id_Course,id_Assignment,lang){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
+		var compileError;
 		if (lang == "Java"){
 			console.log("creating Java instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
-					if (error) console.log("createInstructorSolutionJava error: " + error);
-					if (stdout) console.log("createInstructorSolutionJava stdout: " + stdout);
-					if (stderr) console.log("createInstructorSolutionJava stderr: " + stderr);
+					if (stderr) {
+						console.log("Compilation error creating Auto-Grader: ", stderr);
+						compileError = stderr;
+// Insert logic for dealing with non compiling EXECI
+					}
 				}
 			);
 		}
@@ -65,20 +68,24 @@ Meteor.methods({
 			console.log("creating C instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
-					if (error) console.log("createInstructorSolutionC error: " + error);
-					if (stdout) console.log("createInstructorSolutionC stdout: " + stdout);
-					if (stderr) console.log("createInstructorSolutionC stderr: " + stderr);
+					if (stderr) {
+						console.log("Compilation error creating Auto-Grader: ", stderr);
+						compileError = stderr;
+// Insert logic for dealing with non compiling EXECI
+					}
 				}
 			);
 		}
 	},	
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
+		var compileError;
 		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path +
 			' /home/student/ags/vta/bin',
 			function(error,stdout,stderr){
 				if (stderr) {
 					console.log("Compilation error creating Auto-Grader: ", stderr);
+					compileError = stderr;
 // Insert logic for dealing with non compiling autograder
 				}
 			}

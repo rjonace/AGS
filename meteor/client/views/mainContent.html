@@ -142,6 +142,7 @@
 			{{/if}}
 
 			{{#if isCourseDash}}
+				<script>$(document).scrollTop(0)</script>
 				{{#with courseInfo}}
 					{{#if isUserCreator}}
 					<div class="ui dividing header">
@@ -187,6 +188,7 @@
 			{{/if}}
 
 			{{#if isAssignmentDash}}
+				<script>$(document).scrollTop(0)</script>
 				{{#with assignmentInfo}}
 					<div class="ui dividing header">
 						<i class="file text icon"></i>
@@ -221,6 +223,7 @@
 			{{/if}}
 
 			{{#if isSubmissionDash}}
+				<script>$(document).scrollTop(0)</script>
 				{{#with submissionInfo}}
 					<div class="ui dividing header">
 						<i class="code icon"></i>
