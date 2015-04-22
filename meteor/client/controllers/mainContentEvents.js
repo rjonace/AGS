@@ -227,7 +227,7 @@ Template.mainContent.events({
 								if (error) console.log(error);
 								else{
 									if (numFiles == solutionFileList.length){
-										console.log("creating Execi.jar")
+										console.log("creating execi")
 										Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
 									}
 									else{

@@ -54,14 +54,20 @@ Meteor.methods({
 		if (lang == "Java"){
 			console.log("creating Java instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
-				function(error,stdout,stderr){if (error) console.log("There was an error creating instructor solution Java",error)}
+				function(error,stdout,stderr){
+					if (error) console.log("createInstructorSolutionJava error: " + error);
+					if (stdout) console.log("createInstructorSolutionJava stdout: " + stdout);
+					if (stderr) console.log("createInstructorSolutionJava stderr: " + stderr);
+				}
 			);
 		}
 		else if (lang == "C"){
 			console.log("creating C instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
-					if (error) console.log("There was an error creating instructor solution C",error);
+					if (error) console.log("createInstructorSolutionC error: " + error);
+					if (stdout) console.log("createInstructorSolutionC stdout: " + stdout);
+					if (stderr) console.log("createInstructorSolutionC stderr: " + stderr);
 				}
 			);
 		}
@@ -71,8 +77,10 @@ Meteor.methods({
 		exec('sh /home/student/ags/grading/createAutograderAPIversion.sh '+id_Assignment+' '+ path +
 			' /home/student/ags/vta/bin',
 			function(error,stdout,stderr){
-				if (error) console.log("There was an error creating autograder ns",error);
-			}
+					if (error) console.log("createAutograder error: " + error);
+					if (stdout) console.log("createAutograder stdout: " + stdout);
+					if (stderr) console.log("createAutograder stderr: " + stderr);
+				}
 		);
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
