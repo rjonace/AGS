@@ -139,9 +139,9 @@ Template.mainContent.events({
 		}
 		var time = event.target.assignmentTimeField.value;
 		var compileFlags = event.target.assignmentCompileflagsField.value;
-		var type = event.target.assignmentTypeField.value;
+//var type = event.target.assignmentTypeField.value;
 
-		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "" || type == "") {
+		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "" /*|| type == ""*/) {
 			$('#assignmentErrorMessage').text('Complete required data fields').show();
 			return false;
 		} 
@@ -160,7 +160,7 @@ Template.mainContent.events({
 $('#createAssignment')[0].reset();
 
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, compileFlags, type,
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, compileFlags, /*type,*/
 			function(error, result) {
 				if(!error) {
 
