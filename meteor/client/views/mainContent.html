@@ -493,6 +493,7 @@
 		{{/if}}
 
 		{{#if isSubmissionDash}}
+		{{submissionStatus}}
 			{{#if fileNotSubmitted}}
 				{{> submissionFilesForm}}
 			{{else}}
@@ -508,7 +509,6 @@
 					</div>
 				</div>
 				<div class="ui segment">
-					{{submissionStatus}}
 					{{#if fileNotGraded}}
 						<div class="ui icon positive message">
 							<i class="file icon"></i>

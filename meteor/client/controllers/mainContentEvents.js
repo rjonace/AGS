@@ -83,7 +83,7 @@ Template.mainContent.events({
 						Session.set('currentSubmission', result);
 						//Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
-						
+						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
 					} else {
 						//Session.set('feedbackStatus', "Timed out");
 						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
