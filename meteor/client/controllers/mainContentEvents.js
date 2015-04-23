@@ -68,6 +68,7 @@ Template.mainContent.events({
 				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language, currentAssignment.compileFlags] , true);
 				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
+				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){

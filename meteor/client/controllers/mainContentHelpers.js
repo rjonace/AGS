@@ -48,6 +48,9 @@ Template.mainContent.helpers({
 	'feedbackStatus' : function(){
 		return Session.get('feedbackStatus');
 	},
+	'submissionStatus' : function(){
+		return Session.get('currentSubmission').status;
+	},
 	'isGrading' : function( status ){
 		if (Session.get('currentSubmission').feedbackObj) return false;
 		else if (Session.get('currentSubmission').feedback) return false;
