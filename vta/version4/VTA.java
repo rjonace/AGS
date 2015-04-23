@@ -299,7 +299,7 @@ public class VTA{
 				out.append("\"pointsEarned\":");
 				out.append(b.pointsEarned + ",");
 				
-				out.append("\"PointsPossible\":");
+				out.append("\"pointsPossible\":");
 				out.append(b.pointsPossible + ",");
 				
 				out.append("\"comments\":\"");
