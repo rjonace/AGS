@@ -80,10 +80,12 @@ Template.mainContent.events({
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
-						Session.set('feedbackStatus', "Submission graded.");
+						//Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
+						
 					} else {
-						Session.set('feedbackStatus', "Timed out");
+						//Session.set('feedbackStatus', "Timed out");
+						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
 					}
 					Meteor.clearInterval(feedbackCheck);
 			});

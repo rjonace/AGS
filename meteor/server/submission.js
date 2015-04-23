@@ -1,5 +1,19 @@
 /*	Server side Submission methods*/
 Meteor.methods({
+	'updateSubmissionStatus' : function(id_Student, id_Assignment, subNumber, status){
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set : {
+					"AttemptList.$.status": status
+				}
+			} 
+		);
+	},
 	'updateFeedbackObj' : function(id_Student, id_Assignment, subNumber, newFeedbackObj){
 		AGSSubmissions.update(
 			{
@@ -29,6 +43,18 @@ Meteor.methods({
 				 } 
 			} 
 		);
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set : {
+					"AttemptList.$.status": 'graded'
+				}
+			} 
+		);
 	},
 	'createNewSubmission': function(id_User, id_Assignment, id_Instructor){
 		var sub = AGSSubmissions.findOne({
@@ -46,7 +72,7 @@ Meteor.methods({
 				id_Assignment: id_Assignment,
 				id_Instructor: id_Instructor,
 				AttemptCount: 1,
-				AttemptList: [{ id_Student: id_User, studentName: studentName, name: 'Submission 1' , dateCreated: new Date().toLocaleString() , subNumber : 0}]
+				AttemptList: [{ id_Student: id_User, studentName: studentName, name: 'Submission 1' , dateCreated: new Date().toLocaleString() , subNumber : 0, status : 'created'}]
 			}, function(err, id) {
 				console.log(err);
 				AGSAssignments.update(
@@ -59,7 +85,7 @@ Meteor.methods({
 			AGSSubmissions.update(
 					sub,
 					{ 	$inc: { AttemptCount: 1 },
-						$addToSet: { AttemptList: { id_Student: id_User, studentName: studentName, name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount } }
+						$addToSet: { AttemptList: { id_Student: id_User, studentName: studentName, name: 'Submission ' + (sub.AttemptCount+1) , dateCreated: new Date(), subNumber : sub.AttemptCount, status : 'created' } }
 					}
 			);
 		};
@@ -76,6 +102,18 @@ Meteor.methods({
 			{ 
 				$addToSet : {
 					"AttemptList.$.files": { name : filename, contents : contents }
+				}
+			} 
+		);
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set : {
+					"AttemptList.$.status": 'files submitted'
 				}
 			} 
 		);
