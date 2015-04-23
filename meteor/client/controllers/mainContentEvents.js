@@ -557,7 +557,7 @@ Template.mainContent.events({
                     updatedFeedback["totals"]["pointsGraded"] = updatedFeedback["totals"]["pointsGraded"] + curRow.pointsPossible;
                     updatedFeedback["totals"]["pointsEarned"] = updatedFeedback["totals"]["pointsEarned"] + curRow.pointsEarned;
 					updatedFeedback["totals"]["pointsUngraded"] = updatedFeedback["totals"]["pointsTotalAssignment"] - updatedFeedback["totals"]["pointsGraded"];
-					updatedFeedback["totals"]["pointsMaxStillPossible"] = updatedFeedback["totals"]["pointsEarned"] - updatedFeedback["totals"]["pointsUngraded"];
+					updatedFeedback["totals"]["pointsMaxStillPossible"] = updatedFeedback["totals"]["pointsEarned"] + updatedFeedback["totals"]["pointsUngraded"];
                     updatedFeedback["sections"][tableIndex] = currSection;
                     updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
 
