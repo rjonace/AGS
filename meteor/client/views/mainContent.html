@@ -58,6 +58,7 @@
 		<i class="close icon"></i>
 		{{#if isAssignmentDash}}
 		 {{#with assignmentInfo}}
+		 	{{#if studentfiles}}
 		 	{{#each studentfiles}}
 			<div class="header">
 	      		{{name}}
@@ -66,6 +67,14 @@
 				<pre>{{contents}}</pre>
 			</div>
 			{{/each}}
+			{{else}}
+			<div class="header">
+	      		No Files
+			</div>
+			<div class="content">
+				<pre>No files provided to the student.</pre>
+			</div>
+			{{/if}}
 		{{/with}}
 		{{/if}}
 		{{#if isSubmissionDash}}
@@ -99,6 +108,7 @@
 				<div class="ui green approve button">Update</div>
 			</div>
 			 {{#with submissionInfo}}
+			 	{{#if files}}
 			 	{{#each files}}
 				<div class="header">
 		      		{{name}}
@@ -107,6 +117,14 @@
 					<pre>{{contents}}</pre>
 				</div>
 				{{/each}}
+				{{else}}
+				<div class="header">
+					No Files
+				</div>
+				<div class="content">
+					<pre>No files provided by the student.</pre>
+				</div>
+				{{/if}}
 			{{/with}}
 		{{/if}}
 	</div>
