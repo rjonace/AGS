@@ -138,22 +138,26 @@ Template.mainContent.events({
 				dateDue = dateDue.toLocaleString();
 		}
 		var time = event.target.assignmentTimeField.value;
-		var points = event.target.assignmentPointsField.value;
+		var compileFlags = event.target.assignmentCompileflagsField.value;
 		var type = event.target.assignmentTypeField.value;
 
 		if (name === "" || lang === "" || event.target.assignmentDateAvailableField.value === "" || event.target.assignmentDateDueField.value === "" || time === "" || type == "") {
 			$('#assignmentErrorMessage').text('Complete required data fields').show();
 			return false;
-		} else {
-			if (event.target.assignmentAGField.files.length == 0) {
-				$('#assignmentErrorMessage').text('Choose Auto-Grader File.').show();
-				return false;
-			}
-			if (event.target.assignmentSolutionField.files.length == 0) {
-				$('#assignmentErrorMessage').text('Choose Solution File(s).').show();
-				return false;
-			}
+		} 
+		else if (event.target.assignmentAGField.files.length == 0) {
+			$('#assignmentErrorMessage').text('Choose Auto-Grader File.').show();
+			return false;
 		}
+		else if (event.target.assignmentSolutionField.files.length == 0) {
+			$('#assignmentErrorMessage').text('Choose Solution File(s).').show();
+			return false;
+		}
+		else {
+			$('#assignmentErrorMessage').hide();
+		}
+		
+$('#createAssignment')[0].reset();
 
 		var currentCourseId = Session.get('currentCourse')._id;
 		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, points, type,
@@ -349,7 +353,7 @@ Template.mainContent.events({
 					 $('#assignmentLanguageField').val(currentAssignment.language)
 					 $('#assignmentDateAvailableField').val(currentAssignment.dateAvailable)
 					 $('#assignmentDateDueField').val(currentAssignment.dateDue)
-					 $('#assignmentPointsField').val(currentAssignment.points)
+					 $('#assignmentCompileflagsField').val(currentAssignment.compileFlags)
 
 				}
 			},
@@ -425,7 +429,7 @@ Template.mainContent.events({
 					 var dateAvailable = $('#assignmentDateAvailableField').val();
 					 var dateDue = $('#assignmentDateDueField').val();
 					 var time = $('#assignmentTimeField').val();
-					 var points = $('#assignmentPointsField').val();
+					 var compileFlags = $('#assignmentCompileflagsField').val();
 
 			 		if (name === "" || lang === "" || dateAvailable === "" || dateDue === "" || time === "") {
 						$('#assignmentErrorMessage').text('Complete required data fields').show();
@@ -440,7 +444,7 @@ Template.mainContent.events({
 						 dateAvailable, 
 						 dateDue,
 						 time, 
-						 points]);
+						 compileFlags]);
 					Meteor.apply('resetCurrentAssignment',[currentAssignment._id], 					 
 				 		function(error,result){
 				 			if(!error){

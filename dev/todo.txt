@@ -6,12 +6,12 @@ X	Show total points earned on a submission page
 X	Make manually-updated-rows update totals
 X	In edit comments modal, it doesn't say how many points
 -	Help menu
--	Deal with files that do not compile
+/	Deal with files that do not compile
 X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 -	Clear error when everything for assignment is ready
--	If no files in assignment say No files or remove view button
--	Don't show your submission among students' submissions
+-	If no files in assignment say "No Files" or remove view button
+-	Don't show instructor submission among students' submissions
 -	Compilation options
 -	Show input file
 -	Assignment Creation only shows one file path when multi upload
@@ -32,7 +32,7 @@ X	Center login
 -	Presentation outline
 -	Presentation slides text
 -	Presentation graphics
-/	90-page paper outline
+X	90-page paper outline
 -	90-page paper first draft
 -	90-page paper graphics
 -	Testing plan and documentation
