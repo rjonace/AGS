@@ -4,7 +4,7 @@ X	Consolidate scripts
 X	Default comments on manually-graded rows
 X	Show total points earned on a submission page
 -	Make manually-updated-rows update totals
--	In edit comments modal, it doesn't say how many points
+X	In edit comments modal, it doesn't say how many points
 -	Help menu
 -	Deal with files that do not compile
 X	Fix comments field when updating manually-graded rows

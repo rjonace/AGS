@@ -281,7 +281,7 @@ public class VTA{
 			out.append(a.pointsPossible + ",");
 
 			out.append("\"pointsGraded\":");
-			out.append(a.pointsPossible + ",");
+			out.append(a.pointsGraded + ",");
 			
 			out.append("\"pointsEarned\":");
 			out.append(a.pointsEarned + ",");
