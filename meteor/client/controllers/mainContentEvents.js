@@ -483,46 +483,49 @@ Template.mainContent.events({
 		$('#viewFilesModal').modal('show');
 	},
 	'change #submissionSolutionFile' : function(event) {
-		var fileName = $('#submissionSolutionFile').val();
-		if (fileName != '')
-			$('#subFileNameField').val(fileName);
-		else
+		var files = $('#submissionSolutionFile')[0].files;
+		if (!files)
 			$('#subFileNameField').val('No file chosen')
+		else if (files.length == 1)
+			$('#subFileNameField').val(files[0].name);
+		else
+			$('#subFileNameField').val("Upload " + files.length + " files")		
 	},
 	'change #assignmentAGField' : function(event) {
 		var files = $('#assignmentAGField')[0].files;
-//var fileName = $('#assignmentAGField').val();
-//console.log(fileName);
 		if (!files)
 			$('#agFileNameField').val('No file chosen')
 		else if (files.length == 1)
 			$('#agFileNameField').val(files[0].name);
 		else
-			$('#agFileNameField').val(files.length + " files")
+			$('#agFileNameField').val("Upload " + files.length + " files")
 	},
 	'change #assignmentStudentField' : function(event) {
-		var fileName = $('#assignmentStudentField').val();
-		console.log(fileName);
-		if (fileName != '')
-			$('#studentFileNameField').val(fileName);
-		else
+		var files = $('#assignmentStudentField')[0].files;
+		if (!files)
 			$('#studentFileNameField').val('No file chosen')
+		else if (files.length == 1)
+			$('#studentFileNameField').val(files[0].name);
+		else
+			$('#studentFileNameField').val("Upload " + files.length + " files")		
 	},
 	'change #assignmentInputField' : function(event) {
-		var fileName = $('#assignmentInputField').val();
-		console.log(fileName);
-		if (fileName != '')
-			$('#inputFileNameField').val(fileName);
-		else
+		var files = $('#assignmentInputField')[0].files;
+		if (!files)
 			$('#inputFileNameField').val('No file chosen')
+		else if (files.length == 1)
+			$('#inputFileNameField').val(files[0].name);
+		else
+			$('#inputFileNameField').val("Upload " + files.length + " files")		
 	},
 	'change #assignmentSolutionField' : function(event) {
-		var fileName = $('#assignmentSolutionField').val();
-		console.log(fileName);
-		if (fileName != '')
-			$('#solutionFileNameField').val(fileName);
-		else
+		var files = $('#assignmentSolutionField')[0].files;
+		if (!files)
 			$('#solutionFileNameField').val('No file chosen')
+		else if (files.length == 1)
+			$('#solutionFileNameField').val(files[0].name);
+		else
+			$('#solutionFileNameField').val("Upload " + files.length + " files")			
 	},
 	'click .gradedInputRow' : function(event) {
 		var curIndex = Number($(event.currentTarget)[0].getAttribute('index'));

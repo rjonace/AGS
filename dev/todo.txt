@@ -9,13 +9,12 @@ X	In edit comments modal, it doesn't say how many points
 /	Deal with files that do not compile
 X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
--	Clear error when everything for assignment is ready
+X	Clear error when everything for assignment is ready
 -	If no files in assignment say "No Files" or remove view button
 X	Don't show instructor submission among students' submissions
 X	Compilation options
 -	Show input file
--	Assignment Creation only shows one file path when multi upload
--	Let professor know they are looking at a course they created
+X	Assignment Creation only shows one file path when multi upload
 -	Remove "Finish adding files and submit!" after submitting
 -	Do something better on feedback timeout
 -	Says "Feedback Timeout" on start
