@@ -72,7 +72,7 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language, currentAssignment.compileFlags, currentAssignment._id] , true);
+				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language, currentAssignment.compileFlags] , true);
 				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
 		});
