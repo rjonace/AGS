@@ -1,5 +1,10 @@
 /*	Server side Auto Grading methods*/
 Meteor.methods({
+	'createErrorJSONFile' : function(error, path){
+		var fs = Npm.require('fs');
+		var data = '{"error":'+JSON.stringify(error) + '}';
+		fs.writeFileSync(path + '/feedback.json', data)
+	},
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		console.log("prep start");
 		
@@ -30,12 +35,18 @@ Meteor.methods({
 		if (language == "C") {
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
-				function(error,stdout,stderr){
+				Meteor.bindEnvironment(function(err,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating execs C: ", stderr);
+						var error = {
+							err: "Compilation error creating execs C: " + err,
+						 	stdout: stdout,
+						  	stderr: stderr
+						};
 // Insert logic for dealing with non compiling EXECS
+						Meteor.call('createErrorJSONFile', error, path);
 					}
-				}
+				})
 			);
 		}
 		else if (language == "Java") {

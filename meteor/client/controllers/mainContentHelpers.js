@@ -144,6 +144,9 @@ Template.mainContent.helpers({
 
 		if (!submission.feedbackObj) {
 			HTMLString += '<h3>Error: No feedback available</h3>'
+		} else if (submission.feedbackObj.error){
+			HTMLString += '<h3>Error</h3>';
+			HTMLString += '<pre>'+ submission.feedbackObj.error +'</pre>';
 		}
 		else{
 			var totals = submission.feedbackObj['totals'];
