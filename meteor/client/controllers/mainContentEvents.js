@@ -46,14 +46,10 @@ Template.mainContent.events({
 		}else{
 			Session.set('fileNotSubmitted', false);
 		}
-		if(Session.get('currentSubmission').feedbackObj === undefined){
-			if(Session.get('currentSubmission').status != 'graded')
-				Session.set('fileNotGraded', true);
-			else
-				Session.set('fileNotGraded', false);
-		}else{
+		if(Session.get('currentSubmission').status == 'graded' || Session.get('currentSubmission').status == 'timed out')
+			Session.set('fileNotGraded', true);
+		else
 			Session.set('fileNotGraded', false);
-		}
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
