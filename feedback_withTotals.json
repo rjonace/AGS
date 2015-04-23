@@ -10,6 +10,7 @@
 		{
 			"sectionName":"Code Points",
 			"pointsPossible":20,
+			"pointsGraded":0,
 			"pointsEarned":0,
 			"rows":[
 				{
@@ -30,6 +31,7 @@
 		{
 			"sectionName":"Execution Points",
 			"pointsPossible":100,
+			"pointsGraded":100,
 			"pointsEarned":100,
 			"rows":[],
 			"gradedInputs":[
