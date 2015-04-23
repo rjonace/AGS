@@ -236,9 +236,9 @@ Template.mainContent.events({
 										Meteor.call('createAssignmentSolution',currentCourseId, result, lang, compileFlags,
 											function(error, compileError){
 												if (compileError)
-													alert(compileError);
+													console.log(compileError);
 												if (error)
-													alert(error);
+													console.log(error);
 
 											}
 										);
@@ -265,9 +265,9 @@ Template.mainContent.events({
 										Meteor.call('createAutograderNonskeleton',currentCourseId, result,
 											function(error, compileError){
 												if (compileError)
-													alert(compileError);
+													console.log(compileError);
 												if (error)
-													alert(error);
+													console.log(error);
 											}
 										);
 									}
