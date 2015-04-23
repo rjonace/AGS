@@ -237,6 +237,9 @@ Template.mainContent.events({
 											function(error, compileError){
 												if (compileError)
 													alert(compileError);
+												if (error)
+													alert(error);
+
 											}
 										);
 									}
@@ -263,6 +266,8 @@ Template.mainContent.events({
 											function(error, compileError){
 												if (compileError)
 													alert(compileError);
+												if (error)
+													alert(error);
 											}
 										);
 									}
