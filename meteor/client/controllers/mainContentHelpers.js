@@ -143,7 +143,7 @@ Template.mainContent.helpers({
 						var tabObj = submission.feedbackObj[name][i];
 						
 						HTMLString += '<h4>' + tabObj["sectionName"];
-						HTMLString += ' (' + tabObj["sectionName"]['pointsPossible'];
+						HTMLString += ' (' + tabObj["pointsPossible"];
 						HTMLString += '  points possible)</h4>'
 
 						HTMLString += '<table class="ui celled table"><thead><tr>'
