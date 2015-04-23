@@ -17,7 +17,9 @@ X	Change "check submission" to "submit"
 -	Assignment Creation only shows one file path when multi upload
 -	Let professor know they are looking at a course they created
 -	Remove "Finish adding files and submit!" after submitting
--	Do something better on submission timeout
+-	Do something better on feedback timeout
+-	Says "Feedback Timeout" on start
+-	Show something different when submission is fully graded
 X	Scroll to the top on viewing assignment
 X	Say that max time is in seconds
 X	Change screens on submit for first one
