@@ -49,12 +49,12 @@ Meteor.methods({
 			}
 		);
 	},
-	'createAssignmentSolution': function(id_Course,id_Assignment,lang){
+	'createAssignmentSolution': function(id_Course,id_Assignment,lang,compileFlags){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
 		var compileError;
 		if (lang == "Java"){
 			console.log("creating Java instructor solution file");
-			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
+			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+path+' '+compileFlags,
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Instructor Java: ", stderr);
@@ -66,7 +66,7 @@ Meteor.methods({
 		}
 		else if (lang == "C"){
 			console.log("creating C instructor solution file");
-			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
+			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+path+' '+compileFlags,
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Instructor C: ", stderr);

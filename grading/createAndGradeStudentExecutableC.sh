@@ -1,13 +1,15 @@
 set -e
 
 SUB_PATH=$1
+COMPFLAGS=$2
+
 cd $SUB_PATH
 
 mkdir -p ../student_files/
 touch ../student_files/dummy
 cp ../student_files/* .
 
-gcc -std="gnu99" -o execs -lm *.c
+gcc $COMPFLAGS -o execs *.c
 
 cp ../autograder_files/Autograder.jar .
 cp ../solution_files/execi .

@@ -18,7 +18,7 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'gradeSubmission' : function(submission, path, language) {
+	'gradeSubmission' : function(submission, path, language, compileFlags) {
 		console.log("sub start");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -30,7 +30,7 @@ Meteor.methods({
 		var compileError;
 		if (language == "C") {
 			console.log("creating C student solution file");
-			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path, 
+			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Auto-Grader: ", stderr);
@@ -42,7 +42,7 @@ Meteor.methods({
 		}
 		else if (language == "Java") {
 			console.log("creating Java student solution file");
-			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path, 
+			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Auto-Grader: ", stderr);

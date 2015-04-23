@@ -1,10 +1,10 @@
 #create an executable jar file with name set as JAR_NAME
 
 JAR_NAME=$1
-VTA_PATH=$2
+COMPFLAGS=$2
 
 #compiles all .java
-javac *.java
+javac $COMPFLAGS *.java
 
 #creates jar file packaging every class file in the directory
 #should only be one java file that has a main because that becomes the entry point of the jar

@@ -65,7 +65,7 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language] , true);
+				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language, currentAssignment.compileFlags] , true);
 				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
 		});
@@ -230,7 +230,7 @@ Template.mainContent.events({
 								else{
 									if (numFiles == solutionFileList.length){
 										console.log("creating execi");
-										Meteor.call('createAssignmentSolution',currentCourseId, result, lang);
+										Meteor.call('createAssignmentSolution',currentCourseId, result, lang, compileFlags);
 									}
 									else{
 										console.log(numFiles + ' solution files written thus far');

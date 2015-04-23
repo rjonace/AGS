@@ -6,4 +6,4 @@ CURRENT_PATH=$2
 COMPFLAGS=$3
 
 cd "$CURRENT_PATH/$ASS_ID/solution_files"
-gcc *.c -std=gnu99 -o execi #$C
+gcc $COMPFLAGS *.c -o execi
