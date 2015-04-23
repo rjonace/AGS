@@ -118,82 +118,77 @@ Template.mainContent.helpers({
 	'submissionFeedbackObject': function(){
 		var submission = Session.get('currentSubmission');
 		var HTMLString = '<div "ui segment">'
-		for(var name in submission.feedbackObj){
-			if (name == "header"){
-				for (var i in submission.feedbackObj[name]) {
-					HTMLString += '<h3>' + submission.feedbackObj[name][i] + '</h3>'
-				}
-			}
 
-			if (name == "table-with-header"){
-				for (var i in submission.feedbackObj[name]) {
-					var tabObj = submission.feedbackObj[name][i];
-					HTMLString += '<h4>' + tabObj.header + '</h4>'
-					HTMLString += '<table class="ui table"><thead><tr>'
-					for (var c in tabObj.columns){
-						HTMLString += '<th>' + tabObj.columns[c] + '</th>';
-					}
-					HTMLString += '</tr></thead>'
-					HTMLString += '<tbody>'
-					for (var r in tabObj.rows){
-						HTMLString += '<tr>'
-						for (var val in tabObj.rows[r]) {
-							HTMLString += '<td>' + tabObj.rows[r][val] + '</td>'
-						}
-						HTMLString += '</tr>'
-					}
-					HTMLString += '</tbody></table>'
-				}
-			}
+		if (!submission.feedbackObj) {
+			HTMLString += '<h3>Error: No feedback available</h3>'
+		}
+		else{
+			var totals = submission.feedbackObj['totals'];
+			
+			HTMLString += '<h3>Total Points Earned: ';
+			HTMLString += totals.pointsEarned+' out of '+totals.pointsGraded;
+			HTMLString += ' graded</h3>';
 
-			if (name == "sections"){
-				for (var i in submission.feedbackObj[name]) {
-					var tabObj = submission.feedbackObj[name][i];
-					//
-					HTMLString += '<h4>' + tabObj["sectionName"] + '</h4>'
+			HTMLString += '<h3>Total Points Ungraded: ';
+			HTMLString += totals.pointsUngraded;
+			HTMLString += '  points left</h3>';
 
-					HTMLString += '<table class="ui celled table"><thead><tr>'
+			HTMLString += '<h3>Max Possible Score: ';
+			HTMLString += totals.pointsMaxStillPossible+' out of '+totals.pointsTotalAssignment;
+			HTMLString += ' graded</h3>';
+			
+			for(var name in submission.feedbackObj){
+				if (name == "sections"){
+					for (var i in submission.feedbackObj[name]) {
+						var tabObj = submission.feedbackObj[name][i];
 						
-					HTMLString += '<th>Description</th><th>Points Earned</th><th>Points Possible</th><th>Comments</th>';
-					HTMLString += '</tr></thead>'
-					HTMLString += '<tbody>'
-					for (var rowObj in tabObj["rows"]){
-						HTMLString += '<tr>'
-						for (var val in tabObj["rows"][rowObj]) {
-							if (tabObj["rows"][rowObj][val] < 0){
-								if(Session.get('currentCourse').id_Instructor == Meteor.userId())
-									HTMLString += '<td><div rowIndex="'+ rowObj + '" tableIndex="'+i+'" class="ui fluid manual row button">Grade</div></td>'
+						HTMLString += '<h4>' + tabObj["sectionName"];
+						HTMLString += ' (' + tabObj["sectionName"]['pointsPossible'];
+						HTMLString += '  points possible)</h4>'
+
+						HTMLString += '<table class="ui celled table"><thead><tr>'
+							
+						HTMLString += '<th>Description</th><th>Points Earned</th><th>Points Possible</th><th>Comments</th>';
+						HTMLString += '</tr></thead>'
+						HTMLString += '<tbody>'
+						for (var rowObj in tabObj["rows"]){
+							HTMLString += '<tr>'
+							for (var val in tabObj["rows"][rowObj]) {
+								if (tabObj["rows"][rowObj][val] < 0){
+									if(Session.get('currentCourse').id_Instructor == Meteor.userId())
+										HTMLString += '<td><div rowIndex="'+ rowObj + '" tableIndex="'+i+'" class="ui fluid manual row button">Grade</div></td>'
+									else
+										HTMLString += '<td>Waiting for TA</td>'
+								}
 								else
-									HTMLString += '<td>Waiting for TA</td>'
+									HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
 							}
-							else
-								HTMLString += '<td>' + tabObj["rows"][rowObj][val] + '</td>'
+							HTMLString += '</tr>'
 						}
-						HTMLString += '</tr>'
-					}
-					for (var r in tabObj["gradedInputs"]){
-						HTMLString += '<tr class="gradedInputRow" index='+r+'>'
-						HTMLString += '<td>' + tabObj["gradedInputs"][r].name + '</td>'
-						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsEarned + '</td>'
-						HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsPossible + '</td>'
-						HTMLString += '<td>' + tabObj["gradedInputs"][r].comments + '<div class="ui right floated mini compact icon button"><i class="dropdown icon"></i></div></td>'
-						HTMLString += '</tr>'
-						HTMLString += '<tr><td colspan="4" style="display: none;"><table class="ui celled table"><thead><tr><th>test case #</th><th>correct output</th><th>student output</th><th>points</th><th>comments</th></tr></thead><tbody>'
-						for (var caseIndex in tabObj["gradedInputs"][r].cases){
-							if (!tabObj["gradedInputs"][r].cases[caseIndex].correct)
-								HTMLString += '<tr class="error">'
-							else
-								HTMLString += '<tr>'
-							HTMLString += '<td>' + (Number(caseIndex) + 1) + '</td>'
-							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].correctOutput + '</td>'
-							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].studentOutput + '</td>'
-							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].points + '</td>'
-							HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].comments + '</td>'
-							HTMLString += '</td></tr>'
+						for (var r in tabObj["gradedInputs"]){
+							HTMLString += '<tr class="gradedInputRow" index='+r+'>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].name + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsEarned + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].pointsPossible + '</td>'
+							HTMLString += '<td>' + tabObj["gradedInputs"][r].comments + '<div class="ui right floated mini compact icon button"><i class="dropdown icon"></i></div></td>'
+							HTMLString += '</tr>'
+							HTMLString += '<tr><td colspan="4" style="display: none;"><table class="ui celled table"><thead><tr><th>test case #</th><th>correct output</th><th>student output</th><th>points</th><th>comments</th></tr></thead><tbody>'
+							for (var caseIndex in tabObj["gradedInputs"][r].cases){
+								if (!tabObj["gradedInputs"][r].cases[caseIndex].correct)
+									HTMLString += '<tr class="error">'
+								else
+									HTMLString += '<tr>'
+								HTMLString += '<td>' + (Number(caseIndex) + 1) + '</td>'
+								HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].correctOutput + '</td>'
+								HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].studentOutput + '</td>'
+								HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].points + '</td>'
+								HTMLString += '<td>' + tabObj["gradedInputs"][r].cases[caseIndex].comments + '</td>'
+								HTMLString += '</td></tr>'
+							}
+							HTMLString += '</tbody></table></tr>'
 						}
-						HTMLString += '</tbody></table></tr>'
+						HTMLString += '</tbody></table>'
 					}
-					HTMLString += '</tbody></table>'
 				}
 			}
 		}

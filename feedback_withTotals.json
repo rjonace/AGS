@@ -3,7 +3,7 @@
 		"pointsEarned":100,
 		"pointsGraded":100,
 		"pointsUngraded":20,
-		"pointsMaxPossible":120,
+		"pointsMaxStillPossible":120,
 		"pointsTotalAssignment":120
 	},
 	"sections":[
