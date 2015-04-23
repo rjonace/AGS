@@ -12,7 +12,7 @@ X	Change "check submission" to "submit"
 -	Clear error when everything for assignment is ready
 -	If no files in assignment say "No Files" or remove view button
 -	Don't show instructor submission among students' submissions
--	Compilation options
+X	Compilation options
 -	Show input file
 -	Assignment Creation only shows one file path when multi upload
 -	Let professor know they are looking at a course they created
@@ -53,3 +53,5 @@ X	Blurb for website
 -	No skeleton option when using C
 -	Hide extra database data from client
 X	Delete server data when deleting course or assignment
+-	Let instructor download autograder.jar
+-	Let instructor upload autograder.jar
