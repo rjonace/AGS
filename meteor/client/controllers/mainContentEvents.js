@@ -532,6 +532,7 @@ Template.mainContent.events({
 		var rowIndex = Number($(event.currentTarget)[0].getAttribute('rowIndex'));
 
 		var submission = Session.get('currentSubmission');
+		var currSection = submission.feedbackObj["sections"][tableIndex];
 		var curRow = submission.feedbackObj["sections"][tableIndex]["rows"][rowIndex];
 		Session.set('manGradedRow', curRow);
 		$('#viewFilesModal').modal({
@@ -545,8 +546,18 @@ Template.mainContent.events({
                 onApprove : function() {
                     curRow.pointsEarned = Number($('#pointsEarnedInput').val());
                     curRow.comments = $('#commentsInput').val();
+
+                    currSection["pointsGraded"] = currSection["pointsGraded"] + curRow.pointsPossible;
+                    currSection["pointsEarned"] = currSection["pointsEarned"] + curRow.pointsEarned;
+
                     var updatedFeedback = submission.feedbackObj;
+                    updatedFeedback["totals"]["pointsGraded"] = updatedFeedback["totals"]["pointsGraded"] + curRow.pointsGraded;
+                    updatedFeedback["totals"]["pointsEarned"] = updatedFeedback["totals"]["pointsEarned"] + curRow.pointsEarned;
+					updatedFeedback["totals"]["pointsUngraded"] = updatedFeedback["totals"]["pointsTotalAssignment"] - updatedFeedback["totals"]["pointsGraded"];
+					updatedFeedback["totals"]["pointsMaxStillPossible"] = updatedFeedback["totals"]["pointsEarned"] - updatedFeedback["totals"]["pointsUngraded"];
+                    updatedFeedback["sections"][tableIndex] = currSection;
                     updatedFeedback["sections"][tableIndex]["rows"][rowIndex] = curRow;
+
                     Meteor.call('updateFeedbackObj', submission.id_Student, Session.get('currentAssignment')._id, submission.subNumber, updatedFeedback, 
                         function() {
 							Meteor.call('resetSubmissionSession', submission.id_Student, Session.get('currentAssignment')._id, submission,

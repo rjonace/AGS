@@ -3,11 +3,11 @@ X	Move server-side logic into scripts
 X	Consolidate scripts
 X	Default comments on manually-graded rows
 X	Show total points earned on a submission page
--	Make manually updated rows update totals
--	Deal with files that do not compile
+-	Make manually-updated-rows update totals
 -	In edit comments modal, it doesn't say how many points
 -	Help menu
--	Fix comments field when updating manually-graded rows
+-	Deal with files that do not compile
+X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 -	Clear error when everything for assignment is ready
 -	If no files in assignment say No files or remove view button
@@ -16,7 +16,7 @@ X	Change "check submission" to "submit"
 -	Show input file
 -	Assignment Creation only shows one file path when multi upload
 -	Let professor know they are looking at a course they created
--	"Finish adding files and submit!" even after submit
+-	Remove "Finish adding files and submit!" after submitting
 -	Do something better on submission timeout
 X	Scroll to the top on viewing assignment
 X	Say that max time is in seconds
