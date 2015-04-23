@@ -122,7 +122,7 @@ Template.mainContent.helpers({
 		return Session.get('fileNotSubmitted');
 	},
 	'fileNotGraded': function(){
-		return Session.get('fileNotGraded');
+		return Session.get('currentSubmission').status != 'graded';
 	},
 	'submissionFiles': function(){
 		var submission = Session.get('currentSubmission');
