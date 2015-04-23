@@ -2,7 +2,8 @@ X	Run Java submissions
 X	Move server-side logic into scripts
 X	Consolidate scripts
 X	Default comments on manually-graded rows
--	Show total points earned on a submission page
+X	Show total points earned on a submission page
+-	Make manually updated rows update totals
 -	Deal with files that do not compile
 -	In edit comments modal, it doesn't say how many points
 -	Help menu
