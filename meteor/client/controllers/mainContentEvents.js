@@ -64,7 +64,8 @@ Template.mainContent.events({
 		var newPath;
 
 		Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
-		Meteor.call('resetSubmissionSession', [currentUserId, currentAssignment._id, submission],function(error,result){
+		Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission,
+		function(error,result){
 			Session.set('currentSubmission',result);
 		});
 		
