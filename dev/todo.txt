@@ -40,6 +40,7 @@ X	90-page paper outline
 X	Email reminders to committee members
 X	Blurb for website
 -	Pictures for website
+-   Turn in Thursday stuff for website
 -	Presentation for website
 -	Fully practice presentation
 -	Group peer review forms
