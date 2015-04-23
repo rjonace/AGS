@@ -127,17 +127,17 @@ Template.mainContent.helpers({
 			
 			HTMLString += '<div align="right">';
 
-			HTMLString += '<h3>Total Points Earned: ';
+			HTMLString += '<h4>Total Points Earned: ';
 			HTMLString += totals.pointsEarned+' out of '+totals.pointsGraded;
-			HTMLString += ' graded</h3>';
+			HTMLString += ' graded</h4>';
 
-			HTMLString += '<h3>Total Points Ungraded: ';
+			HTMLString += '<h4>Total Points Ungraded: ';
 			HTMLString += totals.pointsUngraded;
-			HTMLString += '  points left</h3>';
+			HTMLString += '  points left</h4>';
 
-			HTMLString += '<h3>Max Possible Score: ';
+			HTMLString += '<h4>Max Possible Score: ';
 			HTMLString += totals.pointsMaxStillPossible+' out of '+totals.pointsTotalAssignment;
-			HTMLString += ' graded</h3>';
+			HTMLString += ' graded</h4>';
 
 			HTMLString += '</div>'
 			
