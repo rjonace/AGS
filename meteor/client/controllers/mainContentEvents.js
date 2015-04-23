@@ -40,6 +40,7 @@ Template.mainContent.events({
 	'click #assignmentSubmission': function(){
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
+		Session.set('feedbackStatus',null);
 		if(Session.get('currentSubmission').files === undefined){
 			Session.set('fileNotSubmitted', true);
 		}else{
@@ -80,14 +81,12 @@ Template.mainContent.events({
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
-						//Session.set('feedbackStatus', "Submission graded.");
+						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
-						Session.set('feedbackStatus', null);
 					} else {
-						//Session.set('feedbackStatus', "Timed out");
+						Session.set('feedbackStatus', "Timed out");
 						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
-						Session.set('feedbackStatus', null);
 					}
 					Meteor.clearInterval(feedbackCheck);
 			});
