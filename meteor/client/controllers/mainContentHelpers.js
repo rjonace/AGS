@@ -81,7 +81,7 @@ Template.mainContent.helpers({
 	'instructorSubmissionList' : function() {
 		var assignment = Session.get('currentAssignment');
 		var assignmentId = assignment ? assignment._id : null;
-		return AGSSubmissions.find({id_Assignment: assignmentId, id_Instructor: Meteor.userId()});
+		return AGSSubmissions.find({id_Assignment: assignmentId, id_Instructor: Meteor.userId(), id_Student:{ $ne:Meteor.userId() } });
 	},
 	'currentDashboard': function(){
 		 return Session.get('currentDashboard');
