@@ -45,6 +45,9 @@ Template.mainContent.helpers({
 		// check if creator of submission
 		return Session.get('currentSubmission');
 	},
+	'notEmpty' : function(list){
+		return list.length == 0;
+	},
 	'feedbackStatus' : function(){
 		if (Session.get('feedbackStatus'))
 			return Session.get('feedbackStatus');

@@ -58,7 +58,7 @@
 		<i class="close icon"></i>
 		{{#if isAssignmentDash}}
 		 {{#with assignmentInfo}}
-		 	{{#if studentfiles}}
+		 	{{#if notEmpty studentfiles}}
 		 	{{#each studentfiles}}
 			<div class="header">
 	      		{{name}}
@@ -108,7 +108,7 @@
 				<div class="ui green approve button">Update</div>
 			</div>
 			 {{#with submissionInfo}}
-			 	{{#if files}}
+			 	{{#if notEmpty files}}
 			 	{{#each files}}
 				<div class="header">
 		      		{{name}}
