@@ -156,9 +156,7 @@ Template.mainContent.events({
 		else {
 			$('#assignmentErrorMessage').hide();
 		}
-		
-$('#createAssignment')[0].reset();
-
+	
 		var currentCourseId = Session.get('currentCourse')._id;
 		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, compileFlags, /*type,*/
 			function(error, result) {
@@ -267,6 +265,9 @@ $('#createAssignment')[0].reset();
 							}
 						);
 					},1000);
+
+//$('#createAssignment')[0].reset();
+
 
 				} else {
 					console.log(error);
