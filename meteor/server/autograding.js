@@ -18,7 +18,7 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'gradeSubmission' : function(submission, path, language, compileFlags) {
+	'gradeSubmission' : function(submission, path, language, compileFlags, id_Assignment) {
 		console.log("sub start");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
@@ -34,6 +34,8 @@ Meteor.methods({
 					if (stderr) {
 						console.log("Compilation error creating execs C: ", stderr);
 // Insert logic for dealing with non compiling EXECS
+						Meteor.call('updateSubmissionStatus',submission.id_Student, id_Assignment, submission.subNumber, 'error')
+						Meteor.call('updateErrorStatus',submission.id_Student, id_Assignment, submission.subNumber, stderr)
 					}
 				}
 			);
@@ -45,6 +47,8 @@ Meteor.methods({
 					if (stderr) {
 						console.log("Compilation error creating execs Java: ", stderr);
 // Insert logic for dealing with non compiling EXECS
+						Meteor.call('updateSubmissionStatus',submission.id_Student, id_Assignment, submission.subNumber, 'error')
+						Meteor.call('updateErrorStatus',submission.id_Student, id_Assignment, submission.subNumber, stderr)
 					}
 				}
 			);

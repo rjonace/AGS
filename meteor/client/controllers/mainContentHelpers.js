@@ -69,7 +69,7 @@ Template.mainContent.helpers({
 	'errorStatus' : function(){
 		var status = 'An error has occured!'
 		if(Session.get('currentSubmission').status == "timed out")
-			status = 'Submission did not compile or execute within the assignments time limit';
+			status = 'Timed out!';
 		return status;
 	},
 	'isWaitingForGrades' : function( ){
