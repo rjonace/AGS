@@ -160,7 +160,7 @@ Template.mainContent.events({
 $('#createAssignment')[0].reset();
 
 		var currentCourseId = Session.get('currentCourse')._id;
-		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, points, type,
+		Meteor.call('insertAssignmentData', currentCourseId, name, description, lang, dateAvailable, dateDue, time, compileFlags, type,
 			function(error, result) {
 				if(!error) {
 

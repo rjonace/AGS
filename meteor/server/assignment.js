@@ -2,7 +2,7 @@
 var fs = Npm.require('fs');
 var exec = Npm.require('child_process').exec;
 Meteor.methods({
-	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, points){
+	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, compileFlags){
 		return AGSAssignments.insert({
 			name: name,
 			description: description,
@@ -10,7 +10,7 @@ Meteor.methods({
 			dateAvailable: dateAvailable,
 			dateDue: dateDue,
 			time: time,
-			points: points,
+			compileFlags: compileFlags,
 			id_Course: id_Course
 		}, function(err, id) {
 			console.log(err);			
