@@ -74,7 +74,8 @@ Template.mainContent.events({
 		var feedbackCheck = Meteor.setInterval(function(){
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
-			
+			Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
+			Meteor.apply('resetSubmissionSession', [currentUserId, currentAssignment._id, submission]);
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.feedbackObj && counter < maxTime) {
