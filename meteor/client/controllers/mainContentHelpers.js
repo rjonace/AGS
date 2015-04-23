@@ -122,7 +122,12 @@ Template.mainContent.helpers({
 		return Session.get('fileNotSubmitted');
 	},
 	'fileNotGraded': function(){
-		return Session.get('currentSubmission').status != 'graded';
+		if(Session.get('currentSubmission').status != 'graded'){
+			if (Session.get('currentSubmission').status == 'timed out')
+				return false;
+			else return true;
+		}
+		return true;
 	},
 	'submissionFiles': function(){
 		var submission = Session.get('currentSubmission');
