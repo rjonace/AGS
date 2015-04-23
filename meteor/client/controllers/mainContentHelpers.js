@@ -46,7 +46,9 @@ Template.mainContent.helpers({
 		return Session.get('currentSubmission');
 	},
 	'feedbackStatus' : function(){
-		return Session.get('feedbackStatus');
+		if (Session.get('feedbackStatus'))
+			return Session.get('feedbackStatus');
+		else return Session.get('currentSubmission').status;
 	},
 	'submissionStatus' : function(){
 		return Session.get('currentSubmission').status;

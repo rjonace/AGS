@@ -71,7 +71,6 @@ Template.mainContent.events({
 		});
 
 		var feedbackCheck = Meteor.setInterval(function(){
-			Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
@@ -84,9 +83,11 @@ Template.mainContent.events({
 						//Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
+						Session.set('feedbackStatus', null);
 					} else {
 						//Session.set('feedbackStatus', "Timed out");
 						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
+						Session.set('feedbackStatus', null);
 					}
 					Meteor.clearInterval(feedbackCheck);
 			});
