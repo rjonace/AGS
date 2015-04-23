@@ -52,7 +52,7 @@ Meteor.methods({
 		else if (language == "Java") {
 			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
-				Meteor.bindEnvironment(function(error,stdout,stderr){
+				Meteor.bindEnvironment(function(err,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating execs Java: ", stderr);
 // Insert logic for dealing with non compiling EXECS
