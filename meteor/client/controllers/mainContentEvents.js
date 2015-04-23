@@ -547,7 +547,6 @@ Template.mainContent.events({
                     var updatedFeedback = submission.feedbackObj;
 
                     curRow.pointsPossible = updatedFeedback["sections"][tableIndex]["rows"][rowIndex]["pointsPossible"];
-                    curRow.pointsGraded =  updatedFeedback["sections"][tableIndex]["rows"][rowIndex]["pointsGraded"];
                     curRow.pointsEarned = Number($('#pointsEarnedInput').val());
                     curRow.comments = $('#commentsInput').val();
 
@@ -555,7 +554,7 @@ Template.mainContent.events({
                     currSection["pointsEarned"] = currSection["pointsEarned"] + curRow.pointsEarned;
 
 
-                    updatedFeedback["totals"]["pointsGraded"] = updatedFeedback["totals"]["pointsGraded"] + curRow.pointsGraded;
+                    updatedFeedback["totals"]["pointsGraded"] = updatedFeedback["totals"]["pointsGraded"] + curRow.pointsPossible;
                     updatedFeedback["totals"]["pointsEarned"] = updatedFeedback["totals"]["pointsEarned"] + curRow.pointsEarned;
 					updatedFeedback["totals"]["pointsUngraded"] = updatedFeedback["totals"]["pointsTotalAssignment"] - updatedFeedback["totals"]["pointsGraded"];
 					updatedFeedback["totals"]["pointsMaxStillPossible"] = updatedFeedback["totals"]["pointsEarned"] - updatedFeedback["totals"]["pointsUngraded"];
