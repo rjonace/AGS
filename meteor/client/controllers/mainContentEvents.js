@@ -544,13 +544,16 @@ Template.mainContent.events({
                     Session.set('manGradedRow', null);
                 },
                 onApprove : function() {
+                    var updatedFeedback = submission.feedbackObj;
+                    
+                    curRow.pointsPossible = updatedFeedback["sections"][tableIndex]["rows"][rowIndex]["pointsPossible"];
                     curRow.pointsEarned = Number($('#pointsEarnedInput').val());
                     curRow.comments = $('#commentsInput').val();
 
                     currSection["pointsGraded"] = currSection["pointsGraded"] + curRow.pointsPossible;
                     currSection["pointsEarned"] = currSection["pointsEarned"] + curRow.pointsEarned;
 
-                    var updatedFeedback = submission.feedbackObj;
+
                     updatedFeedback["totals"]["pointsGraded"] = updatedFeedback["totals"]["pointsGraded"] + curRow.pointsGraded;
                     updatedFeedback["totals"]["pointsEarned"] = updatedFeedback["totals"]["pointsEarned"] + curRow.pointsEarned;
 					updatedFeedback["totals"]["pointsUngraded"] = updatedFeedback["totals"]["pointsTotalAssignment"] - updatedFeedback["totals"]["pointsGraded"];
