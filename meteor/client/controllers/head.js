@@ -14,9 +14,7 @@ Template.agsHead.events({
 			if(error)
 				alert(error);
 			else {
-				Session.set('currentSubmission', null);
-				Session.set('currentAssignment', null);
-				Session.set('currentCourse', null);
+				Session.keys = {};
 				Session.set('currentDashboard', 'userDash');
 			}
 

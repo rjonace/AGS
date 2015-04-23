@@ -8,8 +8,8 @@ public class Autograder2
 		VTA vta = new VTA("C");
 		
 		vta.addSection("Code Points");
-		vta.addManuallyGradedRow("Code Points", "Uses stdin", 10, "Edit this comment");
-		vta.addManuallyGradedRow("Code Points", "Uses stdout", 10, "Edit this comment");
+		vta.addManuallyGradedRow("Code Points", "Uses stdin", 10);
+		vta.addManuallyGradedRow("Code Points", "Uses stdout", 10);
 
 		vta.addSection("Execution Points");
 

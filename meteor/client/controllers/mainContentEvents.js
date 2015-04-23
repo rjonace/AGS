@@ -223,6 +223,9 @@ Template.mainContent.events({
 						};
 					}
 
+					var solutionFileDone = false;
+					var agFileDone = false;
+
 					var solutionFileCheck = Meteor.setInterval(function(){
 						Meteor.call('numberOfFilesInDirectory', filePath +'/'+'solution_files',
 							function (error, numFiles) {
@@ -230,7 +233,12 @@ Template.mainContent.events({
 								else{
 									if (numFiles == solutionFileList.length){
 										console.log("creating execi");
-										Meteor.call('createAssignmentSolution',currentCourseId, result, lang, compileFlags);
+										Meteor.call('createAssignmentSolution',currentCourseId, result, lang, compileFlags,
+											function(error, compileError){
+												if (compileError)
+													alert(compileError);
+											}
+										);
 									}
 									else{
 										console.log(numFiles + ' solution files written thus far');
@@ -252,9 +260,11 @@ Template.mainContent.events({
 									if (numFiles == agFileList.length){
 										console.log("creating Autograder.jar")
 										Meteor.call('createAutograderNonskeleton',currentCourseId, result,
-											function (err) {
-											//	console.log(err);
-											});
+											function(error, compileError){
+												if (compileError)
+													alert(compileError);
+											}
+										);
 									}
 									else{
 										console.log(numFiles + ' autograder files written thus far');

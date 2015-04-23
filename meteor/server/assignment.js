@@ -76,6 +76,8 @@ Meteor.methods({
 				}
 			);
 		}
+
+		return compileError;
 	},	
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
@@ -90,6 +92,8 @@ Meteor.methods({
 				}
 			}
 		);
+
+		return compileError;
 	},
 	'insertAssignmentStudent': function(id_Course,id_Assignment, filename, contents){
 		AGSAssignments.update(

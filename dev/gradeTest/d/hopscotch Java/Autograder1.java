@@ -7,8 +7,8 @@ public class Autograder1
 		VTA vta = new VTA("Java");
 		
 		vta.addSection("Code Points");
-		vta.addManuallyGradedRow("Code Points", "Uses stdin", 10, "Edit this comment");
-		vta.addManuallyGradedRow("Code Points", "Uses stdout", 10, "Edit this comment");
+		vta.addManuallyGradedRow("Code Points", "Uses stdin", 10);
+		vta.addManuallyGradedRow("Code Points", "Uses stdout", 10);
 
 		vta.addSection("Execution Points");
 		String[][] inputs = {
