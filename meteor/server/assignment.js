@@ -57,7 +57,7 @@ Meteor.methods({
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
 					if (stderr) {
-						console.log("Compilation error creating Auto-Grader: ", stderr);
+						console.log("Compilation error creating Instructor Java: ", stderr);
 						compileError = stderr;
 // Insert logic for dealing with non compiling EXECI
 					}
@@ -69,7 +69,7 @@ Meteor.methods({
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+ path,
 				function(error,stdout,stderr){
 					if (stderr) {
-						console.log("Compilation error creating Auto-Grader: ", stderr);
+						console.log("Compilation error creating Instructor C: ", stderr);
 						compileError = stderr;
 // Insert logic for dealing with non compiling EXECI
 					}
