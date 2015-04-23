@@ -47,7 +47,10 @@ Template.mainContent.events({
 			Session.set('fileNotSubmitted', false);
 		}
 		if(Session.get('currentSubmission').feedbackObj === undefined){
-			Session.set('fileNotGraded', true);
+			if(Session.get('currentSubmission').status != 'graded')
+				Session.set('fileNotGraded', true);
+			else
+				Session.set('fileNotGraded', false);
 		}else{
 			Session.set('fileNotGraded', false);
 		}
