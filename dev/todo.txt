@@ -3,7 +3,7 @@ X	Move server-side logic into scripts
 X	Consolidate scripts
 X	Default comments on manually-graded rows
 X	Show total points earned on a submission page
--	Make manually-updated-rows update totals
+X	Make manually-updated-rows update totals
 X	In edit comments modal, it doesn't say how many points
 -	Help menu
 -	Deal with files that do not compile
