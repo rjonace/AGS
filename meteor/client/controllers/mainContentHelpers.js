@@ -53,10 +53,25 @@ Template.mainContent.helpers({
 	'submissionStatus' : function(){
 		return Session.get('currentSubmission').status;
 	},
-	'isGrading' : function( status ){
-		if (Session.get('currentSubmission').feedbackObj) return false;
-		else if (Session.get('currentSubmission').feedback) return false;
-		else return status != "Submission graded.";
+	'isGrading' : function( ){
+		return Session.get('currentSubmission').status == "grading";
+	},
+	'isGraded' : function( ){
+		return (Session.get('currentSubmission').status == "graded" && 
+			Session.get('currentSubmission').feedbackObj[totals].pointUngraded <= 0)
+	},
+	'isError' : function( ){
+		return Session.get('currentSubmission').status == "timed out";
+	},
+	'errorStatus' : function(){
+		var status = 'An error has occured!'
+		if(Session.get('currentSubmission').status == "timed out")
+			status = 'Submission did not compile or execute within the assignments time limit';
+		return status;
+	},
+	'isWaitingForGrades' : function( ){
+		return (Session.get('currentSubmission').status == "graded" && 
+			Session.get('currentSubmission').feedbackObj[totals].pointUngraded > 0)
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
