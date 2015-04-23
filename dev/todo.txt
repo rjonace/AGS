@@ -6,7 +6,6 @@ X	Show total points earned on a submission page
 X	Make manually-updated-rows update totals
 X	In edit comments modal, it doesn't say how many points
 -	Help menu
-/	Deal with files that do not compile
 X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 X	Clear error when everything for assignment is ready
@@ -18,11 +17,13 @@ X	Assignment Creation only shows one file path when multi upload
 -	Remove "Finish adding files and submit!" after submitting
 -	Do something better on feedback timeout
 -	Says "Feedback Timeout" on start
+/	Deal with files that do not compile
 -	Show something different when submission is fully graded
 X	Scroll to the top on viewing assignment
 X	Say that max time is in seconds
 X	Change screens on submit for first one
 X	Center login
+-	Don't let instructor put in negative manual points
 
 -	Auto-Grader examples
 -	Blurbs for senior design day
@@ -31,7 +32,7 @@ X	Center login
 -	Presentation outline
 -	Presentation slides text
 -	Presentation graphics
-X	90-page paper outline
+/	90-page paper outline
 -	90-page paper first draft
 -	90-page paper graphics
 -	Testing plan and documentation
@@ -39,8 +40,8 @@ X	90-page paper outline
 -	Conference paper
 X	Email reminders to committee members
 X	Blurb for website
--	Pictures for website
--   Turn in Thursday stuff for website
+X	Pictures for website
+X   Turn in Thursday stuff for website
 -	Presentation for website
 -	Fully practice presentation
 -	Group peer review forms
@@ -50,8 +51,6 @@ X	Blurb for website
 -	Let professor choose whether student can see case outputs
 -	Let professor choose whether student can see input file
 -	Skeleton mode
--	No skeleton option when using C
--	Hide extra database data from client
 X	Delete server data when deleting course or assignment
 -	Let instructor download autograder.jar
 -	Let instructor upload autograder.jar
