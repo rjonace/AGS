@@ -57,10 +57,7 @@ Meteor.methods({
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Instructor Java: ", stderr);
-						Session.set("execiCompileError", stderr);
-					}
-					else{
-						Session.set("execiCompileError", null);
+// Insert logic for dealing with non compiling EXECI
 					}
 				}
 			);
@@ -71,16 +68,11 @@ Meteor.methods({
 				function(error,stdout,stderr){
 					if (stderr) {
 						console.log("Compilation error creating Instructor C: ", stderr);
-						Session.set("execiCompileError", stderr);
-					}
-					else{
-						Session.set("execiCompileError", null);
+// Insert logic for dealing with non compiling EXECI
 					}
 				}
 			);
 		}
-
-		return compileError;
 	},	
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
 		var path = '/home/student/ags/grading/courses/'+id_Course;
@@ -89,10 +81,7 @@ Meteor.methods({
 			function(error,stdout,stderr){
 				if (stderr) {
 					console.log("Compilation error creating Auto-Grader: ", stderr);
-						Session.set("agCompileError", stderr);
-					}
-					else{
-						Session.set("agCompileError", null);
+// Insert logic for dealing with non compiling AG
 					}
 			}
 		);

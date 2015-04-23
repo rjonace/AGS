@@ -27,14 +27,12 @@ Meteor.methods({
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
 
-		var compileError;
 		if (language == "C") {
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
 				function(error,stdout,stderr){
 					if (stderr) {
-						console.log("Compilation error creating Auto-Grader: ", stderr);
-						compileError = stderr;
+						console.log("Compilation error creating execs C: ", stderr);
 // Insert logic for dealing with non compiling EXECS
 					}
 				}
@@ -45,15 +43,13 @@ Meteor.methods({
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
 				function(error,stdout,stderr){
 					if (stderr) {
-						console.log("Compilation error creating Auto-Grader: ", stderr);
-						compileError = stderr;
+						console.log("Compilation error creating execs Java: ", stderr);
 // Insert logic for dealing with non compiling EXECS
 					}
 				}
 			);
 		}
 		console.log("sub end");
-		return compileError;
 	},
 	'storeSubmissionFeedback' : function(submission, assignment, path){
 		var fs = Npm.require('fs');
