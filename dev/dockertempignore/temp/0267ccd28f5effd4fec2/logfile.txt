@@ -1,0 +1,4 @@
+compiler gcc -o /usercode/a.out file file.c output /usercode/a.out args
+gcc -o /usercode/a.out /usercode/file.c -
+0
+finished
