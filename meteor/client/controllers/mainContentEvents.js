@@ -490,12 +490,15 @@ Template.mainContent.events({
 			$('#subFileNameField').val('No file chosen')
 	},
 	'change #assignmentAGField' : function(event) {
-		var fileName = $('#assignmentAGField').val();
-		console.log(fileName);
-		if (fileName != '')
-			$('#agFileNameField').val(fileName);
-		else
+		var files = $('#assignmentAGField')[0].files;
+//var fileName = $('#assignmentAGField').val();
+//console.log(fileName);
+		if (!files)
 			$('#agFileNameField').val('No file chosen')
+		else if (files.length == 1)
+			$('#agFileNameField').val(files[0].name);
+		else
+			$('#agFileNameField').val(files.length + " files")
 	},
 	'change #assignmentStudentField' : function(event) {
 		var fileName = $('#assignmentStudentField').val();

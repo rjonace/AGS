@@ -11,7 +11,7 @@ X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 -	Clear error when everything for assignment is ready
 -	If no files in assignment say "No Files" or remove view button
--	Don't show instructor submission among students' submissions
+X	Don't show instructor submission among students' submissions
 X	Compilation options
 -	Show input file
 -	Assignment Creation only shows one file path when multi upload
