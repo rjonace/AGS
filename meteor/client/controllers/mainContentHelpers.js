@@ -58,7 +58,7 @@ Template.mainContent.helpers({
 	},
 	'isGraded' : function( ){
 		return (Session.get('currentSubmission').status == "graded" && 
-			Session.get('currentSubmission').feedbackObj["totals"].pointUngraded <= 0)
+			Session.get('currentSubmission').feedbackObj["totals"].pointsUngraded <= 0)
 	},
 	'isError' : function( ){
 		return Session.get('currentSubmission').status == "timed out";
@@ -71,7 +71,7 @@ Template.mainContent.helpers({
 	},
 	'isWaitingForGrades' : function( ){
 		return (Session.get('currentSubmission').status == "graded" && 
-			Session.get('currentSubmission').feedbackObj["totals"].pointUngraded > 0)
+			Session.get('currentSubmission').feedbackObj["totals"].pointsUngraded > 0)
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
