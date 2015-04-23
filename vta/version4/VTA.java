@@ -257,6 +257,8 @@ public class VTA{
 	private void createJSON(){
 		StringBuilder out = new StringBuilder();
 		
+		out.append("{");
+		
 		out.append("\"totals\":" + "{");
 		out.append("\"pointsEarned\":" + this.totals.pointsEarned + ",");
 		out.append("\"pointsGraded\":" + this.totals.pointsGraded + ",");
