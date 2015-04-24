@@ -30,26 +30,30 @@ Template.mainContent.events({
 		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
 	},
 	'click #userCourse': function(){
+
 		Session.set('currentCourse', this);
 		Session.set('currentDashboard', "courseDash");
 	},
 	'click #courseAssignment': function(){
+
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #assignmentSubmission': function(){
+
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
+		Session.set('feedbackStatus',null);
 		if(Session.get('currentSubmission').files === undefined){
 			Session.set('fileNotSubmitted', true);
 		}else{
 			Session.set('fileNotSubmitted', false);
 		}
-		if(Session.get('currentSubmission').feedbackObj === undefined){
-			Session.set('fileNotGraded', true);
-		}else{
+		var status = Session.get('currentSubmission').status;
+		if(status == 'graded' || status == 'timed out' || status == 'error')
 			Session.set('fileNotGraded', false);
-		}
+		else
+			Session.set('fileNotGraded', true);
 	},
 	'click #gradeSubmission': function(){
 		var submission = Session.get('currentSubmission');
@@ -61,6 +65,12 @@ Template.mainContent.events({
 		var counter = 0;
 		var maxTime = currentAssignment.time;
 		var newPath;
+
+		Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
+		Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission,
+		function(error,result){
+			Session.set('currentSubmission',result);
+		});
 		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
@@ -74,24 +84,32 @@ Template.mainContent.events({
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
+			if (!Session.get('currentSubmission').feedbackObj && counter < maxTime) {
+			}
+			else if (counter < maxTime) {
+				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
+			} else if (Session.get('currentSubmission').status != 'error'){
+				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
+			}
+
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.feedbackObj && counter < maxTime) {
+						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {
 						Session.set('currentSubmission', result);
-						//Session.set('feedbackStatus', "Submission graded.");
+						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
-						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
-						Session.set('feedbackStatus', null);
 					} else {
-						//Session.set('feedbackStatus', "Timed out");
-						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
-						Session.set('feedbackStatus', null);
+						Session.set('currentSubmission',result);
+						Session.set('feedbackStatus', "Timed out");
 					}
 					Meteor.clearInterval(feedbackCheck);
 			});
 		}, 1000);
+
+		
 
 	},
 	'submit #submissionFilesForm': function(event){

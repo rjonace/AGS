@@ -45,6 +45,9 @@ Template.mainContent.helpers({
 		// check if creator of submission
 		return Session.get('currentSubmission');
 	},
+	'notEmpty' : function(list){
+		return list.length > 0;
+	},
 	'feedbackStatus' : function(){
 		if (Session.get('feedbackStatus'))
 			return Session.get('feedbackStatus');
@@ -53,10 +56,25 @@ Template.mainContent.helpers({
 	'submissionStatus' : function(){
 		return Session.get('currentSubmission').status;
 	},
-	'isGrading' : function( status ){
-		if (Session.get('currentSubmission').feedbackObj) return false;
-		else if (Session.get('currentSubmission').feedback) return false;
-		else return status != "Submission graded.";
+	'isGrading' : function( ){
+		return Session.get('currentSubmission').status == "grading";
+	},
+	'isGraded' : function( ){
+		return (Session.get('currentSubmission').status == "graded" && 
+			Session.get('currentSubmission').feedbackObj["totals"].pointsUngraded <= 0)
+	},
+	'isError' : function( ){
+		return Session.get('currentSubmission').status == "timed out";
+	},
+	'errorStatus' : function(){
+		var status = 'An error has occured!'
+		if(Session.get('currentSubmission').status == "timed out")
+			status = 'Timed out!';
+		return status;
+	},
+	'isWaitingForGrades' : function( ){
+		return (Session.get('currentSubmission').status == "graded" && 
+			Session.get('currentSubmission').feedbackObj["totals"].pointsUngraded > 0)
 	},
 	'unfinishedAccount': function(){
 		return (AGSUsers.find({_id:Meteor.userId()}).count() == 0);
@@ -126,6 +144,10 @@ Template.mainContent.helpers({
 
 		if (!submission.feedbackObj) {
 			HTMLString += '<h3>Error: No feedback available</h3>'
+		} else if (submission.feedbackObj.error){
+			HTMLString += '<h3>Error</h3>';
+			HTMLString += '<pre>'+ submission.feedbackObj.error.stderr +'</pre>';
+			HTMLString += '<pre>'+ submission.feedbackObj.error.stdout +'</pre>';
 		}
 		else{
 			var totals = submission.feedbackObj['totals'];

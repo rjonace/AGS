@@ -1,4 +1,8 @@
 <template name="agsLogin">
+	{{#if currentUser}}
+	<div class="ui loading segment" style="width: 100%; height: 100%;">
+	</div>
+	{{else}}
 	<div class="ags-login" align="center">
 		<img class="ui medium centered image" src="images/headlogo2.png">
 		<div class="ui left icon input">
@@ -18,5 +22,6 @@
 			<div class="ui button create account">Create account</div>
 		</div>
 	</div>
+	{{/if}}
 </template>
 

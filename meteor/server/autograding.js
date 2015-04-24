@@ -1,5 +1,10 @@
 /*	Server side Auto Grading methods*/
 Meteor.methods({
+	'createErrorJSONFile' : function(error, path){
+		var fs = Npm.require('fs');
+		var data = { error: error };
+		fs.writeFileSync(path + '/feedback.json', JSON.stringify(data));
+	},
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		console.log("prep start");
 		
@@ -30,23 +35,34 @@ Meteor.methods({
 		if (language == "C") {
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
-				function(error,stdout,stderr){
-					if (stderr) {
+				Meteor.bindEnvironment(function(err,stdout,stderr){
+					if (err) {
 						console.log("Compilation error creating execs C: ", stderr);
-// Insert logic for dealing with non compiling EXECS
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Student C file does not compile'}, path);
+							}
+						}));
 					}
-				}
+				})
 			);
 		}
 		else if (language == "Java") {
 			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
-				function(error,stdout,stderr){
-					if (stderr) {
+				Meteor.bindEnvironment(function(err,stdout,stderr){
+					if (err) {
 						console.log("Compilation error creating execs Java: ", stderr);
-// Insert logic for dealing with non compiling EXECS
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Student Java file does not compile'}, path);
+							}
+						}));
 					}
-				}
+					
+				})
 			);
 		}
 		console.log("sub end");

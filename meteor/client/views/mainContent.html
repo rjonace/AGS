@@ -58,7 +58,7 @@
 		<i class="close icon"></i>
 		{{#if isAssignmentDash}}
 		 {{#with assignmentInfo}}
-		 	{{#if studentfiles}}
+		 	{{#if notEmpty studentfiles}}
 		 	{{#each studentfiles}}
 			<div class="header">
 	      		{{name}}
@@ -108,7 +108,7 @@
 				<div class="ui green approve button">Update</div>
 			</div>
 			 {{#with submissionInfo}}
-			 	{{#if files}}
+			 	{{#if notEmpty files}}
 			 	{{#each files}}
 				<div class="header">
 		      		{{name}}
@@ -493,7 +493,6 @@
 		{{/if}}
 
 		{{#if isSubmissionDash}}
-		{{submissionStatus}}
 			{{#if fileNotSubmitted}}
 				{{> submissionFilesForm}}
 			{{else}}
@@ -521,7 +520,7 @@
 						</div>
 						<div class="ui button" id="gradeSubmission" >Grade Submission</div>
 					{{else}}
-						{{#if isGrading feedbackStatus}}
+						{{#if isGrading}}
 						<div class="ui icon message">
 							<i class="notched circle loading icon"></i>
 							<div class="content">
@@ -531,14 +530,37 @@
 								<p>{{feedbackStatus}}</p>
 							</div>
 						</div>
-						{{else}}
+						{{/if}}
+						{{#if isError}}
+						<div class="ui icon negative message">
+							<i class="warning icon"></i>
+							<div class="content">
+								<div class="header">
+									Error
+								</div>
+								<p>{{errorStatus}}</p>
+							</div>
+						</div>
+						{{/if}}
+						{{#if isWaitingForGrades}}
+						<div class="ui icon message">
+							<i class="wait icon"></i>
+							<div class="content">
+								<div class="header">
+									Waiting For Manual Grading
+								</div>
+								<p>Your submission has finished the Auto-Grading process. Waiting for manual grades.</p>
+							</div>
+						</div>
+						{{/if}}
+						{{#if isGraded}}
 						<div class="ui icon positive message">
 							<i class="checkmark icon"></i>
 							<div class="content">
 								<div class="header">
 									Finished
 								</div>
-								<p>{{feedbackStatus}}</p>
+								<p>Your submission has been fully graded!</p>
 							</div>
 						</div>
 						{{/if}}
