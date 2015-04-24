@@ -11,6 +11,8 @@ cp ../student_files/* .
 
 gcc $COMPFLAGS -o execs *.c
 
+touch subpathcompilationworked
+
 cp ../autograder_files/Autograder.jar .
 cp ../solution_files/execi .
 
@@ -18,4 +20,4 @@ mkdir -p ../input_files/
 touch ../input_files/dummy
 cp ../input_files/* .
 
-docker run -v $SUB_PATH:/shared/ ags-vm java -jar Autograder.jar
+docker run -v $SUB_PATH:/shared/ ags-vm java -jar shared/Autograder.jar
