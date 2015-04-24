@@ -30,23 +30,17 @@ Template.mainContent.events({
 		Meteor.call('createUserData',userId,firstName,lastName,selectedCourseList);
 	},
 	'click #userCourse': function(){
-		var status = Session.get('currentSubmission').status;
-		if (status == 'grading')
-			return;
+
 		Session.set('currentCourse', this);
 		Session.set('currentDashboard', "courseDash");
 	},
 	'click #courseAssignment': function(){
-		var status = Session.get('currentSubmission').status;
-		if (status == 'grading')
-			return;
+
 		Session.set('currentAssignment', this);
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #assignmentSubmission': function(){
 		var status = Session.get('currentSubmission').status;
-		if (status == 'grading')
-			return;
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
 		Session.set('feedbackStatus',null);
