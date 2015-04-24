@@ -22,5 +22,5 @@ cp ../input_files/* .
 
 #java -jar Autograder.jar
 cp ../../../../runInDocker.sh .
-docker run -v $SUB_PATH:/shared/ ags-vm sh runInDocker.sh
+docker run -v $SUB_PATH:/shared/ ags-vm sh shared/runInDocker.sh
 docker diff $(docker ps -lq)
