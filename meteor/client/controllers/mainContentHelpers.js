@@ -46,7 +46,9 @@ Template.mainContent.helpers({
 		return Session.get('currentSubmission');
 	},
 	'notEmpty' : function(list){
-		return list.length > 0;
+		if (!list) return false;
+		else 
+			return list.length > 0;
 	},
 	'feedbackStatus' : function(){
 		if (Session.get('feedbackStatus'))
