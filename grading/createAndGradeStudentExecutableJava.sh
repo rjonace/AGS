@@ -1,4 +1,4 @@
-#set -e
+set -e
 
 SUB_PATH=$1
 COMPFLAGS=$2
@@ -10,7 +10,8 @@ touch ../student_files/dummy
 cp ../student_files/* .
 bash ../../../../createJar.sh execs $COMPFLAGS
 
-touch subpathcompilationworked
+touch compilationworked
+pwd >> compilationworked
 
 cp ../autograder_files/Autograder.jar .
 cp ../solution_files/execi .

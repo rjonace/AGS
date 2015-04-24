@@ -11,7 +11,8 @@ cp ../student_files/* .
 
 gcc $COMPFLAGS -o execs *.c
 
-touch subpathcompilationworked
+touch compilationworked
+pwd >> compilationworked
 
 cp ../autograder_files/Autograder.jar .
 cp ../solution_files/execi .
