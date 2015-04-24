@@ -55,7 +55,7 @@
 			"file": "meteor/client/views/createAssignment.html",
 			"settings":
 			{
-				"buffer_size": 5973,
+				"buffer_size": 5997,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,7 +87,7 @@
 			"file": "meteor/client/views/login.html",
 			"settings":
 			{
-				"buffer_size": 690,
+				"buffer_size": 807,
 				"line_ending": "Windows"
 			}
 		},
@@ -103,7 +103,7 @@
 			"file": "meteor/client/views/mainContent.html",
 			"settings":
 			{
-				"buffer_size": 14741,
+				"buffer_size": 15721,
 				"line_ending": "Windows"
 			}
 		},
@@ -119,7 +119,7 @@
 			"file": "dev/todo.txt",
 			"settings":
 			{
-				"buffer_size": 1748,
+				"buffer_size": 1997,
 				"line_ending": "Windows"
 			}
 		},
@@ -151,7 +151,7 @@
 			"file": "meteor/server/assignment.js",
 			"settings":
 			{
-				"buffer_size": 5402,
+				"buffer_size": 5649,
 				"line_ending": "Windows"
 			}
 		},
@@ -159,7 +159,7 @@
 			"file": "meteor/server/autograding.js",
 			"settings":
 			{
-				"buffer_size": 3143,
+				"buffer_size": 3702,
 				"line_ending": "Windows"
 			}
 		},
@@ -199,7 +199,7 @@
 			"file": "meteor/client/controllers/head.js",
 			"settings":
 			{
-				"buffer_size": 621,
+				"buffer_size": 516,
 				"line_ending": "Windows"
 			}
 		},
@@ -223,7 +223,7 @@
 			"file": "meteor/client/controllers/mainContentEvents.js",
 			"settings":
 			{
-				"buffer_size": 20333,
+				"buffer_size": 22762,
 				"line_ending": "Windows"
 			}
 		},
@@ -231,7 +231,7 @@
 			"file": "meteor/client/controllers/mainContentHelpers.js",
 			"settings":
 			{
-				"buffer_size": 7811,
+				"buffer_size": 8850,
 				"line_ending": "Windows"
 			}
 		},
@@ -255,7 +255,7 @@
 			"file": "meteor/server/submission.js",
 			"settings":
 			{
-				"buffer_size": 2563,
+				"buffer_size": 3346,
 				"line_ending": "Windows"
 			}
 		},
@@ -272,23 +272,6 @@
 			"settings":
 			{
 				"buffer_size": 881,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "senior design website/website blurbles.txt",
-			"settings":
-			{
-				"buffer_size": 959,
-				"line_ending": "Windows",
-				"name": "Project/Group Name (Ex: Simulated Exhibit Experien"
-			}
-		},
-		{
-			"file": "vta/version3/VTA.java",
-			"settings":
-			{
-				"buffer_size": 11614,
 				"line_ending": "Windows"
 			}
 		}
@@ -353,6 +336,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Alexis/Desktop/P2-2015-04-23/P2/printer.txt",
+		"/C/Users/Alexis/Desktop/P2-2015-04-23/P2/printer1.out",
+		"/C/Users/Alexis/Desktop/P2-2015-04-23/P2/DataContest/printer-brady.txt",
+		"/C/Users/Alexis/Documents/GitHub/AGS/senior design website/website blurbles.txt",
+		"/C/Users/Alexis/Documents/GitHub/AGS/vta/version3/VTA.java",
 		"/C/Users/Alexis/Documents/GitHub/AGS/dev/response_request.js",
 		"/C/Users/Alexis/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/Alexis/Documents/GitHub/AGS/meteor/ags.html",
@@ -472,7 +460,7 @@
 					"file": "meteor/client/views/createAssignment.html",
 					"settings":
 					{
-						"buffer_size": 5973,
+						"buffer_size": 5997,
 						"regions":
 						{
 						},
@@ -579,7 +567,7 @@
 					"file": "meteor/client/views/login.html",
 					"settings":
 					{
-						"buffer_size": 690,
+						"buffer_size": 807,
 						"regions":
 						{
 						},
@@ -632,7 +620,7 @@
 					"file": "meteor/client/views/mainContent.html",
 					"settings":
 					{
-						"buffer_size": 14741,
+						"buffer_size": 15721,
 						"regions":
 						{
 						},
@@ -686,15 +674,15 @@
 					"file": "dev/todo.txt",
 					"settings":
 					{
-						"buffer_size": 1748,
+						"buffer_size": 1997,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								843,
+								843
 							]
 						],
 						"settings":
@@ -702,7 +690,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 356.0,
+						"translation.y": 22.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -710,7 +698,7 @@
 			]
 		},
 		{
-			"selected": 20,
+			"selected": 18,
 			"sheets":
 			[
 				{
@@ -796,7 +784,7 @@
 					"file": "meteor/server/assignment.js",
 					"settings":
 					{
-						"buffer_size": 5402,
+						"buffer_size": 5649,
 						"regions":
 						{
 						},
@@ -823,7 +811,7 @@
 					"file": "meteor/server/autograding.js",
 					"settings":
 					{
-						"buffer_size": 3143,
+						"buffer_size": 3702,
 						"regions":
 						{
 						},
@@ -957,7 +945,7 @@
 					"file": "meteor/client/controllers/head.js",
 					"settings":
 					{
-						"buffer_size": 621,
+						"buffer_size": 516,
 						"regions":
 						{
 						},
@@ -1038,7 +1026,7 @@
 					"file": "meteor/client/controllers/mainContentEvents.js",
 					"settings":
 					{
-						"buffer_size": 20333,
+						"buffer_size": 22762,
 						"regions":
 						{
 						},
@@ -1065,7 +1053,7 @@
 					"file": "meteor/client/controllers/mainContentHelpers.js",
 					"settings":
 					{
-						"buffer_size": 7811,
+						"buffer_size": 8850,
 						"regions":
 						{
 						},
@@ -1144,7 +1132,7 @@
 					"file": "meteor/server/submission.js",
 					"settings":
 					{
-						"buffer_size": 2563,
+						"buffer_size": 3346,
 						"regions":
 						{
 						},
@@ -1215,61 +1203,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 30,
-					"file": "senior design website/website blurbles.txt",
-					"settings":
-					{
-						"buffer_size": 959,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								823,
-								823
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Project/Group Name (Ex: Simulated Exhibit Experien",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 31,
-					"file": "vta/version3/VTA.java",
-					"settings":
-					{
-						"buffer_size": 11614,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								166,
-								167
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 722.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
