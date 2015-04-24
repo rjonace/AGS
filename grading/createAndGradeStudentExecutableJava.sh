@@ -1,4 +1,4 @@
-set -e
+#set -e
 
 SUB_PATH=$1
 COMPFLAGS=$2
