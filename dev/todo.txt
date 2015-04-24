@@ -6,7 +6,6 @@ X	Show total points earned on a submission page
 X	Make manually-updated-rows update totals
 X	In edit comments modal, it doesn't say how many points
 -	Help menu
-/	Deal with files that do not compile
 X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 X	Clear error when everything for assignment is ready
@@ -16,8 +15,9 @@ X	Compilation options
 -	Show input file
 X	Assignment Creation only shows one file path when multi upload
 -	Remove "Finish adding files and submit!" after submitting
--	Do something better on feedback timeout
--	Says "Feedback Timeout" on start
+/	Do something better on feedback timeout
+/	Says "Feedback Timeout" on start
+/	Deal with files that do not compile
 -	Show something different when submission is fully graded
 X	Scroll to the top on viewing assignment
 X	Say that max time is in seconds
@@ -39,7 +39,7 @@ X	90-page paper outline
 -	Conference paper
 X	Email reminders to committee members
 X	Blurb for website
--	Pictures for website
+X	Pictures for website
 -   Turn in Thursday stuff for website
 -	Presentation for website
 -	Fully practice presentation
