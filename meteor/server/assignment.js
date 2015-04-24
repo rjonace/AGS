@@ -5,7 +5,7 @@ var fs = Npm.require('fs');
 var exec = Npm.require('child_process').exec;
 
 var checkForFile = function(path, filename){
-
+	
 	var fileCheckHandle = Meteor.setInterval(function(){
 		fs.readFile(path + '/' + filename, 'utf8',
 			function (error, data) {
@@ -18,7 +18,6 @@ var checkForFile = function(path, filename){
 			}
 		);
 	},1000);
-
 }
 
 Meteor.methods({
@@ -74,36 +73,24 @@ Meteor.methods({
 		if (lang == "Java"){
 			console.log("creating Java instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+path+' '+compileFlags,
-				Meteor.bindEnvironment(function(error,stdout,stderr){
-					if (error) {
+				function(error,stdout,stderr){
+					if (stderr) {
 						console.log("Compilation error creating Instructor Java: ", stderr);
 // Insert logic for dealing with non compiling EXECI
-					} else {
-						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
-							if (error){
-								Meteor.call('createErrorJSONFile', {error:'Instructor Java file does not compile'}, path);
-							}
-						}));
 					}
 				}
-			));
+			);
 		}
 		else if (lang == "C"){
 			console.log("creating C instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+path+' '+compileFlags,
-				Meteor.bindEnvironment(function(error,stdout,stderr){
-					if (error) {
+				function(error,stdout,stderr){
+					if (stderr) {
 						console.log("Compilation error creating Instructor C: ", stderr);
 // Insert logic for dealing with non compiling EXECI
-					} else {
-						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
-							if (error){
-								Meteor.call('createErrorJSONFile', {error:'Instructor C file does not compile'}, path);
-							}
-						}));
 					}
 				}
-			));
+			);
 		}
 	},	
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
