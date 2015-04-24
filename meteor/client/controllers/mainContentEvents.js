@@ -40,6 +40,7 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #assignmentSubmission': function(){
+
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
 		Session.set('feedbackStatus',null);
