@@ -20,6 +20,6 @@ mkdir -p ../input_files/
 touch ../input_files/dummy
 cp ../input_files/* .
 
-java -jar shared/Autograder.jar
+java -jar Autograder.jar
 
 #docker run -v $SUB_PATH:/shared/ ags-vm java -jar shared/Autograder.jar
