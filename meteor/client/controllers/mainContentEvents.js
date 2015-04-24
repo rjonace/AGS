@@ -40,7 +40,6 @@ Template.mainContent.events({
 		Session.set('currentDashboard', "assignmentDash");
 	},
 	'click #assignmentSubmission': function(){
-		var status = Session.get('currentSubmission').status;
 		Session.set('currentSubmission', this);
 		Session.set('currentDashboard', "submissionDash");
 		Session.set('feedbackStatus',null);
@@ -49,6 +48,7 @@ Template.mainContent.events({
 		}else{
 			Session.set('fileNotSubmitted', false);
 		}
+		var status = Session.get('currentSubmission').status;
 		if(status == 'graded' || status == 'timed out' || status == 'error')
 			Session.set('fileNotGraded', false);
 		else
