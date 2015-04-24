@@ -38,13 +38,12 @@ Meteor.methods({
 				Meteor.bindEnvironment(function(err,stdout,stderr){
 					if (err) {
 						console.log("Compilation error creating execs C: ", stderr);
-						var error = {
-							err: err,
-						 	stdout: stdout,
-						  	stderr: stderr
-						};
-// Insert logic for dealing with non compiling EXECS
-						Meteor.call('createErrorJSONFile', error, path);
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Student C file does not compile'}, path);
+							}
+						}));
 					}
 				})
 			);
@@ -55,14 +54,14 @@ Meteor.methods({
 				Meteor.bindEnvironment(function(err,stdout,stderr){
 					if (err) {
 						console.log("Compilation error creating execs Java: ", stderr);
-// Insert logic for dealing with non compiling EXECS
-						var error = {
-							err: err,
-						 	stdout: stdout,
-						  	stderr: stderr
-						};
-						Meteor.call('createErrorJSONFile', error, path);
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Student Java file does not compile'}, path);
+							}
+						}));
 					}
+					
 				})
 			);
 		}

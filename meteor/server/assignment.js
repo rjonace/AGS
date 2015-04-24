@@ -74,24 +74,36 @@ Meteor.methods({
 		if (lang == "Java"){
 			console.log("creating Java instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionJava.sh '+id_Assignment+' '+path+' '+compileFlags,
-				function(error,stdout,stderr){
-					if (stderr) {
+				Meteor.bindEnvironment(function(error,stdout,stderr){
+					if (error) {
 						console.log("Compilation error creating Instructor Java: ", stderr);
 // Insert logic for dealing with non compiling EXECI
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Instructor Java file does not compile'}, path);
+							}
+						}));
 					}
 				}
-			);
+			));
 		}
 		else if (lang == "C"){
 			console.log("creating C instructor solution file");
 			exec('sh /home/student/ags/grading/createInstructorSolutionC.sh '+id_Assignment+' '+path+' '+compileFlags,
-				function(error,stdout,stderr){
-					if (stderr) {
+				Meteor.bindEnvironment(function(error,stdout,stderr){
+					if (error) {
 						console.log("Compilation error creating Instructor C: ", stderr);
 // Insert logic for dealing with non compiling EXECI
+					} else {
+						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
+							if (error){
+								Meteor.call('createErrorJSONFile', {error:'Instructor C file does not compile'}, path);
+							}
+						}));
 					}
 				}
-			);
+			));
 		}
 	},	
 	'createAutograderNonskeleton': function(id_Course,id_Assignment){
