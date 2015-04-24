@@ -36,10 +36,10 @@ Meteor.methods({
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
 				Meteor.bindEnvironment(function(err,stdout,stderr){
-					if (stderr) {
+					if (err) {
 						console.log("Compilation error creating execs C: ", stderr);
 						var error = {
-							err: "Compilation error creating execs C: " + err,
+							err: err,
 						 	stdout: stdout,
 						  	stderr: stderr
 						};
@@ -53,11 +53,11 @@ Meteor.methods({
 			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
 				Meteor.bindEnvironment(function(err,stdout,stderr){
-					if (stderr) {
+					if (err) {
 						console.log("Compilation error creating execs Java: ", stderr);
 // Insert logic for dealing with non compiling EXECS
 						var error = {
-							err: "Compilation error creating execs Java: " + err,
+							err: err,
 						 	stdout: stdout,
 						  	stderr: stderr
 						};

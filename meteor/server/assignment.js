@@ -1,6 +1,26 @@
 /*	Server side Assignment Methods*/
+
+
 var fs = Npm.require('fs');
 var exec = Npm.require('child_process').exec;
+
+var checkForFile = function(path, filename){
+
+	var fileCheckHandle = Meteor.setInterval(function(){
+		fs.readFile(path + '/' + filename, 'utf8',
+			function (error, data) {
+				if (error) 
+					return;
+				else{
+					console.log(data);
+				}
+				Meteor.clearInterval(fileCheckHandle);
+			}
+		);
+	},1000);
+
+}
+
 Meteor.methods({
 	'insertAssignmentData': function(id_Course, name, description, lang, dateAvailable, dateDue, time, compileFlags){
 		return AGSAssignments.insert({
