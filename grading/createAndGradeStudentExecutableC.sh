@@ -21,4 +21,5 @@ mkdir -p ../input_files/
 touch ../input_files/dummy
 cp ../input_files/* .
 
-docker run -v $SUB_PATH:/shared/ ags-vm java -jar shared/Autograder.jar
+docker run -v $SUB_PATH:/shared/ ags-vm cd shared && java -jar shared/Autograder.jar
+docker diff $(docker ps -lq)
