@@ -61,10 +61,12 @@ Template.mainContent.helpers({
 	'subStatus' : function( submission ){
 		if (submission.status == "created")
 			return "Empty"
-		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded > 0)
-			return "Finished"
+		if (submission.status == "timed out")
+			return "Error"
 		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded <= 0)
-			return "Waiting"
+			return "Finished: " + submission.feedbackObj["totals"].pointsEarned + " points"
+		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded > 0)
+			return "Waiting: " + submission.feedbackObj["totals"].pointsEarned + " points"
 	},
 	'isGrading' : function( ){
 		return Session.get('currentSubmission').status == "grading";

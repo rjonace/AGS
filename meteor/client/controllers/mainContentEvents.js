@@ -84,7 +84,7 @@ Template.mainContent.events({
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
-			if (!Session.get('currentSubmission').feedbackObj && counter < maxTime) {
+			if (!Session.get('currentSubmission').error && !Session.get('currentSubmission').feedbackObj && counter < maxTime) {
 			}
 			else if (counter < maxTime) {
 				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
