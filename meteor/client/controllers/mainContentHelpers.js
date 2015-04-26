@@ -58,6 +58,14 @@ Template.mainContent.helpers({
 	'submissionStatus' : function(){
 		return Session.get('currentSubmission').status;
 	},
+	'subStatus' : function( submission ){
+		if (submission.status == "created")
+			return "Empty"
+		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded > 0)
+			return "Finished"
+		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded <= 0)
+			return "Waiting"
+	},
 	'isGrading' : function( ){
 		return Session.get('currentSubmission').status == "grading";
 	},

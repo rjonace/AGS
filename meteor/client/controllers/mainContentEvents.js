@@ -75,7 +75,7 @@ Template.mainContent.events({
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
 				newPath = filePath + tempFolderName;
-				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment.language, currentAssignment.compileFlags] , true);
+				Meteor.apply('gradeSubmission', [submission, newPath, currentAssignment, currentAssignment.compileFlags] , true);
 				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
 		});
@@ -94,7 +94,7 @@ Template.mainContent.events({
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
-					if (!result.feedbackObj && counter < maxTime) {
+					if (!result.error && !result.feedbackObj && counter < maxTime) {
 						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {

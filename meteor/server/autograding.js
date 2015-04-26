@@ -3,7 +3,7 @@ Meteor.methods({
 	'createErrorJSONFile' : function(error, path){
 		var fs = Npm.require('fs');
 		var data = { error: error };
-		fs.writeFileSync(path + '/feedback.json', JSON.stringify(data));
+		fs.writeFileSync(path + '/errorfeedback.json', JSON.stringify(data));
 	},
 	'prepareGrade' : function(id_User, id_Assignment, submission, path){
 		console.log("prep start");
@@ -23,11 +23,12 @@ Meteor.methods({
 		console.log("prep mkdir over");
 		return folderName;
 	},
-	'gradeSubmission' : function(submission, path, language, compileFlags) {
+	'gradeSubmission' : function(submission, path, assignment, compileFlags) {
 		console.log("sub start");
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
-
+		var language = assignment.language;
+		
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
@@ -36,12 +37,14 @@ Meteor.methods({
 			console.log("creating C student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableC.sh ' + path+' '+compileFlags, 
 				Meteor.bindEnvironment(function(err,stdout,stderr){
-					if (err) {
+					if (stderr) {
 						console.log("Compilation error creating execs C: ", stderr);
+						Meteor.call('insertSubmissionError', submission.id_Student, assignment._id, submission.subNumber ,stderr);
 					} else {
 						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
 							if (error){
-								Meteor.call('createErrorJSONFile', {error:'Student C file does not compile'}, path);
+								console.log(error);
+								//Meteor.call('createErrorJSONFile', {error:'Student C file does not compile'}, path);
 							}
 						}));
 					}
@@ -52,16 +55,18 @@ Meteor.methods({
 			console.log("creating Java student solution file");
 			exec('sh /home/student/ags/grading/createAndGradeStudentExecutableJava.sh ' + path+' '+compileFlags, 
 				Meteor.bindEnvironment(function(err,stdout,stderr){
-					if (err) {
+					if (stderr) {
 						console.log("Compilation error creating execs Java: ", stderr);
+						Meteor.call('insertSubmissionError', submission.id_Student, assignment._id, submission.subNumber ,stderr);
 					} else {
 						fs.readFileSync(path + '/compilationworked','utf8',Meteor.bindEnvironment(function(error,data){
 							if (error){
-								Meteor.call('createErrorJSONFile', {error:'Student Java file does not compile'}, path);
+								console.log(error);
+								//Meteor.call('createErrorJSONFile', {error:'Student Java file does not compile'}, path);
 							}
 						}));
 					}
-					
+
 				})
 			);
 		}
