@@ -1,0 +1,19 @@
+Write a program in Java to convert temperatures between Celsius and Fahrenheit.
+
+Output should be sent to stdout.
+Input will be given through stdin and have the following format:
+
+A single integer, n, between 1 and 10000 indicating the number of test cases.
+Followed by n lines of the form:
+Either a C or an F then a float.
+
+Sample input:
+
+2
+C 0.0
+F 212.0
+
+Sample output:
+
+32.00
+100.00
