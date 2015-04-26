@@ -465,12 +465,13 @@ public class VTA{
 		return true;
 	}
 
+	/// not allowed to use "NOINPUTFILE" for inputFileName
 	public boolean runWithInput(char mode, String inputFileName){
 		if (!(mode == 'i' || mode == 's'))
 			return false;
 		if (!(this.language == 'C' || this.language == 'J'))
 			return false;
-/// not allowed to use "NOINPUTFILE" for inputFileName
+		
 		Runtime rt = Runtime.getRuntime();
 
 		String[] command = {"/bin/sh", "-c", ""};
