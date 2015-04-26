@@ -81,9 +81,9 @@ Template.mainContent.events({
 		});
 		Session.set('feedbackStatus',null);
 
-		/*var feedbackCheck = Meteor.setInterval(function(){
-			Session.set('feedbackStatus',"Checking for feedback " + counter);
-			counter++;
+		var feedbackCheck = Meteor.setInterval(function(){
+			//Session.set('feedbackStatus',"Checking for feedback " + counter);
+			//counter++;
 			
 
 			//if (!Session.get('currentSubmission').error && !Session.get('currentSubmission').feedbackObj && counter < maxTime) {
@@ -97,27 +97,27 @@ Template.mainContent.events({
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.feedbackObj && counter < maxTime) {
-						result.status = 'grading';
-						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
+						//result.status = 'grading';
+						//Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
 						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {
-						result.status = 'graded';
-						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
+						//result.status = 'graded';
+						//Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
 						Session.set('currentSubmission', result);
 						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 						Meteor.clearInterval(feedbackCheck);
 
 					} else {
-						result.status = 'timed out';
-						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
+						//result.status = 'timed out';
+						//Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
 						Session.set('currentSubmission',result);
 						Session.set('feedbackStatus', "Timed out");
 						Meteor.clearInterval(feedbackCheck);
 					}
 			});
-		}, 1000);*/
+		}, 1000);
 
 		
 
