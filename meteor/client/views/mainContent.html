@@ -566,6 +566,12 @@
 						</div>
 						{{/if}}
 						<h3>Feedback</h3>
+						{{#with submissionInfo}}
+							{{#if error}}
+							<h3>Errors</h3>
+							<pre>{{error}}</pre>
+							{{/if}}
+						{{/with}}
 						{{{submissionFeedbackObject}}}
 					{{/if}}
 				</div>
