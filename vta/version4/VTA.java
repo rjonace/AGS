@@ -231,6 +231,11 @@ public class VTA{
 		return addInputCase(sectionName, "No input file", correctOutput, studentOutput, correct, points, comments);
 	}
 
+	public void cleanUp(){
+		calculateTotals();
+		createJSON();	
+	}
+
 	private void calculateTotals(){
 		for (Section a : sections){
 			totals.pointsTotalAssignment += a.pointsPossible;
@@ -240,11 +245,6 @@ public class VTA{
 
 		totals.pointsUngraded = totals.pointsTotalAssignment - totals.pointsGraded;
 		totals.pointsMaxStillPossible = totals.pointsEarned + totals.pointsUngraded;
-	}
-
-	public void cleanUp(){
-		calculateTotals();
-		createJSON();	
 	}
 
 	private void createJSON(){
@@ -395,7 +395,6 @@ public class VTA{
 	public boolean parseCases(int numLinesPerCase){
 		return parseCases("No input file", numLinesPerCase);
 	}
-
 	
 	public boolean parseCases(String inputFilename, int numLinesPerCase){
 		String[] instructorTemp = correctOutputText.get(inputFilename).split("\n");
