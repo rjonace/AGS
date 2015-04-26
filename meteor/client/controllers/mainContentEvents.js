@@ -95,17 +95,18 @@ Template.mainContent.events({
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
-					if (!result.error && !result.feedbackObj && counter < maxTime) {
-						result.status = 'grading';
+					if (!result.feedbackObj && counter < maxTime) {
 						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {
 						result.status = 'graded';
+						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
 						Session.set('currentSubmission', result);
 						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 					} else {
 						result.status = 'timed out';
+						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
 						Session.set('currentSubmission',result);
 						Session.set('feedbackStatus', "Timed out");
 					}
