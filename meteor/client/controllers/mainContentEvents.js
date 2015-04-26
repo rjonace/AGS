@@ -81,7 +81,7 @@ Template.mainContent.events({
 		});
 		Session.set('feedbackStatus',null);
 
-		var feedbackCheck = Meteor.setInterval(function(){
+		/*var feedbackCheck = Meteor.setInterval(function(){
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
 			counter++;
 			
@@ -117,7 +117,7 @@ Template.mainContent.events({
 						Meteor.clearInterval(feedbackCheck);
 					}
 			});
-		}, 1000);
+		}, 1000);*/
 
 		
 

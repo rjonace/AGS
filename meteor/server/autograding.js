@@ -28,7 +28,7 @@ Meteor.methods({
 		var fs = Npm.require('fs');
 		var exec = Npm.require('child_process').exec;
 		var language = assignment.language;
-		
+
 		for (var i = 0; i < submission.files.length; i++){
 			fs.writeFileSync(path + "/" + submission.files[i].name, submission.files[i].contents);
 		}
@@ -89,10 +89,13 @@ Meteor.methods({
 				fs.readFile(path + '/feedback.json', 'utf8', Meteor.bindEnvironment(function(error, data) {
 					if (error && counter < maxTime) {
 						//console.log(error);
+						Meteor.call('updateSubmissionStatus', [submission.id_Student, id_Assignment, subNumber, 'grading']);
 						return;
 					}
 					else if (counter < maxTime) {
 						console.log("Completed");
+						Meteor.call('updateSubmissionStatus', [submission.id_Student, id_Assignment, subNumber, 'graded']);
+
 						try{
 							Meteor.call('insertJSONFile',submission.id_Student, id_Assignment, subNumber, path + '/feedback.json',
 								function(error){
@@ -105,6 +108,7 @@ Meteor.methods({
 					}
 					else { 
 						// exceeded max time
+						Meteor.call('updateSubmissionStatus', [submission.id_Student, id_Assignment, subNumber, 'timed out']);
 						console.log("Timed out");
 					}
 
