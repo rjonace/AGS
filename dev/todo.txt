@@ -9,7 +9,7 @@ X	In edit comments modal, it doesn't say how many points
 X	Fix comments field when updating manually-graded rows
 X	Change "check submission" to "submit"
 X	Clear error when everything for assignment is ready
--	If no files in assignment say "No Files" or remove view button
+X	If no files in assignment say "No Files" or remove view button
 X	Don't show instructor submission among students' submissions
 X	Compilation options
 -	Show input file
@@ -24,6 +24,8 @@ X	Say that max time is in seconds
 X	Change screens on submit for first one
 X	Center login
 -	Don't let instructor put in negative manual points
+-	Queue of manually graded sections
+-	Better feedback in dashboard
 
 -	Auto-Grader examples
 -	Blurbs for senior design day

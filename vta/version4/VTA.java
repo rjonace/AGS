@@ -116,6 +116,7 @@ public class VTA{
 	public int numCases;
 
 	
+
 	/** No-arg constructor */
 	public VTA(String language)
 	{
@@ -123,21 +124,13 @@ public class VTA{
 			this.language = 'C';
 		else if (language.trim().equalsIgnoreCase("Java"))
 			this.language = 'J';
-//		else
-//			throw (new Exception("Unknown Language"));
+		else
+			throw (new Error("Unknown Language"));
 
 		sections = new ArrayList<Section>();
 		correctOutputText = new HashMap<String,String>();
 		studentOutputText = new HashMap<String, String>();
 		totals = new Totals();
-	}
-
-	/** String[] constructor */
-	public VTA(String[] args)
-	{
-		sections = new ArrayList<Section>();
-		correctOutputText = new HashMap<String,String>();
-		studentOutputText = new HashMap<String, String>();
 	}
 	
 	public void addSection(String name){
