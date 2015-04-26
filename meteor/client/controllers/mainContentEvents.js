@@ -66,11 +66,11 @@ Template.mainContent.events({
 		var maxTime = currentAssignment.time;
 		var newPath;
 
-		Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
-		Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission,
-		function(error,result){
-			Session.set('currentSubmission',result);
-		});
+		//Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
+		//Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission,
+		//function(error,result){
+			//Session.set('currentSubmission',result);
+		//});
 		
 		Meteor.call('prepareGrade', currentUserId, currentAssignment._id, submission, filePath,
 			function(error, tempFolderName) {
@@ -79,6 +79,7 @@ Template.mainContent.events({
 				Meteor.apply('storeSubmissionFeedback',[submission,currentAssignment,newPath] , true);
 				Session.set('fileNotGraded', false);
 		});
+		Session.set('feedbackStatus',null);
 
 		var feedbackCheck = Meteor.setInterval(function(){
 			Session.set('feedbackStatus',"Checking for feedback " + counter);
@@ -96,17 +97,19 @@ Template.mainContent.events({
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.feedbackObj && counter < maxTime) {
+						result.status = 'grading';
+						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'grading']);
 						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {
 						result.status = 'graded';
-						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
+						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
 						Session.set('currentSubmission', result);
 						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 					} else {
 						result.status = 'timed out';
-						Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
+						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
 						Session.set('currentSubmission',result);
 						Session.set('feedbackStatus', "Timed out");
 					}
