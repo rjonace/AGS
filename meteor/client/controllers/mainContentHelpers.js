@@ -158,7 +158,9 @@ Template.mainContent.helpers({
 
 			HTMLString += '<h4>Total Points Earned: ';
 			HTMLString += totals.pointsEarned+' out of '+totals.pointsGraded;
-			HTMLString += ' graded</h4>';
+			if (totals.pointsUngraded > 0)
+				HTMLString += ' graded';
+			HTMLString += '</h4>';
 			if (totals.pointsUngraded > 0) {
 				HTMLString += '<h4>Total Points Ungraded: ';
 				HTMLString += totals.pointsUngraded;
@@ -168,7 +170,7 @@ Template.mainContent.helpers({
 				HTMLString += totals.pointsMaxStillPossible+' out of '+totals.pointsTotalAssignment;
 				HTMLString += ' possible</h4>';
 			}
-			
+
 			HTMLString += '</div>'
 			
 			for(var name in submission.feedbackObj){
