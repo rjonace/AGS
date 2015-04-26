@@ -107,13 +107,15 @@ Template.mainContent.events({
 						Session.set('currentSubmission', result);
 						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
+						Meteor.clearInterval(feedbackCheck);
+
 					} else {
 						result.status = 'timed out';
 						Meteor.call('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
 						Session.set('currentSubmission',result);
 						Session.set('feedbackStatus', "Timed out");
+						Meteor.clearInterval(feedbackCheck);
 					}
-					Meteor.clearInterval(feedbackCheck);
 			});
 		}, 1000);
 
