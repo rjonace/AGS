@@ -85,25 +85,27 @@ Template.mainContent.events({
 			counter++;
 			
 
-			
-			if (!Session.get('currentSubmission').error && !Session.get('currentSubmission').feedbackObj && counter < maxTime) {
-			}
-			else if (counter < maxTime) {
-				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
-			} else if (Session.get('currentSubmission').status != 'graded'){
-				Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
-			}
+			//if (!Session.get('currentSubmission').error && !Session.get('currentSubmission').feedbackObj && counter < maxTime) {
+			//}
+			//else if (counter < maxTime) {
+				//Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'graded']);
+			//} else if (Session.get('currentSubmission').status != 'graded'){
+				//Meteor.apply('updateSubmissionStatus', [currentUserId, currentAssignment._id, submission.subNumber, 'timed out']);
+			//}
 
 			Meteor.call('resetSubmissionSession', currentUserId, currentAssignment._id, submission, 
 				function(error, result) {
 					if (!result.error && !result.feedbackObj && counter < maxTime) {
+						result.status = 'grading';
 						Session.set('currentSubmission',result);
 						return;
 					} else if (counter < maxTime) {
+						result.status = 'graded';
 						Session.set('currentSubmission', result);
 						Session.set('feedbackStatus', "Submission graded.");
 						Meteor.apply('gradeCleanUp', [newPath, currentUserId, currentAssignment._id, submission], true);
 					} else {
+						result.status = 'timed out';
 						Session.set('currentSubmission',result);
 						Session.set('feedbackStatus', "Timed out");
 					}
