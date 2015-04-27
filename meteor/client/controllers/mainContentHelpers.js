@@ -58,6 +58,16 @@ Template.mainContent.helpers({
 	'submissionStatus' : function(){
 		return Session.get('currentSubmission').status;
 	},
+	'subStatus' : function( submission ){
+		if (submission.status == "created")
+			return "Empty"
+		if (submission.status == "timed out")
+			return "Error"
+		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded <= 0)
+			return "Finished: " + submission.feedbackObj["totals"].pointsEarned + " points"
+		if (submission.status == "graded" && submission.feedbackObj["totals"].pointsUngraded > 0)
+			return "Waiting: " + submission.feedbackObj["totals"].pointsEarned + " points"
+	},
 	'isGrading' : function( ){
 		return Session.get('currentSubmission').status == "grading";
 	},
@@ -158,15 +168,18 @@ Template.mainContent.helpers({
 
 			HTMLString += '<h4>Total Points Earned: ';
 			HTMLString += totals.pointsEarned+' out of '+totals.pointsGraded;
-			HTMLString += ' graded</h4>';
+			if (totals.pointsUngraded > 0)
+				HTMLString += ' graded';
+			HTMLString += '</h4>';
+			if (totals.pointsUngraded > 0) {
+				HTMLString += '<h4>Total Points Ungraded: ';
+				HTMLString += totals.pointsUngraded;
+				HTMLString += '  points left</h4>';
 
-			HTMLString += '<h4>Total Points Ungraded: ';
-			HTMLString += totals.pointsUngraded;
-			HTMLString += '  points left</h4>';
-
-			HTMLString += '<h4>Max Possible Score: ';
-			HTMLString += totals.pointsMaxStillPossible+' out of '+totals.pointsTotalAssignment;
-			HTMLString += ' graded</h4>';
+				HTMLString += '<h4>Max Possible Score: ';
+				HTMLString += totals.pointsMaxStillPossible+' out of '+totals.pointsTotalAssignment;
+				HTMLString += ' possible</h4>';
+			}
 
 			HTMLString += '</div>'
 			

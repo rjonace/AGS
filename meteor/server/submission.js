@@ -1,5 +1,19 @@
 /*	Server side Submission methods*/
 Meteor.methods({
+	'insertSubmissionError' : function(id_Student, id_Assignment, subNumber, error){
+		AGSSubmissions.update(
+			{
+				"id_Student": id_Student,
+				"id_Assignment": id_Assignment,
+				"AttemptList.subNumber": subNumber
+			}, 
+			{ 
+				$set : {
+					"AttemptList.$.error": error
+				}
+			} 
+		);
+	},
 	'updateSubmissionStatus' : function(id_Student, id_Assignment, subNumber, status){
 		AGSSubmissions.update(
 			{

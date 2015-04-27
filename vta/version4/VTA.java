@@ -116,6 +116,7 @@ public class VTA{
 	public int numCases;
 
 	
+
 	/** No-arg constructor */
 	public VTA(String language)
 	{
@@ -123,21 +124,13 @@ public class VTA{
 			this.language = 'C';
 		else if (language.trim().equalsIgnoreCase("Java"))
 			this.language = 'J';
-//		else
-//			throw (new Exception("Unknown Language"));
+		else
+			throw (new Error("Unknown Language"));
 
 		sections = new ArrayList<Section>();
 		correctOutputText = new HashMap<String,String>();
 		studentOutputText = new HashMap<String, String>();
 		totals = new Totals();
-	}
-
-	/** String[] constructor */
-	public VTA(String[] args)
-	{
-		sections = new ArrayList<Section>();
-		correctOutputText = new HashMap<String,String>();
-		studentOutputText = new HashMap<String, String>();
 	}
 	
 	public void addSection(String name){
@@ -238,6 +231,11 @@ public class VTA{
 		return addInputCase(sectionName, "No input file", correctOutput, studentOutput, correct, points, comments);
 	}
 
+	public void cleanUp(){
+		calculateTotals();
+		createJSON();	
+	}
+
 	private void calculateTotals(){
 		for (Section a : sections){
 			totals.pointsTotalAssignment += a.pointsPossible;
@@ -247,11 +245,6 @@ public class VTA{
 
 		totals.pointsUngraded = totals.pointsTotalAssignment - totals.pointsGraded;
 		totals.pointsMaxStillPossible = totals.pointsEarned + totals.pointsUngraded;
-	}
-
-	public void cleanUp(){
-		calculateTotals();
-		createJSON();	
 	}
 
 	private void createJSON(){
@@ -402,7 +395,6 @@ public class VTA{
 	public boolean parseCases(int numLinesPerCase){
 		return parseCases("No input file", numLinesPerCase);
 	}
-
 	
 	public boolean parseCases(String inputFilename, int numLinesPerCase){
 		String[] instructorTemp = correctOutputText.get(inputFilename).split("\n");
@@ -472,12 +464,13 @@ public class VTA{
 		return true;
 	}
 
+	/// not allowed to use "NOINPUTFILE" for inputFileName
 	public boolean runWithInput(char mode, String inputFileName){
 		if (!(mode == 'i' || mode == 's'))
 			return false;
 		if (!(this.language == 'C' || this.language == 'J'))
 			return false;
-/// not allowed to use "NOINPUTFILE" for inputFileName
+		
 		Runtime rt = Runtime.getRuntime();
 
 		String[] command = {"/bin/sh", "-c", ""};
